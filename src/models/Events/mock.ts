@@ -5,7 +5,7 @@ export const MOCK_EVENTS: Event[] = [
     id: '1',
     title: 'Medusa Festival',
     description: 'Abonos ya a la venta para el Medusa Festival 2023',
-    image: '/images/tickets/medusa-fest.jpg'
+    image: '/images/tickets/medusa-festival.png'
   },
   {
     id: '2',
@@ -29,7 +29,7 @@ export const MOCK_EVENTS: Event[] = [
     id: '5',
     title: 'Medusa Festival',
     description: 'Abonos ya a la venta para el Medusa Festival 2023',
-    image: '/images/tickets/medusa-fest.jpg'
+    image: '/images/tickets/medusa-festival.png'
   },
   {
     id: '6',
@@ -53,7 +53,7 @@ export const MOCK_EVENTS: Event[] = [
     id: '9',
     title: 'Medusa Festival',
     description: 'Abonos ya a la venta para el Medusa Festival 2023',
-    image: '/images/tickets/medusa-fest.jpg'
+    image: '/images/tickets/medusa-festival.png'
   },
   {
     id: '10',
@@ -77,7 +77,7 @@ export const MOCK_EVENTS: Event[] = [
     id: '13',
     title: 'Medusa Festival',
     description: 'Abonos ya a la venta para el Medusa Festival 2023',
-    image: '/images/tickets/medusa-fest.jpg'
+    image: '/images/tickets/medusa-festival.png'
   },
   {
     id: '14',

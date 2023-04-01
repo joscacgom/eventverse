@@ -9,6 +9,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: flex-start;
 
+
   @media (max-width: 768px) {
     align-items: center;
   }
@@ -32,6 +33,8 @@ export const EventList = styled.section`
   align-items: center;
   width: 100%;
   height: auto;
+
+  gap: 1rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
