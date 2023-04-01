@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { LinkItem, MenuLinks, Nav } from './styles'
+import { Button85, LinkItem, MenuLinks, Nav } from './styles'
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
@@ -29,7 +29,7 @@ const Navbar = () => {
       <MenuLinks mobile={showMobileMenu}>
         <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>Eventos</LinkItem>
         <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>Reventas</LinkItem>
-        <LinkItem mobile={showMobileMenu} primary={true} href={'/'}>Crear evento</LinkItem>
+        <Button85>Crear evento</Button85>
       </MenuLinks>
     </Nav>
   )
