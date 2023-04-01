@@ -5,8 +5,17 @@ export const Container = styled.section`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    
+    
     width: 100%;
-    height: 60%;
+    height: 60vh;
+    @media (min-width: 1300px) {
+        height: 45vh;
+    }
+
+    @media (max-width: 767px) {
+        height: 55vh;
+    }
 `
 
 export const BackgroundImage = styled.div`
@@ -21,6 +30,10 @@ export const BackgroundImage = styled.div`
     background-repeat: no-repeat;
     opacity: 0.15;
     z-index: -1;
+
+    @media (min-width: 1300px) {
+        height: 55%;
+    }
 `
 
 export const Heading = styled.h1`

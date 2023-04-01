@@ -1,9 +1,13 @@
 import React from 'react'
-import TopSection from './TopSection'
+import HeaderSection from './HeaderSection'
+import MainSection from './MainSection'
 
 const Home = () => {
   return (
-    <TopSection />
+    <>
+      <HeaderSection />
+      <MainSection />
+    </>
   )
 }
 

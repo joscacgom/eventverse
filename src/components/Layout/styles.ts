@@ -6,6 +6,5 @@ export const Main = styled.main`
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
-  height: 100vh;
-  
+  height: auto;
 `
