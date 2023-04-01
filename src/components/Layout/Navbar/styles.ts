@@ -2,8 +2,9 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 type NavProps = {
-    mobile?: boolean
+    mobile?: boolean // Make `mobile` prop optional
 }
+
 export const Nav = styled.nav<NavProps>`
     display: flex;
     flex-direction: ${({ mobile }) => mobile ? 'column' : 'row'};
@@ -15,8 +16,9 @@ export const Nav = styled.nav<NavProps>`
 `
 
 type MenuProps = {
-    mobile?: boolean
+    mobile?: boolean // Make `mobile` prop optional
 }
+
 export const MenuLinks = styled.div<MenuProps>`
     display: flex;
     flex-direction: row;
@@ -27,11 +29,11 @@ export const MenuLinks = styled.div<MenuProps>`
 `
 
 type LinkProps = {
-    primary?: boolean
-    active?: boolean
-    mobile?: boolean
+    primary: boolean;
+    mobile?: boolean; // Make `mobile` prop optional
 }
-export const LinkItem = styled(Link) <LinkProps>`
+
+export const LinkItem = styled(Link)<LinkProps>`
     display: flex;
     align-items: center;
     justify-content: center;

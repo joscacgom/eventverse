@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { LinkItem, MenuLinks, Nav } from './styles'
 
 const Navbar = () => {
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,9 +27,9 @@ const Navbar = () => {
           height={'auto'}
         />
       <MenuLinks mobile={showMobileMenu}>
-        <LinkItem mobile={showMobileMenu} href={'/'}>Eventos</LinkItem>
-        <LinkItem mobile={showMobileMenu} href={'/'}>Reventas</LinkItem>
-        <LinkItem mobile={showMobileMenu} primary href={'/'}>Crear evento</LinkItem>
+        <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>Eventos</LinkItem>
+        <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>Reventas</LinkItem>
+        <LinkItem mobile={showMobileMenu} primary={true} href={'/'}>Crear evento</LinkItem>
       </MenuLinks>
     </Nav>
   )
