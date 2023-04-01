@@ -39,4 +39,8 @@ export const Heading = styled.h1`
     @media (min-width: 1300px) {
         font-size: 3.4em;
     }
+
+    @media (max-width: 767px) {
+        font-size: 2em;
+    }
 `

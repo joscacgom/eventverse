@@ -8,13 +8,6 @@ export const CategoryContainer = styled.div`
   width: 75%;
   height: auto;
   gap: 1rem;
-
-  @media (max-width: 767px) {
-    flex-wrap: nowrap;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
 `
 
 export const CategoryItem = styled.div`
@@ -25,7 +18,7 @@ export const CategoryItem = styled.div`
     width: calc(25% - 0.75rem);
     height: 55px;
     background-color: ${({ theme }) => theme.nord.black0};
-    color: white;
+    color: ${({ theme }) => theme.nord.white};
     border-radius: 9px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
@@ -39,6 +32,5 @@ export const CategoryItem = styled.div`
     @media (max-width: 767px) {
         width: calc(50% - 0.75rem);
         height: 50px;
-        margin-bottom: 1rem;
     }
 `
