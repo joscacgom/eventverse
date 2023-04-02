@@ -60,3 +60,14 @@ export const EventList = styled.section`
     align-items: center;
   }
 `
+
+export const Search = styled.div``
+
+export const SearchInput = styled.input`
+  width: 300px;
+  height: 40px;
+  padding: 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+`
