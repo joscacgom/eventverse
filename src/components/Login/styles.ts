@@ -5,7 +5,132 @@ export const LoginContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    background-color: #f5f5f5;
+    border-radius: 15px;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+    width: 25vw;
+    gap: 2rem;
+    height: 30vh;
+    small{
+        color: gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-content: justify;
+        margin-top:-1rem;
+        padding-left: 0.7rem;
+        @media (max-width: 768px) {
+            padding-bottom: 0.5rem;
+        }
+    }
+    h1 {
+        color: #000000;
+        background-color: #ffffff;
+        font-size: 1.5rem;
+        border-radius: 10px;
+    }
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    @media (max-width: 768px) {
+        width: 90vw;
+        height: 40vh;
+    }
+     /* @media (min-width: 1000px) {
+        width: 60vw;
+        height: 55vh;
+    } */
+
+     /* @media (min-height: 800px) {
+        width: 90vw;
+        height: 40vh;
+    }  */
+
+   
+`
+
+export const GoogleButton = styled.div`
+  width: 80%;
+  height: 42px;
+  background-color: #4285f4;
+  color: #ffffff;
+  border-radius: 2px;
+  cursor-pointer;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+  .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: #ffffff;
+  }
+  .google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+  .btn-text {
+    margin-top:11px;
+    margin-left: 90px;
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto";
+    @media (max-width: 768px) {
+        margin-left: 60px;
+    }
+    @media (max-width: 450px) {
+        font-size: 12px;
+        margin-left: 50px;
+    }
+  }
+  &:hover {
+    box-shadow: 0 0 6px #4285f4;
+  }
+  &:active {
+    background: #1669F2;
+  }
+`
+export const MainContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img{    
+        height:auto;
+        margin-top:1rem;
+    }
+  
+
+`
+export const Separator = styled.hr`
+     border-top: 1px solid black;
+     width: 50%;
+     opacity: 0.2;
+
+`
+
+export const WalletButton = styled.div`
+  display: flex;
+  width: 80%;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px 10px 20px;
+  align-content: center;
+  flex-wrap: nowrap;
+  border-radius: 10px;
+  background-color: ${({ theme }) => theme.nord.black0};
+  color: ${({ theme }) => theme.nord.white};
+  border-radius: 9px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    &:hover {
+        background-color: ${({ theme }) => theme.nord.white};
+        color: ${({ theme }) => theme.nord.black0};
+    }
 `
