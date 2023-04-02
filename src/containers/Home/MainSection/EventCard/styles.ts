@@ -5,10 +5,9 @@ export const BORDER_RADIUS = '9px'
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 400px;
+  height: 350px;
   width: 250px;
   border: 1px solid ${({ theme }) => theme.nord.gray0};
-  border-radius: ${BORDER_RADIUS};
   cursor: pointer;
   transition: transform 0.35s ease-in-out;
 
@@ -24,8 +23,6 @@ export const CardImage = styled.img`
   height: 40%;
   width: 100%;
   object-fit: cover;
-  border-top-left-radius: ${BORDER_RADIUS};
-  border-top-right-radius: ${BORDER_RADIUS};
 `
 
 export const CardContent = styled.div`
@@ -50,14 +47,4 @@ export const Date = styled.p`
 export const Description = styled.p`
   font-size: 16px;
   margin: 4px 0;
-`
-
-export const BuyButton = styled.button`
-  font-size: 16px;
-  padding: 8px 16px;
-  background-color: ${({ theme }) => theme.nord.black0};
-  color: ${({ theme }) => theme.nord.white};
-  border: none;
-  cursor: pointer;
-  border-radius: ${BORDER_RADIUS};
 `

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { BuyButton, CardContent, CardImage, CardWrapper, Date, Description, Title } from './styles'
+import { CardContent, CardImage, CardWrapper, Date, Description, Title } from './styles'
 import { Event } from '@/models/Events/types'
 
 type Props = {
@@ -14,7 +14,6 @@ const EventCard: FC<Props> = ({ event }) => {
         <Date>22 de Agosto 2023</Date>
         <Description>{event.description}</Description>
         <img src={'/images/avatar-events.png'} width={60} height={20} />
-        <BuyButton>Comprar</BuyButton>
       </CardContent>
     </CardWrapper>
   )
