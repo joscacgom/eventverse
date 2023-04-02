@@ -10,7 +10,8 @@ export const Foot = styled.footer`
     height: 140px;
     padding: 0 135px;
 
-    background-color: gray;
+    background-color: ${({ theme }) => theme.nord.black0};
+    color: ${({ theme }) => theme.nord.white};
 
     @media (max-width: 768px) {
         padding: 20px 20px;
@@ -33,3 +34,12 @@ export const Menu = styled.div`
 `
 
 export const MenuItem = styled(Link)``
+
+export const Title = styled.h1`
+    font-size: 1.8rem;
+    font-weight: 400;
+`
+export const Text = styled.h4`
+    font-size: 1rem;
+    font-weight: 300;
+`

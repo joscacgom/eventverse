@@ -1,18 +1,18 @@
 import React from 'react'
-import { Foot, Menu, MenuItem } from './styles'
+import { Foot, Menu, MenuItem, Text, Title } from './styles'
 
 const Footer = () => (
   <Foot>
-    <h1>EventVerse</h1>
+    <Title>EventVerse</Title>
     <Menu>
       <MenuItem href="/">
-        <h4>Aviso legal</h4>
+        <Text>Aviso legal</Text>
       </MenuItem>
       <MenuItem href="/">
-        <h4>Contacto</h4>
+        <Text>Contacto</Text>
       </MenuItem>
       <MenuItem href="/">
-        <h4>Política de privacidad</h4>
+        <Text>Política de privacidad</Text>
       </MenuItem>
     </Menu>
   </Foot>
