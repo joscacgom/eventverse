@@ -11,7 +11,7 @@ const EventCard: FC<Props> = ({ event }) => {
       <CardImage src={event.image} />
       <CardContent>
         <Title>{event.title}</Title>
-        <Date>22 de Agosto 2023</Date>
+        <Date>{event.date}</Date>
         <Description>{event.description}</Description>
         <img src={'/images/avatar-events.png'} width={60} height={20} />
       </CardContent>

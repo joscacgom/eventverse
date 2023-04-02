@@ -31,6 +31,9 @@ export const Header = styled.header`
     
     height: 60px;
     margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    gap: 1rem;
   }
 
   @media (min-width: 1300px) {
@@ -58,5 +61,18 @@ export const EventList = styled.section`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
+
+    margin-top: 1.2rem;
   }
+`
+
+export const Search = styled.div``
+
+export const SearchInput = styled.input`
+  width: 300px;
+  height: 40px;
+  padding: 0 1rem;
+  border: 1px solid ${({ theme }) => theme.nord.gray2};
+  border-radius: 5px;
+  outline: none;
 `
