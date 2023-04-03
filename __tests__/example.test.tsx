@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+import 'jest-styled-components'
+import '@testing-library/jest-dom'
 
 const sum = (a: number, b: number) => {
   return a + b
