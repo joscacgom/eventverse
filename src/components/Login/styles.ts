@@ -35,17 +35,6 @@ export const LoginContainer = styled.div`
         width: 90vw;
         height: 40vh;
     }
-     /* @media (min-width: 1000px) {
-        width: 60vw;
-        height: 55vh;
-    } */
-
-     /* @media (min-height: 800px) {
-        width: 90vw;
-        height: 40vh;
-    }  */
-
-   
 `
 
 export const GoogleButton = styled.div`
