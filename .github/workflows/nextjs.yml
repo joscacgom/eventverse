@@ -26,4 +26,4 @@ jobs:
         run: npm test
 
       - name: Check linter problems
-        run: npm run fix
+        run: npm run lint
