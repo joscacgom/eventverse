@@ -3,4 +3,5 @@ export type User = {
     email: string;
     address: string;
     balance: string;
+    privateKey: string;
 }

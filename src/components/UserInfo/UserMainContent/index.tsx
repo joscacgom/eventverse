@@ -1,13 +1,20 @@
-import React from 'react'
-import { MainContainer, InfoContainer, PrivateKeyButton, HeaderSection } from './styles'
+import React, { useState } from 'react'
+import { MainContainer, InfoContainer, PrivateKeyButton, HeaderSection, PrivateKeyContainer, WarningContainer } from './styles'
 import type { FC } from 'react'
 import { User } from '@/models/Users/types'
 import Image from 'next/image'
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props ={
     userData:User,
 };
 const UserMainContent:FC<Props> = ({ userData }) => {
+  const [privateKey, setPrivateKey] = useState<boolean>(false)
+
+  const handlePrivateKey = () => {
+    setPrivateKey(!privateKey)
+  }
   return (
     <>
         <HeaderSection>Bienvenido Jorge! 👋 </HeaderSection>
@@ -19,11 +26,22 @@ const UserMainContent:FC<Props> = ({ userData }) => {
                     <p>{userData.email}</p>
                 <h2>Información de la cartera</h2>
                     <p>{userData.address}</p>
-                    <p>{userData.balance} MATIC</p>
-                <PrivateKeyButton>
+                    <p>115€<small> {userData.balance} ~ MATIC </small></p>
+                <PrivateKeyButton onClick={handlePrivateKey}>
                     Obtener clave privada
                 </PrivateKeyButton>
             </InfoContainer>
+            {privateKey && 
+                <PrivateKeyContainer>
+                    <WarningContainer>
+                         <FontAwesomeIcon icon={faExclamationTriangle} size={'2xl'} />
+                          <p>¡No compartas tu clave privada con nadie!</p>
+                    </WarningContainer>
+                    <br />
+                    <small>{userData.privateKey}</small>
+                    <button onClick={handlePrivateKey}>Cerrar</button>
+                </PrivateKeyContainer>
+                }
         </MainContainer>
 
     </>
