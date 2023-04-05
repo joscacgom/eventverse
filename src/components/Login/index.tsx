@@ -1,7 +1,7 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { LoginContainer, GoogleButton, MainContainer, Separator, WalletButton } from './styles'
+import { LoginContainer, GoogleButton, MainContainer, Separator, WalletButton, IconWrapper, ButtonText } from './styles'
 
 const Login = () => {
   return (
@@ -10,10 +10,10 @@ const Login = () => {
           <LoginContainer>
           <h1>Inicia sesión o regístrate</h1>
           <GoogleButton>
-            <div className="google-icon-wrapper">
-              <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
-            </div>
-            <p className="btn-text"><b>Inicia sesión con tu cuenta de google</b></p>
+            <IconWrapper>
+              <Image src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" width={20} height={20} />
+            </IconWrapper>
+            <ButtonText>Inicia sesión con tu cuenta de google</ButtonText>
           </GoogleButton>
           <Separator/>
           <WalletButton > Conectar wallet </WalletButton>

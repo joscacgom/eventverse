@@ -37,15 +37,7 @@ export const LoginContainer = styled.div`
     }
 `
 
-export const GoogleButton = styled.div`
-  width: 80%;
-  height: 42px;
-  background-color: #4285f4;
-  color: #ffffff;
-  border-radius: 2px;
-  cursor-pointer;
-  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
-  .google-icon-wrapper {
+export const IconWrapper = styled.div`
     position: absolute;
     margin-top: 1px;
     margin-left: 1px;
@@ -53,15 +45,16 @@ export const GoogleButton = styled.div`
     height: 40px;
     border-radius: 2px;
     background-color: #ffffff;
+    img {
+      position: absolute;
+      margin-left: 11px;
+      margin-bottom: 11px;
+      width: 18px;
+      height: 18px;
   }
-  .google-icon {
-    position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
-    width: 18px;
-    height: 18px;
-  }
-  .btn-text {
+`
+
+export const ButtonText = styled.p`
     margin-top:11px;
     margin-left: 90px;
     color: #ffffff;
@@ -75,7 +68,16 @@ export const GoogleButton = styled.div`
         font-size: 12px;
         margin-left: 50px;
     }
-  }
+`
+
+export const GoogleButton = styled.div`
+  width: 80%;
+  height: 42px;
+  background-color: #4285f4;
+  color: #ffffff;
+  border-radius: 2px;
+  cursor-pointer;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
   &:hover {
     box-shadow: 0 0 6px #4285f4;
   }
