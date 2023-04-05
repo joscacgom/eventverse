@@ -12,7 +12,7 @@ const UserMainContent:FC<Props> = ({ userData }) => {
     <>
         <HeaderSection>Bienvenido Jorge! 👋 </HeaderSection>
         <MainContainer>
-            <Image src='/images/user.png' alt='user' width={50} height={50} />
+            <Image src='https://yt3.googleusercontent.com/ytc/AL5GRJU9cqqMsIBsfgueCzUvrOjf774u4cJPzQ1YVtQTCw=s900-c-k-c0x00ffffff-no-rj' alt='user' width={150} height={150} />
             <InfoContainer>
                 <h2>Información de tu cuenta</h2>
                     <p>{userData.name}</p>
