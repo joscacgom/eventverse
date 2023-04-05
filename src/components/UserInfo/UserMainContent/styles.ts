@@ -15,9 +15,7 @@ export const HeaderSection = styled.h1`
         margin-top: 7rem;
         margin-bottom: 0;
     }
-`;
-
-
+`
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: row;

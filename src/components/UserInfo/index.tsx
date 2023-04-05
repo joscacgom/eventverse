@@ -2,7 +2,6 @@
 import React from 'react'
 import UserSideBar from './UserSideBar'
 import UserMainContent from './UserMainContent'
-import { MainContainer } from './styles'
 import type { FC } from 'react'
 import type { User as UserType } from '@/models/Users/types'
 
