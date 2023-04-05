@@ -31,7 +31,7 @@ const UserMainContent:FC<Props> = ({ userData }) => {
                     Obtener clave privada
                 </PrivateKeyButton>
             </InfoContainer>
-            {privateKey && 
+            {privateKey &&
                 <PrivateKeyContainer>
                     <WarningContainer>
                          <FontAwesomeIcon icon={faExclamationTriangle} size={'2xl'} />

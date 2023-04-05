@@ -2,7 +2,7 @@
 import 'jest-styled-components'
 import '@testing-library/jest-dom'
 
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { MOCK_USER } from '@/models/Users/mock'
 import { ThemeProvider } from 'styled-components'
 import theme from '@/theme'
@@ -10,8 +10,8 @@ import theme from '@/theme'
 import UserMainContent from '@/components/UserInfo/UserMainContent'
 
 describe('UserMainContent', () => {
+  const userData = MOCK_USER
   it('renders user information correctly', () => {
-    const userData = MOCK_USER
     render(
         <ThemeProvider theme={theme}>
             <UserMainContent userData={userData} />
@@ -25,7 +25,16 @@ describe('UserMainContent', () => {
     expect(screen.getByText(userData.email)).toBeInTheDocument()
     expect(screen.getByText('Información de la cartera')).toBeInTheDocument()
     expect(screen.getByText(userData.address)).toBeInTheDocument()
-    expect(screen.getByText(`${userData.balance} MATIC`)).toBeInTheDocument()
-    expect(screen.getByText('Obtener clave privada')).toBeInTheDocument()
+    expect(screen.getByText(`${userData.balance} ~ MATIC`)).toBeInTheDocument()
+  })
+
+  it('shows the private key when the button is clicked', () => {
+    render(<ThemeProvider theme={theme}>
+            <UserMainContent userData={userData} />
+        </ThemeProvider>)
+    const button = screen.getByText('Obtener clave privada')
+    expect(screen.queryByText(userData.privateKey)).not.toBeInTheDocument()
+    fireEvent.click(button)
+    expect(screen.getByText(userData.privateKey)).toBeInTheDocument()
   })
 })
