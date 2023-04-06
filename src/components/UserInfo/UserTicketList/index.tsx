@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { MainContainer, HeaderSection, InfoHeader, SearchContainer, SearchInput, SearchButton, TicketListContainer, TicketListHeader, TicketList, TicketItem, TicketMainData, TicketImage, TicketInfo, TicketAmount, TicketPrice, TicketStatus, TicketName, TicketPlace, TicketDate, TicketTime } from './styles'
 import type { FC } from 'react'
 import { User } from '@/models/Users/types'
-import Image from 'next/image'
 
 type Props ={
     userData:User,
