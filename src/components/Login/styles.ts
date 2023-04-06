@@ -3,21 +3,20 @@ import styled from 'styled-components'
 export const LoginContainer = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     border-radius: 15px;
     margin-top: 1rem;
-    margin-bottom: 5rem;
-    width: 25vw;
+    margin-bottom: 5rem; 
+    width: 500px;
     gap: 2rem;
-    height: 30vh;
-    small{
+    height: 300px;
+    small {
         color: gray;
         display: flex;
         justify-content: center;
         align-items: center;
-        text-content: justify;
-        margin-top:-1rem;
+        margin-top: -1rem;
         padding-left: 0.7rem;
         @media (max-width: 768px) {
             padding-bottom: 0.5rem;
@@ -38,19 +37,20 @@ export const LoginContainer = styled.div`
 `
 
 export const IconWrapper = styled.div`
-    position: absolute;
-    margin-top: 1px;
-    margin-left: 1px;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    background-color: #ffffff;
-    img {
-      position: absolute;
-      margin-left: 11px;
-      margin-bottom: 11px;
-      width: 18px;
-      height: 18px;
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 1rem;
   }
 `
 
@@ -76,7 +76,7 @@ export const GoogleButton = styled.div`
   background-color: #4285f4;
   color: #ffffff;
   border-radius: 2px;
-  cursor-pointer;
+  cursor:pointer;
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
   &:hover {
     box-shadow: 0 0 6px #4285f4;
@@ -90,6 +90,7 @@ export const MainContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 15rem;
     img{    
         height:auto;
         margin-top:1rem;
