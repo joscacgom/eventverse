@@ -3,12 +3,19 @@ import { MainContainer, HeaderSection, InfoHeader, SearchContainer, SearchInput,
 import type { FC } from 'react'
 import { User } from '@/models/Users/types'
 import Image from 'next/image'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props ={
     userData:User,
 };
+
+interface ColorStatus {
+  [key: string]: string;
+}
+
+const COLOR_STATUS: ColorStatus = {
+  Activo: '#539362',
+  Finalizado: '#d65151'
+}
 const UserTicketList:FC<Props> = ({ userData }) => {
   return (
     <>
@@ -18,7 +25,6 @@ const UserTicketList:FC<Props> = ({ userData }) => {
             Estos son los tickets que has comprado
           </InfoHeader>
           <SearchContainer>
-            <FontAwesomeIcon icon={faSearch} size={'2xl'} />
             <SearchInput placeholder='Buscar un ticket...' />
             <SearchButton>
               Buscar
@@ -32,28 +38,29 @@ const UserTicketList:FC<Props> = ({ userData }) => {
               <p>Estado</p>
             </TicketListHeader>
             <TicketList>
-              <TicketItem>
+              {userData.tickets.map((ticket) => (
+                 <TicketItem key={ticket.name}>
                 <TicketMainData>
-                <TicketImage>
-
-                </TicketImage>
+                <TicketImage src={ticket.imagEvent}/>
                 <TicketInfo>
-                  <TicketName>Nombre del evento</TicketName>
-                  <TicketDate>Fecha del evento</TicketDate>
-                  <TicketPlace>Lugar</TicketPlace>
-                  <TicketTime>Hora</TicketTime>
+                  <TicketName>{ticket.name}</TicketName>
+                  <TicketDate>{ticket.date}</TicketDate>
+                  <TicketPlace>{ticket.place}</TicketPlace>
+                  <TicketTime>{ticket.time}</TicketTime>
                 </TicketInfo>
                 </TicketMainData>
                 <TicketAmount>
-                  <p>1</p>
+                  <p>x{ticket.quantity}</p>
                 </TicketAmount>
                 <TicketPrice>
-                  <p>115€</p>
+                  <p>{ticket.price}</p>
                 </TicketPrice>
                 <TicketStatus>
-                  <p>En venta</p>
+                <p style={{ color: COLOR_STATUS[ticket.status] }}>{ticket.status}</p>
                 </TicketStatus>
               </TicketItem>
+              ))}
+
             </TicketList>
           </TicketListContainer>
         </MainContainer>

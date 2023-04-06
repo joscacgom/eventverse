@@ -36,7 +36,7 @@ export const PrivateKeyContainer = styled.div`
         padding: 0.5rem;
         outline: none;
         border: none;
-        border-radious: 9px;
+        border-radius: 9px;
         background-color: ${({ theme }) => theme.nord.white};
         cursor: pointer;
         display: flex;
