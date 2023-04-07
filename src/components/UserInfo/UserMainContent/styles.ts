@@ -6,18 +6,18 @@ export const HeaderSection = styled.h1`
     font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
     color: #000000;
     font-size: 36px;
-    margin-left: 0;
-    margin-bottom: 10rem;
+    margin-bottom: 3rem;
     @media (max-width: 768px) {
         font-size: 1.5rem;
         text-align: center;
         margin-top: 7rem;
-        margin-bottom: 0;
+        margin-bottom: -2rem;
     }
 `
+
 export const PrivateKeyContainer = styled.div`
   position: fixed;
-  top: 0; 
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,6 @@ export const PrivateKeyContainer = styled.div`
   margin-top: 8rem;
   height: auto;
   border-radius: 8px;
-  margin-right: 8rem;
   z-index: 1;
   width: auto;
   padding: 1rem;
@@ -74,14 +73,12 @@ export const PrivateKeyContainer = styled.div`
   
   @media (max-width: 768px) {
       flex-direction: column;
-      align-items: center;
       position:fixed;
       z-index: 1;
       font-size: 0.8rem;
       small{
         font-size: 0.5rem;
       }
-      justify-content: center;
   };
 `
 export const WarningContainer = styled.div`
@@ -101,22 +98,32 @@ export const WarningContainer = styled.div`
     }
     
 `
+export const InfoMainContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 5rem;
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap:2rem;
+        align-items: center;
+        justify-content: center;
+    }
+`
 
 export const MainContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 5rem;
-  margin-left: 5rem;
-  margin-top:-4rem;
-  margin-bottom: 4rem;
+  margin-bottom: 10rem;
+  margin-right: 15rem;
   img{
     width: 198px;
     height: 213px;
     display: flex;
     flex-direction: row;
-    margin-left: 3rem;
     justify-content: flex-start;
     align-items: flex-start;
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
@@ -131,17 +138,15 @@ export const MainContainer = styled.div`
     margin-bottom: 0;
     margin-top: 5rem;
     margin-left: 0;
+    margin-right: 0;
     font-size: 0.8rem;
     }
 `
 export const InfoContainer = styled.div`
     display: flex;
-    width: auto;
-    height:auto;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-    margin-bottom: 1rem;
     
     p{
         font-weight: 700;

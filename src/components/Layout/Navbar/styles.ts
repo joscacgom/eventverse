@@ -20,6 +20,9 @@ export const Nav = styled.nav<NavProps>`
     border-bottom-width: 1px;
     border-left-width: 0px;
     border-right-width: 0px;
+    img{
+      cursor:pointer;
+    }
   `
 
 type MenuProps = {

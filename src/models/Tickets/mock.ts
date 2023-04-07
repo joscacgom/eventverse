@@ -20,18 +20,18 @@ export const MOCK_TICKETS: UserTicket[] = [
     time: '16:00',
     quantity: 1,
     price: 90,
-    status: 'Finalizado',
+    status: 'Activo',
     imagEvent: '/images/tickets/medusa-festival.png'
   },
 
   {
-    name: 'Medusa Festival',
+    name: 'Rock in Rio',
     date: '2023-06-01',
     place: 'Playa de Cullera, Valencia',
     time: '16:00',
     quantity: 1,
     price: 115,
-    status: 'Activo',
+    status: 'Finalizado',
     imagEvent: '/images/tickets/medusa-festival.png'
 
   }

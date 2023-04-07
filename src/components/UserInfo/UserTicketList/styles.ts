@@ -50,6 +50,7 @@ export const SearchContainer = styled.div`
   gap: 10;
   border-radius: 9px;
   border: 0px solid #222222;
+  margin-bottom: 1rem;
   @media (max-width: 768px) {
     width: 100%;
     margin-left: 17rem;
@@ -65,9 +66,12 @@ export const SearchInput = styled.input`
   justify-content: center;
   align-items: center;
   border-radius: 9px;
-  border: 1px solid #222222;
+  border: 1px solid ${({ theme }) => theme.nord.gray2};
+  border-radius: 5px;
+  outline: none;
   @media (max-width: 768px) {
     width: 30%;
+    margin-left: 2.5rem;
   }
 
 `
@@ -149,9 +153,12 @@ export const TicketListHeader = styled.div`
 `
 
 export const TicketList = styled.div`
+  display: flex;
+  flex-direction: column;
   margin-top:1rem;
   @media (max-width: 768px) {
     width:45%;
+    gap:1rem;
     margin-top: 2rem;
   }
   
@@ -168,6 +175,7 @@ export const TicketItem = styled.div`
   margin-top: 1rem;
   align-content: center;
   border-radius: 9px;
+  cursor: pointer;
   border: 1px solid #222;
   @media (max-width: 768px) {
     width: 100%;
@@ -175,8 +183,7 @@ export const TicketItem = styled.div`
     justify-content: center;
     align-items: center;
     margin-top:0;
-    gap: 0;
-    
+    gap: 0;    
   }
 `
 export const TicketMainData = styled.div`
@@ -239,7 +246,6 @@ export const TicketPrice = styled.div`
   color: #333333;
   font-size: 18px;
   @media (max-width: 768px) {
-    // place it on the right
     margin-left: auto;
     margin-right: 1rem;
     font-size: 14px;
@@ -256,10 +262,10 @@ export const TicketStatus = styled.div`
   margin-right: 1rem;
   font-size: 18px;
   @media (max-width: 768px) {
-    font-size: 12px;
-    //place it below the price
-    margin-left: auto;
-    margin-right: 1rem;
+    font-size: 14px;
+    margin-top: 5rem;
+    margin-left:-2rem;
+    margin-right: 0.5rem;
 
   }
   
