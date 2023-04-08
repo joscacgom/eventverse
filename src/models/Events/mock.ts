@@ -1,5 +1,13 @@
 import { Event } from './types'
 
+export const MOCK_EVENT: Event = {
+  id: '1',
+  title: 'Medusa Festival',
+  date: '22 de Agosto 2023',
+  description: 'Abonos ya a la venta para el Medusa Festival 2023',
+  image: '/images/tickets/medusa-festival.png'
+}
+
 export const MOCK_EVENTS: Event[] = [
   {
     id: '1',
