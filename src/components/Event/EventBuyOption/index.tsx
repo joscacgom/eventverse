@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Event } from '@/models/Events/types'
-import { EventBuyOptionContainer, EventBuyOptionButtons, EventBuyOptionButton, EventBuyOptionTicket, EventBuyOptionTicketInfo, EventBuyOptionTicketButton, EventBuyOptionTicketActionPrice, EventBuyOptionTicketActionAmount, EventBuyOptionTicketImage, EventBuyOptionTicketAction } from './styles'
+import { EventBuyOptionContainer, EventBuyOptionButtons, EventBuyOptionButton, EventBuyOptionTicket, EventBuyOptionTicketInfo, EventBuyOptionTicketActionLabel, EventBuyOptionTicketButton, EventBuyOptionTicketActionPrice, EventBuyOptionTicketActionAmount, EventBuyOptionTicketImage, EventBuyOptionTicketAction } from './styles'
 
 type Props = {
     event : Event ;
@@ -19,9 +19,12 @@ const EventBuyOption:FC<Props> = ({ event }) => {
             </EventBuyOptionButtons>
             <EventBuyOptionTicket>
                 <EventBuyOptionTicketInfo>
-                <EventBuyOptionTicketImage/>
+                <EventBuyOptionTicketImage src ={event.image}/>
                 <EventBuyOptionTicketAction>
-                    <EventBuyOptionTicketActionAmount type="number" min="1" defaultValue="1">
+                    <EventBuyOptionTicketActionLabel htmlFor="amount">
+                        Cantidad
+                    </EventBuyOptionTicketActionLabel>
+                    <EventBuyOptionTicketActionAmount name="amount" id="amount" type="number" min="1" defaultValue="1">
                     </EventBuyOptionTicketActionAmount>
                     <EventBuyOptionTicketActionPrice>
                        100€

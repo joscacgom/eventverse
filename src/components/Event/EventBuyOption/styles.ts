@@ -21,6 +21,16 @@ export const EventBuyOptionButtons = styled.div`
     gap:1rem;
 `
 
+export const EventBuyOptionTicketActionLabel = styled.label`
+  width: auto; 
+  height: auto; 
+  font-weight: 700;
+  font-style: normal;
+  font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
+  color: #424242;
+  font-size: 18px;
+  `
+
 export const EventBuyOptionButton = styled.button`
   width: 205px;
   height: 40px;

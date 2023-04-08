@@ -9,7 +9,7 @@ type Props = {
 const Event: FC<Props> = ({ event }) => {
   return (
     <>
-    <MainImage />
+    <MainImage src={'/images/events/medusa-fest-wallpaper.jpg'} />
     <MainContainer>
         <EventData event={event} />
         <EventBuyOption event={event} />

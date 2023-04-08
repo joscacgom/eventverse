@@ -15,8 +15,8 @@ export const MainContainer = styled.div`
     }
 `
 export const MainImage = styled.img`
-  width: 60vw;
-  height: 242px;
+  width: 1150px;
+  height: 300px;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.25);
   opacity: 0.8;
   background-size: cover;
@@ -26,7 +26,12 @@ export const MainImage = styled.img`
   border: 1px solid #d4d4d4;
   margin-bottom: 2rem;
     @media (max-width: 768px) {
-        width: 100%;
+        width: 100vw;
+        height: 242px;
+        border: none;
+        border-radius: 0px;
+       
+
     }
 
 `

@@ -142,5 +142,6 @@ export const EventGoogleMapPic = styled.img`
   border-radius: 12px;
   @media (max-width: 768px) {
     width: 100%;
+    height: auto;
 }
 `
