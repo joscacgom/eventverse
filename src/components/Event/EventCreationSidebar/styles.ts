@@ -12,7 +12,6 @@ export const SideBarContainer = styled.div`
   left: 0;
   border-radius: 0;
   border: 1px solid #e6e6e6;
-  border-top: 0;
   @media (max-width: 768px) {
     height: 10%;
     width: 100%;

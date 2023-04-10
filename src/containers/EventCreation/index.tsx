@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { EventCreationForm, EventCreationSidebar } from '@/components/Event'
+import { EventCreationForm, EventCreationSidebar, EventTicketCreationForm } from '@/components/Event'
 import { MainContainer, EventCreationFormButton } from './styles'
 
 const EventCreation = () => {
@@ -14,23 +14,20 @@ const EventCreation = () => {
       case 1:
         return <EventCreationForm />
       case 2:
-        return <EventCreationForm />
+        return <EventTicketCreationForm />
       case 3:
-        return <EventCreationForm />
+        return <div>Step 3 component goes here</div>
       default:
-        return <EventCreationForm />
+        return null
     }
   }
 
   return (
-    <>
     <MainContainer>
-        <EventCreationSidebar step={step} />
-        {handleFormRender()}
-        <EventCreationFormButton onClick={handleStepIncrease}>Siguiente paso</EventCreationFormButton>
-
+      <EventCreationSidebar step={step} />
+      {handleFormRender()}
+      <EventCreationFormButton onClick={handleStepIncrease}>Siguiente paso</EventCreationFormButton>
     </MainContainer>
-    </>
   )
 }
 
