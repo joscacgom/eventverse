@@ -1,6 +1,7 @@
-import { UserTicket } from './types'
+import { MOCK_EVENT } from '../Events/mock'
+import { Ticket, UserTicket } from './types'
 
-export const MOCK_TICKET: UserTicket = {
+export const MOCK_TICKET_USER: UserTicket = {
   name: 'Medusa Festival',
   date: '2021-01-01',
   place: 'Playa de Cullera, Valencia',
@@ -36,3 +37,18 @@ export const MOCK_TICKETS: UserTicket[] = [
 
   }
 ]
+
+export const MOCK_TICKET: Ticket = {
+  id: '1',
+  name: 'Medusa Festival',
+  price: 100,
+  amount: 100,
+  description: 'Abonos ya a la venta para el Medusa Festival 2023',
+  startDate: '22 de Agosto 2023',
+  endDate: '23 de Agosto 2023',
+  maxPerUser: 100,
+  contractAddress: '0x4c59cbe3af1b885267802c8cef2a6e97ff6a23fa',
+  organizerRoyalty: 5,
+  platformRoyalty: 2.5,
+  event: MOCK_EVENT
+}
