@@ -13,7 +13,17 @@ export const Nav = styled.nav<NavProps>`
     width: 100%;
     height: ${({ mobile }) => mobile ? '100%' : '60px'};
     padding: ${({ mobile }) => mobile ? '20px' : '0 40px'};
-`
+    border-radius: 0px 0px 0px 0px;
+    border-color: rgba(0, 0, 0, 0.08);
+    border-style: solid;
+    border-top-width: 0px;
+    border-bottom-width: 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    img{
+      cursor:pointer;
+    }
+  `
 
 type MenuProps = {
     mobile?: boolean // Make `mobile` prop optional

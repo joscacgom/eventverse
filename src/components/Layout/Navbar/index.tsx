@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Button85, LinkItem, MenuLinks, Nav } from './styles'
+import { useRouter } from 'next/router'
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+  const router = useRouter()
 
   useEffect(() => {
     const handleResize = () => {
@@ -18,6 +20,10 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  const handleClickLogo = () => {
+    router.push('/')
+  }
+
   return (
     <Nav mobile={showMobileMenu}>
         <img
@@ -25,6 +31,7 @@ const Navbar = () => {
           alt="Logo"
           width={150}
           height={'auto'}
+          onClick={handleClickLogo}
         />
       <MenuLinks mobile={showMobileMenu}>
         <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>Eventos</LinkItem>
