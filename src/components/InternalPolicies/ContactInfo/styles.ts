@@ -68,21 +68,13 @@ export const ContactInfoFormContainer = styled.div`
     margin-bottom:2rem;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 3rem;
     padding-left: 2rem;
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
-    img{
-        width: 600px;
-        height: 100%;
-        border-radius: 15px;
-        @media (max-width: 768px) {
-            display: none;
-        }
-
-    }
     @media (max-width: 768px) {
        flex-direction: column;
+       width: 100%;
     }
 `
 
@@ -94,12 +86,11 @@ export const ContactInfoFormLabel = styled.label`
   font-family: "Inter-Medium", "Inter", sans-serif;
   color: #333333;
   font-size: 24px; 
+
   @media (max-width: 768px) {
         font-size: 16px;
     }
-  @media (min-width: 1920px){
-        width: 70%;
-    }
+
 `
 
 export const ContactInfoFormInput = styled.input`
@@ -107,15 +98,13 @@ export const ContactInfoFormInput = styled.input`
   height: 37px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   background-color: #ffffff;
-  padding: 0px 0px 0px 0px;
   font-size: 14px;
   font-family: "Inter-Medium", sans-serif;
   color: #333;
-  align-content: center;
-  border-radius: 0px 0px 0px 0px;
+  align-content: flex-start;
   border-color: #222;
   border-style: solid;
   border-top-width: 0px;
@@ -124,6 +113,7 @@ export const ContactInfoFormInput = styled.input`
   border-right-width: 0px;
   @media (max-width: 768px) {
         width: 80%;
+        margin-bottom:1rem;
     }
 
 `
@@ -133,13 +123,14 @@ export const ContactInfoFormTextArea = styled.textarea`
   height: 100px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   background-color: #ffffff;
   font-size: 14px;
   font-family: "Inter-Medium", sans-serif;  color: #333;
   padding: 0px 0px 0px 0px;
-  align-content: center;
+  align-content: flex-start;
+  margin-top: 0.8rem;
   border-radius: 0px 0px 0px 0px;
   border-color: #222;
   border-style: solid;
@@ -182,4 +173,24 @@ export const ContactInfoFormButton = styled.button`
     width:50%;
     margin-left: 0;
    }
+`
+
+export const ContactInfoFormInputs = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    @media (max-width: 768px) {
+        width: 100%;
+        
+    }
+`
+
+export const ContactInfoFormImage = styled.img`
+    width: 600px;
+    height: 100%;
+    border-radius: 15px;
+    @media (max-width: 768px) {
+        display: none;
+    }
 `

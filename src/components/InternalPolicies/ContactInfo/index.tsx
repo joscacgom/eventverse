@@ -1,5 +1,5 @@
 import React from 'react'
-import { ContactInfoContainer, ContactInfoHeader, ContactInfoFormContainer, ContactInfoFormButton, ContactInfoFormLabel, ContactInfoFormInput, ContactInfoFormTextArea, ContactInfoBody, ContactInfoTitle, ContactInfoText, ContactInfoParagraph } from './styles'
+import { ContactInfoContainer, ContactInfoHeader, ContactInfoFormInputs, ContactInfoFormImage, ContactInfoFormContainer, ContactInfoFormButton, ContactInfoFormLabel, ContactInfoFormInput, ContactInfoFormTextArea, ContactInfoBody, ContactInfoTitle, ContactInfoText, ContactInfoParagraph } from './styles'
 const ContactInfo = () => {
   return (
        <><ContactInfoContainer>
@@ -14,8 +14,8 @@ const ContactInfo = () => {
               </ContactInfoText>
           </ContactInfoBody>
         <ContactInfoFormContainer>
-            <div>
-     <ContactInfoFormLabel htmlFor='user-name'>Nombre</ContactInfoFormLabel>
+            <ContactInfoFormInputs>
+                <ContactInfoFormLabel htmlFor='user-name'>Nombre</ContactInfoFormLabel>
                 <ContactInfoFormInput type='text' placeholder='Introduce tu nombre' id='user-name' name='user-name'></ContactInfoFormInput>
 
                 <ContactInfoFormLabel htmlFor='email'>Email</ContactInfoFormLabel>
@@ -25,9 +25,9 @@ const ContactInfo = () => {
                 <ContactInfoFormTextArea placeholder='Introduce el mensaje que deseas enviarnos' id='message' name='message'></ContactInfoFormTextArea>
                 <ContactInfoFormButton type="submit" >Enviar</ContactInfoFormButton>
 
-            </div>
+            </ContactInfoFormInputs>
 
-            <img src="/images/home-party.jpg" />
+            <ContactInfoFormImage src="/images/home-party.jpg" />
 
         </ContactInfoFormContainer>
 
