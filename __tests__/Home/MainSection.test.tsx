@@ -7,7 +7,12 @@ import { MOCK_EVENTS } from '@/models/Events/mock'
 import MainSection from '@/containers/Home/MainSection'
 import { ThemeProvider } from 'styled-components'
 import theme from '@/theme'
+import { NextRouter, useRouter } from 'next/router'
 
+jest.mock('next/router', () => ({
+  useRouter: jest.fn()
+}))
+useRouter as jest.Mock<NextRouter>
 describe('MainSection', () => {
   it('renders the title "Novedades"', () => {
     render(
