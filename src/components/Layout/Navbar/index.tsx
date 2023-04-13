@@ -24,6 +24,10 @@ const Navbar = () => {
     router.push('/')
   }
 
+  const handleClickCreateEvent = () => {
+    router.push('/event/create')
+  }
+
   return (
     <Nav mobile={showMobileMenu}>
         <img
@@ -36,7 +40,7 @@ const Navbar = () => {
       <MenuLinks mobile={showMobileMenu}>
         <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>Eventos</LinkItem>
         <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>Reventas</LinkItem>
-        <Button85>Crear evento</Button85>
+        <Button85 onClick={handleClickCreateEvent}>Crear evento</Button85>
       </MenuLinks>
     </Nav>
   )

@@ -5,13 +5,13 @@ const Footer = () => (
   <Foot>
     <Title>EventVerse</Title>
     <Menu>
-      <MenuItem href="/">
+      <MenuItem href="/policies/legal">
         <Text>Aviso legal</Text>
       </MenuItem>
-      <MenuItem href="/">
+      <MenuItem href="/policies/contact">
         <Text>Contacto</Text>
       </MenuItem>
-      <MenuItem href="/">
+      <MenuItem href="/policies/privacy-policy">
         <Text>Política de privacidad</Text>
       </MenuItem>
     </Menu>
