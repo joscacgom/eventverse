@@ -24,11 +24,7 @@ const EventCreation = () => {
     }
   }
   const handleTextRender = () => {
-    if (step === 3) {
-      return 'Finalizar y publicar'
-    } else {
-      return 'Siguiente paso'
-    }
+    return step === 3 ? 'Finalizar y publicar' : 'Siguiente paso'
   }
   return (
     <MainContainer>
