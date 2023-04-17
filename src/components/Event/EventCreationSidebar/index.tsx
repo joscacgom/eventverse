@@ -12,10 +12,10 @@ const EventCreationSidebar:FC<Props> = ({ step }) => {
     return {
       width: '25px',
       height: '25px',
-      boxShadow: current === step ? '0px 0.7961918735236395px 2.0700988711614627px -0.875px rgba(166, 219, 87, 0.68), 0px 2.414506143104518px 6.277715972071746px -1.75px rgba(166, 219, 87, 0.65171), 0px 6.382653521484461px 16.5948991558596px -2.625px rgba(166, 219, 87, 0.57235), 0px 20px 52px -3.5px rgba(166, 219, 87, 0.3)' : 'none',
-      backgroundColor: current === step ? '#a6db57' : 'white',
-      color: current === step ? '#a6db57' : 'white',
-      border: current === step ? 'none' : '1px solid #000000',
+      boxShadow: current <= step ? '0px 0.7961918735236395px 2.0700988711614627px -0.875px rgba(166, 219, 87, 0.68), 0px 2.414506143104518px 6.277715972071746px -1.75px rgba(166, 219, 87, 0.65171), 0px 6.382653521484461px 16.5948991558596px -2.625px rgba(166, 219, 87, 0.57235), 0px 20px 52px -3.5px rgba(166, 219, 87, 0.3)' : 'none',
+      backgroundColor: current <= step ? '#a6db57' : 'white',
+      color: current <= step ? '#a6db57' : 'white',
+      border: current <= step ? 'none' : '1px solid #000000',
       borderRadius: '100px'
     }
   }

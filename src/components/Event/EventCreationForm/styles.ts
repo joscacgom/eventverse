@@ -37,7 +37,6 @@ export const EventCreationInputOption = styled.option`
 export const EventCreationHeader = styled.div`
   width: auto; 
   height: auto;
-  white-space: pre;
   font-weight: 600;
   font-style: normal;
   font-family: "Inter-SemiBold", "Inter", sans-serif;
