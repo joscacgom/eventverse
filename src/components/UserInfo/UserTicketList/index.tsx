@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { MainContainer, HeaderSection, InfoHeader, SearchContainer, SearchInput, TicketListContainer, TicketListHeader, TicketList, TicketItem, TicketMainData, TicketImage, TicketInfo, TicketAmount, TicketPrice, TicketStatus, TicketName, TicketPlace, TicketDate, TicketTime } from './styles'
 import type { FC } from 'react'
+import ResellTicketForm from '@/components/ResellTicket/ResellTicketForm'
 import { User } from '@/models/Users/types'
 
 type Props ={
@@ -66,7 +67,9 @@ const UserTicketList: FC<Props> = ({ userData }) => {
                 </TicketPrice>
                 <TicketStatus>
                   <p style={{ color: COLOR_STATUS[ticket.status] }}>{ticket.status}</p>
+                  {<ResellTicketForm ticket={ticket}/>}
                 </TicketStatus>
+
               </TicketItem>
             ))}
           </TicketList>

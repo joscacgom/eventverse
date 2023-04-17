@@ -14,6 +14,7 @@ export const HeaderSection = styled.h1`
         margin-bottom: 0;
     }
 `
+
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,7 +23,6 @@ export const MainContainer = styled.div`
   margin-bottom: 10rem;
   padding-bottom: 10rem;
   gap: 5rem;
-  
 `
 export const InfoHeader = styled.h2`
   width: auto;  
@@ -256,6 +256,11 @@ export const TicketStatus = styled.div`
   width: auto; 
   height: auto; 
   font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
   font-style: normal;
   font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
   color: #539362;
