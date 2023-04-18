@@ -3,8 +3,8 @@ import styled from 'styled-components'
 export const Container = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
     height: auto;
     min-height: 100vh;  
@@ -21,6 +21,4 @@ export const Content = styled.div`
     padding-left: 6em;
     padding-top: 2em;
     gap: 1.2em;
-
-    border: 1px solid ${({ theme }) => theme.nord.blue};
 `

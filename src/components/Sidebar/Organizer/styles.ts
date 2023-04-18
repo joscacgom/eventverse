@@ -5,13 +5,12 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 15%;
+    width: 14%;
     height: auto;
     min-height: 100vh;
     padding-top: 2em;
     padding-left: 2.5em;
     gap: 1em;
-    background-color: ${({ theme }) => theme.nord.gray1};
 `
 
 type TabButtonProps = {
@@ -22,5 +21,6 @@ export const TabButton = styled.button<TabButtonProps>`
     font-weight: 600;
     border: none;
     cursor: pointer;
+    background: none;
     color: ${({ theme, active }) => (active ? theme.nord.black0 : theme.nord.gray2)};
 `

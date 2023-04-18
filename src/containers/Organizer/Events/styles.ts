@@ -30,11 +30,14 @@ export const TableHeader = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.nord.black1};
 `
 
+export const TableItem = styled.p``
+
 export const EventsList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 90%;
+    height: auto;
+    margin-bottom: 4em;
   gap: 1em;
 `
-export const TableItem = styled.p``
