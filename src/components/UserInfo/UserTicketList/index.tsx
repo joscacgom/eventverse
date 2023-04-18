@@ -69,7 +69,6 @@ const UserTicketList: FC<Props> = ({ userData }) => {
                   <p style={{ color: COLOR_STATUS[ticket.status] }}>{ticket.status}</p>
                   {<ResellTicketForm ticket={ticket}/>}
                 </TicketStatus>
-
               </TicketItem>
             ))}
           </TicketList>

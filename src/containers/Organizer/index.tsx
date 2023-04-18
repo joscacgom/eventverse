@@ -2,11 +2,20 @@ import { useState } from 'react'
 import { OrganizerDetailsTabs } from './types'
 import SideBar from '../../components/Sidebar/Organizer'
 import { Container, Content } from './styles'
+import Events from './Events'
 
 const OrganizerDetails = () => {
   const [activeTab, setActiveTab] = useState<OrganizerDetailsTabs>(OrganizerDetailsTabs.Events)
   const handleUpdateActiveTab = (tab: OrganizerDetailsTabs) => {
     setActiveTab(tab)
+  }
+
+  const renderSelectedTab = () => {
+    if (activeTab === OrganizerDetailsTabs.Events) return <Events />
+    // if (activeTab === OrganizerDetailsTabs.Asistants) return <General />
+    // if (activeTab === OrganizerDetailsTabs.Finances) return <Tickets />
+    // if (activeTab === OrganizerDetailsTabs.Profile) return <Sponsors />
+    return <div>Not found</div>
   }
   return (
         <Container>
@@ -14,7 +23,9 @@ const OrganizerDetails = () => {
                 activeTab={activeTab}
                 handleUpdateActiveTab={handleUpdateActiveTab}
             />
-            <Content>Content</Content>
+            <Content>
+                {renderSelectedTab()}
+            </Content>
         </Container>
   )
 }

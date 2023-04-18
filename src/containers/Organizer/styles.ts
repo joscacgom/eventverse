@@ -13,10 +13,14 @@ export const Container = styled.div`
 export const Content = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 85%;
     height: auto;
     min-height: 100vh;
-    padding: 0 2em;
+    padding-left: 6em;
+    padding-top: 2em;
+    gap: 1.2em;
+
+    border: 1px solid ${({ theme }) => theme.nord.blue};
 `
