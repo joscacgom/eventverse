@@ -1,9 +1,15 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled(Link)`
     display: flex;
     flex-direction: row;
     width: 100%;
+
+    &:hover {
+        transform: scale(1.02);
+        transition: all 0.2s ease-in-out;
+    }
 `
 
 export const Card = styled.div`

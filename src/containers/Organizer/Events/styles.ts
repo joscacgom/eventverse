@@ -37,7 +37,7 @@ export const EventsList = styled.div`
   flex-direction: column;
   align-items: center;
   width: 90%;
-    height: auto;
-    margin-bottom: 4em;
-  gap: 1em;
+  height: auto;
+  margin-bottom: 4em;
+  gap: 2em;
 `
