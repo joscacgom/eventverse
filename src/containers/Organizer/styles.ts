@@ -21,4 +21,5 @@ export const Content = styled.div`
     padding-left: 6em;
     padding-top: 1.6em;
     gap: 1.2em;
+    margin-bottom: 6em;
 `
