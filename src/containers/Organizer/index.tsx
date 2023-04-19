@@ -13,8 +13,8 @@ const OrganizerDetails = () => {
   const renderSelectedTab = () => {
     if (activeTab === OrganizerDetailsTabs.Events) return <Events />
     // if (activeTab === OrganizerDetailsTabs.Asistants) return <General />
-    // if (activeTab === OrganizerDetailsTabs.Finances) return <Tickets />
-    // if (activeTab === OrganizerDetailsTabs.Profile) return <Sponsors />
+    // if (activeTab === OrganizerDetailsTabs.Finances) return <Finances />
+    // if (activeTab === OrganizerDetailsTabs.Profile) return <Profile />
     return <div>Not found</div>
   }
   return (

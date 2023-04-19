@@ -19,6 +19,6 @@ export const Content = styled.div`
     height: auto;
     min-height: 100vh;
     padding-left: 6em;
-    padding-top: 2em;
+    padding-top: 1.6em;
     gap: 1.2em;
 `
