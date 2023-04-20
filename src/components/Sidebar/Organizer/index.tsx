@@ -17,13 +17,6 @@ const SideBar: FC<Props> = ({ activeTab, handleUpdateActiveTab }) => {
             </TabButton>
 
             <TabButton
-                active={activeTab === OrganizerDetailsTabs.Asistants}
-                onClick={() => handleUpdateActiveTab(OrganizerDetailsTabs.Asistants)}
-            >
-                {OrganizerDetailsTabs.Asistants}
-            </TabButton>
-
-            <TabButton
                 active={activeTab === OrganizerDetailsTabs.Finances}
                 onClick={() => handleUpdateActiveTab(OrganizerDetailsTabs.Finances)}
             >
