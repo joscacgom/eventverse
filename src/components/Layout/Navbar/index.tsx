@@ -39,7 +39,7 @@ const Navbar = () => {
         />
       <MenuLinks mobile={showMobileMenu}>
         <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>Eventos</LinkItem>
-        <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>Reventas</LinkItem>
+        <LinkItem mobile={showMobileMenu} primary={false} href={'/resell'}>Reventas</LinkItem>
         <Button85 onClick={handleClickCreateEvent}>Crear evento</Button85>
       </MenuLinks>
     </Nav>
