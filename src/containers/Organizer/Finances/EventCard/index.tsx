@@ -1,33 +1,8 @@
 import { Event } from '@/models/Events/types'
 import type { FC } from 'react'
-import styled from 'styled-components'
+import { Container, Left, Checkbox, Right, Title } from './styles'
 
-export const Container = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 1rem;
-`
-
-export const Left = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-`
-
-export const Checkbox = styled.input`
-  width: 1.5rem;
-  height: 1.5rem;
-`
-
-export const Title = styled.h3``
-
-export const Right = styled.div`
-`
+const MOCK_AMOUNT = '1.239.003,12€'
 
 type Props = {
   event: Event
@@ -46,7 +21,7 @@ const EventCard: FC<Props> = ({ event, selected, handleUpdateSelectedEvents }) =
         <Title>{event.title}</Title>
       </Left>
       <Right>
-        <Title>789.003,12€</Title>
+        <Title>{MOCK_AMOUNT}</Title>
       </Right>
     </Container>
   )

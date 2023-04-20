@@ -23,11 +23,9 @@ const Finances = () => {
   }
 
   const eventIsSelected = (event: Event) => {
-    if (selectedEvents) {
-      const eventIndex = selectedEvents.findIndex((e) => e.id === event.id)
-      return eventIndex !== -1
-    }
-    return false
+    if (!selectedEvents) return false
+    const eventIndex = selectedEvents.findIndex((e) => e.id === event.id)
+    return eventIndex !== -1
   }
   const renderEventList = () => {
     return MOCK_EVENTS.map((event) => {

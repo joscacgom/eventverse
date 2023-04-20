@@ -4,6 +4,7 @@ import SideBar from '../../components/Sidebar/Organizer'
 import { Container, Content } from './styles'
 import Events from './Events'
 import Finances from './Finances'
+import Profile from './Profile'
 
 const OrganizerDetails = () => {
   const [activeTab, setActiveTab] = useState<OrganizerDetailsTabs>(OrganizerDetailsTabs.Events)
@@ -14,8 +15,8 @@ const OrganizerDetails = () => {
   const renderSelectedTab = () => {
     if (activeTab === OrganizerDetailsTabs.Events) return <Events />
     if (activeTab === OrganizerDetailsTabs.Finances) return <Finances />
+    if (activeTab === OrganizerDetailsTabs.Profile) return <Profile />
     // if (activeTab === OrganizerDetailsTabs.Asistants) return <General />
-    // if (activeTab === OrganizerDetailsTabs.Profile) return <Profile />
     return <div>Not found</div>
   }
   return (
