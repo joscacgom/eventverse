@@ -16,7 +16,6 @@ const OrganizerDetails = () => {
     if (activeTab === OrganizerDetailsTabs.Events) return <Events />
     if (activeTab === OrganizerDetailsTabs.Finances) return <Finances />
     if (activeTab === OrganizerDetailsTabs.Profile) return <Profile />
-    // if (activeTab === OrganizerDetailsTabs.Asistants) return <General />
     return <div>Not found</div>
   }
   return (
