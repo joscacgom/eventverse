@@ -8,11 +8,8 @@ type Props = {
 }
 const EventCard: FC<Props> = ({ listingItem }) => {
   const router = useRouter()
-  const navigateToDetails = (id: string) => () => {
-    router.push(`/ticket/${id}`)
-  }
   return (
-    <CardWrapper onClick={() => navigateToDetails(listingItem.id)}>
+    <CardWrapper onClick={() => router.push(`/ticket/${listingItem.id}`)}>
       <CardImage src={listingItem.image} />
       <CardContent>
         <Title>{listingItem.title}</Title>
