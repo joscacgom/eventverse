@@ -16,7 +16,7 @@ type Props = {
 }
 const EventCard: FC<Props> = ({ event }) => {
   return (
-        <Container href={`/event/${event.id}`}>
+        <Container href={`/organizer/event/${event.id}`}>
             <Card>
                 <Image src={event.image} width={100} height={100} />
                 <CardInfo>
