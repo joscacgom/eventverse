@@ -7,8 +7,9 @@ const nord = {
   black1: '#434c5e',
 
   gray0: '#FCFCFC',
-  gray1: '#575757',
-  gray2: '#B3B3B3',
+  gray1: '#ECEFF4',
+  gray2: '#575757',
+  gray3: '#B3B3B3',
 
   red: '#D65151',
   blue: '#0099FF',

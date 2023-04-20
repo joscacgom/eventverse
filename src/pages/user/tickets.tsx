@@ -4,7 +4,7 @@ import { Layout } from '@/components'
 
 const User = () => {
   return (
-    <Layout title={'Perfil de usuario'}>
+    <Layout title={'Tus tickets'}>
       <UserTickets />
     </Layout>
 

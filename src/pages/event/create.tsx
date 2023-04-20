@@ -3,7 +3,7 @@ import { EventCreation } from '@/containers'
 
 const Event = () => {
   return (
-    <Layout title={`${'Creación de evento'}`}>
+    <Layout title={'Creación de evento'}>
       <EventCreation />
     </Layout>
   )
