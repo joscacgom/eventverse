@@ -17,6 +17,19 @@ export const MainContainer = styled.div`
     }
 
 `
+export const ButtonContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+
+    @media (max-width: 768px) {
+        width: 80%;
+        gap: 1rem;
+    }
+`
+
 export const EventCreationFormButton = styled.button`
   width: 205px;
   height: 40px;

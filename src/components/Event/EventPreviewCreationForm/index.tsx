@@ -1,14 +1,36 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { EventPreviewCreationMainContainer, EventPreviewCreationHeader, EventPreviewCreationFirstContainer, EventPreviewCreationSecondContainer, EventPreviewCreationImage, EventPreviewCreationName, EventPreviewCreationNameHeader, EventPreviewCreationNameText, EventPreviewCreationDescription, EventPreviewCreationDescriptionHeader, EventPreviewCreationDescriptionText, EventPreviewCreationStartDate, EventPreviewCreationStartDateHeader, EventPreviewCreationStartDateText, EventPreviewCreationEndDate, EventPreviewCreationEndDateHeader, EventPreviewCreationEndDateText, EventPreviewCreationLocation, EventPreviewCreationLocationHeader, EventPreviewCreationLocationText, EventPreviewCreationLocationImage, EventPreviewCreationTicket, EventPreviewCreationTicketHeader, EventPreviewCreationTicketImage, EventPreviewCreationTicketName, EventPreviewCreationTicketPriceContainer, EventPreviewCreationTicketPrice, EventPreviewCreationTicketAmount } from './styles'
-import type { Event } from '@/models/Events/types'
+import type { EventTicketPreview } from '@/models/Events/types'
 type Props = {
-    event: Event
+    event: EventTicketPreview
 }
 const EventPreviewCreationForm:FC<Props> = ({ event }) => {
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [ticketImagePreview, setTicketImagePreview] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (isFile(event.image)) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string)
+      }
+      reader.readAsDataURL(event.image)
+    }
+    if (isFile(event.ticketImage)) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setTicketImagePreview(reader.result as string)
+      }
+      reader.readAsDataURL(event.ticketImage)
+    }
+  }, [event.image, event.ticketImage])
+
+  const isFile = (value: any): value is File =>
+    value instanceof File
   return (
      <>
      <EventPreviewCreationHeader>Resumen final del evento</EventPreviewCreationHeader>
-     <EventPreviewCreationImage src={'/images/events/medusa-fest-wallpaper.jpg'} />
+     <EventPreviewCreationImage src={imagePreview || ''} />
      <EventPreviewCreationMainContainer>
 
           <EventPreviewCreationFirstContainer>
@@ -29,7 +51,7 @@ const EventPreviewCreationForm:FC<Props> = ({ event }) => {
 
               <EventPreviewCreationEndDate>
                   <EventPreviewCreationEndDateHeader>Fecha de finalización</EventPreviewCreationEndDateHeader>
-                  <EventPreviewCreationEndDateText>23 de Agosto 2023</EventPreviewCreationEndDateText>
+                  <EventPreviewCreationEndDateText>{event.endDate}</EventPreviewCreationEndDateText>
               </EventPreviewCreationEndDate>
 
               <EventPreviewCreationLocation>
@@ -43,11 +65,11 @@ const EventPreviewCreationForm:FC<Props> = ({ event }) => {
           <EventPreviewCreationSecondContainer>
               <EventPreviewCreationTicket>
                   <EventPreviewCreationTicketHeader>Entradas</EventPreviewCreationTicketHeader>
-                  <EventPreviewCreationTicketImage src={'/images/tickets/medusa-festival.png'} alt='Ticket image' />
-                  <EventPreviewCreationTicketName>Medusa Festival (EV)</EventPreviewCreationTicketName>
+                  <EventPreviewCreationTicketImage src={ticketImagePreview || ''} alt='Ticket image' />
+                  <EventPreviewCreationTicketName>{event.ticketTitle}</EventPreviewCreationTicketName>
                   <EventPreviewCreationTicketPriceContainer>
-                      <EventPreviewCreationTicketPrice>100 entradas</EventPreviewCreationTicketPrice>
-                      <EventPreviewCreationTicketAmount>90€</EventPreviewCreationTicketAmount>
+                      <EventPreviewCreationTicketPrice>{event.ticketAmount} entradas</EventPreviewCreationTicketPrice>
+                      <EventPreviewCreationTicketAmount>{event.ticketPrice}€</EventPreviewCreationTicketAmount>
                   </EventPreviewCreationTicketPriceContainer>
               </EventPreviewCreationTicket>
           </EventPreviewCreationSecondContainer>
