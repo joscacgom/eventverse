@@ -15,3 +15,19 @@ export type EventTicketPreview = Event & {
     ticketPrice: number;
     ticketImage: string;
 }
+export type EventTableSupabase = {
+    name: string
+    summary: string
+    description: string
+    image: any
+    tags: string
+    location: string
+    start_date: string
+    end_date: string
+    time_zone: string
+    country: string
+    event_type: string
+    category: string
+    pricing_plan: string
+
+    }

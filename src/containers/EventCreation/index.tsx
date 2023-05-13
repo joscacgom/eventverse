@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { EventCreationForm, EventCreationSidebar, EventTicketCreationForm, EventPreviewCreationForm } from '@/components/Event'
 import { MainContainer, EventCreationFormButton, ButtonContainer } from './styles'
 import { useRouter } from 'next/router'
-import type { EventTicketPreview } from '@/models/Events/types'
 import { ToastContainer, Zoom, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { handleSubmitEventToSupabase } from '@/utils/Event/handleSubmitEventToSupabase'
+import { handleEventObjects } from '@/utils/Event/handleEventObjects'
 
 type FormData = {
   [part: string]: any;
@@ -12,25 +13,12 @@ type FormData = {
 
 const EventCreation = () => {
   const [step, setStep] = useState<number>(1)
+  const [sendingData, setSendingData] = useState<boolean>(false)
   const router = useRouter()
   const [formData, setFormData] = useState<FormData>({
     part1: {},
     part2: {}
   })
-
-  const event: EventTicketPreview = {
-    id: 'pending',
-    title: formData.part1.eventName,
-    date: formData.part1.startDate,
-    endDate: formData.part1.endDate,
-    description: formData.part1.eventDescription,
-    image: formData.part1.image,
-    location: formData.part1.location,
-    ticketTitle: formData.part2.ticketName,
-    ticketAmount: formData.part2.ticketAmount,
-    ticketPrice: formData.part2.ticketPrice,
-    ticketImage: formData.part2.image
-  }
 
   const handleStepIncrease = () => {
     let isValid = true
@@ -53,7 +41,7 @@ const EventCreation = () => {
       step !== 3 ? setStep(step + 1) : handleSubmit()
       window.scrollTo(0, 0)
     } else {
-      toast.error('Por favor, completa todos los campos')
+      toast.error('Por favor, completa todos los campos 😬')
     }
   }
 
@@ -73,23 +61,17 @@ const EventCreation = () => {
   }
 
   const handleSubmit = () => {
-    toast.promise(
-      connectToSupabaseAndSubmit(),
-      {
-        pending: 'Procesando datos de tu evento... 😅',
-        success: 'Tu evento ha sido creado exitosamente! 😍',
-        error: 'Hubo un error al crear tu evento! 😭 Por favor, intenta nuevamente.'
-      }
-    )
-  }
-
-  const connectToSupabaseAndSubmit = async () => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      return 'success'
-    } catch (error) {
-      throw new Error('Submission failed!')
-    }
+    setSendingData(true)
+    const { eventToSubmit, ticketToSubmit } = handleEventObjects(formData.part1, formData.part2)
+    toast.promise(handleSubmitEventToSupabase(eventToSubmit, ticketToSubmit), {
+      pending: 'Procesando datos de tu evento... 😅',
+      success: 'Tu evento ha sido creado exitosamente! 😍',
+      error: 'Hubo un error al crear tu evento! 😭 Por favor, intenta nuevamente.'
+    }).then(() => {
+      setTimeout(() => {
+        router.push('/')
+      }, 5000)
+    })
   }
 
   const handleFormRender = () => {
@@ -97,13 +79,16 @@ const EventCreation = () => {
       case 1:
         return <EventCreationForm formData={formData.part1} onChange={data => handleFormChange('part1', data)} />
       case 2:
-        return <EventTicketCreationForm formData={formData.part2} onChange={data => handleFormChange('part2', data)}/>
-      case 3:
-        return <EventPreviewCreationForm event={event} />
+        return <EventTicketCreationForm formData={formData.part2} onChange={data => handleFormChange('part2', data)} />
+      case 3: {
+        const { eventPreview } = handleEventObjects(formData.part1, formData.part2)
+        return <EventPreviewCreationForm event={eventPreview} />
+      }
       default:
         return null
     }
   }
+
   const handleIncreaseTextRender = () => {
     return step === 3 ? 'Finalizar y publicar' : 'Siguiente paso'
   }
@@ -118,8 +103,8 @@ const EventCreation = () => {
       <EventCreationSidebar step={step} />
       {handleFormRender()}
       <ButtonContainer>
-        <EventCreationFormButton onClick={handleStepDecrease}>{handleDecreaseTextRender()}</EventCreationFormButton>
-        <EventCreationFormButton onClick={handleStepIncrease}>{handleIncreaseTextRender()}</EventCreationFormButton>
+        <EventCreationFormButton sending={sendingData} onClick={handleStepDecrease}>{handleDecreaseTextRender()}</EventCreationFormButton>
+        <EventCreationFormButton sending={sendingData} onClick={handleStepIncrease}>{handleIncreaseTextRender()}</EventCreationFormButton>
       </ButtonContainer>
     </MainContainer>
   )

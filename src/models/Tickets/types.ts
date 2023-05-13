@@ -24,3 +24,18 @@ export type Ticket ={
     platformRoyalty: number;
     event:Event;
 }
+
+export type TicketTableSupabase = {
+      name: string;
+      description: string;
+      image: string;
+      start_date: string;
+      end_date: string;
+      price: number;
+      quantity: number;
+      max_per_user: number;
+      organizer_royalty: number;
+      platform_royalty: number
+      contract_address: string;
+      platform_address: string;
+}
