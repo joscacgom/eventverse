@@ -40,8 +40,8 @@ const EventCreation = () => {
         lengthMax: 255,
         errorMessageEmpty: 'Por favor, completa todos los campos 😬',
         errorMessageDate: 'La fecha de inicio no puede ser mayor que la fecha de fin 😬',
-        errorMessageLength: 'Los campos de nombre, descripción y resumen deben tener entre 5 y 255 caracteres 😬',
-        errorMessageLengthMin: 'Los campos de nombre, descripción y resumen no pueden ser menores a 5 caracteres 😬',
+        errorMessageLengthEvent: 'Los campos de nombre, descripción y resumen deben tener entre 5 y 255 caracteres 😬',
+        errorMessageLengthMinEvent: 'Los campos de nombre, descripción y resumen no pueden ser menores a 5 caracteres 😬',
         errorMessageDatePast: 'La fecha de inicio no puede ser menor a la fecha actual 😬'
       },
       {
@@ -62,12 +62,13 @@ const EventCreation = () => {
         errorMessageDate: 'La fecha de inicio no puede ser mayor que la fecha de fin 😬',
         errorMessageLength: 'Los campos de nombre y descripción deben tener entre 5 y 255 caracteres 😬',
         errorMessageLengthMin: 'Los campos de cantidad, precio, límite y regalías no pueden ser menores a 1 😬',
+        errorMessageLenghtMax: 'Los campos de cantidad, precio, límite y regalías no pueden ser mayores a 100000 😬',
         errorMessageDatePast: 'La fecha de inicio no puede ser menor a la fecha actual 😬',
         errorMessageLimit: 'El límite de tickets de un usuario no puede ser mayor a la cantidad de tickets 😬'
       }
     ]
-
-    const { fields, lengthMin, lengthMax, errorMessageEmpty, errorMessageDate, errorMessageLength, errorMessageDatePast, errorMessageLimit, errorMessageLengthMin } = validationRules[step - 1]
+    if (step === 3) return handleSubmit()
+    const { fields, lengthMin, lengthMax, errorMessageEmpty, errorMessageDate, errorMessageLength, errorMessageDatePast, errorMessageLimit, errorMessageLengthMin, errorMessageLenghtMax, errorMessageLengthMinEvent, errorMessageLengthEvent } = validationRules[step - 1]
 
     for (const field of fields) {
       if (!formData[`part${step}`][field]) {
@@ -76,7 +77,7 @@ const EventCreation = () => {
       }
     }
 
-    const { startDate, endDate, ticketLimit, ticketAmount, ticketName, ticketDescription } = formData[`part${step}`]
+    const { startDate, endDate, ticketLimit, ticketAmount, ticketName, ticketDescription, eventName, eventDescription, eventSummary, ticketPrice, ticketRoyalties } = formData[`part${step}`]
 
     if (startDate > endDate) {
       toast.error(errorMessageDate)
@@ -94,15 +95,40 @@ const EventCreation = () => {
     }
 
     if (ticketName?.length < lengthMin || ticketDescription?.length < lengthMin) {
-      toast.error(errorMessageLengthMin)
+      toast.error(errorMessageLength)
       return
     }
 
     if (ticketName?.length > lengthMax || ticketDescription?.length > lengthMax) {
       toast.error(errorMessageLength)
+      return
+    }
+
+    if (ticketLimit < 1 || ticketAmount < 1) {
+      toast.error(errorMessageLengthMin)
+      return
+    }
+
+    if (ticketLimit > 100000 || ticketAmount > 100000 || ticketPrice > 100000) {
+      toast.error(errorMessageLenghtMax)
+      return
+    }
+
+    if (ticketRoyalties > 100000) {
+      toast.error(errorMessageLenghtMax)
+      return
+    }
+
+    if (eventName?.length < lengthMin || eventDescription?.length < lengthMin || eventSummary?.length < lengthMin) {
+      toast.error(errorMessageLengthMinEvent)
+      return
+    }
+
+    if (eventName?.length > lengthMax || eventDescription?.length > lengthMax || eventSummary?.length > lengthMax) {
+      toast.error(errorMessageLengthEvent)
+      return
     }
     setStep(step !== 3 ? step + 1 : step)
-    if (step === 3) handleSubmit()
     window.scrollTo(0, 0)
   }
 
