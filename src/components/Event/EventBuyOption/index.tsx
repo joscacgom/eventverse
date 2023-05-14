@@ -1,41 +1,81 @@
-import React, { FC } from 'react'
-import { Event } from '@/models/Events/types'
-import { EventBuyOptionContainer, EventBuyOptionButtons, EventBuyOptionButton, EventBuyOptionTicket, EventBuyOptionTicketInfo, EventBuyOptionTicketActionLabel, EventBuyOptionTicketButton, EventBuyOptionTicketActionPrice, EventBuyOptionTicketActionAmount, EventBuyOptionTicketImage, EventBuyOptionTicketAction } from './styles'
+import { FC, useEffect, useCallback, useState } from 'react'
+import {
+  Container,
+  Buttons,
+  Button,
+  Ticket,
+  TicketAction,
+  TicketActionAmount,
+  TicketActionPrice,
+  TicketImage,
+  TicketInfo,
+  TicketActionLabel
+} from './styles'
+import { PaymentMethod, Props } from './types'
+import CrossmintButton from './CrossmintButton'
+import ThirdwebButton from './ThirdwebButton'
 
-type Props = {
-    event : Event ;
-};
+const EventBuyOption: FC<Props> = ({ event }) => {
+  const [amount, setAmount] = useState(1)
+  const [totalPrice, setTotalPrice] = useState(0.01)
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.CREDIT_CARD)
 
-const EventBuyOption:FC<Props> = ({ event }) => {
+  const updatePaymentMethod = (method: PaymentMethod) => {
+    if (method === paymentMethod) return
+    setPaymentMethod(method)
+  }
+
+  const renderPaymentMethod = useCallback(() => {
+    if (paymentMethod === PaymentMethod.CREDIT_CARD) return <CrossmintButton quantity={amount} totalPrice={totalPrice} />
+    return <ThirdwebButton contractAddress={event.ticket.contractAddress} />
+  }, [paymentMethod, amount, totalPrice])
+
+  useEffect(() => {
+    setTotalPrice(amount * event.ticket.price)
+  }, [amount])
+
   return (
-        <EventBuyOptionContainer>
-            <EventBuyOptionButtons>
-                <EventBuyOptionButton>
-                   Tarjeta de crédito
-                </EventBuyOptionButton>
-                <EventBuyOptionButton>
-                    Wallet
-                </EventBuyOptionButton>
-            </EventBuyOptionButtons>
-            <EventBuyOptionTicket>
-                <EventBuyOptionTicketInfo>
-                <EventBuyOptionTicketImage src ={event.image}/>
-                <EventBuyOptionTicketAction>
-                    <EventBuyOptionTicketActionLabel htmlFor="amount">
+        <Container>
+            <Buttons>
+                <Button
+                    active={paymentMethod === PaymentMethod.CREDIT_CARD}
+                    onClick={() => updatePaymentMethod(PaymentMethod.CREDIT_CARD)}
+                >
+                    {PaymentMethod.CREDIT_CARD}
+                </Button>
+                <Button
+                    active={paymentMethod === PaymentMethod.WALLET}
+                    onClick={() => updatePaymentMethod(PaymentMethod.WALLET)}
+                >
+                    {PaymentMethod.WALLET}
+                </Button>
+            </Buttons>
+            <Ticket>
+                <TicketInfo>
+                <TicketImage src ={event.image}/>
+                <TicketAction>
+                    <TicketActionLabel htmlFor="amount">
                         Cantidad
-                    </EventBuyOptionTicketActionLabel>
-                    <EventBuyOptionTicketActionAmount name="amount" id="amount" type="number" min="1" defaultValue="1">
-                    </EventBuyOptionTicketActionAmount>
-                    <EventBuyOptionTicketActionPrice>
-                       100€
-                    </EventBuyOptionTicketActionPrice>
-                </EventBuyOptionTicketAction>
-                </EventBuyOptionTicketInfo>
-                <EventBuyOptionTicketButton>
-                    Comprar
-                </EventBuyOptionTicketButton>
-            </EventBuyOptionTicket>
-        </EventBuyOptionContainer>
+                    </TicketActionLabel>
+                    <TicketActionAmount
+                      name="amount"
+                      id="amount"
+                      type="number"
+                      min="1"
+                      max={event.ticket.maxPerUser}
+                      defaultValue={amount}
+                      onChange={(e) => setAmount(parseInt(e.target.value))}
+                    />
+                    <TicketActionPrice>
+                        {totalPrice} MATIC
+                    </TicketActionPrice>
+                </TicketAction>
+                </TicketInfo>
+                <div>
+                  {renderPaymentMethod()}
+                </div>
+            </Ticket>
+        </Container>
   )
 }
 
