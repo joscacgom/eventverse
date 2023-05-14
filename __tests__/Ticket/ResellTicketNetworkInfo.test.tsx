@@ -3,13 +3,13 @@ import 'jest-styled-components'
 import '@testing-library/jest-dom'
 
 import { render, screen } from '@testing-library/react'
-import { MOCK_TICKET } from '@/models/Tickets/mock'
+import { MOCK_EVENT_TICKET } from '@/models/Tickets/mock'
 import { ThemeProvider } from 'styled-components'
 import ResellTicketNetworkInfo from '@/components/ResellTicket/ResellTicketNetworkInfo'
 import theme from '@/theme'
 
 describe('ResellTicketNetworkInfo', () => {
-  const ticket = MOCK_TICKET
+  const ticket = MOCK_EVENT_TICKET
 
   it('should render correctly', () => {
     render(

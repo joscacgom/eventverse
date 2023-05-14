@@ -1,4 +1,3 @@
-import { MOCK_EVENT } from '../Events/mock'
 import { Ticket, UserTicket } from './types'
 
 export const MOCK_TICKET_USER: UserTicket = {
@@ -10,7 +9,6 @@ export const MOCK_TICKET_USER: UserTicket = {
   price: 90,
   status: 'Activo',
   imagEvent: '/images/tickets/medusa-festival.png'
-
 }
 
 export const MOCK_TICKETS: UserTicket[] = [
@@ -38,10 +36,11 @@ export const MOCK_TICKETS: UserTicket[] = [
   }
 ]
 
-export const MOCK_TICKET: Ticket = {
+export const MOCK_EVENT_TICKET: Ticket = {
   id: '1',
   name: 'Medusa Festival',
-  price: 100,
+  image: '/images/tickets/medusa-festival.png',
+  price: '0.01',
   amount: 100,
   description: 'Abonos ya a la venta para el Medusa Festival 2023',
   startDate: '22 de Agosto 2023',
@@ -50,5 +49,5 @@ export const MOCK_TICKET: Ticket = {
   contractAddress: '0x4c59cbe3af1b885267802c8cef2a6e97ff6a23fa',
   organizerRoyalty: 5,
   platformRoyalty: 2.5,
-  event: MOCK_EVENT
+  eventId: '1'
 }

@@ -1,41 +1,48 @@
-import React, { FC } from 'react'
-import { Event } from '@/models/Events/types'
-import { EventBuyOptionContainer, EventBuyOptionButtons, EventBuyOptionButton, EventBuyOptionTicket, EventBuyOptionTicketInfo, EventBuyOptionTicketActionLabel, EventBuyOptionTicketButton, EventBuyOptionTicketActionPrice, EventBuyOptionTicketActionAmount, EventBuyOptionTicketImage, EventBuyOptionTicketAction } from './styles'
+import type { FC } from 'react'
+import { useCallback, useState } from 'react'
+import {
+  Container,
+  Buttons,
+  Button
+} from './styles'
+import { PaymentMethod, Props } from './types'
+import CrossmintButton from './CrossmintButton'
 
-type Props = {
-    event : Event ;
-};
+const EventBuyOption: FC<Props> = ({ event }) => {
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.CREDIT_CARD)
 
-const EventBuyOption:FC<Props> = ({ event }) => {
+  const updatePaymentMethod = (method: PaymentMethod) => {
+    if (method === paymentMethod) return
+    setPaymentMethod(method)
+  }
+
+  const renderPaymentMethod = useCallback(() => {
+    if (paymentMethod === PaymentMethod.CREDIT_CARD) {
+      return <CrossmintButton totalPrice={event.ticket.price} />
+    }
+
+    return (
+        <h1>Wallet button</h1>
+    )
+  }, [paymentMethod])
   return (
-        <EventBuyOptionContainer>
-            <EventBuyOptionButtons>
-                <EventBuyOptionButton>
-                   Tarjeta de crédito
-                </EventBuyOptionButton>
-                <EventBuyOptionButton>
-                    Wallet
-                </EventBuyOptionButton>
-            </EventBuyOptionButtons>
-            <EventBuyOptionTicket>
-                <EventBuyOptionTicketInfo>
-                <EventBuyOptionTicketImage src ={event.image}/>
-                <EventBuyOptionTicketAction>
-                    <EventBuyOptionTicketActionLabel htmlFor="amount">
-                        Cantidad
-                    </EventBuyOptionTicketActionLabel>
-                    <EventBuyOptionTicketActionAmount name="amount" id="amount" type="number" min="1" defaultValue="1">
-                    </EventBuyOptionTicketActionAmount>
-                    <EventBuyOptionTicketActionPrice>
-                       100€
-                    </EventBuyOptionTicketActionPrice>
-                </EventBuyOptionTicketAction>
-                </EventBuyOptionTicketInfo>
-                <EventBuyOptionTicketButton>
-                    Comprar
-                </EventBuyOptionTicketButton>
-            </EventBuyOptionTicket>
-        </EventBuyOptionContainer>
+        <Container>
+            <Buttons>
+                <Button
+                    active={paymentMethod === PaymentMethod.CREDIT_CARD}
+                    onClick={() => updatePaymentMethod(PaymentMethod.CREDIT_CARD)}
+                >
+                    {PaymentMethod.CREDIT_CARD}
+                </Button>
+                <Button
+                    active={paymentMethod === PaymentMethod.WALLET}
+                    onClick={() => updatePaymentMethod(PaymentMethod.WALLET)}
+                >
+                    {PaymentMethod.WALLET}
+                </Button>
+            </Buttons>
+            {renderPaymentMethod()}
+        </Container>
   )
 }
 
