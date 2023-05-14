@@ -12,7 +12,7 @@ export type Ticket ={
     id: string;
     image: string;
     name: string;
-    price: string;
+    price: number;
     amount: number;
     description: string;
     startDate: string;

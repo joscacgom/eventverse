@@ -64,3 +64,113 @@ export const Button = styled.button<ButtonProps>`
     }
 
 `
+export const Ticket = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  
+  padding: 1em;
+  align-content: center;
+  
+  gap: 1rem;
+  width: 410px;
+  height: 247px;
+  
+  border-radius: 9px;
+  border: 1px solid ${({ theme }) => theme.nord.black0};
+  background-color: ${({ theme }) => theme.nord.white};
+
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`
+
+export const TicketInfo = styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: space-between;
+    width:100%;
+    @media (max-width: 768px) {
+       gap:7rem;
+    }
+`
+
+export const TicketButton = styled.button`
+  width: 378px; 
+  height: 49px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+  background-color: #222222;
+  align-content: center;
+  margin-left: 10px;
+  gap: 10;
+  border:none;
+  color: ${({ theme }) => theme.nord.white};
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-style: normal;
+  font-family: "Inter", sans-serif;
+  color: #ffffff;
+  font-size: 18px;
+  &:hover {
+    background-color: ${({ theme }) => theme.nord.white};
+    color: ${({ theme }) => theme.nord.black0};
+  }
+  @media (max-width: 768px) {
+    width: 80%;
+    }
+`
+
+export const TicketActionPrice = styled.p`
+  font-weight: 400;
+  color: ${({ theme }) => theme.nord.black0};
+  font-size: 24px;
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+`
+
+export const TicketActionAmount = styled.input`
+  width: 50px; 
+  height: auto; 
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
+  color: #424242;
+  font-size: 26px;
+  @media (max-width: 768px) {
+    font-size: 18px;
+    }
+`
+
+export const TicketImage = styled.img`
+  width: 141px;
+  height: 138px;
+  display: block;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 9px;
+  @media (max-width: 768px) {
+   
+    }
+`
+
+export const TicketAction = styled.div`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:1rem;
+    @media (max-width: 768px) {
+    }
+`
