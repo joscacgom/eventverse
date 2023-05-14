@@ -21,9 +21,11 @@ export const handleSubmitEventToSupabase = async (event: EventTableSupabase, tic
 
     const eventId = eventData?.[0].id
 
+    const { nftContract, nftImageURL } = await handleSubmitToThirdWeb(ticket)
+
     const { error: ticketError } = await supabase
       .from('ticket_drop')
-      .insert([{ ...ticket, event_id: eventId }])
+      .insert([{ ...ticket, event_id: eventId, contract_address: nftContract, image: nftImageURL }])
 
     if (ticketError) {
       throw new Error('Ticket submission failed!')
