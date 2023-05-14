@@ -23,7 +23,7 @@ describe('ResellTicketNetworkInfo', () => {
     expect(screen.getByText('5% comisión del organizador')).toBeInTheDocument()
     expect(screen.getByText('Información del smart contract')).toBeInTheDocument()
     expect(screen.getByText('Dirección del contrato')).toBeInTheDocument()
-    expect(screen.getByText('0x4c59cbe3af1b885267802c8cef2a6e97ff6a23fa')).toBeInTheDocument()
+    expect(screen.getByText('0x6968BaEb1058b0663a7F178725C1fF996F5Cd696')).toBeInTheDocument()
     expect(screen.getByText('Ver en PolygonScan')).toBeInTheDocument()
     expect(screen.getByText('Blockchain')).toBeInTheDocument()
     expect(screen.getByText('Polygon')).toBeInTheDocument()
