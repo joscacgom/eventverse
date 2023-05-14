@@ -130,6 +130,27 @@ export const EventTicketCreationFormInputDate = styled.input`
         width: 70%;
     }
 `
+type LimitProps = {
+  tooLong: boolean
+  nearLimit: boolean,
+  safe: boolean
+}
+export const LimitCharacterSpan = styled.span<LimitProps>`
+  color: #888;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 4px;
+
+  ${props => props.tooLong && `
+    color: #D65151;
+  `}
+  ${props => props.nearLimit && `
+    color: #D65151;
+  `}
+  ${props => props.safe && `
+    color: #888;
+  `}
+`
 
 export const EventTicketCreationFormTextArea = styled.textarea`
   width: 365px;

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { EventCreationMainContainer, EventCreationHeader, EventCreationFormImagePreview, EventCreationFormInputDate, EventCreationFormContainer, EventCreationInputOption, EventCreationFormLabel, EventCreationFormInput, EventCreationFormTextArea, EventCreationFormImageFile, EventCreationFormLocationImage } from './styles'
+import { EventCreationMainContainer, EventCreationHeader, EventCreationFormImagePreview, EventCreationFormInputDate, EventCreationFormContainer, EventCreationInputOption, EventCreationFormLabel, EventCreationFormInput, EventCreationFormTextArea, EventCreationFormImageFile, EventCreationFormLocationImage, LimitCharacterSpan } from './styles'
 
 interface Props {
   onChange: (data: any) => void,
@@ -8,8 +8,31 @@ interface Props {
 
 const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
   const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(null)
+  const [characterCount, setCharacterCount] = useState({
+    eventName: formData.eventName?.length || 0,
+    eventDescription: formData.eventDescription?.length || 0,
+    eventSummary: formData.eventSummary?.length || 0
+
+  })
+  // eslint-disable-next-line no-unused-vars
+  const [formDataCharacters, setFormDataCharacters] = useState({
+    eventName: '',
+    eventDescription: '',
+    eventSummary: ''
+  })
+  const handleChangeCharacters = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target
+    setFormDataCharacters((prevFormData) => ({ ...prevFormData, [name]: value }))
+    setCharacterCount((prevCharacterCount) => ({
+      ...prevCharacterCount,
+      [name]: value.length
+    }))
+  }
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
+    if (name === 'eventName' || name === 'eventDescription' || name === 'eventSummary') {
+      handleChangeCharacters(event)
+    }
     onChange({ [name]: value })
   }
 
@@ -47,14 +70,35 @@ const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
         <EventCreationMainContainer>
             <EventCreationHeader>Información del evento</EventCreationHeader>
             <EventCreationFormContainer>
-                        <EventCreationFormLabel htmlFor='event-name'>Nombre</EventCreationFormLabel>
-                      <EventCreationFormInput type='text' value={formData.eventName || ''} required onChange={handleChange} placeholder='Introduce el nombre del evento' id='event-name' name='eventName'></EventCreationFormInput>
+                      <EventCreationFormLabel htmlFor='event-name'>Nombre</EventCreationFormLabel>
+                      <EventCreationFormInput type='text' value={formData.eventName || ''} required onChange={handleChange} placeholder='Introduce el nombre del evento' id='event-name' maxLength={50} name='eventName'></EventCreationFormInput>
+                      <LimitCharacterSpan
+                                tooLong={characterCount.eventName >= 45}
+                                nearLimit={characterCount.eventName > 30}
+                                safe={characterCount.eventName <= 30}>
+
+                                {characterCount.eventName}/{50} caracteres
+                      </LimitCharacterSpan>
 
                       <EventCreationFormLabel htmlFor='event-description'>Descripción</EventCreationFormLabel>
-                      <EventCreationFormTextArea value={formData.eventDescription || ''} required onChange={handleChange} placeholder='Describa de forma clara y concisa el evento' id='event-description' name='eventDescription'></EventCreationFormTextArea>
+                      <EventCreationFormTextArea value={formData.eventDescription || ''} required onChange={handleChange} placeholder='Describa de forma clara y concisa el evento' id='event-description' maxLength={255} name='eventDescription'></EventCreationFormTextArea>
+                       <LimitCharacterSpan
+                                tooLong={characterCount.eventDescription >= 250}
+                                nearLimit={characterCount.eventDescription > 200}
+                                safe={characterCount.eventDescription <= 200}>
+
+                                {characterCount.eventDescription}/{255} caracteres
+                        </LimitCharacterSpan>
 
                       <EventCreationFormLabel htmlFor='event-summary'>Resumen</EventCreationFormLabel>
-                      <EventCreationFormTextArea value={formData.eventSummary || ''} required onChange={handleChange} placeholder='Resuma de forma clara en qué consiste el evento' id='event-summary' name='eventSummary'></EventCreationFormTextArea>
+                      <EventCreationFormTextArea value={formData.eventSummary || ''} required onChange={handleChange} placeholder='Resuma de forma clara en qué consiste el evento' id='event-summary' maxLength={255} name='eventSummary'></EventCreationFormTextArea>
+                       <LimitCharacterSpan
+                                tooLong={characterCount.eventSummary >= 250}
+                                nearLimit={characterCount.eventSummary > 200}
+                                safe={characterCount.eventSummary <= 200}>
+
+                                {characterCount.eventSummary}/{255} caracteres
+                        </LimitCharacterSpan>
 
                       <EventCreationFormLabel htmlFor='event-type'>Tipo</EventCreationFormLabel>
                       <EventCreationFormInput value={formData.eventType || ''} as='select' required onChange={handleChange} placeholder='Selecciona el tipo de evento' id='event-type' name='eventType'>

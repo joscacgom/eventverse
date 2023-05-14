@@ -21,28 +21,89 @@ const EventCreation = () => {
   })
 
   const handleStepIncrease = () => {
-    let isValid = true
-    switch (step) {
-      case 1:
-        if (!formData.part1.eventName || !formData.part1.startDate || !formData.part1.endDate || !formData.part1.eventDescription || !formData.part1.image || !formData.part1.location || !formData.part1.eventSummary || !formData.part1.eventCategory || !formData.part1.eventType || !formData.part1.country || !formData.part1.timezone) {
-          isValid = false
-        }
-        break
-      case 2:
-        if (!formData.part2.ticketName || !formData.part2.ticketAmount || !formData.part2.ticketPrice || !formData.part2.image || !formData.part2.ticketDescription || !formData.part2.ticketLimit || !formData.part2.ticketRoyalties || !formData.part2.endDate || !formData.part2.startDate) {
-          isValid = false
-        }
-        break
-      default:
-        break
+    const validationRules = [
+      {
+        fields: [
+          'eventName',
+          'startDate',
+          'endDate',
+          'eventDescription',
+          'image',
+          'location',
+          'eventSummary',
+          'eventCategory',
+          'eventType',
+          'country',
+          'timezone'
+        ],
+        lengthMin: 5,
+        lengthMax: 255,
+        errorMessageEmpty: 'Por favor, completa todos los campos 😬',
+        errorMessageDate: 'La fecha de inicio no puede ser mayor que la fecha de fin 😬',
+        errorMessageLength: 'Los campos de nombre, descripción y resumen deben tener entre 5 y 255 caracteres 😬',
+        errorMessageLengthMin: 'Los campos de nombre, descripción y resumen no pueden ser menores a 5 caracteres 😬',
+        errorMessageDatePast: 'La fecha de inicio no puede ser menor a la fecha actual 😬'
+      },
+      {
+        fields: [
+          'ticketName',
+          'ticketAmount',
+          'ticketPrice',
+          'image',
+          'ticketDescription',
+          'ticketLimit',
+          'ticketRoyalties',
+          'endDate',
+          'startDate'
+        ],
+        lengthMin: 5,
+        lengthMax: 255,
+        errorMessageEmpty: 'Por favor, completa todos los campos 😬',
+        errorMessageDate: 'La fecha de inicio no puede ser mayor que la fecha de fin 😬',
+        errorMessageLength: 'Los campos de nombre y descripción deben tener entre 5 y 255 caracteres 😬',
+        errorMessageLengthMin: 'Los campos de cantidad, precio, límite y regalías no pueden ser menores a 1 😬',
+        errorMessageDatePast: 'La fecha de inicio no puede ser menor a la fecha actual 😬',
+        errorMessageLimit: 'El límite de tickets de un usuario no puede ser mayor a la cantidad de tickets 😬'
+      }
+    ]
+
+    const { fields, lengthMin, lengthMax, errorMessageEmpty, errorMessageDate, errorMessageLength, errorMessageDatePast, errorMessageLimit, errorMessageLengthMin } = validationRules[step - 1]
+
+    for (const field of fields) {
+      if (!formData[`part${step}`][field]) {
+        toast.error(errorMessageEmpty)
+        return
+      }
     }
 
-    if (isValid) {
-      step !== 3 ? setStep(step + 1) : handleSubmit()
-      window.scrollTo(0, 0)
-    } else {
-      toast.error('Por favor, completa todos los campos 😬')
+    const { startDate, endDate, ticketLimit, ticketAmount, ticketName, ticketDescription } = formData[`part${step}`]
+
+    if (startDate > endDate) {
+      toast.error(errorMessageDate)
+      return
     }
+
+    if (startDate < new Date().toISOString()) {
+      toast.error(errorMessageDatePast)
+      return
+    }
+
+    if (ticketLimit > ticketAmount) {
+      toast.error(errorMessageLimit)
+      return
+    }
+
+    if (ticketName?.length < lengthMin || ticketDescription?.length < lengthMin) {
+      toast.error(errorMessageLengthMin)
+      return
+    }
+
+    if (ticketName?.length > lengthMax || ticketDescription?.length > lengthMax) {
+      toast.error(errorMessageLength)
+    }
+    setStep(step !== 3 ? step + 1 : step)
+    if (step === 3) handleSubmit()
+    window.scrollTo(0, 0)
   }
 
   const handleStepDecrease = () => {

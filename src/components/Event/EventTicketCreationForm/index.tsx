@@ -1,13 +1,34 @@
 import React, { FC, useState } from 'react'
-import { EventTicketCreationMainContainer, EventTicketCreationHeader, EventTicketCreationFormImagePreview, EventTicketCreationFormInputDate, EventTicketCreationFormContainer, EventTicketCreationFormLabel, EventTicketCreationFormInput, EventTicketCreationFormTextArea, EventTicketCreationFormImageFile } from './styles'
+import { EventTicketCreationMainContainer, EventTicketCreationHeader, EventTicketCreationFormImagePreview, EventTicketCreationFormInputDate, EventTicketCreationFormContainer, EventTicketCreationFormLabel, EventTicketCreationFormInput, EventTicketCreationFormTextArea, EventTicketCreationFormImageFile, LimitCharacterSpan } from './styles'
 interface Props {
   onChange: (data: any) => void,
   formData: any
 }
 const EventTicketCreationForm:FC<Props> = ({ onChange, formData }) => {
   const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(null)
+  const [characterCount, setCharacterCount] = useState({
+    ticketName: formData.ticketName?.length || 0,
+    ticketDescription: formData.ticketDescription?.length || 0
+  })
+  // eslint-disable-next-line no-unused-vars
+  const [formDataCharacters, setFormDataCharacters] = useState({
+    ticketName: '',
+    ticketDescription: ''
+  })
+  const handleChangeCharacters = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target
+    setFormDataCharacters((prevFormData) => ({ ...prevFormData, [name]: value }))
+    setCharacterCount((prevCharacterCount) => ({
+      ...prevCharacterCount,
+      [name]: value.length
+    }))
+  }
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
+    if (name === 'ticketName' || name === 'ticketDescription') {
+      handleChangeCharacters(event)
+    }
+
     onChange({ [name]: value })
   }
 
@@ -46,10 +67,24 @@ const EventTicketCreationForm:FC<Props> = ({ onChange, formData }) => {
             <EventTicketCreationHeader>Información de las entradas</EventTicketCreationHeader>
             <EventTicketCreationFormContainer>
                 <EventTicketCreationFormLabel htmlFor='ticket-name'>Nombre</EventTicketCreationFormLabel>
-        <EventTicketCreationFormInput value={formData.ticketName || ''} type='text' required onChange={handleChange} placeholder='Introduce el nombre de la colección de entradas' id='ticket-name' name='ticketName'></EventTicketCreationFormInput>
+        <EventTicketCreationFormInput value={formData.ticketName || ''} type='text' required onChange={handleChange} placeholder='Introduce el nombre de la colección de entradas' id='ticket-name' maxLength={50} name='ticketName'></EventTicketCreationFormInput>
+        <LimitCharacterSpan
+            tooLong={characterCount.ticketName >= 45}
+            nearLimit={characterCount.ticketName > 30}
+            safe={characterCount.ticketName <= 30}>
+
+            {characterCount.ticketName}/{50} caracteres
+        </LimitCharacterSpan>
 
         <EventTicketCreationFormLabel htmlFor='ticket-description'>Descripción</EventTicketCreationFormLabel>
-        <EventTicketCreationFormTextArea value={formData.ticketDescription || ''} required onChange={handleChange} placeholder='Describa de forma clara y concisa el evento' id='ticket-description' name='ticketDescription'></EventTicketCreationFormTextArea>
+        <EventTicketCreationFormTextArea value={formData.ticketDescription || ''} required onChange={handleChange} placeholder='Describa de forma clara y concisa el evento' id='ticket-description' maxLength={255} name='ticketDescription'></EventTicketCreationFormTextArea>
+         <LimitCharacterSpan
+            tooLong={characterCount.ticketDescription >= 250}
+            nearLimit={characterCount.ticketDescription > 200}
+            safe={characterCount.ticketDescription <= 200}>
+
+            {characterCount.ticketDescription}/{255} caracteres
+        </LimitCharacterSpan>
 
         <EventTicketCreationFormLabel htmlFor='ticket-amount'>Cantidad</EventTicketCreationFormLabel>
         <EventTicketCreationFormInput value={formData.ticketAmount || ''} required onChange={handleChange} type='number' min='1' placeholder='Introduce la cantidad de entradas' id='ticket-amount' name='ticketAmount'></EventTicketCreationFormInput>
