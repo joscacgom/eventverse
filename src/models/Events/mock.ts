@@ -1,3 +1,4 @@
+import { MOCK_EVENT_TICKET } from '../Tickets/mock'
 import { Event } from './types'
 
 export const MOCK_EVENT: Event = {
@@ -6,7 +7,8 @@ export const MOCK_EVENT: Event = {
   date: '22 de Agosto 2023',
   description: 'Abonos ya a la venta para el Medusa Festival 2023',
   image: '/images/tickets/medusa-festival.png',
-  location: 'Sevilla'
+  location: 'Sevilla',
+  ticket: MOCK_EVENT_TICKET
 }
 
 export const MOCK_EVENTS: Event[] = [
@@ -16,7 +18,8 @@ export const MOCK_EVENTS: Event[] = [
     date: '22 de Agosto 2023',
     description: 'Abonos ya a la venta para el Medusa Festival 2023',
     image: '/images/tickets/medusa-festival.png',
-    location: 'Sevilla'
+    location: 'Sevilla',
+    ticket: MOCK_EVENT_TICKET
   },
   {
     id: '2',
@@ -24,7 +27,8 @@ export const MOCK_EVENTS: Event[] = [
     date: '22 de Agosto 2023',
     description: 'Abonos ya a la venta para el concierto de Sala Apolo',
     image: '/images/tickets/evento-2.jpg',
-    location: 'Barcelona'
+    location: 'Barcelona',
+    ticket: MOCK_EVENT_TICKET
   },
   {
     id: '3',
@@ -32,7 +36,8 @@ export const MOCK_EVENTS: Event[] = [
     date: '22 de Agosto 2023',
     description: 'Tickes ya a la venta para el concierto de Sala Cosmos',
     image: '/images/tickets/evento-1.jpg',
-    location: 'Madrid'
+    location: 'Madrid',
+    ticket: MOCK_EVENT_TICKET
   },
   {
     id: '4',
@@ -40,7 +45,8 @@ export const MOCK_EVENTS: Event[] = [
     date: '22 de Agosto 2023',
     description: 'Abonos ya a la venta para el Color Run Festival Sevilla',
     image: '/images/tickets/evento-3.jpg',
-    location: 'Sevilla'
+    location: 'Sevilla',
+    ticket: MOCK_EVENT_TICKET
   },
   {
     id: '5',
@@ -48,7 +54,8 @@ export const MOCK_EVENTS: Event[] = [
     date: '22 de Agosto 2023',
     description: 'Abonos ya a la venta para el Medusa Festival 2023',
     image: '/images/tickets/medusa-festival.png',
-    location: 'Sevilla'
+    location: 'Sevilla',
+    ticket: MOCK_EVENT_TICKET
   },
   {
     id: '6',
@@ -56,7 +63,8 @@ export const MOCK_EVENTS: Event[] = [
     date: '22 de Agosto 2023',
     description: 'Abonos ya a la venta para el concierto de Sala Apolo',
     image: '/images/tickets/evento-2.jpg',
-    location: 'Barcelona'
+    location: 'Barcelona',
+    ticket: MOCK_EVENT_TICKET
   },
   {
     id: '7',
@@ -64,7 +72,8 @@ export const MOCK_EVENTS: Event[] = [
     date: '22 de Agosto 2023',
     description: 'Tickes ya a la venta para el concierto de Sala Cosmos',
     image: '/images/tickets/evento-1.jpg',
-    location: 'Madrid'
+    location: 'Madrid',
+    ticket: MOCK_EVENT_TICKET
   },
   {
     id: '8',
@@ -72,6 +81,7 @@ export const MOCK_EVENTS: Event[] = [
     date: '22 de Agosto 2023',
     description: 'Abonos ya a la venta para el Color Run Festival Sevilla',
     image: '/images/tickets/evento-3.jpg',
-    location: 'Sevilla'
+    location: 'Sevilla',
+    ticket: MOCK_EVENT_TICKET
   }
 ]

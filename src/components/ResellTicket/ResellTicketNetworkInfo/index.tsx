@@ -1,37 +1,36 @@
 
 import React, { FC } from 'react'
 import { Ticket } from '@/models/Tickets/types'
-import { ResellTicketNetworkInfoMainContainer, ResellTicketNetworkImage, ResellTicketNetworkInfoContainer, ResellTicketNetworkInfoRoyaltiesContainer, ResellTicketNetworkInfoRoyaltiesHeader, ResellTicketNetworkInfoRoyalties, ResellTicketNetworkInfoNetworkContainer, ResellTicketNetworkInfoNetworkHeader, ResellTicketNetworkInfoSmartContract, ResellTicketNetworkInfoSmartContractHeader, ResellTicketNetworkInfoSmartContractAddress, ResellTicketNetworkInfoBlockchainExplorer, ResellTicketNetworkInfoBlockchainContainer, ResellTicketNetworkInfoBlockchainHeader, ResellTicketNetworkInfoBlockchain } from './styles'
+import { MainContainer, ResellTicketImage, Container, RoyaltiesContainer, RoyaltiesHeader, Royalties, NetworkContainer, NetworkHeader, SmartContract, SmartContractHeader, SmartContractAddress, BlockchainExplorer, BlockchainContainer, BlockchainHeader, Blockchain } from './styles'
 
 type Props = {
     ticket: Ticket;
 }
 
-const ResellTicketNetworkInfo:FC<Props> = ({ ticket }) => {
+const ResellTicketNetworkInfo: FC<Props> = ({ ticket }) => {
   return (
-       <ResellTicketNetworkInfoMainContainer>
-            <ResellTicketNetworkImage src={ticket.event.image} alt="Event image" />
-            <ResellTicketNetworkInfoContainer>
-              <ResellTicketNetworkInfoRoyaltiesContainer>
-                <ResellTicketNetworkInfoRoyaltiesHeader>Royalties</ResellTicketNetworkInfoRoyaltiesHeader>
-                <ResellTicketNetworkInfoRoyalties>{ticket.platformRoyalty}% comisión para EventVerse</ResellTicketNetworkInfoRoyalties>
-                <ResellTicketNetworkInfoRoyalties>{ticket.organizerRoyalty}% comisión para el organizador</ResellTicketNetworkInfoRoyalties>
-              </ResellTicketNetworkInfoRoyaltiesContainer>
-              <ResellTicketNetworkInfoNetworkContainer>
-                <ResellTicketNetworkInfoNetworkHeader>Información del smart contract</ResellTicketNetworkInfoNetworkHeader>
-                <ResellTicketNetworkInfoSmartContract>
-                  <ResellTicketNetworkInfoSmartContractHeader>Dirección del contrato</ResellTicketNetworkInfoSmartContractHeader>
-                  <ResellTicketNetworkInfoSmartContractAddress>{ticket.contractAddress}</ResellTicketNetworkInfoSmartContractAddress>
-                  <ResellTicketNetworkInfoBlockchainExplorer>Ver en PolygonScan</ResellTicketNetworkInfoBlockchainExplorer>
-                </ResellTicketNetworkInfoSmartContract>
-                <ResellTicketNetworkInfoBlockchainContainer>
-                  <ResellTicketNetworkInfoBlockchainHeader>Blockchain</ResellTicketNetworkInfoBlockchainHeader>
-                  <ResellTicketNetworkInfoBlockchain>Polygon</ResellTicketNetworkInfoBlockchain>
-                </ResellTicketNetworkInfoBlockchainContainer>
-
-                </ResellTicketNetworkInfoNetworkContainer>
-            </ResellTicketNetworkInfoContainer>
-        </ResellTicketNetworkInfoMainContainer>
+       <MainContainer>
+            <ResellTicketImage src={ticket.image} alt="Event image" />
+            <Container>
+              <RoyaltiesContainer>
+                <RoyaltiesHeader>Royalties</RoyaltiesHeader>
+                <Royalties>{ticket.platformRoyalty}% comisión de EventVerse</Royalties>
+                <Royalties>{ticket.organizerRoyalty}% comisión del organizador</Royalties>
+              </RoyaltiesContainer>
+              <NetworkContainer>
+                <NetworkHeader>Información del smart contract</NetworkHeader>
+                <SmartContract>
+                  <SmartContractHeader>Dirección del contrato</SmartContractHeader>
+                  <SmartContractAddress>{ticket.contractAddress}</SmartContractAddress>
+                  <BlockchainExplorer>Ver en PolygonScan</BlockchainExplorer>
+                </SmartContract>
+                <BlockchainContainer>
+                  <BlockchainHeader>Blockchain</BlockchainHeader>
+                  <Blockchain>Polygon</Blockchain>
+                </BlockchainContainer>
+                </NetworkContainer>
+            </Container>
+        </MainContainer>
 
   )
 }

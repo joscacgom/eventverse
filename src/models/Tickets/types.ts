@@ -1,5 +1,3 @@
-import { Event } from '../Events/types'
-
 export type UserTicket ={
     name: string;
     date: string;
@@ -12,6 +10,7 @@ export type UserTicket ={
 }
 export type Ticket ={
     id: string;
+    image: string;
     name: string;
     price: number;
     amount: number;
@@ -22,5 +21,5 @@ export type Ticket ={
     contractAddress: string;
     organizerRoyalty: number;
     platformRoyalty: number;
-    event:Event;
+    eventId: string;
 }

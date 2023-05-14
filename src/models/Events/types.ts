@@ -1,3 +1,5 @@
+import { Ticket } from '../Tickets/types'
+
 export type Event = {
     id: string;
     title: string;
@@ -5,4 +7,5 @@ export type Event = {
     description: string;
     image: string;
     location: string;
+    ticket: Ticket
 };

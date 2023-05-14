@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ResellTicketNetworkInfoMainContainer = styled.div`
+export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -14,7 +14,7 @@ export const ResellTicketNetworkInfoMainContainer = styled.div`
     }
 `
 
-export const ResellTicketNetworkInfoContainer = styled.div`
+export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -25,7 +25,7 @@ export const ResellTicketNetworkInfoContainer = styled.div`
         flex-direction: column;
     }
 `
-export const ResellTicketNetworkImage = styled.img`
+export const ResellTicketImage = styled.img`
   width: 209px;
   height: 199px;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
@@ -40,7 +40,7 @@ export const ResellTicketNetworkImage = styled.img`
 
 `
 
-export const ResellTicketNetworkInfoRoyaltiesContainer = styled.div`
+export const RoyaltiesContainer = styled.div`
   width: 304px;
   height: 39px;
   display: flex;
@@ -54,7 +54,7 @@ export const ResellTicketNetworkInfoRoyaltiesContainer = styled.div`
   border-radius: 10px;
 `
 
-export const ResellTicketNetworkInfoRoyaltiesHeader = styled.h3`
+export const RoyaltiesHeader = styled.h3`
   width: auto; /* 71px */
   height: auto; /* 19px */
   white-space: pre;
@@ -67,7 +67,7 @@ export const ResellTicketNetworkInfoRoyaltiesHeader = styled.h3`
   letter-spacing: 0px;
 `
 
-export const ResellTicketNetworkInfoRoyalties = styled.p`
+export const Royalties = styled.p`
   font-weight: 500;
   font-style: normal;
   font-family: "Inter-Medium", "Inter", sans-serif;
@@ -75,7 +75,7 @@ export const ResellTicketNetworkInfoRoyalties = styled.p`
   font-size: 14px;
 `
 
-export const ResellTicketNetworkInfoNetworkContainer = styled.div`
+export const NetworkContainer = styled.div`
   width: 267px;
   height: 151px;
   display: flex;
@@ -95,7 +95,7 @@ export const ResellTicketNetworkInfoNetworkContainer = styled.div`
   border-right-width: 0px;
 `
 
-export const ResellTicketNetworkInfoNetworkHeader = styled.h3`
+export const NetworkHeader = styled.h3`
   width: auto; /* 239px */
   height: auto; /* 19px */
   font-weight: 600;
@@ -105,7 +105,7 @@ export const ResellTicketNetworkInfoNetworkHeader = styled.h3`
   font-size: 16px;
 `
 
-export const ResellTicketNetworkInfoSmartContract = styled.div`
+export const SmartContract = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -116,7 +116,7 @@ export const ResellTicketNetworkInfoSmartContract = styled.div`
   }
 `
 
-export const ResellTicketNetworkInfoSmartContractHeader = styled.h3`
+export const SmartContractHeader = styled.h3`
   width: auto; /* 148px */
   height: auto; /* 17px */
   font-weight: 500;
@@ -126,7 +126,7 @@ export const ResellTicketNetworkInfoSmartContractHeader = styled.h3`
   font-size: 14px; 
 `
 
-export const ResellTicketNetworkInfoSmartContractAddress = styled.p`
+export const SmartContractAddress = styled.p`
   width: auto; /* 267px */
   height: auto; /* 13px */
   font-weight: 500;
@@ -136,7 +136,7 @@ export const ResellTicketNetworkInfoSmartContractAddress = styled.p`
   font-size: 11px;
 `
 
-export const ResellTicketNetworkInfoBlockchainExplorer = styled.button`
+export const BlockchainExplorer = styled.button`
   width: 100%;
   height: 40px;
   display: flex;
@@ -165,14 +165,14 @@ export const ResellTicketNetworkInfoBlockchainExplorer = styled.button`
     }
 `
 
-export const ResellTicketNetworkInfoBlockchainContainer = styled.div`
+export const BlockchainContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 `
 
-export const ResellTicketNetworkInfoBlockchainHeader = styled.h3`
+export const BlockchainHeader = styled.h3`
   width: auto; /* 73px */
   height: auto; /* 17px */
   white-space: pre;
@@ -184,7 +184,7 @@ export const ResellTicketNetworkInfoBlockchainHeader = styled.h3`
   font-size: 14px;
 `
 
-export const ResellTicketNetworkInfoBlockchain = styled.p`
+export const Blockchain = styled.p`
   width: auto; /* 42px */
   height: auto; /* 13px */
   font-weight: 500;
