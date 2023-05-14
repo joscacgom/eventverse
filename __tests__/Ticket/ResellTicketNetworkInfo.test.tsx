@@ -19,8 +19,8 @@ describe('ResellTicketNetworkInfo', () => {
 
     expect(screen.getByAltText('Event image')).toHaveAttribute('src', '/images/tickets/medusa-festival.png')
     expect(screen.getByText('Royalties')).toBeInTheDocument()
-    expect(screen.getByText('2.5% comisión para EventVerse')).toBeInTheDocument()
-    expect(screen.getByText('5% comisión para el organizador')).toBeInTheDocument()
+    expect(screen.getByText('2.5% comisión de EventVerse')).toBeInTheDocument()
+    expect(screen.getByText('5% comisión del organizador')).toBeInTheDocument()
     expect(screen.getByText('Información del smart contract')).toBeInTheDocument()
     expect(screen.getByText('Dirección del contrato')).toBeInTheDocument()
     expect(screen.getByText('0x4c59cbe3af1b885267802c8cef2a6e97ff6a23fa')).toBeInTheDocument()
