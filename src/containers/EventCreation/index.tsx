@@ -19,7 +19,6 @@ const EventCreation = () => {
     part1: {},
     part2: {}
   })
-
   const handleStepIncrease = () => {
     const validationRules = [
       {

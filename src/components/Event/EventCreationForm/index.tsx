@@ -36,37 +36,45 @@ const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
   }
 
   const debouncedHandleChangeLocation = useDebouncedCallback(async (value: string) => {
+    if (value.length === 0) return
     setLoading(true)
     try {
       const results = await handleEventLocation(value)
       if (results.length > 0) {
         const { lat, lng } = results[0].geometry.location
         const mapImage = getStaticMapImageUrl(lat, lng)
+        const formattedAddress = results[0].formatted_address
         setMapImageUrl(mapImage)
-        setLocation(results[0].formatted_address)
+        setLocation(formattedAddress)
       }
     } catch (error) {
       console.error('Error occurred while fetching geocoding results:', error)
     } finally {
       setLoading(false)
     }
-  }, 2000)
+  }, 1000)
 
   useEffect(() => {
     debouncedHandleChangeLocation(location)
   }, [debouncedHandleChangeLocation])
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  useEffect(() => {
+    onChange({ locationFormattedAddress: location })
+  }, [location])
+
+  useEffect(() => {
+    onChange({ locationImage: mapImageUrl })
+  }, [mapImageUrl])
+
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
     if (name === 'eventName' || name === 'eventDescription' || name === 'eventSummary') {
       handleChangeCharacters(event)
       onChange({ [name]: value })
     }
     if (name === 'location' && value.length > 0) {
-      debouncedHandleChangeLocation(value)
+      await debouncedHandleChangeLocation(value)
       onChange({ [name]: value })
-      onChange({ locationFormattedAddress: location })
-      onChange({ locationImage: mapImageUrl })
     } else {
       onChange({ [name]: value })
     }
