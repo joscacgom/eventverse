@@ -7,17 +7,18 @@ type FormData = {
 
 export const handleEventObjects = (event:FormData, ticket: FormData) => {
   const eventPreview: EventTicketPreview = {
-    id: 'pending',
     title: event.eventName,
     date: event.startDate,
     endDate: event.endDate,
     description: event.eventDescription,
     image: event.image,
     location: event.location,
+    locationImage: event.locationImage,
     ticketTitle: ticket.ticketName,
     ticketAmount: ticket.ticketAmount,
     ticketPrice: ticket.ticketPrice,
-    ticketImage: ticket.image
+    ticketImage: ticket.image,
+    locationFormattedAddress: event.locationFormattedAddress
   }
   const eventToSubmit: EventTableSupabase = {
     name: event.eventName,
@@ -25,7 +26,7 @@ export const handleEventObjects = (event:FormData, ticket: FormData) => {
     description: event.eventDescription,
     image: event.image,
     tags: 'none',
-    location: event.location,
+    location: event.locationFormattedAddress,
     start_date: event.startDate,
     end_date: event.endDate,
     time_zone: event.timezone,

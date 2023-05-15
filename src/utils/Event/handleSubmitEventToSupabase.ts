@@ -3,6 +3,7 @@ import { EventTableSupabase } from '@/models/Events/types'
 import { TicketTableSupabase } from '@/models/Tickets/types'
 import { createClient } from '@supabase/supabase-js'
 import { handleSubmitImageToCloudinary } from '../Event/handleSubmitImageToCloudinary'
+import { handleSubmitToThirdWeb } from './handleSubmitToThirdWeb'
 
 const supabase = createClient('https://mxfgbnuvnebcyxbczdcr.supabase.co', process.env.NEXT_PUBLIC_SUPABASE_KEY as string)
 const organizer_id = 1

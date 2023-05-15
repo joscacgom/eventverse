@@ -1,14 +1,14 @@
 import { Ticket } from '../Tickets/types'
 
 export type Event = {
-    id: string;
+    id?: string;
     title: string;
     date: string;
     endDate: string;
     description: string;
     image: string;
     location: string;
-    ticket: Ticket
+    ticket?: Ticket
 };
 
 export type EventTicketPreview = Event & {
@@ -16,6 +16,8 @@ export type EventTicketPreview = Event & {
     ticketAmount: number;
     ticketPrice: number;
     ticketImage: string;
+    locationImage: string;
+    locationFormattedAddress: string;
 }
 export type EventTableSupabase = {
     name: string

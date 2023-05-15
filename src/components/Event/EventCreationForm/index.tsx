@@ -1,5 +1,8 @@
-import React, { FC, useState } from 'react'
+/* eslint-disable no-unused-vars */
+import React, { FC, useEffect, useState } from 'react'
 import { EventCreationMainContainer, EventCreationHeader, EventCreationFormImagePreview, EventCreationFormInputDate, EventCreationFormContainer, EventCreationInputOption, EventCreationFormLabel, EventCreationFormInput, EventCreationFormTextArea, EventCreationFormImageFile, EventCreationFormLocationImage, LimitCharacterSpan } from './styles'
+import { getStaticMapImageUrl, handleEventLocation } from '@/utils/Event/handleEventLocation'
+import { useDebouncedCallback } from 'use-debounce'
 
 interface Props {
   onChange: (data: any) => void,
@@ -8,18 +11,21 @@ interface Props {
 
 const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
   const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(null)
+  const [location, setLocation] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [mapImageUrl, setMapImageUrl] = useState(formData.locationImage || 'https://via.placeholder.com/150')
   const [characterCount, setCharacterCount] = useState({
     eventName: formData.eventName?.length || 0,
     eventDescription: formData.eventDescription?.length || 0,
     eventSummary: formData.eventSummary?.length || 0
 
   })
-  // eslint-disable-next-line no-unused-vars
   const [formDataCharacters, setFormDataCharacters] = useState({
     eventName: '',
     eventDescription: '',
     eventSummary: ''
   })
+
   const handleChangeCharacters = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
     setFormDataCharacters((prevFormData) => ({ ...prevFormData, [name]: value }))
@@ -28,12 +34,42 @@ const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
       [name]: value.length
     }))
   }
+
+  const debouncedHandleChangeLocation = useDebouncedCallback(async (value: string) => {
+    setLoading(true)
+    try {
+      const results = await handleEventLocation(value)
+      if (results.length > 0) {
+        const { lat, lng } = results[0].geometry.location
+        const mapImage = getStaticMapImageUrl(lat, lng)
+        setMapImageUrl(mapImage)
+        setLocation(results[0].formatted_address)
+      }
+    } catch (error) {
+      console.error('Error occurred while fetching geocoding results:', error)
+    } finally {
+      setLoading(false)
+    }
+  }, 2000)
+
+  useEffect(() => {
+    debouncedHandleChangeLocation(location)
+  }, [debouncedHandleChangeLocation])
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
     if (name === 'eventName' || name === 'eventDescription' || name === 'eventSummary') {
       handleChangeCharacters(event)
+      onChange({ [name]: value })
     }
-    onChange({ [name]: value })
+    if (name === 'location' && value.length > 0) {
+      debouncedHandleChangeLocation(value)
+      onChange({ [name]: value })
+      onChange({ locationFormattedAddress: location })
+      onChange({ locationImage: mapImageUrl })
+    } else {
+      onChange({ [name]: value })
+    }
   }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,8 +153,7 @@ const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
                       </EventCreationFormInput>
                 <EventCreationFormLabel htmlFor='location'>Ubicación</EventCreationFormLabel>
               <EventCreationFormInput value={formData.location || ''} id='location' required onChange={handleChange} name='location' type='search' placeholder='Introduce la ubicación del evento'></EventCreationFormInput>
-
-              <EventCreationFormLocationImage src={'/images/google-maps.png'} alt='Google Maps image' />
+              <EventCreationFormLocationImage src={formData.locationImage || mapImageUrl !== 'https://via.placeholder.com/150' ? mapImageUrl : 'https://via.placeholder.com/150'} alt='Google Maps image' />
 
               <EventCreationFormLabel htmlFor='country'>País</EventCreationFormLabel>
               <EventCreationFormInput value={formData.country || ''} id='country' required onChange={handleChange} name='country' as='select' placeholder='Introduce el país del evento'>

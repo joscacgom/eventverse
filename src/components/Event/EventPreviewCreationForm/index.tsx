@@ -56,8 +56,8 @@ const EventPreviewCreationForm:FC<Props> = ({ event }) => {
 
               <EventPreviewCreationLocation>
                   <EventPreviewCreationLocationHeader>Ubicación del evento</EventPreviewCreationLocationHeader>
-                  <EventPreviewCreationLocationText>{event.location}</EventPreviewCreationLocationText>
-                  <EventPreviewCreationLocationImage src={'/images/google-maps.png'} alt='Google Maps image' />
+                  <EventPreviewCreationLocationText>{event.locationFormattedAddress}</EventPreviewCreationLocationText>
+                  <EventPreviewCreationLocationImage src={event.locationImage} alt='Google Maps image' />
               </EventPreviewCreationLocation>
 
           </EventPreviewCreationFirstContainer>
