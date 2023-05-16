@@ -34,4 +34,4 @@ export type EventTableSupabase = {
     category: string
     pricing_plan: string
 
-    }
+}

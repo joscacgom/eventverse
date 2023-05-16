@@ -9,6 +9,22 @@ interface Props {
   formData: any
 }
 
+enum EventCategory {
+  Festivales = 'Festivales',
+  Negocios = 'Negocios',
+  Musica = 'Música',
+  Deportes = 'Deportes',
+  Teatro = 'Teatro',
+  Cine = 'Cine',
+  Arte = 'Arte',
+  Comida = 'Comida',
+}
+
+enum EventType {
+  Online = 'Online',
+  Presencial = 'Presencial',
+}
+
 const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
   const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(null)
   const [location, setLocation] = useState('')
@@ -147,17 +163,21 @@ const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
                       <EventCreationFormLabel htmlFor='event-type'>Tipo</EventCreationFormLabel>
                       <EventCreationFormInput value={formData.eventType || ''} as='select' required onChange={handleChange} placeholder='Selecciona el tipo de evento' id='event-type' name='eventType'>
                           <EventCreationInputOption value="">Selecciona un tipo</EventCreationInputOption>
-                          <EventCreationInputOption value="online">Online</EventCreationInputOption>
-                          <EventCreationInputOption value="presencial">Presencial</EventCreationInputOption>
+                          <EventCreationInputOption value={EventType.Online}>Online</EventCreationInputOption>
+                          <EventCreationInputOption value={EventType.Presencial}>Presencial</EventCreationInputOption>
                       </EventCreationFormInput>
 
                       <EventCreationFormLabel htmlFor='event-category'>Categoría</EventCreationFormLabel>
                       <EventCreationFormInput value={formData.eventCategory || ''} as="select" required onChange={handleChange} placeholder='Selecciona la categoría del evento' id='event-category' name='eventCategory'>
                           <EventCreationInputOption value="">Selecciona una categoría</EventCreationInputOption>
-                          <EventCreationInputOption value="concierto">Concierto</EventCreationInputOption>
-                          <EventCreationInputOption value="deporte">Deporte</EventCreationInputOption>
-                          <EventCreationInputOption value="teatro">Teatro</EventCreationInputOption>
-                          <EventCreationInputOption value="arte">Arte</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Festivales}>Festivales</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Musica}>Música</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Teatro}>Teatro</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Cine}>Cine</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Negocios}>Negocios</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Deportes}>Deportes</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Arte}>Arte</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Comida}>Comida</EventCreationInputOption>
                       </EventCreationFormInput>
                 <EventCreationFormLabel htmlFor='location'>Ubicación</EventCreationFormLabel>
               <EventCreationFormInput value={formData.location || ''} id='location' required onChange={handleChange} name='location' type='search' placeholder='Introduce la ubicación del evento'></EventCreationFormInput>
