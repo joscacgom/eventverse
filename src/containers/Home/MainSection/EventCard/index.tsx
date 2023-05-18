@@ -8,16 +8,18 @@ type Props = {
 }
 const EventCard: FC<Props> = ({ event }) => {
   const router = useRouter()
-  const handleClickEvent = (id: string) => () => {
+  const handleClickEvent = (id: number) => () => {
     router.push(`/event/${id}`)
   }
+
+  const shortDescription = event.summary.slice(0, 45)
   return (
     <CardWrapper onClick={handleClickEvent(event.id)}>
       <CardImage src={event.image} />
       <CardContent>
-        <Title>{event.title}</Title>
-        <Date>{event.date}</Date>
-        <Description>{event.description}</Description>
+        <Title>{event.name}</Title>
+        <Date>{event.start_date}</Date>
+        <Description>{shortDescription}...</Description>
         <img src={'/images/avatar-events.png'} width={60} height={20} />
       </CardContent>
     </CardWrapper>

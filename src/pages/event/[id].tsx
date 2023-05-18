@@ -4,7 +4,7 @@ import { MOCK_EVENT } from '@/models/Events/mock'
 
 const Event = () => {
   return (
-    <Layout title={`${MOCK_EVENT.title}`}>
+    <Layout title={`${MOCK_EVENT.name}`}>
       <EventDetails event={MOCK_EVENT} />
     </Layout>
   )

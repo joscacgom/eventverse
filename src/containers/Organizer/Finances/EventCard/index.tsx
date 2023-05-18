@@ -18,7 +18,7 @@ const EventCard: FC<Props> = ({ event, selected, handleUpdateSelectedEvents }) =
           checked={selected}
           onChange={() => handleUpdateSelectedEvents(event)}
         />
-        <Title>{event.title}</Title>
+        <Title>{event.name}</Title>
       </Left>
       <Right>
         <Title>{MOCK_AMOUNT}</Title>

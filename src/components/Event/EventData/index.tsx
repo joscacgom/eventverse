@@ -9,12 +9,12 @@ const EventData: FC<Props> = ({ event }) => {
   return (
         <EventDataContainer>
             <EventNameDescriptionContainer>
-                <EventName>{event.title}</EventName>
+                <EventName>{event.name}</EventName>
                 <EventDescription>{event.description}</EventDescription>
             </EventNameDescriptionContainer>
             <EventDateContainer>
                 <EventDateHeader>Hora y Fecha</EventDateHeader>
-                <EventDate>{event.date}</EventDate>
+                <EventDate>{event.start_date}</EventDate>
             </EventDateContainer>
             <EventLocationContainer>
                 <EventLocationHeader>Ubicación</EventLocationHeader>
