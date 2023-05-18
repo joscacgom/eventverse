@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button85, LinkItem, MenuLinks, Nav, Avatar } from './styles'
+import { Button85, LinkItem, MenuLinks, Nav, Avatar, IconWrapper } from './styles'
 import { useRouter } from 'next/router'
 import { handleWeb3AuthInit } from '@/utils/Login/handleWeb3AuthInit'
 import Web3AuthContext from '@/context/Web3AuthContext'
-import { getUserCookie } from '@/utils/Login/userCookie'
 import LogoutIcon from './LogoutIcon'
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
   const { userData } = useContext(Web3AuthContext)
   const router = useRouter()
-  const { login, logout } = handleWeb3AuthInit()
+  const { provider, login, logout } = handleWeb3AuthInit()
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -49,12 +48,17 @@ const Navbar = () => {
         <LinkItem mobile={showMobileMenu} primary={false} href={'/resell'}>
           Reventas
         </LinkItem>
-        {getUserCookie()
+        {provider
           ? (
           <>
             <Button85 onClick={handleClickCreateEvent}>Crear evento</Button85>
-              {/* <LogoutIcon /> */}
-            <Button85 onClick={logout}>Desconectar</Button85>
+            <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>
+              <Avatar src={userData?.profileImage} alt='User avatar'/>
+            </LinkItem>
+            <IconWrapper onClick={logout}>
+              <LogoutIcon />
+            </IconWrapper>
+
           </>
             )
           : (
@@ -65,4 +69,4 @@ const Navbar = () => {
   )
 }
 
-export default React.memo(Navbar)
+export default Navbar
