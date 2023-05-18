@@ -23,5 +23,5 @@ export default async function handler (
 
   const tickets: Ticket[] = data.map(ticket => normalizeTicket(ticket))
 
-  res.status(200).json({ tickets })
+  res.status(200).json(tickets)
 }

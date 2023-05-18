@@ -14,8 +14,10 @@ import {
 import { PaymentMethod, Props } from './types'
 import CrossmintButton from './CrossmintButton'
 import ThirdwebButton from './ThirdwebButton'
+import useTicketsByEvent from '@/hooks/useTicketsByEvent'
 
 const EventBuyOption: FC<Props> = ({ event }) => {
+  const { data: eventTickets } = useTicketsByEvent({ event_id: String(event.id) })
   const [amount, setAmount] = useState(1)
   const [totalPrice, setTotalPrice] = useState(0.01)
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.CREDIT_CARD)
@@ -26,12 +28,16 @@ const EventBuyOption: FC<Props> = ({ event }) => {
   }
 
   const renderPaymentMethod = useCallback(() => {
+    if (!eventTickets) return null
+
     if (paymentMethod === PaymentMethod.CREDIT_CARD) return <CrossmintButton quantity={amount} totalPrice={totalPrice} />
-    return <ThirdwebButton contractAddress={event.ticket.contractAddress} />
+    return <ThirdwebButton contractAddress={eventTickets.contract_address} />
   }, [paymentMethod, amount, totalPrice])
 
   useEffect(() => {
-    setTotalPrice(amount * event.ticket.price)
+    if (!eventTickets) return
+
+    setTotalPrice(amount * eventTickets.price)
   }, [amount])
 
   return (
@@ -62,7 +68,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
                       id="amount"
                       type="number"
                       min="1"
-                      max={event.ticket.maxPerUser}
+                      max={eventTickets?.max_per_user}
                       defaultValue={amount}
                       onChange={(e) => setAmount(parseInt(e.target.value))}
                     />

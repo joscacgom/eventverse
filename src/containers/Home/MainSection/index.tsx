@@ -5,18 +5,37 @@ import useEvents from '@/hooks/useEvents'
 import { Event } from '@/models/Events/types'
 
 const MainSection = () => {
-  const { data } = useEvents()
+  const { data, error, isLoading } = useEvents()
   const [searchTerm, setSearchTerm] = useState<string>('')
 
   const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) =>
     setSearchTerm(e.target.value)
 
-  const filteredEvents = data?.filter((event: Event) =>
-    event?.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  function filteredEvents () {
+    if (!data) return []
+    return data.filter(event => nameIncludesSearchTerm(event))
+  }
 
-  const handleRenderEventList = () =>
-    filteredEvents?.map((event: Event) => <EventCard key={event.id} event={event} />)
+  function nameIncludesSearchTerm (event: Event) {
+    return event.name.toLowerCase().includes(searchTerm.toLowerCase())
+  }
+
+  const handleRenderEventList = () => {
+    const filtered = filteredEvents()
+    return filtered.map((event: Event) => <EventCard key={event.id} event={event} />)
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (error) {
+    return <div>Error</div>
+  }
+
+  if (!data) {
+    return <div>Not found</div>
+  }
 
   return (
     <Container>
