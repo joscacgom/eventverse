@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const EventDataContainer = styled.div`
+export const DataContainer = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -14,7 +14,7 @@ export const EventDataContainer = styled.div`
         width:100%;
     }
 `
-export const EventNameDescriptionContainer = styled.div`
+export const DescriptionContainer = styled.div`
     display:flex;
     flex-direction:column;
     align-items:flex-start;
@@ -25,7 +25,7 @@ export const EventNameDescriptionContainer = styled.div`
         align-items:center;
     }
 `
-export const EventDateContainer = styled.div`
+export const DateContainer = styled.div`
     display:flex;
     flex-direction:column;
     align-items:flex-start;
@@ -33,7 +33,7 @@ export const EventDateContainer = styled.div`
     width:100%;
     height:auto;
 `
-export const EventLocationContainer = styled.div`
+export const LocationContainer = styled.div`
     display:flex;
     flex-direction:column;
     align-items:flex-start;
@@ -41,7 +41,7 @@ export const EventLocationContainer = styled.div`
     width:100%;
     height:auto;
 `
-export const EventName = styled.h1`
+export const Name = styled.h1`
   width: auto; 
   height: auto; 
   white-space: pre;
@@ -55,7 +55,7 @@ export const EventName = styled.h1`
     font-size: 32px;
     }
 `
-export const EventDescription = styled.p`
+export const Description = styled.p`
   width: auto; 
   height: auto; 
   font-weight: 500;
@@ -69,7 +69,7 @@ export const EventDescription = styled.p`
 }
 
 `
-export const EventDateHeader = styled.h2`
+export const DateHeader = styled.h2`
   width: auto; 
   height: auto;
   white-space: pre;
@@ -84,7 +84,7 @@ export const EventDateHeader = styled.h2`
     font-size: 24px;
 }
 `
-export const EventDate = styled.p`
+export const Date = styled.p`
   width: auto; 
   height: auto; 
   white-space: pre;
@@ -99,7 +99,7 @@ export const EventDate = styled.p`
     font-size: 16px;
 }
 `
-export const EventLocationHeader = styled.h2`
+export const LocationHeader = styled.h2`
   width: auto; 
   height: auto; 
   white-space: pre;
@@ -114,7 +114,7 @@ export const EventLocationHeader = styled.h2`
     font-size: 24px;
 }
 `
-export const EventLocation = styled.p`
+export const Location = styled.p`
   width: auto; 
   height: auto; 
   white-space: pre;
@@ -129,7 +129,7 @@ export const EventLocation = styled.p`
     font-size: 16px;
 }
 `
-export const EventGoogleMapPic = styled.img`
+export const GoogleMapPic = styled.img`
   width: 455px;
   height: 254px;
   display: block;

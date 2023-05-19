@@ -11,7 +11,6 @@ const TEST_CLIENT_ID = 'b01bd14f-1da4-4343-84a9-dc1909844036'
 const CrossmintButton: FC<Props> = ({ clientId = TEST_CLIENT_ID, totalPrice, quantity }) => {
   const totalPriceToString = String(totalPrice)
   const quantityToString = String(quantity)
-  console.log({ quantityToString, quantity, totalPriceToString, totalPrice })
   return (
         <CrossmintPayButton
             clientId={clientId}
