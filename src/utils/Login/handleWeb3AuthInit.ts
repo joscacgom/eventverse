@@ -9,20 +9,41 @@ import { WalletConnectV2Adapter, getWalletConnectV2Settings } from '@web3auth/wa
 import { MetamaskAdapter } from '@web3auth/metamask-adapter'
 import { TorusWalletAdapter } from '@web3auth/torus-evm-adapter'
 import { getUserCookie, setCookie, removeCookie } from '@/utils/Login/userCookie'
+import EthereumRpc from '@/utils/Login/web3RPC'
+import { get } from 'http'
 
 const clientId = process.env.NEXT_PUBLIC_CLIENT_ID as string
 const walletConnectClientId = process.env.NEXT_PUBLIC_WALLET_CONNECT_CLIENT_ID as string
 
 export const handleWeb3AuthInit = () => {
-  const { web3auth, setWeb3auth, setUserData } = useContext(Web3AuthContext)
+  const { setUserData } = useContext(Web3AuthContext)
+  const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null)
   const [torusPlugin, setTorusPlugin] =
     useState<TorusWalletConnectorPlugin | null>(null)
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
     null
   )
+
   useEffect(() => {
     const init = async () => {
-      const storedProvider = getUserCookie()
+      if (provider) {
+        setCookie('web3auth_provider', JSON.stringify(provider))
+        console.log('provider', provider)
+        const ethereumRpc = new EthereumRpc(provider)
+        const user = JSON.parse(getUserCookie('userData'))
+        const balance = await ethereumRpc?.getBalance()
+        const privateKey = await ethereumRpc?.getPrivateKey()
+        const address = await ethereumRpc?.getAccounts()
+        const userWithBlockchainInfo = { ...user, balance, privateKey, address }
+        setCookie('userData', JSON.stringify(userWithBlockchainInfo), 7)
+      }
+    }
+    init()
+  }, [provider])
+
+  useEffect(() => {
+    const init = async () => {
+      const storedProvider = getUserCookie('web3auth_provider')
       if (storedProvider) {
         setProvider(JSON.parse(storedProvider))
       } else {
@@ -133,23 +154,15 @@ export const handleWeb3AuthInit = () => {
     init()
   }, [])
 
-  const getUserInfo = async () => {
-    if (!web3auth) {
-      console.log('web3auth not initialized yet')
-      return
-    }
-    const user = await web3auth.getUserInfo()
-    console.log(user)
-  }
-
   const login = async () => {
     if (!web3auth) {
       return
     }
-    const web3authProvider = await web3auth.connect()
-    setCookie('web3auth_provider', JSON.stringify(web3authProvider), 7)
-    setProvider(web3authProvider)
+    await web3auth.connect()
     const user = await web3auth.getUserInfo()
+    setCookie('userData', JSON.stringify(user), 7)
+    setCookie('web3auth_provider', JSON.stringify(web3auth.provider), 7)
+
     setUserData(user)
   }
 
@@ -160,6 +173,7 @@ export const handleWeb3AuthInit = () => {
     await web3auth.logout()
     torusPlugin?.disconnect()
     removeCookie('web3auth_provider')
+    removeCookie('userData')
     setProvider(null)
     setUserData(null)
   }

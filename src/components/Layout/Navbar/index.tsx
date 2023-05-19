@@ -4,12 +4,15 @@ import { useRouter } from 'next/router'
 import { handleWeb3AuthInit } from '@/utils/Login/handleWeb3AuthInit'
 import Web3AuthContext from '@/context/Web3AuthContext'
 import LogoutIcon from './LogoutIcon'
+import { getUserCookie } from '@/utils/Login/userCookie'
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
   const { userData } = useContext(Web3AuthContext)
   const router = useRouter()
-  const { provider, login, logout } = handleWeb3AuthInit()
+  const { login, logout } = handleWeb3AuthInit()
+  const userCookieImage = JSON.parse(getUserCookie('userData'))?.profileImage
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -48,12 +51,12 @@ const Navbar = () => {
         <LinkItem mobile={showMobileMenu} primary={false} href={'/resell'}>
           Reventas
         </LinkItem>
-        {provider
+        {userCookieImage
           ? (
           <>
             <Button85 onClick={handleClickCreateEvent}>Crear evento</Button85>
-            <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>
-              <Avatar src={userData?.profileImage} alt='User avatar'/>
+            <LinkItem mobile={showMobileMenu} primary={false} href={'/user'}>
+              <Avatar src={userData?.profileImage || userCookieImage} alt='User avatar'/>
             </LinkItem>
             <IconWrapper onClick={logout}>
               <LogoutIcon />

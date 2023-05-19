@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 
-export const getUserCookie = () => {
-  const userCookie = Cookies.get('web3auth_provider')
+export const getUserCookie = (cookie:string) => {
+  const userCookie = Cookies.get(cookie)
   if (!userCookie) return null
   const userObject = userCookie ? JSON.parse(userCookie) : null
   return userObject
