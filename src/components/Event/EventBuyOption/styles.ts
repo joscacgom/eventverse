@@ -64,7 +64,7 @@ export const Button = styled.button<ButtonProps>`
     }
 
 `
-export const Ticket = styled.div`
+export const TicketContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

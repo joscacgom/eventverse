@@ -41,10 +41,10 @@ describe('MainSection', () => {
     const searchInput = screen.getByPlaceholderText('🔎 Buscar eventos...')
     fireEvent.change(searchInput, { target: { value: 'concert' } })
     const filteredEvents = MOCK_EVENTS.filter((e) =>
-      e.title.toLowerCase().includes('concert')
+      e.name.toLowerCase().includes('concert')
     )
     filteredEvents.forEach((event) => {
-      expect(screen.getByText(event.title)).toBeInTheDocument()
+      expect(screen.getByText(event.name)).toBeInTheDocument()
     })
   })
 })

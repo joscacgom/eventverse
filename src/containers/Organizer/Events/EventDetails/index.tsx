@@ -11,7 +11,7 @@ const EventDetails: FC<Props> = ({ event }) => {
         <Container>
             <Image src={'/images/events/medusa-fest-wallpaper.jpg'} />
             <BackButton onClick={() => router.back()}>Volver</BackButton>
-            <Title>{event.title}</Title>
+            <Title>{event.name}</Title>
             <Info>
                 <Subtitle>Ventas</Subtitle>
                 <Sells>

@@ -10,7 +10,7 @@ const MainSection = () => {
     setSearchTerm(e.target.value)
 
   const filteredEvents = MOCK_EVENTS.filter((e) =>
-    e.title.toLowerCase().includes(searchTerm.toLowerCase())
+    e.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   const handleRenderEventList = () =>
