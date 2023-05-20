@@ -8,10 +8,18 @@ import { getUserCookie } from '@/utils/Login/userCookie'
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
-  const { userData } = useContext(Web3AuthContext)
+  const { userData, setUserData } = useContext(Web3AuthContext)
   const router = useRouter()
   const { login, logout } = handleWeb3AuthInit()
   const userCookieImage = JSON.parse(getUserCookie('userData'))?.profileImage
+
+  useEffect(() => {
+    const userCookieData = JSON.parse(getUserCookie('userData'))
+
+    if (userCookieData) {
+      setUserData(userCookieData)
+    }
+  }, [])
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,7 +42,6 @@ const Navbar = () => {
   const handleClickCreateEvent = () => {
     router.push('/event/create')
   }
-
   return (
     <Nav mobile={showMobileMenu}>
       <img
@@ -51,7 +58,7 @@ const Navbar = () => {
         <LinkItem mobile={showMobileMenu} primary={false} href={'/resell'}>
           Reventas
         </LinkItem>
-        {userCookieImage
+        {userData
           ? (
           <>
             <Button85 onClick={handleClickCreateEvent}>Crear evento</Button85>

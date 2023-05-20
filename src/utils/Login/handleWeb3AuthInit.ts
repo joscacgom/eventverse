@@ -16,25 +16,22 @@ const clientId = process.env.NEXT_PUBLIC_CLIENT_ID as string
 const walletConnectClientId = process.env.NEXT_PUBLIC_WALLET_CONNECT_CLIENT_ID as string
 
 export const handleWeb3AuthInit = () => {
-  const { setUserData } = useContext(Web3AuthContext)
-  const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null)
+  const { web3auth: web3authcontext, setUserData, setWeb3auth } = useContext(Web3AuthContext)
   const [torusPlugin, setTorusPlugin] =
     useState<TorusWalletConnectorPlugin | null>(null)
-  const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
-    null
-  )
+  const [provider, setProvider] = useState<SafeEventEmitterProvider | null | any>(null)
 
   useEffect(() => {
     const init = async () => {
-      if (provider) {
+      if (provider && !getUserCookie('web3auth_provider')) {
         setCookie('web3auth_provider', JSON.stringify(provider))
-        console.log('provider', provider)
         const ethereumRpc = new EthereumRpc(provider)
         const user = JSON.parse(getUserCookie('userData'))
         const balance = await ethereumRpc?.getBalance()
         const privateKey = await ethereumRpc?.getPrivateKey()
         const address = await ethereumRpc?.getAccounts()
         const userWithBlockchainInfo = { ...user, balance, privateKey, address }
+        setUserData(userWithBlockchainInfo)
         setCookie('userData', JSON.stringify(userWithBlockchainInfo), 7)
       }
     }
@@ -141,9 +138,20 @@ export const handleWeb3AuthInit = () => {
           setWeb3auth(web3auth)
 
           await web3auth.initModal()
-
-          if (web3auth.provider) {
-            setProvider(web3auth.provider)
+          const web3provider = await new Promise((resolve, reject) => {
+            const checkProvider = () => {
+              if (web3auth.provider) {
+                resolve(web3auth.provider)
+              } else {
+                setTimeout(checkProvider, 100) // Check again after 100ms
+              }
+            }
+            checkProvider()
+          })
+          console.log('provider', web3provider)
+          if (web3provider) {
+            setProvider(web3provider)
+           // setCookie('web3auth_provider', JSON.stringify(web3provider))
           }
         } catch (error) {
           console.error(error)
@@ -155,23 +163,23 @@ export const handleWeb3AuthInit = () => {
   }, [])
 
   const login = async () => {
-    if (!web3auth) {
+    if (!web3authcontext) {
       return
     }
-    await web3auth.connect()
-    const user = await web3auth.getUserInfo()
+    await web3authcontext.connect()
+    const user = await web3authcontext.getUserInfo()
     setCookie('userData', JSON.stringify(user), 7)
-    setCookie('web3auth_provider', JSON.stringify(web3auth.provider), 7)
+   // setCookie('web3auth_provider', JSON.stringify(web3authcontext.provider), 7)
 
     setUserData(user)
   }
 
   const logout = async () => {
-    if (!web3auth) {
+    if (!web3authcontext) {
       return
     }
-    await web3auth.logout()
-    torusPlugin?.disconnect()
+    await torusPlugin?.disconnect()
+    await web3authcontext.logout()
     removeCookie('web3auth_provider')
     removeCookie('userData')
     setProvider(null)
