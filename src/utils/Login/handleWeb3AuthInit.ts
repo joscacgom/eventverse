@@ -10,7 +10,6 @@ import { MetamaskAdapter } from '@web3auth/metamask-adapter'
 import { TorusWalletAdapter } from '@web3auth/torus-evm-adapter'
 import { getUserCookie, setCookie, removeCookie } from '@/utils/Login/userCookie'
 import EthereumRpc from '@/utils/Login/web3RPC'
-import { get } from 'http'
 
 const clientId = process.env.NEXT_PUBLIC_CLIENT_ID as string
 const walletConnectClientId = process.env.NEXT_PUBLIC_WALLET_CONNECT_CLIENT_ID as string
@@ -148,10 +147,8 @@ export const handleWeb3AuthInit = () => {
             }
             checkProvider()
           })
-          console.log('provider', web3provider)
           if (web3provider) {
             setProvider(web3provider)
-           // setCookie('web3auth_provider', JSON.stringify(web3provider))
           }
         } catch (error) {
           console.error(error)
@@ -169,8 +166,6 @@ export const handleWeb3AuthInit = () => {
     await web3authcontext.connect()
     const user = await web3authcontext.getUserInfo()
     setCookie('userData', JSON.stringify(user), 7)
-   // setCookie('web3auth_provider', JSON.stringify(web3authcontext.provider), 7)
-
     setUserData(user)
   }
 
