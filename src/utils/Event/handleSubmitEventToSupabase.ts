@@ -6,7 +6,7 @@ import { handleSubmitImageToCloudinary } from '../Event/handleSubmitImageToCloud
 import { handleSubmitToThirdWeb } from './handleSubmitToThirdWeb'
 
 const supabase = createClient('https://mxfgbnuvnebcyxbczdcr.supabase.co', process.env.NEXT_PUBLIC_SUPABASE_KEY as string)
-const organizer_id = 1
+const organizer_id = 2
 
 export const handleSubmitEventToSupabase = async (event: EventTableSupabase, ticket: TicketTableSupabase) => {
   try {

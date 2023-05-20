@@ -40,15 +40,14 @@ export const handleEventObjects = (event:FormData, ticket: FormData) => {
   const ticketToSubmit: TicketTableSupabase = {
     name: ticket.ticketName,
     description: ticket.ticketDescription,
-    image: ticket.image.name,
+    image: ticket.image,
     start_date: ticket.startDate,
     end_date: ticket.endDate,
     price: ticket.ticketPrice,
     quantity: ticket.ticketAmount,
     max_per_user: ticket.ticketLimit,
     organizer_royalty: ticket.ticketRoyalties,
-    contract_address: '0x0000000000',
-    platform_address: '0x0000000000',
+    platform_address: '0xEC504299EEd0774293BE523c52a8FB2B2F2ABb13',
     platform_royalty: 5
   }
 

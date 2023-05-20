@@ -43,7 +43,7 @@ const EventCreation = () => {
       return
     }
 
-    if (ticketLimit > ticketAmount) {
+    if (Number(ticketLimit) > Number(ticketAmount)) {
       toast.error(errorMessageLimit)
       return
     }
@@ -105,14 +105,17 @@ const EventCreation = () => {
     setSendingData(true)
     const { eventToSubmit, ticketToSubmit } = handleEventObjects(formData.part1, formData.part2)
     toast.promise(handleSubmitEventToSupabase(eventToSubmit, ticketToSubmit), {
-      pending: 'Procesando datos de tu evento... 😅',
+      pending: 'Procesando datos de tu evento...😅 La creación de la colecion de tickets NFT de tu evento puede tardar varios minutos...',
       success: 'Tu evento ha sido creado exitosamente! 😍',
       error: 'Hubo un error al crear tu evento! 😭 Por favor, intenta nuevamente.'
     }).then(() => {
       setTimeout(() => {
         router.push('/')
       }, 5000)
-    })
+    }).catch(() => {
+      setSendingData(false)
+    }
+    )
   }
 
   const handleFormRender = () => {

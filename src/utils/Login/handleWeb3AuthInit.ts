@@ -23,7 +23,11 @@ export const handleWeb3AuthInit = () => {
   useEffect(() => {
     const init = async () => {
       if (provider && !getUserCookie('web3auth_provider')) {
-        setCookie('web3auth_provider', JSON.stringify(provider))
+        try {
+          setCookie('web3auth_provider', JSON.stringify(provider))
+        } catch (error) {
+          setCookie('web3auth_provider', 'Metamask/Other')
+        }
         const ethereumRpc = new EthereumRpc(provider)
         const user = JSON.parse(getUserCookie('userData'))
         const balance = await ethereumRpc?.getBalance()
@@ -173,7 +177,7 @@ export const handleWeb3AuthInit = () => {
     if (!web3authcontext) {
       return
     }
-    await torusPlugin?.disconnect()
+    // await torusPlugin?.disconnect()
     await web3authcontext.logout()
     removeCookie('web3auth_provider')
     removeCookie('userData')
