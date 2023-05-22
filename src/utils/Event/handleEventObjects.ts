@@ -7,9 +7,9 @@ type FormData = {
 
 export const handleEventObjects = (event:FormData, ticket: FormData) => {
   const eventPreview: EventTicketPreview = {
-    title: event.eventName,
-    date: event.startDate,
-    endDate: event.endDate,
+    name: event.eventName,
+    start_date: event.startDate,
+    end_date: event.endDate,
     description: event.eventDescription,
     image: event.image,
     location: event.location,

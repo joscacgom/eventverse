@@ -17,13 +17,13 @@ describe('ResellTicketNetworkInfo', () => {
             <ResellTicketNetworkInfo ticket={ticket} />
         </ThemeProvider>)
 
-    expect(screen.getByAltText('Event image')).toHaveAttribute('src', '/images/tickets/medusa-festival.png')
+    expect(screen.getByAltText('Event image')).toHaveAttribute('src', 'https://ipfs.thirdwebcdn.com/ipfs/QmP9MEiC7WPmoZ3p2dPn8ZYzjFQKNUe4DPCzrGoAkXFxDz/apolo-event.jpg')
     expect(screen.getByText('Royalties')).toBeInTheDocument()
-    expect(screen.getByText('2.5% comisión de EventVerse')).toBeInTheDocument()
+    expect(screen.getByText('5% comisión de EventVerse')).toBeInTheDocument()
     expect(screen.getByText('5% comisión del organizador')).toBeInTheDocument()
     expect(screen.getByText('Información del smart contract')).toBeInTheDocument()
     expect(screen.getByText('Dirección del contrato')).toBeInTheDocument()
-    expect(screen.getByText('0x6968BaEb1058b0663a7F178725C1fF996F5Cd696')).toBeInTheDocument()
+    expect(screen.getByText('0x1dd488Aa32731bED13A54581d78061AAeBdA4d91')).toBeInTheDocument()
     expect(screen.getByText('Ver en PolygonScan')).toBeInTheDocument()
     expect(screen.getByText('Blockchain')).toBeInTheDocument()
     expect(screen.getByText('Polygon')).toBeInTheDocument()

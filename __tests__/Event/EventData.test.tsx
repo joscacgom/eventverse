@@ -17,7 +17,7 @@ describe('EventData', () => {
             <EventData event={event} />
         </ThemeProvider>
     )
-    expect(screen.getByText('Medusa Festival')).toBeInTheDocument()
+    expect(screen.getByText('Apolo Techno Fest (Sevilla)')).toBeInTheDocument()
   })
 
   it('should render the event description', () => {
@@ -26,7 +26,7 @@ describe('EventData', () => {
             <EventData event={event} />
         </ThemeProvider>
     )
-    expect(screen.getByText('Abonos ya a la venta para el Medusa Festival 2023')).toBeInTheDocument()
+    expect(screen.getByText('The Apolo Techno Fest in Sevilla turned up the heat with an electrifying display of cutting-edge music and futuristic vibes. The festival drew in a diverse crowd of techno enthusiasts, who danced the night away to pulsating beats from renowned DJs and up-and-coming talents. With mind-blowing visuals and immersive soundscapes, Apolo Techno Fest established itself as a premier destination for electronic music lovers, leaving attendees craving for more.')).toBeInTheDocument()
   })
 
   it('should render the event date', () => {
@@ -44,7 +44,7 @@ describe('EventData', () => {
             <EventData event={event} />
         </ThemeProvider>
     )
-    expect(screen.getByText('Sevilla')).toBeInTheDocument()
+    expect(screen.getByText('Seville, Spain')).toBeInTheDocument()
     expect(screen.getByRole('img')).toHaveAttribute('src', '/images/google-maps.png')
   })
 })

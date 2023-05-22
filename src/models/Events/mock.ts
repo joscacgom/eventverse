@@ -1,4 +1,4 @@
-import { Event } from './types'
+import { Event, EventTicketPreview } from './types'
 
 export const MOCK_EVENT: Event = {
   id: 36,
@@ -17,6 +17,21 @@ export const MOCK_EVENT: Event = {
   event_type: 'PHYSICAL',
   category: 'MUSIC',
   pricing_plan: 'STANDARD'
+}
+
+export const MOCK_EVENT_TICKET_PREVIEW: EventTicketPreview = {
+  name: 'Apolo Techno Fest (Sevilla)',
+  start_date: '22-08-2023 16:00',
+  end_date: '23-08-2023 03:00',
+  description: 'The Apolo Techno Fest in Sevilla turned up the heat with an electrifying display of cutting-edge music and futuristic vibes.',
+  image: 'https://ipfs.thirdwebcdn.com/ipfs/QmP9MEiC7WPmoZ3p2dPn8ZYzjFQKNUe4DPCzrGoAkXFxDz/apolo-event.jpg',
+  location: 'Seville, Spain',
+  ticketTitle: 'Standard Ticket',
+  ticketAmount: 100,
+  ticketPrice: 20,
+  ticketImage: 'https://ipfs.thirdwebcdn.com/ipfs/QmP9MEiC7WPmoZ3p2dPn8ZYzjFQKNUe4DPCzrGoAkXFxDz/apolo-event.jpg',
+  locationImage: 'https://ipfs.thirdwebcdn.com/ipfs/QmP9MEiC7WPmoZ3p2dPn8ZYzjFQKNUe4DPCzrGoAkXFxDz/apolo-event.jpg',
+  locationFormattedAddress: 'Sevilla'
 }
 
 export const MOCK_EVENTS: Event[] = [

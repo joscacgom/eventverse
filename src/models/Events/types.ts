@@ -1,32 +1,38 @@
-import { Ticket } from "../Tickets/types";
+import { Ticket } from '../Tickets/types'
 
 export type Event = {
     id: number;
-    organizer_id: number;
+    organizer_id?: number;
     name: string;
     description: string;
     summary: string;
     category: string;
     country: string;
-    created_at: string;
+    created_at?: string;
     start_date: string;
     end_date: string;
-    event_type: string;
+    event_type?: string;
     image: string;
     location: string;
-    tags: string;
+    tags?: string;
     time_zone: string;
     ticket?: Ticket
     pricing_plan?: string;
 };
 
-export type EventTicketPreview = Event & {
-    ticketTitle: string;
-    ticketAmount: number;
-    ticketPrice: number;
-    ticketImage: string;
-    locationImage: string;
-    locationFormattedAddress: string;
+export type EventTicketPreview = {
+    name: string,
+    start_date: string,
+    end_date: string,
+    description: string,
+    image: string,
+    location: string,
+    ticketTitle?: string;
+    ticketAmount?: number;
+    ticketPrice?: number;
+    ticketImage?: string;
+    locationImage?: string;
+    locationFormattedAddress?: string;
 }
 export type EventTableSupabase = {
     name: string
