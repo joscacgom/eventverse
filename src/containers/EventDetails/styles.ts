@@ -8,6 +8,7 @@ export const MainContainer = styled.div`
     width: 60%;
     gap:10rem;
     height: 100%;
+
     @media (max-width: 768px) {
         flex-direction: column;
         width: 100%;
@@ -22,16 +23,16 @@ export const MainImage = styled.img`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 12px;
+  border-radius: 4px;
   border: 1px solid #d4d4d4;
   margin-bottom: 2rem;
+  object-fit: cover;
+  
     @media (max-width: 768px) {
         width: 100vw;
         height: 242px;
         border: none;
         border-radius: 0px;
-       
-
     }
 
 `

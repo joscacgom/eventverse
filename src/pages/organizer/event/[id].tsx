@@ -12,7 +12,7 @@ const EventDetails = () => {
 
   useEffect(() => {
     if (id) {
-      const event = MOCK_EVENTS.find((event) => event.id === id)
+      const event = MOCK_EVENTS.find((event) => event.id === parseInt(id as string))
       if (!event) {
         router.push('/organizer/events')
       } else {
@@ -24,7 +24,7 @@ const EventDetails = () => {
   if (!event) return null
 
   return (
-    <Layout title={`${event.title}`}>
+    <Layout title={`${event.name}`}>
         <OrganizerEventDetails event={event} />
     </Layout>
   )

@@ -41,9 +41,9 @@ describe('ResellTicketInfo', () => {
             <ResellTicketInfo ticket={ticket} />
         </ThemeProvider>)
     expect(screen.getByText('Comienzo:')).toBeInTheDocument()
-    expect(screen.getByText(ticket.startDate)).toBeInTheDocument()
+    expect(screen.getByText(ticket.start_date)).toBeInTheDocument()
     expect(screen.getByText('Fin:')).toBeInTheDocument()
-    expect(screen.getByText(ticket.endDate)).toBeInTheDocument()
+    expect(screen.getByText(ticket.end_date)).toBeInTheDocument()
   })
 
   it('renders the ticket price and cryptocurrency equivalent', () => {

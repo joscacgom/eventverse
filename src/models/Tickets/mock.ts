@@ -37,17 +37,19 @@ export const MOCK_TICKETS: UserTicket[] = [
 ]
 
 export const MOCK_EVENT_TICKET: Ticket = {
-  id: '1',
-  name: 'Medusa Festival',
-  image: '/images/tickets/medusa-festival.png',
-  price: 0.01,
-  amount: 100,
-  description: 'Abonos ya a la venta para el Medusa Festival 2023',
-  startDate: '22 de Agosto 2023',
-  endDate: '23 de Agosto 2023',
-  maxPerUser: 100,
-  contractAddress: '0x6968BaEb1058b0663a7F178725C1fF996F5Cd696',
-  organizerRoyalty: 5,
-  platformRoyalty: 2.5,
-  eventId: '1'
+  id: 15,
+  created_at: '2023-05-18T15:00:45.633958+00:00',
+  event_id: 36,
+  name: 'Ticket - Apolo Techno Festival',
+  quantity: 1652,
+  price: 0.02,
+  description: 'This ticket gives you access to the Apolo Techno Festival in Seville, Spain.',
+  start_date: '22-08-2023 16:00',
+  end_date: '23-08-2023 03:00',
+  max_per_user: 2,
+  contract_address: '0x1dd488Aa32731bED13A54581d78061AAeBdA4d91',
+  platform_address: '0x8dC9a644B511AbF608af7f4Cf28E567AB9154897',
+  organizer_royalty: 5,
+  platform_royalty: 5,
+  image: 'https://ipfs.thirdwebcdn.com/ipfs/QmP9MEiC7WPmoZ3p2dPn8ZYzjFQKNUe4DPCzrGoAkXFxDz/apolo-event.jpg'
 }

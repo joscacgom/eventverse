@@ -20,8 +20,8 @@ const EventCard: FC<Props> = ({ event }) => {
             <Card>
                 <Image src={event.image} width={100} height={100} />
                 <CardInfo>
-                    <EventTitle>{event.title}</EventTitle>
-                    <p>{event.date}</p>
+                    <EventTitle>{event.name}</EventTitle>
+                    <p>{event.start_date}</p>
                     <p>{event.location}</p>
                 </CardInfo>
             </Card>

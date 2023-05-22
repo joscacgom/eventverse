@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const EventPreviewCreationMainContainer = styled.div`
+export const MainContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -14,7 +14,7 @@ export const EventPreviewCreationMainContainer = styled.div`
     }
 `
 
-export const EventPreviewCreationHeader = styled.div`
+export const Header = styled.div`
   width: auto; 
   height: auto; 
   font-weight: 600;
@@ -29,7 +29,7 @@ export const EventPreviewCreationHeader = styled.div`
     }
 `
 
-export const EventPreviewCreationImage = styled.img`
+export const Image = styled.img`
   width: 1150px;
   height: 300px;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.25);
@@ -47,7 +47,7 @@ export const EventPreviewCreationImage = styled.img`
     }
 `
 
-export const EventPreviewCreationName = styled.div`
+export const Name = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -60,7 +60,7 @@ export const EventPreviewCreationName = styled.div`
 
 `
 
-export const EventPreviewCreationNameHeader = styled.div`
+export const NameHeader = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -74,7 +74,7 @@ export const EventPreviewCreationNameHeader = styled.div`
     }
 `
 
-export const EventPreviewCreationNameText = styled.div`
+export const NameText = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -88,7 +88,7 @@ export const EventPreviewCreationNameText = styled.div`
     }
 `
 
-export const EventPreviewCreationDescription = styled.div`
+export const Description = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -100,7 +100,7 @@ export const EventPreviewCreationDescription = styled.div`
     }
 `
 
-export const EventPreviewCreationDescriptionHeader = styled.div`
+export const DescriptionHeader = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -114,7 +114,7 @@ export const EventPreviewCreationDescriptionHeader = styled.div`
     }
 `
 
-export const EventPreviewCreationDescriptionText = styled.div`
+export const DescriptionText = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -128,7 +128,7 @@ export const EventPreviewCreationDescriptionText = styled.div`
     }
 `
 
-export const EventPreviewCreationStartDate = styled.div`
+export const StartDate = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -140,7 +140,7 @@ export const EventPreviewCreationStartDate = styled.div`
     }
 `
 
-export const EventPreviewCreationStartDateHeader = styled.div`
+export const StartDateHeader = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -154,7 +154,7 @@ export const EventPreviewCreationStartDateHeader = styled.div`
     }
 `
 
-export const EventPreviewCreationStartDateText = styled.div`
+export const StartDateText = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -168,7 +168,7 @@ export const EventPreviewCreationStartDateText = styled.div`
     }
 `
 
-export const EventPreviewCreationEndDate = styled.div`
+export const EndDate = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -180,7 +180,7 @@ export const EventPreviewCreationEndDate = styled.div`
     }
 `
 
-export const EventPreviewCreationEndDateHeader = styled.div`
+export const EndDateHeader = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -194,7 +194,7 @@ export const EventPreviewCreationEndDateHeader = styled.div`
     }
 `
 
-export const EventPreviewCreationEndDateText = styled.div`
+export const EndDateText = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -208,7 +208,7 @@ export const EventPreviewCreationEndDateText = styled.div`
     }
 `
 
-export const EventPreviewCreationLocation = styled.div`
+export const Location = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -221,7 +221,7 @@ export const EventPreviewCreationLocation = styled.div`
 
 `
 
-export const EventPreviewCreationLocationHeader = styled.div`
+export const LocationHeader = styled.div`
   width: auto; 
   height: auto;
   white-space: pre;
@@ -237,7 +237,7 @@ export const EventPreviewCreationLocationHeader = styled.div`
     }
 `
 
-export const EventPreviewCreationLocationText = styled.div`
+export const LocationText = styled.div`
   width: auto; 
   height: auto;
   opacity: 0.5;
@@ -251,7 +251,7 @@ export const EventPreviewCreationLocationText = styled.div`
     }
 `
 
-export const EventPreviewCreationLocationImage = styled.img`
+export const LocationImage = styled.img`
   width: 258px;
   height: 139px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
@@ -266,7 +266,7 @@ export const EventPreviewCreationLocationImage = styled.img`
     }
 `
 
-export const EventPreviewCreationTicket = styled.div`
+export const Ticket = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -280,7 +280,7 @@ export const EventPreviewCreationTicket = styled.div`
     }
 `
 
-export const EventPreviewCreationTicketHeader = styled.div`
+export const TicketHeader = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -294,7 +294,7 @@ export const EventPreviewCreationTicketHeader = styled.div`
     }
 `
 
-export const EventPreviewCreationTicketImage = styled.img`
+export const TicketImage = styled.img`
   width: 184px;
   height: 138px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
@@ -311,7 +311,7 @@ export const EventPreviewCreationTicketImage = styled.img`
   
 `
 
-export const EventPreviewCreationTicketName = styled.div`
+export const TicketName = styled.div`
   width: auto; 
   height: auto; 
   font-family: "Inter", sans-serif;
@@ -321,7 +321,7 @@ export const EventPreviewCreationTicketName = styled.div`
         font-size: 14px;
     }
 `
-export const EventPreviewCreationFirstContainer = styled.div`
+export const FirstContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -330,7 +330,7 @@ export const EventPreviewCreationFirstContainer = styled.div`
     }
 `
 
-export const EventPreviewCreationSecondContainer = styled.div`
+export const SecondContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -339,7 +339,7 @@ export const EventPreviewCreationSecondContainer = styled.div`
     }
 `
 
-export const EventPreviewCreationTicketPriceContainer = styled.div`
+export const TicketPriceContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -348,7 +348,7 @@ export const EventPreviewCreationTicketPriceContainer = styled.div`
 
 `
 
-export const EventPreviewCreationTicketPrice = styled.div`
+export const TicketPrice = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -362,7 +362,7 @@ export const EventPreviewCreationTicketPrice = styled.div`
     }
 `
 
-export const EventPreviewCreationTicketAmount = styled.div`
+export const TicketAmount = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;

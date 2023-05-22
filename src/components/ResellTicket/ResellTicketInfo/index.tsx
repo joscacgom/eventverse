@@ -24,9 +24,9 @@ const ResellTicketInfo:FC<Props> = ({ ticket }) => {
                 <ResellTicketInfoDateHeader>Fecha y hora</ResellTicketInfoDateHeader>
                 <ResellTicketInfoDateSecondContainer>
                     <ResellTicketInfoDateSecondHeader>Comienzo:</ResellTicketInfoDateSecondHeader>
-                    <ResellTicketInfoDate>{ticket.startDate}</ResellTicketInfoDate>
+                    <ResellTicketInfoDate>{ticket.start_date}</ResellTicketInfoDate>
                     <ResellTicketInfoDateSecondHeader>Fin:</ResellTicketInfoDateSecondHeader>
-                    <ResellTicketInfoDate>{ticket.endDate}</ResellTicketInfoDate>
+                    <ResellTicketInfoDate>{ticket.end_date}</ResellTicketInfoDate>
                 </ResellTicketInfoDateSecondContainer>
             </ResellTicketInfoDateContainer>
             </ResellTicketInfoContainer>
