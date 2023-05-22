@@ -5,17 +5,17 @@ import { render, screen } from '@testing-library/react'
 import theme from '@/theme'
 import { ThemeProvider } from 'styled-components'
 import EventPreviewCreationForm from '@/components/Event/EventPreviewCreationForm'
-import { MOCK_EVENT } from '@/models/Events/mock'
+import { MOCK_EVENT_TICKET_PREVIEW } from '@/models/Events/mock'
 
 describe('EventPreviewCreationForm', () => {
-  const event = MOCK_EVENT
+  const event = MOCK_EVENT_TICKET_PREVIEW
 
   it('should display the event title', () => {
     render(
         <ThemeProvider theme={theme}>
             <EventPreviewCreationForm event={event} />
         </ThemeProvider>)
-    expect(screen.getByText('Medusa Festival')).toBeInTheDocument()
+    expect(screen.getByText('Apolo Techno Fest (Sevilla)')).toBeInTheDocument()
   })
 
   it('should display the event description', () => {
@@ -23,7 +23,7 @@ describe('EventPreviewCreationForm', () => {
         <ThemeProvider theme={theme}>
             <EventPreviewCreationForm event={event} />
         </ThemeProvider>)
-    expect(screen.getByText('Abonos ya a la venta para el Medusa Festival 2023')).toBeInTheDocument()
+    expect(screen.getByText('The Apolo Techno Fest in Sevilla turned up the heat with an electrifying display of cutting-edge music and futuristic vibes.')).toBeInTheDocument()
   })
 
   it('should display the event start date', () => {
@@ -31,7 +31,7 @@ describe('EventPreviewCreationForm', () => {
         <ThemeProvider theme={theme}>
             <EventPreviewCreationForm event={event} />
         </ThemeProvider>)
-    expect(screen.getByText('22 de Agosto 2023')).toBeInTheDocument()
+    expect(screen.getByText('22 de agosto 2023 16:00')).toBeInTheDocument()
   })
 
   it('should display the event end date', () => {
@@ -39,7 +39,7 @@ describe('EventPreviewCreationForm', () => {
         <ThemeProvider theme={theme}>
             <EventPreviewCreationForm event={event} />
         </ThemeProvider>)
-    expect(screen.getByText('23 de Agosto 2023')).toBeInTheDocument()
+    expect(screen.getByText('23 de agosto 2023 03:00')).toBeInTheDocument()
   })
 
   it('should display the event location', () => {
@@ -55,7 +55,7 @@ describe('EventPreviewCreationForm', () => {
         <ThemeProvider theme={theme}>
             <EventPreviewCreationForm event={event} />
         </ThemeProvider>)
-    expect(screen.getByText('Medusa Festival')).toBeInTheDocument()
+    expect(screen.getByText('Standard Ticket')).toBeInTheDocument()
   })
 
   it('should display the ticket price', () => {
@@ -63,6 +63,6 @@ describe('EventPreviewCreationForm', () => {
         <ThemeProvider theme={theme}>
             <EventPreviewCreationForm event={event} />
         </ThemeProvider>)
-    expect(screen.getByText('90€')).toBeInTheDocument()
+    expect(screen.getByText('20€')).toBeInTheDocument()
   })
 })

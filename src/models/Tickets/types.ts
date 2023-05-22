@@ -45,3 +45,17 @@ export const normalizeTicket = (ticket: any): Ticket => {
     start_date: ticket.start_date
   }
 }
+
+export type TicketTableSupabase = {
+      name: string;
+      description: string;
+      image: string;
+      start_date: string;
+      end_date: string;
+      price: number;
+      quantity: number;
+      max_per_user: number;
+      organizer_royalty: number;
+      platform_royalty: number
+      platform_address: string;
+}

@@ -1,10 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import { Button85, LinkItem, MenuLinks, Nav } from './styles'
+import React, { useContext, useEffect, useState } from 'react'
+import { Button85, LinkItem, MenuLinks, Nav, Avatar, IconWrapper } from './styles'
 import { useRouter } from 'next/router'
+import { handleWeb3AuthInit } from '@/utils/Login/handleWeb3AuthInit'
+import Web3AuthContext from '@/context/Web3AuthContext'
+import LogoutIcon from './LogoutIcon'
+import { getUserCookie } from '@/utils/Login/userCookie'
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+  const { userData, setUserData } = useContext(Web3AuthContext)
   const router = useRouter()
+  const { login, logout } = handleWeb3AuthInit()
+  const userCookieImage = JSON.parse(getUserCookie('userData'))?.profileImage
+
+  useEffect(() => {
+    const userCookieData = JSON.parse(getUserCookie('userData'))
+
+    if (userCookieData) {
+      setUserData(userCookieData)
+    }
+  }, [])
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,20 +42,38 @@ const Navbar = () => {
   const handleClickCreateEvent = () => {
     router.push('/event/create')
   }
-
   return (
     <Nav mobile={showMobileMenu}>
-        <img
-          src={'/images/brand/eventverse-logo-black.png'}
-          alt="Logo"
-          width={150}
-          height={'auto'}
-          onClick={handleClickLogo}
-        />
+      <img
+        src={'/images/brand/eventverse-logo-black.png'}
+        alt="Logo"
+        width={150}
+        height={'auto'}
+        onClick={handleClickLogo}
+      />
       <MenuLinks mobile={showMobileMenu}>
-        <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>Eventos</LinkItem>
-        <LinkItem mobile={showMobileMenu} primary={false} href={'/resell'}>Reventas</LinkItem>
-        <Button85 onClick={handleClickCreateEvent}>Crear evento</Button85>
+        <LinkItem mobile={showMobileMenu} primary={false} href={'/'}>
+          Eventos
+        </LinkItem>
+        <LinkItem mobile={showMobileMenu} primary={false} href={'/resell'}>
+          Reventas
+        </LinkItem>
+        {userData
+          ? (
+          <>
+            <Button85 onClick={handleClickCreateEvent}>Crear evento</Button85>
+            <LinkItem mobile={showMobileMenu} primary={false} href={'/user'}>
+              <Avatar src={userData?.profileImage === '' ? userCookieImage : userData?.profileImage } alt='User avatar'/>
+            </LinkItem>
+            <IconWrapper onClick={logout}>
+              <LogoutIcon />
+            </IconWrapper>
+
+          </>
+            )
+          : (
+          <Button85 onClick={login}>Conectar</Button85>
+            )}
       </MenuLinks>
     </Nav>
   )

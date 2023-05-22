@@ -38,6 +38,30 @@ export const MenuLinks = styled.div<MenuProps>`
     margin-top: ${({ mobile }) => mobile ? '20px' : '0'};
 `
 
+export const Avatar = styled.img`
+    height: 40px;
+    width: 40px;
+    border-width: 1px;
+    border-radius: 100%;
+    @media (max-width: 768px) {
+      margin-top: -10px;
+      margin-bottom: -10px;
+    }
+`
+export const IconWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    svg{
+      cursor:pointer;
+      &:hover{
+        opacity:0.5;
+      }
+
+    }
+`
 type LinkProps = {
     primary: boolean;
     mobile?: boolean; // Make `mobile` prop optional

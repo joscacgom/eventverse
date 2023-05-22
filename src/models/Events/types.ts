@@ -1,20 +1,53 @@
+import { Ticket } from '../Tickets/types'
+
 export type Event = {
     id: number;
-    organizer_id: number;
+    organizer_id?: number;
     name: string;
     description: string;
+    summary: string;
     category: string;
     country: string;
-    created_at: string;
+    created_at?: string;
+    start_date: string;
     end_date: string;
-    event_type: string;
+    event_type?: string;
     image: string;
     location: string;
-    pricing_plan: string;
-    start_date: string;
-    summary: string;
-    tags: string;
+    tags?: string;
     time_zone: string;
+    ticket?: Ticket
+    pricing_plan?: string;
+};
+
+export type EventTicketPreview = {
+    name: string,
+    start_date: string,
+    end_date: string,
+    description: string,
+    image: string,
+    location: string,
+    ticketTitle?: string;
+    ticketAmount?: number;
+    ticketPrice?: number;
+    ticketImage?: string;
+    locationImage?: string;
+    locationFormattedAddress?: string;
+}
+export type EventTableSupabase = {
+    name: string
+    summary: string
+    description: string
+    image: any
+    tags: string
+    location: string
+    start_date: string
+    end_date: string
+    time_zone: string
+    country: string
+    event_type: string
+    category: string
+    pricing_plan: string
 }
 
 export const normalizeEvent = (event: any): Event => {

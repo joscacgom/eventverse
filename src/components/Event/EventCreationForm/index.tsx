@@ -1,16 +1,111 @@
-import React, { useState } from 'react'
-import { EventCreationMainContainer, EventCreationHeader, EventCreationFormImagePreview, EventCreationFormInputDate, EventCreationFormContainer, EventCreationInputOption, EventCreationFormLabel, EventCreationFormInput, EventCreationFormTextArea, EventCreationFormImageFile, EventCreationFormLocationImage } from './styles'
-const EventCreationForm = () => {
-  const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(null)
+/* eslint-disable no-unused-vars */
+import React, { FC, useEffect, useState } from 'react'
+import { EventCreationMainContainer, EventCreationHeader, EventCreationFormImagePreview, EventCreationFormInputDate, EventCreationFormContainer, EventCreationInputOption, EventCreationFormLabel, EventCreationFormInput, EventCreationFormTextArea, EventCreationFormImageFile, EventCreationFormLocationImage, LimitCharacterSpan } from './styles'
+import { getStaticMapImageUrl, handleEventLocation } from '@/utils/Event/handleEventLocation'
+import { useDebouncedCallback } from 'use-debounce'
 
-  const handleImageChange = (e: any) => {
-    const file = e.target.files[0]
+interface Props {
+  onChange: (data: any) => void,
+  formData: any
+}
+
+enum EventCategory {
+  Festivales = 'Festivales',
+  Negocios = 'Negocios',
+  Musica = 'Música',
+  Deportes = 'Deportes',
+  Teatro = 'Teatro',
+  Cine = 'Cine',
+  Arte = 'Arte',
+  Comida = 'Comida',
+}
+
+enum EventType {
+  Online = 'Online',
+  Presencial = 'Presencial',
+}
+
+const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
+  const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(null)
+  const [location, setLocation] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [mapImageUrl, setMapImageUrl] = useState(formData.locationImage || 'https://via.placeholder.com/150')
+  const [characterCount, setCharacterCount] = useState({
+    eventName: formData.eventName?.length || 0,
+    eventDescription: formData.eventDescription?.length || 0,
+    eventSummary: formData.eventSummary?.length || 0
+
+  })
+  const [formDataCharacters, setFormDataCharacters] = useState({
+    eventName: '',
+    eventDescription: '',
+    eventSummary: ''
+  })
+
+  const handleChangeCharacters = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target
+    setFormDataCharacters((prevFormData) => ({ ...prevFormData, [name]: value }))
+    setCharacterCount((prevCharacterCount) => ({
+      ...prevCharacterCount,
+      [name]: value.length
+    }))
+  }
+
+  const debouncedHandleChangeLocation = useDebouncedCallback(async (value: string) => {
+    if (value.length === 0) return
+    setLoading(true)
+    try {
+      const results = await handleEventLocation(value)
+      if (results.length > 0) {
+        const { lat, lng } = results[0].geometry.location
+        const mapImage = getStaticMapImageUrl(lat, lng)
+        const formattedAddress = results[0].formatted_address
+        setMapImageUrl(mapImage)
+        setLocation(formattedAddress)
+      }
+    } catch (error) {
+      console.error('Error occurred while fetching geocoding results:', error)
+    } finally {
+      setLoading(false)
+    }
+  }, 1000)
+
+  useEffect(() => {
+    debouncedHandleChangeLocation(location)
+  }, [debouncedHandleChangeLocation])
+
+  useEffect(() => {
+    onChange({ locationFormattedAddress: location })
+  }, [location])
+
+  useEffect(() => {
+    onChange({ locationImage: mapImageUrl })
+  }, [mapImageUrl])
+
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target
+    if (name === 'eventName' || name === 'eventDescription' || name === 'eventSummary') {
+      handleChangeCharacters(event)
+      onChange({ [name]: value })
+    }
+    if (name === 'location' && value.length > 0) {
+      await debouncedHandleChangeLocation(value)
+      onChange({ [name]: value })
+    } else {
+      onChange({ [name]: value })
+    }
+  }
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0]
     if (file) {
       const reader = new FileReader()
       reader.onloadend = () => {
-        setImagePreview(reader.result)
+        setImagePreview(reader.result as string)
       }
       reader.readAsDataURL(file)
+      const { name } = e.target
+      onChange({ [name]: file })
     } else {
       setImagePreview(null)
     }
@@ -18,9 +113,16 @@ const EventCreationForm = () => {
 
   const handleImagePreviewRender = () => {
     if (imagePreview !== null) {
-      return (<EventCreationFormImagePreview src={imagePreview as string} alt='Selected image' />)
+      return <EventCreationFormImagePreview src={imagePreview as string} alt='Selected image' />
+    } else if (formData.image && formData.image instanceof File) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string)
+      }
+      reader.readAsDataURL(formData.image)
+      return <EventCreationFormImagePreview src={''} alt='Previously uploaded image' />
     } else {
-      return (<EventCreationFormImagePreview src='https://via.placeholder.com/150' alt='Default image' />)
+      return <EventCreationFormImagePreview src='https://via.placeholder.com/150' alt='Default image' />
     }
   }
 
@@ -28,37 +130,61 @@ const EventCreationForm = () => {
         <EventCreationMainContainer>
             <EventCreationHeader>Información del evento</EventCreationHeader>
             <EventCreationFormContainer>
-                        <EventCreationFormLabel htmlFor='event-name'>Nombre</EventCreationFormLabel>
-                      <EventCreationFormInput type='text' placeholder='Introduce el nombre del evento' id='event-name' name='event-name'></EventCreationFormInput>
+                      <EventCreationFormLabel htmlFor='event-name'>Nombre</EventCreationFormLabel>
+                      <EventCreationFormInput type='text' value={formData.eventName || ''} required onChange={handleChange} placeholder='Introduce el nombre del evento' id='event-name' maxLength={50} name='eventName'></EventCreationFormInput>
+                      <LimitCharacterSpan
+                                tooLong={characterCount.eventName >= 45}
+                                nearLimit={characterCount.eventName > 30}
+                                safe={characterCount.eventName <= 30}>
+
+                                {characterCount.eventName}/{50} caracteres
+                      </LimitCharacterSpan>
 
                       <EventCreationFormLabel htmlFor='event-description'>Descripción</EventCreationFormLabel>
-                      <EventCreationFormTextArea placeholder='Describa de forma clara y concisa el evento' id='event-description' name='event-description'></EventCreationFormTextArea>
+                      <EventCreationFormTextArea value={formData.eventDescription || ''} required onChange={handleChange} placeholder='Describa de forma clara y concisa el evento' id='event-description' maxLength={255} name='eventDescription'></EventCreationFormTextArea>
+                       <LimitCharacterSpan
+                                tooLong={characterCount.eventDescription >= 250}
+                                nearLimit={characterCount.eventDescription > 200}
+                                safe={characterCount.eventDescription <= 200}>
+
+                                {characterCount.eventDescription}/{255} caracteres
+                        </LimitCharacterSpan>
 
                       <EventCreationFormLabel htmlFor='event-summary'>Resumen</EventCreationFormLabel>
-                      <EventCreationFormTextArea placeholder='Resuma de forma clara en qué consiste el evento' id='event-summary' name='event-summary'></EventCreationFormTextArea>
+                      <EventCreationFormTextArea value={formData.eventSummary || ''} required onChange={handleChange} placeholder='Resuma de forma clara en qué consiste el evento' id='event-summary' maxLength={255} name='eventSummary'></EventCreationFormTextArea>
+                       <LimitCharacterSpan
+                                tooLong={characterCount.eventSummary >= 250}
+                                nearLimit={characterCount.eventSummary > 200}
+                                safe={characterCount.eventSummary <= 200}>
+
+                                {characterCount.eventSummary}/{255} caracteres
+                        </LimitCharacterSpan>
 
                       <EventCreationFormLabel htmlFor='event-type'>Tipo</EventCreationFormLabel>
-                      <EventCreationFormInput as='select' placeholder='Selecciona el tipo de evento' id='event-type' name='event-type'>
+                      <EventCreationFormInput value={formData.eventType || ''} as='select' required onChange={handleChange} placeholder='Selecciona el tipo de evento' id='event-type' name='eventType'>
                           <EventCreationInputOption value="">Selecciona un tipo</EventCreationInputOption>
-                          <EventCreationInputOption value="online">Online</EventCreationInputOption>
-                          <EventCreationInputOption value="presencial">Presencial</EventCreationInputOption>
+                          <EventCreationInputOption value={EventType.Online}>Online</EventCreationInputOption>
+                          <EventCreationInputOption value={EventType.Presencial}>Presencial</EventCreationInputOption>
                       </EventCreationFormInput>
 
                       <EventCreationFormLabel htmlFor='event-category'>Categoría</EventCreationFormLabel>
-                      <EventCreationFormInput as="select" placeholder='Selecciona la categoría del evento' id='event-category' name='event-category'>
+                      <EventCreationFormInput value={formData.eventCategory || ''} as="select" required onChange={handleChange} placeholder='Selecciona la categoría del evento' id='event-category' name='eventCategory'>
                           <EventCreationInputOption value="">Selecciona una categoría</EventCreationInputOption>
-                          <EventCreationInputOption value="concierto">Concierto</EventCreationInputOption>
-                          <EventCreationInputOption value="deporte">Deporte</EventCreationInputOption>
-                          <EventCreationInputOption value="teatro">Teatro</EventCreationInputOption>
-                          <EventCreationInputOption value="arte">Arte</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Festivales}>Festivales</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Musica}>Música</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Teatro}>Teatro</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Cine}>Cine</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Negocios}>Negocios</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Deportes}>Deportes</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Arte}>Arte</EventCreationInputOption>
+                          <EventCreationInputOption value={EventCategory.Comida}>Comida</EventCreationInputOption>
                       </EventCreationFormInput>
-                              <EventCreationFormLabel htmlFor='location'>Ubicación</EventCreationFormLabel>
-              <EventCreationFormInput id='location' name='location' type='search' placeholder='Introduce la ubicación del evento'></EventCreationFormInput>
-
-              <EventCreationFormLocationImage src={'/images/google-maps.png'} alt='Google Maps image' />
+                <EventCreationFormLabel htmlFor='location'>Ubicación</EventCreationFormLabel>
+              <EventCreationFormInput value={formData.location || ''} id='location' required onChange={handleChange} name='location' type='search' placeholder='Introduce la ubicación del evento'></EventCreationFormInput>
+              <EventCreationFormLocationImage src={formData.locationImage || mapImageUrl !== 'https://via.placeholder.com/150' ? mapImageUrl : 'https://via.placeholder.com/150'} alt='Google Maps image' />
 
               <EventCreationFormLabel htmlFor='country'>País</EventCreationFormLabel>
-              <EventCreationFormInput id='country' name='country' as='select' placeholder='Introduce el país del evento'>
+              <EventCreationFormInput value={formData.country || ''} id='country' required onChange={handleChange} name='country' as='select' placeholder='Introduce el país del evento'>
                   <EventCreationInputOption value="">Selecciona un país</EventCreationInputOption>
                   <EventCreationInputOption value="España">España</EventCreationInputOption>
                   <EventCreationInputOption value="Francia">Francia</EventCreationInputOption>
@@ -67,7 +193,7 @@ const EventCreationForm = () => {
               </EventCreationFormInput>
 
               <EventCreationFormLabel htmlFor='timezone'>Zona Horaria</EventCreationFormLabel>
-              <EventCreationFormInput id='timezone' name='timezone' as='select' placeholder='Introduce la zona horaria'>
+              <EventCreationFormInput value={formData.timezone || ''} id='timezone' required onChange={handleChange} name='timezone' as='select' placeholder='Introduce la zona horaria'>
                   <EventCreationInputOption value="">Selecciona una zona horaria</EventCreationInputOption>
                   <EventCreationInputOption value="GMT+1">GMT+1</EventCreationInputOption>
                   <EventCreationInputOption value="GMT+2">GMT+2</EventCreationInputOption>
@@ -76,14 +202,14 @@ const EventCreationForm = () => {
               </EventCreationFormInput>
 
               <EventCreationFormLabel htmlFor='start-date'>Fecha de Inicio</EventCreationFormLabel>
-              <EventCreationFormInputDate id='start-date' name='start-date' type='datetime-local' placeholder='Introduce la fecha de comienzo'>
+              <EventCreationFormInputDate value={formData.startDate || ''} id='start-date' required onChange={handleChange} name='startDate' type='datetime-local' placeholder='Introduce la fecha de comienzo'>
               </EventCreationFormInputDate>
 
               <EventCreationFormLabel htmlFor='end-date'>Fecha de Finalización</EventCreationFormLabel>
-              <EventCreationFormInputDate id='end-date' name='end-date' type='datetime-local' placeholder='Introduce la fecha de clausura'></EventCreationFormInputDate>
+              <EventCreationFormInputDate value={formData.endDate || ''} id='end-date' required onChange={handleChange} name='endDate' type='datetime-local' placeholder='Introduce la fecha de clausura'></EventCreationFormInputDate>
 
               <EventCreationFormLabel htmlFor='image'>Imagen</EventCreationFormLabel>
-              <EventCreationFormImageFile id='image' name='image' type='file' accept='image/jpeg, image/png' onChange={handleImageChange}></EventCreationFormImageFile>
+              <EventCreationFormImageFile id='image' required={imagePreview ? false : undefined} name='image' type='file' accept='image/jpeg, image/png' onChange={handleImageChange}></EventCreationFormImageFile>
               {handleImagePreviewRender()}
 
             </EventCreationFormContainer>
