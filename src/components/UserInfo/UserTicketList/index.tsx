@@ -3,9 +3,10 @@ import { MainContainer, HeaderSection, InfoHeader, SearchContainer, SearchInput,
 import type { FC } from 'react'
 import ResellTicketForm from '@/components/ResellTicket/ResellTicketForm'
 import { User } from '@/models/Users/types'
+import useTicketsByUser from '@/hooks/useTicketsByUser'
 
-type Props ={
-    userData:User,
+type Props = {
+  userData: User;
 };
 
 interface ColorStatus {
@@ -24,11 +25,13 @@ const UserTicketList: FC<Props> = ({ userData }) => {
     setSearchQuery(event.target.value)
   }
 
-  const filteredTickets = userData.tickets.filter((ticket) => ticket.name.toLowerCase().includes(searchQuery.toLowerCase()))
+  const { ticketsWithNFTs: tickets } = useTicketsByUser({ address: userData.address })
+
+  const filteredTickets = tickets.filter((ticket) => ticket.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
   return (
     <>
-      <HeaderSection>Bienvenido Jorge! 👋 </HeaderSection>
+      <HeaderSection>Bienvenido {userData.name}! 👋 </HeaderSection>
       <MainContainer>
         <InfoHeader>
           Estos son los tickets que has comprado
@@ -48,29 +51,39 @@ const UserTicketList: FC<Props> = ({ userData }) => {
             <p>Estado</p>
           </TicketListHeader>
           <TicketList>
-            {filteredTickets.map((ticket) => (
-              <TicketItem key={ticket.price}>
-                <TicketMainData>
-                  <TicketImage src={ticket.imagEvent}/>
-                  <TicketInfo>
-                    <TicketName>{ticket.name}</TicketName>
-                    <TicketDate>{ticket.date}</TicketDate>
-                    <TicketPlace>{ticket.place}</TicketPlace>
-                    <TicketTime>{ticket.time}</TicketTime>
-                  </TicketInfo>
-                </TicketMainData>
-                <TicketAmount>
-                  <p>x{ticket.quantity}</p>
-                </TicketAmount>
-                <TicketPrice>
-                  <p>{ticket.price}€</p>
-                </TicketPrice>
-                <TicketStatus>
-                  <p style={{ color: COLOR_STATUS[ticket.status] }}>{ticket.status}</p>
-                  {<ResellTicketForm ticket={ticket}/>}
-                </TicketStatus>
-              </TicketItem>
-            ))}
+            {tickets.length === 0
+              ? (
+              <p>Loading tickets...</p>
+                )
+              : filteredTickets.length === 0
+                ? (
+              <p>No tickets found.</p>
+                  )
+                : (
+                    filteredTickets.map((ticket) => (
+                <TicketItem key={ticket.price}>
+                  <TicketMainData>
+                    <TicketImage src={ticket.imagEvent} />
+                    <TicketInfo>
+                      <TicketName>{ticket.name}</TicketName>
+                      <TicketDate>{ticket.date}</TicketDate>
+                      <TicketPlace>{ticket.place}</TicketPlace>
+                      <TicketTime>{ticket.time}</TicketTime>
+                    </TicketInfo>
+                  </TicketMainData>
+                  <TicketAmount>
+                    <p>x{ticket.quantity}</p>
+                  </TicketAmount>
+                  <TicketPrice>
+                    <p>{ticket.price}€</p>
+                  </TicketPrice>
+                  <TicketStatus>
+                    <p style={{ color: COLOR_STATUS[ticket.status] }}>{ticket.status}</p>
+                    {<ResellTicketForm ticket={ticket} />}
+                  </TicketStatus>
+                </TicketItem>
+                    ))
+                  )}
           </TicketList>
         </TicketListContainer>
       </MainContainer>
