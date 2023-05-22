@@ -131,7 +131,7 @@ export const MainContainer = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 100px;
+    border-radius: 100%;
   }
   @media (max-width: 768px) {
     flex-direction: column;
