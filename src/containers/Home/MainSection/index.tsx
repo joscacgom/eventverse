@@ -3,6 +3,9 @@ import { Container, EventList, Title, Header, Search, SearchInput } from './styl
 import EventCard from './EventCard'
 import useEvents from '@/hooks/useEvents'
 import { Event } from '@/models/Events/types'
+import Loading from '@/components/Loading'
+import Error from '@/components/Error'
+import NotFound from '@/components/NotFound'
 
 const MainSection = () => {
   const { data, error, isLoading } = useEvents()
@@ -26,15 +29,15 @@ const MainSection = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loading />
   }
 
   if (error) {
-    return <div>Error</div>
+    return <Error />
   }
 
   if (!data) {
-    return <div>Not found</div>
+    return <NotFound />
   }
 
   return (

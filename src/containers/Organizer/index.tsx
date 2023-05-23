@@ -5,6 +5,7 @@ import { Container, Content } from './styles'
 import Events from './Events'
 import Finances from './Finances'
 import Profile from './Profile'
+import NotFound from '@/components/NotFound'
 
 const OrganizerDetails = () => {
   const [activeTab, setActiveTab] = useState<OrganizerDetailsTabs>(OrganizerDetailsTabs.Events)
@@ -16,7 +17,7 @@ const OrganizerDetails = () => {
     if (activeTab === OrganizerDetailsTabs.Events) return <Events />
     if (activeTab === OrganizerDetailsTabs.Finances) return <Finances />
     if (activeTab === OrganizerDetailsTabs.Profile) return <Profile />
-    return <div>Not found</div>
+    return <NotFound />
   }
   return (
         <Container>

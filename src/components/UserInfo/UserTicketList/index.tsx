@@ -27,7 +27,7 @@ const UserTicketList: FC<Props> = ({ userData }) => {
 
   return (
     <>
-      <HeaderSection>Bienvenido {userData.name}! 👋 </HeaderSection>
+      <HeaderSection>Bienvenido {userData.name.split(' ')[0]}! 👋 </HeaderSection>
       <MainContainer>
         <InfoHeader>
           Estos son los tickets que has comprado

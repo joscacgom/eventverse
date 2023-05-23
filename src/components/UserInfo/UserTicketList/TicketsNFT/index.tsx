@@ -4,6 +4,7 @@ import { Ticket } from '@/models/Tickets/types'
 import { TicketAmount, TicketDate, TicketImage, TicketInfo, TicketItem, TicketMainData, TicketName, TicketPlace, TicketPrice, TicketStatus, TicketTime } from './styles'
 import ResellTicketForm from '@/components/ResellTicket/ResellTicketForm'
 import handleStatus from '@/utils/Ticket/handleStatus'
+import Loading from '@/components/Loading'
 
 type TicketWithNFTsProps = {
   ticket: Ticket;
@@ -49,7 +50,7 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
       </TicketItem>
     )
   } else if (isLoading) {
-    return <p>Loading...</p>
+    return <Loading />
   } else {
     return <p>No tienes tickets</p>
   }
