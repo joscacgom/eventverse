@@ -10,7 +10,7 @@ const UserTickets = () => {
   return (
     <MainContainer>
         <UserSideBar />
-        <UserTicketList userData={userData}/>
+        <UserTicketList userData={JSON.parse(userData)}/>
     </MainContainer>
   )
 }
