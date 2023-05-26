@@ -190,15 +190,17 @@ const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
                   <EventCreationInputOption value="Francia">Francia</EventCreationInputOption>
                   <EventCreationInputOption value="Italia">Italia</EventCreationInputOption>
                   <EventCreationInputOption value="Alemania">Alemania</EventCreationInputOption>
+                  <EventCreationInputOption value="Reino Unido">Reino Unido</EventCreationInputOption>
+                  <EventCreationInputOption value="Portugal">Portugal</EventCreationInputOption>
+                  <EventCreationInputOption value="Grecia">Grecia</EventCreationInputOption>
               </EventCreationFormInput>
 
               <EventCreationFormLabel htmlFor='timezone'>Zona Horaria</EventCreationFormLabel>
               <EventCreationFormInput value={formData.timezone || ''} id='timezone' required onChange={handleChange} name='timezone' as='select' placeholder='Introduce la zona horaria'>
                   <EventCreationInputOption value="">Selecciona una zona horaria</EventCreationInputOption>
-                  <EventCreationInputOption value="GMT+1">GMT+1</EventCreationInputOption>
-                  <EventCreationInputOption value="GMT+2">GMT+2</EventCreationInputOption>
-                  <EventCreationInputOption value="GMT+3">GMT+3</EventCreationInputOption>
-                  <EventCreationInputOption value="GMT+4">GMT+4</EventCreationInputOption>
+                  <EventCreationInputOption value="GMT+0">GMT+0: London, Lisbon, Casablanca</EventCreationInputOption>
+                  <EventCreationInputOption value="GMT+1">GMT+1: Paris, Berlin, Madrid</EventCreationInputOption>
+                  <EventCreationInputOption value="GMT+2">GMT+2: Athens, Istanbul, Helsinki</EventCreationInputOption>
               </EventCreationFormInput>
 
               <EventCreationFormLabel htmlFor='start-date'>Fecha de Inicio</EventCreationFormLabel>

@@ -2,7 +2,7 @@
 import 'jest-styled-components'
 import '@testing-library/jest-dom'
 
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { MOCK_USER } from '@/models/Users/mock'
 import { ThemeProvider } from 'styled-components'
 import theme from '@/theme'
@@ -15,16 +15,18 @@ const queryClient = new QueryClient()
 
 describe('UserMainContent', () => {
   const userData = MOCK_USER
-  it('renders user information correctly', () => {
+  it('renders user information correctly', async () => {
     fetchMock.mockResponseOnce(JSON.stringify({ data: { EUR: userData.balance } }))
 
-    render(
-      <QueryClientProvider client={queryClient}>
+    await act(async () => {
+      render(
+        <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
             <UserMainContent userData={userData} />
-        </ThemeProvider>
-      </QueryClientProvider>
-    )
+          </ThemeProvider>
+        </QueryClientProvider>
+      )
+    })
 
     expect(screen.getByText('Bienvenido Jorge! 👋')).toBeInTheDocument()
     expect(screen.getByAltText('user')).toBeInTheDocument()
@@ -36,15 +38,18 @@ describe('UserMainContent', () => {
     expect(screen.getByText(`${userData.balance} ~ MATIC`)).toBeInTheDocument()
   })
 
-  it('shows the private key when the button is clicked', () => {
+  it('shows the private key when the button is clicked', async () => {
     fetchMock.mockResponseOnce(JSON.stringify({ data: { EUR: userData.balance } }))
 
-    render(
-    <QueryClientProvider client={queryClient}>
+    await act(async () => {
+      render(
+        <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
             <UserMainContent userData={userData} />
-        </ThemeProvider>
-      </QueryClientProvider>)
+          </ThemeProvider>
+        </QueryClientProvider>
+      )
+    })
     const button = screen.getByText('Obtener clave privada')
     expect(screen.queryByText(userData.privateKey)).not.toBeInTheDocument()
     fireEvent.click(button)

@@ -11,7 +11,9 @@ describe('EventCreationForm component', () => {
   it('renders all input fields', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm />
+            <EventCreationForm onChange={function (data: any): void {
+              throw new Error('Function not implemented.')
+            } } formData={undefined} />
         </ThemeProvider>)
     expect(screen.getByPlaceholderText('Introduce el nombre del evento')).toBeInTheDocument()
     expect(screen.getByPlaceholderText('Describa de forma clara y concisa el evento')).toBeInTheDocument()
@@ -29,7 +31,9 @@ describe('EventCreationForm component', () => {
   it('renders default image when no image is selected', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm />
+            <EventCreationForm onChange={function (data: any): void {
+              throw new Error('Function not implemented.')
+            } } formData={undefined} />
         </ThemeProvider>)
     expect(screen.getByAltText('Default image')).toBeInTheDocument()
   })
@@ -37,7 +41,9 @@ describe('EventCreationForm component', () => {
   it('renders selected image', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm />
+            <EventCreationForm onChange={function (data: any): void {
+              throw new Error('Function not implemented.')
+            } } formData={undefined} />
         </ThemeProvider>)
     const imageInput = screen.getByLabelText('Imagen')
     const image = new File(['(⌐□_□)'], 'image.png', { type: 'image/png' })
@@ -48,7 +54,9 @@ describe('EventCreationForm component', () => {
   it('renders google maps image', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm />
+            <EventCreationForm onChange={function (data: any): void {
+              throw new Error('Function not implemented.')
+            } } formData={undefined} />
         </ThemeProvider>)
     expect(screen.getByAltText('Google Maps image')).toBeInTheDocument()
   })
@@ -56,7 +64,9 @@ describe('EventCreationForm component', () => {
   it('renders options for event type', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm />
+            <EventCreationForm onChange={function (data: any): void {
+              throw new Error('Function not implemented.')
+            } } formData={undefined} />
         </ThemeProvider>)
     const eventTypeSelect = screen.getByPlaceholderText('Selecciona el tipo de evento')
     expect(eventTypeSelect).toContainElement(screen.getByText('Selecciona un tipo'))
@@ -67,7 +77,9 @@ describe('EventCreationForm component', () => {
   it('renders options for event category', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm />
+            <EventCreationForm onChange={function (data: any): void {
+              throw new Error('Function not implemented.')
+            } } formData={undefined} />
         </ThemeProvider>)
     const eventCategorySelect = screen.getByPlaceholderText('Selecciona la categoría del evento')
     expect(eventCategorySelect).toContainElement(screen.getByText('Selecciona una categoría'))
@@ -80,7 +92,9 @@ describe('EventCreationForm component', () => {
   it('renders options for event country', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm />
+            <EventCreationForm onChange={function (data: any): void {
+              throw new Error('Function not implemented.')
+            } } formData={undefined} />
         </ThemeProvider>)
     const eventCountrySelect = screen.getByPlaceholderText('Introduce el país del evento')
     expect(eventCountrySelect).toContainElement(screen.getByText('Selecciona un país'))
@@ -93,7 +107,9 @@ describe('EventCreationForm component', () => {
   it('renders options for event timezone', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm />
+            <EventCreationForm onChange={function (data: any): void {
+              throw new Error('Function not implemented.')
+            } } formData={undefined} />
         </ThemeProvider>)
     const eventTimezoneSelect = screen.getByPlaceholderText('Introduce la zona horaria')
     expect(eventTimezoneSelect).toContainElement(screen.getByText('Selecciona una zona horaria'))

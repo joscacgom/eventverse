@@ -22,8 +22,20 @@ const EventCreation = () => {
   })
   const handleStepIncrease = () => {
     if (step === 3) return handleSubmit()
-    const { fields, lengthMin, lengthMax, errorMessageEmpty, errorMessageDate, errorMessageLength, errorMessageDatePast, errorMessageLimit, errorMessageLengthMin, errorMessageLenghtMax, errorMessageLengthMinEvent, errorMessageLengthEvent } = validationRules[step - 1]
+    const { fields, lengthMin, lengthMax, errorMessageEmpty, errorMessageDate, errorMessageLength, errorMessageDatePast, errorMessageLimit, errorMessageLengthMin, errorMessageLenghtMax, errorMessageLengthMinEvent, errorMessageLengthEvent, errorMessageStartDateTicket, errorMessageEndDateTicket } = validationRules[step - 1]
 
+    if (step === 2) {
+      const { startDate, endDate } = formData.part1
+      const { startDate: startDate2, endDate: endDate2 } = formData.part2
+      if (startDate < startDate2) {
+        toast.error(errorMessageStartDateTicket)
+        return
+      }
+      if (endDate < endDate2) {
+        toast.error(errorMessageEndDateTicket)
+        return
+      }
+    }
     for (const field of fields) {
       if (!formData[`part${step}`][field]) {
         toast.error(errorMessageEmpty)

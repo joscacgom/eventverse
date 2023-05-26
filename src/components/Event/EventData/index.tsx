@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { DataContainer, DescriptionContainer, DateContainer, LocationContainer, Name, Description, DateHeader, Date, LocationHeader, Location, GoogleMapPic } from './styles'
 import { Event } from '@/models/Events/types'
+import { parseDate } from '@/utils/Event/parseDate'
 
 type Props = {
     event: Event;
@@ -15,7 +16,8 @@ const EventData: FC<Props> = ({ event }) => {
             </DescriptionContainer>
             <DateContainer>
                 <DateHeader>Hora y Fecha</DateHeader>
-                <Date>{event.start_date}</Date>
+                <Date>Desde el {parseDate(event.start_date)}</Date>
+                <Date>Hasta el {parseDate(event.end_date)}</Date>
             </DateContainer>
             <LocationContainer>
                 <LocationHeader>Ubicación</LocationHeader>

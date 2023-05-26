@@ -33,7 +33,7 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
           <TicketInfo>
             <TicketName>{ticket.name}</TicketName>
             <TicketDate>{ticket.start_date.split(' ')[0]}</TicketDate>
-            <TicketPlace>{ticket.description}</TicketPlace>
+            <TicketPlace>{ticket.description.slice(0, 15) + '...'}</TicketPlace>
             <TicketTime>{ticket.start_date.split(' ')[1]}</TicketTime>
           </TicketInfo>
         </TicketMainData>

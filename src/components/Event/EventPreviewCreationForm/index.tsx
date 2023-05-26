@@ -9,6 +9,7 @@ type Props = {
 const EventPreviewCreationForm:FC<Props> = ({ event }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [ticketImagePreview, setTicketImagePreview] = useState<string | null>(null)
+  console.log(event.start_date)
 
   useEffect(() => {
     if (isFile(event.image)) {
