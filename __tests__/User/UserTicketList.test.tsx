@@ -2,7 +2,7 @@
 import 'jest-styled-components'
 import '@testing-library/jest-dom'
 
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import theme from '@/theme'
 import UserTicketList from '@/components/UserInfo/UserTicketList'
@@ -38,7 +38,7 @@ describe('UserTicketList component', () => {
     expect(ticketListHeader).toBeInTheDocument()
   })
 
-  it('renders the search input', () => {
+  it('renders the search input', async () => {
     render(
       <QueryClientProvider client={queryClient}>
             <ThemeProvider theme={theme}>
@@ -46,8 +46,10 @@ describe('UserTicketList component', () => {
            </ThemeProvider>
       </QueryClientProvider>
     )
-    const searchInput = screen.getByPlaceholderText('🔎 Buscar tickets...')
-    expect(searchInput).toBeInTheDocument()
+    await waitFor(() => {
+      const searchInput = screen.getByPlaceholderText('🔎 Buscar tickets...')
+      expect(searchInput).toBeInTheDocument()
+    })
   })
 
   it('renders loading message when tickets are loading', () => {
@@ -62,7 +64,7 @@ describe('UserTicketList component', () => {
     expect(loadingMessage).toBeInTheDocument()
   })
 
-  it('renders no tickets message when no tickets are available', () => {
+  it('renders no tickets message when no tickets are available', async () => {
     render(
       <QueryClientProvider client={queryClient}>
             <ThemeProvider theme={theme}>
@@ -70,8 +72,10 @@ describe('UserTicketList component', () => {
            </ThemeProvider>
       </QueryClientProvider>
     )
-    const noTicketsMessage = screen.getByText('No tienes tickets')
-    expect(noTicketsMessage).toBeInTheDocument()
+    await waitFor(() => {
+      const noTicketsMessage = screen.getByText('No tienes tickets')
+      expect(noTicketsMessage).toBeInTheDocument()
+    })
   })
 
   // it('renders the tickets when available', () => {
