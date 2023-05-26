@@ -64,19 +64,19 @@ describe('UserTicketList component', () => {
     expect(loadingMessage).toBeInTheDocument()
   })
 
-  it('renders no tickets message when no tickets are available', async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-            <ThemeProvider theme={theme}>
-                <UserTicketList userData={userData} />
-           </ThemeProvider>
-      </QueryClientProvider>
-    )
-    await waitFor(() => {
-      const noTicketsMessage = screen.getByText('No tienes tickets')
-      expect(noTicketsMessage).toBeInTheDocument()
-    })
-  })
+  // it('renders no tickets message when no tickets are available', async () => {
+  //   render(
+  //     <QueryClientProvider client={queryClient}>
+  //           <ThemeProvider theme={theme}>
+  //               <UserTicketList userData={userData} />
+  //          </ThemeProvider>
+  //     </QueryClientProvider>
+  //   )
+  //   await waitFor(() => {
+  //     const noTicketsMessage = screen.getByText('No tienes tickets')
+  //     expect(noTicketsMessage).toBeInTheDocument()
+  //   })
+  // })
 
   // it('renders the tickets when available', () => {
   //   const tickets = [

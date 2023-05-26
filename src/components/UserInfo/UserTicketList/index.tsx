@@ -3,7 +3,6 @@ import { MainContainer, HeaderSection, InfoHeader, SearchContainer, SearchInput,
 import type { FC } from 'react'
 import { User } from '@/models/Users/types'
 import useTicketsByUser from '@/hooks/useTicketsByUser'
-import TicketsNFT from './TicketsNFT'
 
 type Props = {
   userData: User;
