@@ -1,34 +1,33 @@
 import React, { useState } from 'react'
-import { MainContainer, HeaderSection, InfoHeader, SearchContainer, SearchInput, TicketListContainer, TicketListHeader, TicketList, TicketItem, TicketMainData, TicketImage, TicketInfo, TicketAmount, TicketPrice, TicketStatus, TicketName, TicketPlace, TicketDate, TicketTime } from './styles'
+import { MainContainer, HeaderSection, InfoHeader, SearchContainer, SearchInput, TicketListContainer, TicketListHeader, TicketList } from './styles'
 import type { FC } from 'react'
-import ResellTicketForm from '@/components/ResellTicket/ResellTicketForm'
 import { User } from '@/models/Users/types'
+import useTicketsByUser from '@/hooks/useTicketsByUser'
+import TicketsNFT from './TicketsNFT'
 
-type Props ={
-    userData:User,
+type Props = {
+  userData: User;
 };
-
-interface ColorStatus {
-  [key: string]: string;
-}
-
-const COLOR_STATUS: ColorStatus = {
-  Activo: '#539362',
-  Finalizado: '#d65151'
-}
 
 const UserTicketList: FC<Props> = ({ userData }) => {
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const { tickets, isLoading: ticketsLoading, error } = useTicketsByUser()
+
+  if (error) {
+    return <p>Error: {error}</p>
+  }
 
   const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
   }
 
-  const filteredTickets = userData.tickets.filter((ticket) => ticket.name.toLowerCase().includes(searchQuery.toLowerCase()))
+  const filteredTickets = tickets?.filter((ticket) =>
+    ticket.name.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   return (
     <>
-      <HeaderSection>Bienvenido Jorge! 👋 </HeaderSection>
+      <HeaderSection>Bienvenido {userData.name.split(' ')[0]}! 👋 </HeaderSection>
       <MainContainer>
         <InfoHeader>
           Estos son los tickets que has comprado
@@ -48,29 +47,25 @@ const UserTicketList: FC<Props> = ({ userData }) => {
             <p>Estado</p>
           </TicketListHeader>
           <TicketList>
-            {filteredTickets.map((ticket) => (
-              <TicketItem key={ticket.price}>
-                <TicketMainData>
-                  <TicketImage src={ticket.imagEvent}/>
-                  <TicketInfo>
-                    <TicketName>{ticket.name}</TicketName>
-                    <TicketDate>{ticket.date}</TicketDate>
-                    <TicketPlace>{ticket.place}</TicketPlace>
-                    <TicketTime>{ticket.time}</TicketTime>
-                  </TicketInfo>
-                </TicketMainData>
-                <TicketAmount>
-                  <p>x{ticket.quantity}</p>
-                </TicketAmount>
-                <TicketPrice>
-                  <p>{ticket.price}€</p>
-                </TicketPrice>
-                <TicketStatus>
-                  <p style={{ color: COLOR_STATUS[ticket.status] }}>{ticket.status}</p>
-                  {<ResellTicketForm ticket={ticket}/>}
-                </TicketStatus>
-              </TicketItem>
-            ))}
+            {ticketsLoading
+              ? (
+              <p>Loading tickets...</p>
+                )
+              : filteredTickets?.length === 0
+                ? (
+              <p>No tienes tickets</p>
+                  )
+                : (<p>Tickets</p>) }
+
+                {/* // : (
+                //     filteredTickets?.map((ticket) => (
+                //        <TicketsNFT
+                //           key={ticket.price}
+                //           ticket={ticket}
+                //           address={userData.address}
+                //         />
+                //     ))
+                //   )} */}
           </TicketList>
         </TicketListContainer>
       </MainContainer>

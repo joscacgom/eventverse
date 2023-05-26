@@ -35,7 +35,8 @@ describe('EventData', () => {
             <EventData event={event} />
         </ThemeProvider>
     )
-    expect(screen.getByText('22 de Agosto 2023')).toBeInTheDocument()
+    expect(screen.getByText('Desde el 22 de agosto 2023 16:00')).toBeInTheDocument()
+    expect(screen.getByText('Hasta el 23 de agosto 2023 03:00')).toBeInTheDocument()
   })
 
   it('should render the event location', () => {

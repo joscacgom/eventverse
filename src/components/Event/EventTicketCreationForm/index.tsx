@@ -98,11 +98,11 @@ const EventTicketCreationForm:FC<Props> = ({ onChange, formData }) => {
          <EventTicketCreationFormLabel htmlFor='ticket-royalties'>Royalties</EventTicketCreationFormLabel>
         <EventTicketCreationFormInput value={formData.ticketRoyalties || ''} required onChange={handleChange} type='number' min='0' max='100' placeholder='Introduce un porcentaje para las regalías de las reventas' id='ticket-royalties' name='ticketRoyalties'></EventTicketCreationFormInput>
 
-    <EventTicketCreationFormLabel htmlFor='start-date'>Fecha de Inicio</EventTicketCreationFormLabel>
+    <EventTicketCreationFormLabel htmlFor='start-date'>Fecha de comienzo de venta</EventTicketCreationFormLabel>
     <EventTicketCreationFormInputDate value={formData.startDate || ''} required onChange={handleChange} id='start-date' name='startDate' type='datetime-local' placeholder='Introduce la fecha de comienzo'>
     </EventTicketCreationFormInputDate>
 
-    <EventTicketCreationFormLabel htmlFor='end-date'>Fecha de Finalización</EventTicketCreationFormLabel>
+    <EventTicketCreationFormLabel htmlFor='end-date'>Fecha de finalización de venta</EventTicketCreationFormLabel>
     <EventTicketCreationFormInputDate value={formData.endDate || ''} required onChange={handleChange} id='end-date' name='endDate' type='datetime-local' placeholder='Introduce la fecha de clausura'></EventTicketCreationFormInputDate>
 
     <EventTicketCreationFormLabel htmlFor='image'>Imagen</EventTicketCreationFormLabel>
