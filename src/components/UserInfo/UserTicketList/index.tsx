@@ -55,15 +55,17 @@ const UserTicketList: FC<Props> = ({ userData }) => {
                 ? (
               <p>No tienes tickets</p>
                   )
-                : (
-                    filteredTickets?.map((ticket) => (
-                       <TicketsNFT
-                          key={ticket.price}
-                          ticket={ticket}
-                          address={userData.address[0]}
-                        />
-                    ))
-                  )}
+                : (<p>Tickets</p>) }
+
+                {/* // : (
+                //     filteredTickets?.map((ticket) => (
+                //        <TicketsNFT
+                //           key={ticket.price}
+                //           ticket={ticket}
+                //           address={userData.address}
+                //         />
+                //     ))
+                //   )} */}
           </TicketList>
         </TicketListContainer>
       </MainContainer>
