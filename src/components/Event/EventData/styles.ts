@@ -14,6 +14,18 @@ export const DataContainer = styled.div`
         width:100%;
     }
 `
+
+export const Wrapper = styled.div`
+    display:flex;
+    flex-direction:row;
+    height:auto;
+    gap:0.5rem;
+    svg{
+        width: 30px;
+        height: 30px;
+    }    
+`
+
 export const DescriptionContainer = styled.div`
     display:flex;
     flex-direction:column;
@@ -45,7 +57,6 @@ export const Name = styled.h1`
   width: auto; 
   height: auto; 
   white-space: pre;
-  z-index: 1;
   font-weight: 700;
   font-style: normal;
   font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
@@ -53,8 +64,53 @@ export const Name = styled.h1`
   font-size: 47px;
   @media (max-width: 768px) {
     font-size: 32px;
-    }
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+
+  }
 `
+export const Type = styled.p`
+  width: auto; 
+  height: auto; 
+  white-space: pre;
+  z-index: 1;
+  font-weight: 500;
+  font-style: normal;
+  font-family: "Inter-Medium", "Inter", sans-serif;
+  color: #858585;
+  font-size: 18px;
+  @media (max-width: 768px) {
+    text-align: center;
+    font-size: 16px;
+}
+`
+
+export const TypeHeader = styled.h2`
+  width: auto; 
+  height: auto; 
+  white-space: pre;
+  z-index: 1;
+  font-weight: 700;
+  font-style: normal;
+  font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
+  color: #000000;
+  font-size: 32px;
+  @media (max-width: 768px) {
+    text-align: center;
+    font-size: 24px;
+}
+`
+
+export const TypeContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    width:100%;
+    height:auto;
+`
+
 export const Description = styled.p`
   width: auto; 
   height: auto; 
@@ -65,7 +121,7 @@ export const Description = styled.p`
   font-size: 19px;
   @media (max-width: 768px) {
     font-size: 16px;
-    text-align: center;
+    text-align: left;
 }
 
 `

@@ -16,6 +16,8 @@ import { PaymentMethod, Props } from './types'
 import CrossmintButton from './CrossmintButton'
 import ThirdwebButton from './ThirdwebButton'
 import useTicketsByEvent from '@/hooks/useTicketsByEvent'
+import AmountAlert from './AmountAlert'
+import { useContract, useUnclaimedNFTSupply } from '@thirdweb-dev/react'
 
 const EventBuyOption: FC<Props> = ({ event }) => {
   const { ticket } = useTicketsByEvent({ event_id: event.id })
@@ -23,6 +25,8 @@ const EventBuyOption: FC<Props> = ({ event }) => {
   const [amount, setAmount] = useState(1)
   const [totalPrice, setTotalPrice] = useState<number>(ticket ? ticket.price : 0)
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.CREDIT_CARD)
+  const { contract: nftDrop } = useContract(ticket?.contract_address)
+  const unclaimedSupply = useUnclaimedNFTSupply(nftDrop)
 
   const updatePaymentMethod = (method: PaymentMethod) => {
     if (method === paymentMethod) return
@@ -43,7 +47,6 @@ const EventBuyOption: FC<Props> = ({ event }) => {
   }, [amount, ticket])
 
   useEffect(() => {
-    // Reset the state when the event prop changes
     setAmount(1)
     setTotalPrice(ticket ? ticket.price : 0)
     setPaymentMethod(PaymentMethod.CREDIT_CARD)
@@ -65,6 +68,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
           {PaymentMethod.WALLET}
         </Button>
       </Buttons>
+      <AmountAlert supply={unclaimedSupply.data} />
       <TicketContainer>
         <TicketInfo>
           <TicketImage src={event.image} />
@@ -82,7 +86,17 @@ const EventBuyOption: FC<Props> = ({ event }) => {
             <TicketActionPrice>{totalPrice} €</TicketActionPrice>
           </TicketAction>
         </TicketInfo>
-        <div>{renderPaymentMethod()}</div>
+        {!unclaimedSupply.data?.eq(0)
+          ? (
+          <div>
+            {renderPaymentMethod()}
+          </div>
+            )
+          : <div>
+            <p>Agotado</p>
+          </div>
+        }
+
       </TicketContainer>
     </Container>
   )

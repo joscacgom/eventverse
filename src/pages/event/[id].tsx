@@ -22,7 +22,6 @@ const Event = () => {
   if (!event) {
     return <NotFound />
   }
-
   return (
     <Layout title={event.name}>
       <EventDetails event={event} />

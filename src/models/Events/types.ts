@@ -2,7 +2,7 @@ import { Ticket } from '../Tickets/types'
 
 export type Event = {
     id: number;
-    organizer_id?: number;
+    organizer_id: number;
     name: string;
     description: string;
     summary: string;

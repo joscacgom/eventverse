@@ -17,6 +17,7 @@ export const MainContainer = styled.div`
 `
 export const MainImage = styled.img`
   width: 1150px;
+  margin-top: 1rem;
   height: 300px;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.25);
   opacity: 0.8;
@@ -30,9 +31,16 @@ export const MainImage = styled.img`
   
     @media (max-width: 768px) {
         width: 100vw;
+        margin-top: 0;
         height: 242px;
         border: none;
         border-radius: 0px;
     }
 
+`
+
+export const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 `

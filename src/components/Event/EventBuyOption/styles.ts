@@ -19,6 +19,10 @@ export const Buttons = styled.div`
     width:100%;
     height:auto;
     gap:1rem;
+    @media (max-width: 768px) {
+      width: 100%;
+      margin-right: 0.5rem;
+    }
 `
 
 export const TicketActionLabel = styled.label`
@@ -79,7 +83,7 @@ export const TicketContainer = styled.div`
   height: 247px;
   
   border-radius: 9px;
-  border: 1px solid ${({ theme }) => theme.nord.black0};
+  border: 1px solid ${({ theme }) => theme.nord.gray3};
   background-color: ${({ theme }) => theme.nord.white};
 
 
