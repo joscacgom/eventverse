@@ -11,7 +11,8 @@ describe('EventTicketCreationForm', () => {
   it('renders all the form elements', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventTicketCreationForm />
+            <EventTicketCreationForm onChange={function (data: any): void {
+            } } formData={[]} />
         </ThemeProvider>)
     expect(screen.getByLabelText('Nombre')).toBeInTheDocument()
     expect(screen.getByLabelText('Descripción')).toBeInTheDocument()
@@ -19,15 +20,16 @@ describe('EventTicketCreationForm', () => {
     expect(screen.getByLabelText('Límite por usuario')).toBeInTheDocument()
     expect(screen.getByLabelText('Precio')).toBeInTheDocument()
     expect(screen.getByLabelText('Royalties')).toBeInTheDocument()
-    expect(screen.getByLabelText('Fecha de Inicio')).toBeInTheDocument()
-    expect(screen.getByLabelText('Fecha de Finalización')).toBeInTheDocument()
+    expect(screen.getByLabelText('Fecha de comienzo de venta')).toBeInTheDocument()
+    expect(screen.getByLabelText('Fecha de finalización de venta')).toBeInTheDocument()
     expect(screen.getByLabelText('Imagen')).toBeInTheDocument()
   })
 
   it('displays a preview of the selected image', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventTicketCreationForm />
+            <EventTicketCreationForm onChange={function (data: any): void {
+            } } formData={[]} />
         </ThemeProvider>)
     const file = new File(['(⌐□_□)'], 'test.png', { type: 'image/png' })
     fireEvent.change(screen.getByLabelText('Imagen'), { target: { files: [file] } })
@@ -37,7 +39,8 @@ describe('EventTicketCreationForm', () => {
   it('displays a default image if no image is selected', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventTicketCreationForm />
+            <EventTicketCreationForm onChange={function (data: any): void {
+            } } formData={[]} />
         </ThemeProvider>)
     expect(screen.getByAltText('Default image')).toBeInTheDocument()
   })

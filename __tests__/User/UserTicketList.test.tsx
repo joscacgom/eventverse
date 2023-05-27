@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import 'jest-styled-components'
 import '@testing-library/jest-dom'
-
 import { render, screen, waitFor } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import theme from '@/theme'

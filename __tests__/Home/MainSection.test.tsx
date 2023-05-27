@@ -17,6 +17,16 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn()
 }))
 useRouter as jest.Mock<NextRouter>
+jest.mock('@/hooks/useEvents', () => {
+  return jest.fn(() => ({
+    data: [
+      { id: 1, name: 'Event 1' },
+      { id: 2, name: 'Event 2' }
+    ],
+    isLoading: false,
+    error: null
+  }))
+})
 describe('MainSection', () => {
   it('renders the title "Novedades"', async () => {
     render(
@@ -28,7 +38,7 @@ describe('MainSection', () => {
     )
     await waitFor(() => {
       expect(screen.getByText('Novedades')).toBeInTheDocument()
-    }, { timeout: 1000 })
+    })
   })
 
   it('renders a search input', async () => {
@@ -42,7 +52,7 @@ describe('MainSection', () => {
 
     await waitFor(() => {
       expect(screen.getByPlaceholderText('🔎 Buscar eventos...')).toBeInTheDocument()
-    }, { timeout: 1000 })
+    })
   })
 
   // it('filters the event list based on search input', async () => {
