@@ -9,10 +9,12 @@ import EventTicketCreationForm from '@/components/Event/EventTicketCreationForm'
 
 describe('EventTicketCreationForm', () => {
   it('renders all the form elements', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventTicketCreationForm onChange={function (data: any): void {
-            } } formData={[]} />
+             <EventTicketCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     expect(screen.getByLabelText('Nombre')).toBeInTheDocument()
     expect(screen.getByLabelText('Descripción')).toBeInTheDocument()
@@ -26,10 +28,12 @@ describe('EventTicketCreationForm', () => {
   })
 
   it('displays a preview of the selected image', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventTicketCreationForm onChange={function (data: any): void {
-            } } formData={[]} />
+             <EventTicketCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     const file = new File(['(⌐□_□)'], 'test.png', { type: 'image/png' })
     fireEvent.change(screen.getByLabelText('Imagen'), { target: { files: [file] } })
@@ -37,10 +41,12 @@ describe('EventTicketCreationForm', () => {
   })
 
   it('displays a default image if no image is selected', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventTicketCreationForm onChange={function (data: any): void {
-            } } formData={[]} />
+             <EventTicketCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     expect(screen.getByAltText('Default image')).toBeInTheDocument()
   })

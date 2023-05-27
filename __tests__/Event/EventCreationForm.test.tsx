@@ -9,10 +9,12 @@ import EventCreationForm from '@/components/Event/EventCreationForm'
 
 describe('EventCreationForm component', () => {
   it('renders all input fields', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm onChange={function (data: any): void {
-            } } formData={{}} />
+             <EventCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     expect(screen.getByPlaceholderText('Introduce el nombre del evento')).toBeInTheDocument()
     expect(screen.getByPlaceholderText('Describa de forma clara y concisa el evento')).toBeInTheDocument()
@@ -28,19 +30,23 @@ describe('EventCreationForm component', () => {
   })
 
   it('renders default image when no image is selected', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm onChange={function (data: any): void {
-            } } formData={{}} />
+             <EventCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     expect(screen.getByAltText('Default image')).toBeInTheDocument()
   })
 
   it('renders selected image', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm onChange={function (data: any): void {
-            } } formData={{}} />
+             <EventCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     const imageInput = screen.getByLabelText('Imagen')
     const image = new File(['(⌐□_□)'], 'image.png', { type: 'image/png' })
@@ -49,19 +55,23 @@ describe('EventCreationForm component', () => {
   })
 
   it('renders google maps image', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm onChange={function (data: any): void {
-            } } formData={{}} />
+             <EventCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     expect(screen.getByAltText('Google Maps image')).toBeInTheDocument()
   })
 
   it('renders options for event type', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm onChange={function (data: any): void {
-            } } formData={{}} />
+             <EventCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     const eventTypeSelect = screen.getByPlaceholderText('Selecciona el tipo de evento')
     expect(eventTypeSelect).toContainElement(screen.getByText('Selecciona un tipo'))
@@ -70,10 +80,12 @@ describe('EventCreationForm component', () => {
   })
 
   it('renders options for event category', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm onChange={function (data: any): void {
-            } } formData={{}} />
+             <EventCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     const eventCategorySelect = screen.getByPlaceholderText('Selecciona la categoría del evento')
     expect(eventCategorySelect).toContainElement(screen.getByText('Selecciona una categoría'))
@@ -88,10 +100,12 @@ describe('EventCreationForm component', () => {
   })
 
   it('renders options for event country', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm onChange={function (data: any): void {
-            } } formData={{}} />
+             <EventCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     const eventCountrySelect = screen.getByPlaceholderText('Introduce el país del evento')
     expect(eventCountrySelect).toContainElement(screen.getByText('Selecciona un país'))
@@ -105,10 +119,12 @@ describe('EventCreationForm component', () => {
   })
 
   it('renders options for event timezone', () => {
+    const onChange = jest.fn()
+    const formData = {}
+
     render(
         <ThemeProvider theme={theme}>
-            <EventCreationForm onChange={function (data: any): void {
-            } } formData={{}} />
+             <EventCreationForm onChange={onChange} formData={formData} />
         </ThemeProvider>)
     const eventTimezoneSelect = screen.getByPlaceholderText('Introduce la zona horaria')
     expect(eventTimezoneSelect).toContainElement(screen.getByText('Selecciona una zona horaria'))

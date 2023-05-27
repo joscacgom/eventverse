@@ -24,6 +24,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@uiball/loaders": "1.2.6",
+    "@walletconnect/client": "^1.8.0",
     "@walletconnect/jsonrpc-types": "^1.0.2",
     "@walletconnect/types": "^2.7.4",
     "@web3auth/base": "^5.2.0",
