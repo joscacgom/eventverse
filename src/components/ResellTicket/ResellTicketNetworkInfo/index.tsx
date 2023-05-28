@@ -14,14 +14,14 @@ const ResellTicketNetworkInfo: FC<Props> = ({ ticket }) => {
             <Container>
               <RoyaltiesContainer>
                 <RoyaltiesHeader>Royalties</RoyaltiesHeader>
-                <Royalties>{ticket.platformRoyalty}% comisión de EventVerse</Royalties>
-                <Royalties>{ticket.organizerRoyalty}% comisión del organizador</Royalties>
+                <Royalties>{ticket.platform_royalty}% comisión de EventVerse</Royalties>
+                <Royalties>{ticket.organizer_royalty}% comisión del organizador</Royalties>
               </RoyaltiesContainer>
               <NetworkContainer>
                 <NetworkHeader>Información del smart contract</NetworkHeader>
                 <SmartContract>
                   <SmartContractHeader>Dirección del contrato</SmartContractHeader>
-                  <SmartContractAddress>{ticket.contractAddress}</SmartContractAddress>
+                  <SmartContractAddress>{ticket.contract_address}</SmartContractAddress>
                   <BlockchainExplorer>Ver en PolygonScan</BlockchainExplorer>
                 </SmartContract>
                 <BlockchainContainer>
