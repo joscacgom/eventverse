@@ -1,11 +1,13 @@
 import styled from 'styled-components'
-
-export const Spinner = styled.div`
+type Props ={
+  type: string
+}
+export const Spinner = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-top: 5rem;
+  margin-top:  ${({ type }) => type === 'button' ? '0rem' : '5rem'};
 `
 
 export const Loader = styled.div`

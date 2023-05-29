@@ -50,7 +50,7 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
       </TicketItem>
     )
   } else if (isLoading) {
-    return <Loading />
+    return <Loading type='main' />
   } else {
     return <p>No tienes tickets</p>
   }

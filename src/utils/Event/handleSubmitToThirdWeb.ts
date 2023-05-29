@@ -21,7 +21,6 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
     })
     const contractDrop = await sdk?.getContract(nftContract, 'nft-drop')
 
-    //  Set claim conditions
     const claimConditions = [
       {
         startTime: new Date(ticket.start_date),

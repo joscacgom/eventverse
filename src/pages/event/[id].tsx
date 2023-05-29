@@ -12,7 +12,7 @@ const Event = () => {
   const { data: event, error, isLoading } = useEventById({ id: parseInt(id as string) })
 
   if (isLoading) {
-    return <Loading />
+    return <Loading type='main' />
   }
 
   if (error) {

@@ -117,7 +117,7 @@ const EventCreation = () => {
     setSendingData(true)
     const { eventToSubmit, ticketToSubmit } = handleEventObjects(formData.part1, formData.part2)
     toast.promise(handleSubmitEventToSupabase(eventToSubmit, ticketToSubmit), {
-      pending: 'Procesando datos de tu evento...😅 La creación de la colecion de tickets NFT de tu evento puede tardar varios minutos...',
+      pending: 'Procesando datos de tu evento, la creación de los NFT puede tardar unos minutos... ⏳',
       success: 'Tu evento ha sido creado exitosamente! 😍',
       error: 'Hubo un error al crear tu evento! 😭 Por favor, intenta nuevamente.'
     }).then(() => {

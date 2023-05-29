@@ -13,7 +13,7 @@ const EventOrganizer:FC<Props> = ({ id }) => {
   const { data, error, isLoading } = useOrganizerById({ id })
 
   if (isLoading) {
-    return <Loading />
+    return <Loading type='main' />
   }
 
   if (error) {

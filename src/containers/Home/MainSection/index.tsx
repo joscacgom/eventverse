@@ -29,7 +29,7 @@ const MainSection = () => {
   }
 
   if (isLoading) {
-    return <Loading />
+    return <Loading type='main' />
   }
 
   if (error) {

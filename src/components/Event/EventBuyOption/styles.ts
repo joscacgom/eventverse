@@ -10,6 +10,19 @@ export const Container = styled.div`
     margin-bottom:5rem;
     gap:1rem;
 `
+export const TicketSpan = styled.span`
+  width: auto;
+  height: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
+  color: #424242;
+  font-size: 12px;
+  margin-top: -0.5rem;
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
+`
 
 export const Buttons = styled.div`
     display:flex;
@@ -86,6 +99,14 @@ export const TicketContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.nord.gray3};
   background-color: ${({ theme }) => theme.nord.white};
 
+  p{
+    font-weight: 400;
+    font-style: normal;
+    font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
+    color: ${({ theme }) => theme.nord.black0};
+    font-size: 18px;
+
+  }
 
   @media (max-width: 768px) {
     width: 100%;
@@ -134,7 +155,7 @@ export const TicketButton = styled.button`
 `
 
 export const TicketActionPrice = styled.p`
-  font-weight: 400;
+  font-weight: 600;
   color: ${({ theme }) => theme.nord.black0};
   font-size: 24px;
   @media (max-width: 768px) {

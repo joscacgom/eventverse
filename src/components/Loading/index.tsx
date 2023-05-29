@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Spinner, Loader } from './styles'
 
-const Loading = () => {
+type Props = {
+  type: 'button' | 'main'
+}
+const Loading:FC<Props> = ({ type }) => {
   return (
-        <Spinner>
+        <Spinner type={type}>
             <Loader></Loader>
         </Spinner>
   )

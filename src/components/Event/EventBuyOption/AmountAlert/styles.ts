@@ -22,13 +22,16 @@ export const Container = styled.div<ContainerProps>`
     }
      @keyframes pulse {
         0% {
-            box-shadow: 0 0 0 0 ${({ theme }) => theme.nord.blue};
+            box-shadow: 0 0 0 0 ${({ status, theme }) =>
+                            status === 'Safe' ? theme.nord.blue : theme.nord.red};
         }
         50% {
-            box-shadow: 0 0 0 2px ${({ theme }) => theme.nord.blue};
+            box-shadow: 0 0 0 2px ${({ status, theme }) =>
+                            status === 'Safe' ? theme.nord.blue : theme.nord.red};   
         }
         100% {
-            box-shadow: 0 0 0 0 ${({ theme }) => theme.nord.blue};
+            box-shadow: 0 0 0 0 ${({ status, theme }) =>
+                            status === 'Safe' ? theme.nord.blue : theme.nord.red};   
         }
 }
     animation : pulse 1.5s ease-in-out infinite;
