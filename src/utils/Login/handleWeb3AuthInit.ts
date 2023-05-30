@@ -11,6 +11,7 @@ import { TorusWalletAdapter } from '@web3auth/torus-evm-adapter'
 import { getUserCookie, setCookie, removeCookie } from '@/utils/Login/userCookie'
 import EthereumRpc from '@/utils/Login/web3RPC'
 
+console.log('hello')
 const clientId = process.env.NEXT_PUBLIC_WEB3_AUTH_CLIENT_ID as string
 const walletConnectClientId = process.env.NEXT_PUBLIC_WALLET_CONNECT_CLIENT_ID as string
 
