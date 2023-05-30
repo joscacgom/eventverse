@@ -5,7 +5,7 @@ import {
 import type { Event } from '@/models/Events/types'
 
 type Props = {
-    event: EventTicketPreview
+    event: Event
 }
 
 const Form:FC<Props> = ({ event }) => {

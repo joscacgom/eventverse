@@ -1,10 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { EventCreationForm, EventCreationSidebar, EventTicketCreationForm, EventPreviewCreationForm } from '@/components/Event'
 import { MainContainer, EventCreationFormButton, ButtonContainer } from './styles'
 import { useRouter } from 'next/router'
 import { ToastContainer, Zoom, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { handleSubmitEventToSupabase } from '@/utils/Event/handleSubmitEventToSupabase'
 import { handleEventObjects } from '@/utils/Event/handleEventObjects'
 import { validationRules } from '@/utils/Event/validationRules'
 
@@ -101,19 +101,7 @@ const EventCreation = () => {
     }))
   }
 
-  const handleSubmit = () => {
-    setSendingData(true)
-    const { eventToSubmit, ticketToSubmit } = handleEventObjects(formData.part1, formData.part2)
-    toast.promise(handleSubmitEventToSupabase(eventToSubmit, ticketToSubmit), {
-      pending: 'Procesando datos de tu evento... 😅',
-      success: 'Tu evento ha sido creado exitosamente! 😍',
-      error: 'Hubo un error al crear tu evento! 😭 Por favor, intenta nuevamente.'
-    }).then(() => {
-      setTimeout(() => {
-        router.push('/')
-      }, 5000)
-    })
-  }
+  const handleSubmit = () => {}
 
   const handleFormRender = () => {
     switch (step) {

@@ -8,29 +8,30 @@ import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plu
 import { WalletConnectV2Adapter, getWalletConnectV2Settings } from '@web3auth/wallet-connect-v2-adapter'
 import { MetamaskAdapter } from '@web3auth/metamask-adapter'
 import { TorusWalletAdapter } from '@web3auth/torus-evm-adapter'
-import { getUserCookie, setCookie, removeCookie } from '@/utils/Login/userCookie'
+import { getUserCookie, setCookie, removeCookie, getCookieByName } from '@/utils/Login/userCookie'
 import EthereumRpc from '@/utils/Login/web3RPC'
+import { supabase } from '@/config'
 
-const clientId = process.env.NEXT_PUBLIC_CLIENT_ID as string
+const clientId = process.env.NEXT_PUBLIC_WEB3_AUTH_CLIENT_ID as string
 const walletConnectClientId = process.env.NEXT_PUBLIC_WALLET_CONNECT_CLIENT_ID as string
 
 export const handleWeb3AuthInit = () => {
-  const { web3auth: web3authcontext, setUserData, setWeb3auth } = useContext(Web3AuthContext)
+  const { web3auth: web3authcontext } = useContext(Web3AuthContext)
   const [torusPlugin, setTorusPlugin] =
     useState<TorusWalletConnectorPlugin | null>(null)
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null | any>(null)
 
   useEffect(() => {
     const init = async () => {
-      if (provider && !getUserCookie('web3auth_provider')) {
+      if (provider && !getCookieByName('web3auth_provider')) {
         setCookie('web3auth_provider', JSON.stringify(provider))
         const ethereumRpc = new EthereumRpc(provider)
-        const user = JSON.parse(getUserCookie('userData'))
+        const user = JSON.parse(getUserCookie())
         const balance = await ethereumRpc?.getBalance()
         const privateKey = await ethereumRpc?.getPrivateKey()
         const address = await ethereumRpc?.getAccounts()
         const userWithBlockchainInfo = { ...user, balance, privateKey, address }
-        setUserData(userWithBlockchainInfo)
+
         setCookie('userData', JSON.stringify(userWithBlockchainInfo), 7)
       }
     }
@@ -39,7 +40,7 @@ export const handleWeb3AuthInit = () => {
 
   useEffect(() => {
     const init = async () => {
-      const storedProvider = getUserCookie('web3auth_provider')
+      const storedProvider = getCookieByName('web3auth_provider')
       if (storedProvider) {
         setProvider(JSON.parse(storedProvider))
       } else {
@@ -134,8 +135,6 @@ export const handleWeb3AuthInit = () => {
           // it will add/update  the torus-evm adapter in to web3auth class
           web3auth.configureAdapter(torusWalletAdapter)
 
-          setWeb3auth(web3auth)
-
           await web3auth.initModal()
           const web3provider = await new Promise((resolve, reject) => {
             const checkProvider = () => {
@@ -160,13 +159,39 @@ export const handleWeb3AuthInit = () => {
   }, [])
 
   const login = async () => {
-    if (!web3authcontext) {
-      return
-    }
+    if (!web3authcontext) return
+
     await web3authcontext.connect()
     const user = await web3authcontext.getUserInfo()
     setCookie('userData', JSON.stringify(user), 7)
-    setUserData(user)
+
+    await checkSupabaseUserExists()
+  }
+
+  // TODO - move to a hook
+  async function checkSupabaseUserExists () {
+    // 1. traer user de la cookie
+    const userCookie = getUserCookie()
+    if (!userCookie) {
+      console.error('No user cookie found')
+      return
+    }
+
+    // 2. comproboar si existe en supabase un user con ese email y devuelve ese usuario (solo 1 usuario)
+    const user = JSON.parse(userCookie)
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', user.email)
+      .limit(1)
+
+    if (error || !data) {
+      console.error('Error fetching user from supabase')
+      return
+    }
+
+    console.log(data)
+    return true
   }
 
   const logout = async () => {
@@ -178,7 +203,6 @@ export const handleWeb3AuthInit = () => {
     removeCookie('web3auth_provider')
     removeCookie('userData')
     setProvider(null)
-    setUserData(null)
   }
 
   return { login, logout, provider }
