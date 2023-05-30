@@ -13,15 +13,15 @@ config.autoAddCss = false
 const queryClient = new QueryClient()
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <QueryClientProvider client={queryClient}>
     <Web3AuthProvider>
-      <ThemeProvider theme={theme}>
-        <ThirdwebProvider activeChain={ChainId.Mumbai}>
-          <Component {...pageProps} />
-        </ThirdwebProvider>
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+            <ThemeProvider theme={theme}>
+              <ThirdwebProvider activeChain={ChainId.Mumbai}>
+                <Component {...pageProps} />
+              </ThirdwebProvider>
+            </ThemeProvider>
+        </QueryClientProvider>
     </Web3AuthProvider >
-  </QueryClientProvider>
 )
 
 export default App

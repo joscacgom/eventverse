@@ -1,13 +1,6 @@
 import Cookies from 'js-cookie'
 
-export const getUserCookie = () => {
-  const userCookie = Cookies.get('userData')
-  if (!userCookie) return null
-  const userObject = userCookie ? JSON.parse(userCookie) : null
-  return userObject
-}
-
-export const getCookieByName = (cookie: string) => {
+export const getUserCookie = (cookie:string) => {
   const userCookie = Cookies.get(cookie)
   if (!userCookie) return null
   const userObject = userCookie ? JSON.parse(userCookie) : null
