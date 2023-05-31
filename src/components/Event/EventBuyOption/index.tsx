@@ -136,24 +136,24 @@ const EventBuyOption: FC<Props> = ({ event }) => {
     <p>Por favor, inicia sesión.</p>
   </div>
           )
-        : activeClaimCondition.isError
+        : claimConditions.data && claimConditions.data[0].startTime > new Date()
           ? (
+  <div>
+    <Timer date={claimConditions.data[0].startTime} />
+  </div>
+            )
+          : activeClaimCondition.isError
+            ? (
   <div>
     <p>Límite de tickets por persona alcanzado.</p>
   </div>
-            )
-          : canClaim
-            ? (
-                isLoading
-                  ? (
-    <div>
-      <Loading type='button' />
-    </div>
-                    )
-                  : claimConditions.data && !claimConditions.data[0].waitInSeconds?.eq(0)
+              )
+            : canClaim
+              ? (
+                  isLoading
                     ? (
     <div>
-      <Timer date={claimConditions.data[0].startTime} />
+      <Loading type='button' />
     </div>
                       )
                     : unclaimedSupply.data?.eq(0)
@@ -167,12 +167,12 @@ const EventBuyOption: FC<Props> = ({ event }) => {
       {renderPaymentMethod()}
     </div>
                         )
-              )
-            : (
+                )
+              : (
   <div>
     <Loading type='button' />
   </div>
-              )}
+                )}
 
       </TicketContainer>
     </Container>

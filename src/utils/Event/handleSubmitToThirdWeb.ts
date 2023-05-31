@@ -20,21 +20,25 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
       platform_fee_basis_points: Number(ticket.platform_royalty)
     })
     const contractDrop = await sdk?.getContract(nftContract, 'nft-drop')
+    console.log('contractDrop', contractDrop)
 
     const claimConditions = [
       {
         startTime: new Date(ticket.start_date),
-        maxClaimableSupply: ticket.quantity,
-        maxClaimablePerWallet: ticket.max_per_user,
-        price: ticket.price
+        maxClaimableSupply: Number(ticket.quantity),
+        maxClaimablePerWallet: Number(ticket.max_per_user),
+        price: Number(ticket.price)
       }
     ]
+    console.log('claimConditions', claimConditions)
 
-    const metadatas = Array(ticket.quantity).fill({
+    const metadatas = Array(Number(ticket.quantity)).fill({
       name: ticket.name,
       description: ticket.description,
       image: ticket.image
     })
+
+    console.log('metadatas', metadatas)
 
     await contractDrop?.createBatch(metadatas)
     await contractDrop?.claimConditions.set(claimConditions)
