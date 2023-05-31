@@ -23,7 +23,6 @@ const COLOR_STATUS: ColorStatus = {
 const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
   const { contract } = useContract(ticket.contract_address)
   const { data, isLoading } = useOwnedNFTs(contract, address)
-  console.log('hola2')
 
   if (data && data.length > 0) {
     return (

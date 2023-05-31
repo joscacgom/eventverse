@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import theme from '@/theme'
 import { NextRouter, useRouter } from 'next/router'
+import { MOCK_EVENT } from '@/models/Events/mock'
 import fetchMock from 'jest-fetch-mock'
 
 fetchMock.enableMocks()
@@ -17,16 +18,18 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn()
 }))
 useRouter as jest.Mock<NextRouter>
-jest.mock('@/hooks/useEvents', () => {
-  return jest.fn(() => ({
+jest.mock('../../src/hooks/useEvents.ts', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
     data: [
-      { id: 1, name: 'Event 1' },
-      { id: 2, name: 'Event 2' }
+      MOCK_EVENT,
+      MOCK_EVENT
     ],
     isLoading: false,
     error: null
   }))
-})
+}))
+
 describe('MainSection', () => {
   it('renders the title "Novedades"', async () => {
     render(

@@ -10,6 +10,7 @@ export const MOCK_EVENT: Event = {
   image: 'https://ipfs.thirdwebcdn.com/ipfs/QmP9MEiC7WPmoZ3p2dPn8ZYzjFQKNUe4DPCzrGoAkXFxDz/apolo-event.jpg',
   tags: 'techno, electronic, music',
   location: 'Seville, Spain',
+  locationImage: '/images/google-maps.png',
   start_date: '22-08-2023 16:00',
   end_date: '23-08-2023 03:00',
   time_zone: 'GMT+2',

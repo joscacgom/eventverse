@@ -27,6 +27,7 @@ export const handleEventObjects = (event:FormData, ticket: FormData) => {
     image: event.image,
     tags: 'none',
     location: event.locationFormattedAddress,
+    locationImage: event.locationImage,
     start_date: event.startDate,
     end_date: event.endDate,
     time_zone: event.timezone,

@@ -39,7 +39,7 @@ const EventData: FC<Props> = ({ event }) => {
                     <LocationHeader>Ubicación</LocationHeader>
                 </Wrapper>
                 <Location>{event.location}</Location>
-                <GoogleMapPic src={'/images/google-maps.png'} />
+                <GoogleMapPic src={event.locationImage} />
             </LocationContainer>
         </DataContainer>
   )
