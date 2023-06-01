@@ -17,7 +17,23 @@ export const MainContainer = styled.div`
     }
 
 `
-export const EventCreationFormButton = styled.button`
+export const ButtonContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+
+    @media (max-width: 768px) {
+        width: 80%;
+        gap: 1rem;
+    }
+`
+type ButtonProps = {
+  sending: boolean;
+}
+
+export const EventCreationFormButton = styled.button<ButtonProps>`
   width: 205px;
   height: 40px;
   display: flex;
@@ -39,6 +55,8 @@ export const EventCreationFormButton = styled.button`
   font-size: 14px;
   margin-top: 1rem;
   cursor: pointer;
+  pointer-events: ${({ sending }) => (sending ? 'none' : 'auto')};
+  opacity: ${({ sending }) => (sending ? '0.5' : '1')};
   &:hover {
     background-color: ${({ theme }) => theme.nord.white};
     color: ${({ theme }) => theme.nord.black0};

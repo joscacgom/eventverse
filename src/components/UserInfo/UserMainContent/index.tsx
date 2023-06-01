@@ -11,16 +11,15 @@ type Props ={
 };
 const UserMainContent:FC<Props> = ({ userData }) => {
   const [privateKey, setPrivateKey] = useState<boolean>(false)
-
   const handlePrivateKey = () => {
     setPrivateKey(!privateKey)
   }
   return (
     <>
-        <HeaderSection>Bienvenido Jorge! 👋 </HeaderSection>
+        <HeaderSection>Bienvenido {userData.name.split(' ')[0]}! 👋 </HeaderSection>
         <MainContainer>
             <InfoMainContainer>
-                <Image src='https://yt3.googleusercontent.com/ytc/AL5GRJU9cqqMsIBsfgueCzUvrOjf774u4cJPzQ1YVtQTCw=s900-c-k-c0x00ffffff-no-rj' alt='user' width={150} height={150} />
+                <Image src={userData.profileImage} alt='user' width={150} height={150} />
                 <InfoContainer>
                     <h2>Información de tu cuenta</h2>
                         <p>{userData.name}</p>

@@ -1,4 +1,3 @@
-export { default as LoginContainer } from './Login'
 export { default as Home } from './Home'
 export { default as ResellTicketDetails } from './ResellTicketDetails'
 export { default as EventDetails } from './EventDetails'
