@@ -63,7 +63,7 @@ const Navbar = () => {
           <>
             <Button85 onClick={handleClickCreateEvent}>Crear evento</Button85>
             <LinkItem mobile={showMobileMenu} primary={false} href={'/user'}>
-              <Avatar src={userData?.profileImage || userCookieImage} alt='User avatar'/>
+              <Avatar src={userData?.profileImage === '' ? userCookieImage : userData?.profileImage } alt='User avatar'/>
             </LinkItem>
             <IconWrapper onClick={logout}>
               <LogoutIcon />

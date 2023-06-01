@@ -1,11 +1,12 @@
 import { FC, useState } from 'react'
 import { TicketAction, TicketResellPopUp, TicketResellPopUpHeader, TicketResellCancel, TicketResellPopUpImage, TicketResellPopUpButton, Overlay, TicketResellPopUpTitle, TicketResellPopUpPrice, TicketResellPopUpForm, TicketResellPopUpLabel, TicketResellPopUpInput } from './styles'
-import { UserTicket } from '@/models/Tickets/types'
+import { Ticket } from '@/models/Tickets/types'
 import { ToastContainer, Zoom, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import handleStatus from '@/utils/Ticket/handleStatus'
 
 type Props = {
-    ticket: UserTicket
+    ticket: Ticket
 }
 
 const handleRenderResellButton:FC<Props> = ({ ticket }) => {
@@ -39,7 +40,7 @@ const handleRenderResellButton:FC<Props> = ({ ticket }) => {
     }
   }
 
-  if (ticket.status === 'Activo') {
+  if (handleStatus({ ticket }) === 'Activo') {
     return (
       <>
         <ToastContainer theme='colored' transition={Zoom} position='top-center' />
@@ -51,7 +52,7 @@ const handleRenderResellButton:FC<Props> = ({ ticket }) => {
           <TicketResellPopUp>
             <TicketResellCancel onClick={handlePopupClose}>X</TicketResellCancel>
             <TicketResellPopUpHeader>¡Revende tu ticket!</TicketResellPopUpHeader>
-            <TicketResellPopUpImage src={ticket.imagEvent} />
+            <TicketResellPopUpImage src={ticket.image} />
             <TicketResellPopUpTitle>{ticket.name}</TicketResellPopUpTitle>
             <TicketResellPopUpPrice>{ticket.price}€</TicketResellPopUpPrice>
             <TicketResellPopUpForm>

@@ -1,22 +1,46 @@
 import { TicketTableSupabase } from '@/models/Tickets/types'
-import { useContract, useContractMetadata, useSDK } from '@thirdweb-dev/react'
+import { ThirdwebSDK } from '@thirdweb-dev/sdk'
+import { getUserCookie } from '@/utils/Login/userCookie'
 
 export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
-  const sdk = useSDK()
+  const privateKey = JSON.parse(getUserCookie('userData')).privateKey
+  const organizerAddress = JSON.parse(getUserCookie('userData')).address[0]
+  const sdk = ThirdwebSDK.fromPrivateKey(privateKey, 'mumbai')
+  // convert price in eur to matic
 
   try {
     const nftContract: any = await sdk?.deployer.deployNFTDrop({
       name: ticket.name,
-      primary_sale_recipient: '{{wallet_address}}', // wallet address of the event organizer connected to the app
+      primary_sale_recipient: organizerAddress,
       image: ticket.image,
-      description: ticket.description
-      // fees
-
+      description: ticket.description,
+      fee_recipient: organizerAddress,
+      seller_fee_basis_points: Number(ticket.organizer_royalty),
+      platform_fee_recipient: ticket.platform_address,
+      platform_fee_basis_points: Number(ticket.platform_royalty)
     })
-    const { contract } = useContract(nftContract)
-    const { data: contractMetadata } = useContractMetadata(contract)
-    const nftImageURL = contractMetadata?.image
+    const contractDrop = await sdk?.getContract(nftContract, 'nft-drop')
 
+    const claimConditions = [
+      {
+        startTime: new Date(ticket.start_date),
+        maxClaimableSupply: Number(ticket.quantity),
+        maxClaimablePerWallet: Number(ticket.max_per_user),
+        price: Number(ticket.price)
+      }
+    ]
+
+    const metadatas = Array(Number(ticket.quantity)).fill({
+      name: ticket.name,
+      description: ticket.description,
+      image: ticket.image
+    })
+
+    await contractDrop?.createBatch(metadatas)
+    await contractDrop?.claimConditions.set(claimConditions)
+
+    const nftMetadata = await contractDrop?.metadata.get()
+    const nftImageURL = nftMetadata?.image
     return { nftContract, nftImageURL }
   } catch (error) {
     throw new Error('Ticket submission failed!')

@@ -8,8 +8,8 @@ import { WalletConnectV2Adapter, getWalletConnectV2Settings } from '@web3auth/wa
 import { MetamaskAdapter } from '@web3auth/metamask-adapter'
 import { TorusWalletAdapter } from '@web3auth/torus-evm-adapter'
 import { getUserCookie, setCookie, removeCookie } from '@/utils/Login/userCookie'
-import EthereumRpc from '@/utils/Login/web3RPC'
 import { checkOrganizerExists, createOrganizer } from './utils'
+import { userBlockchainInfo } from './userBlockchainInfo'
 
 const clientId = process.env.NEXT_PUBLIC_WEB3_AUTH_CLIENT_ID as string
 const walletConnectClientId = process.env.NEXT_PUBLIC_WALLET_CONNECT_CLIENT_ID as string
@@ -19,16 +19,12 @@ export const handleWeb3AuthInit = () => {
   const [torusPlugin, setTorusPlugin] =
     useState<TorusWalletConnectorPlugin | null>(null)
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null | any>(null)
-
   useEffect(() => {
     const init = async () => {
       if (provider) {
         setCookie('web3auth_provider', JSON.stringify(provider))
-        const ethereumRpc = new EthereumRpc(provider)
         const user = JSON.parse(getUserCookie('userData'))
-        const balance = await ethereumRpc?.getBalance()
-        const privateKey = await ethereumRpc?.getPrivateKey()
-        const address = await ethereumRpc?.getAccounts()
+        const { balance, privateKey, address } = await userBlockchainInfo(provider)
         const userWithBlockchainInfo = { ...user, balance, privateKey, address }
         setUserData(userWithBlockchainInfo)
         setCookie('userData', JSON.stringify(userWithBlockchainInfo), 7)

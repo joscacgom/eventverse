@@ -1,13 +1,16 @@
-import React from 'react'
-import { MOCK_USER } from '@/models/Users/mock'
+import React, { useContext } from 'react'
 import { UserTicketList, UserSideBar } from '@/components/UserInfo'
 import { MainContainer } from './styles'
+import Web3AuthContext from '@/context/Web3AuthContext'
+import { getUserCookie } from '@/utils/Login/userCookie'
 
 const UserTickets = () => {
+  const userData = getUserCookie('userData') || useContext(Web3AuthContext).userData
+
   return (
     <MainContainer>
         <UserSideBar />
-        <UserTicketList userData={MOCK_USER}/>
+        <UserTicketList userData={JSON.parse(userData)}/>
     </MainContainer>
   )
 }

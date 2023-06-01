@@ -6,10 +6,6 @@ import { getUserCookie } from '@/utils/Login/userCookie'
 
 const User = () => {
   const userData = getUserCookie('userData') || useContext(Web3AuthContext).userData
-  if (userData === null) {
-    return <div>Loading...</div> // Replace this with the alternate component
-  }
-
   return (
     <MainContainer>
       <UserSideBar />

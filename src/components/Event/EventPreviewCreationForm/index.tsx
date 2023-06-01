@@ -1,62 +1,83 @@
-import type { FC } from 'react'
-import {
-  MainContainer, Header, FirstContainer, SecondContainer, Image, Name, NameHeader, NameText, Description, DescriptionHeader, DescriptionText, StartDate, StartDateHeader, StartDateText, EndDate, EndDateHeader, EndDateText, Location, LocationHeader, LocationText, LocationImage, Ticket, TicketHeader, TicketImage, TicketName, TicketPriceContainer, TicketPrice, TicketAmount
-} from './styles'
-import type { Event } from '@/models/Events/types'
+import React, { FC, useEffect, useState } from 'react'
+import { EventPreviewCreationMainContainer, EventPreviewCreationHeader, EventPreviewCreationFirstContainer, EventPreviewCreationSecondContainer, EventPreviewCreationImage, EventPreviewCreationName, EventPreviewCreationNameHeader, EventPreviewCreationNameText, EventPreviewCreationDescription, EventPreviewCreationDescriptionHeader, EventPreviewCreationDescriptionText, EventPreviewCreationStartDate, EventPreviewCreationStartDateHeader, EventPreviewCreationStartDateText, EventPreviewCreationEndDate, EventPreviewCreationEndDateHeader, EventPreviewCreationEndDateText, EventPreviewCreationLocation, EventPreviewCreationLocationHeader, EventPreviewCreationLocationText, EventPreviewCreationLocationImage, EventPreviewCreationTicket, EventPreviewCreationTicketHeader, EventPreviewCreationTicketImage, EventPreviewCreationTicketName, EventPreviewCreationTicketPriceContainer, EventPreviewCreationTicketPrice, EventPreviewCreationTicketAmount } from './styles'
+import type { EventTicketPreview } from '@/models/Events/types'
+import { parseDate } from '@/utils/Event/parseDate'
 
 type Props = {
-    event: Event
+    event: EventTicketPreview
 }
+const EventPreviewCreationForm:FC<Props> = ({ event }) => {
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [ticketImagePreview, setTicketImagePreview] = useState<string | null>(null)
 
-const Form:FC<Props> = ({ event }) => {
+  useEffect(() => {
+    if (isFile(event.image)) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string)
+      }
+      reader.readAsDataURL(event.image)
+    }
+    if (isFile(event.ticketImage)) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setTicketImagePreview(reader.result as string)
+      }
+      reader.readAsDataURL(event.ticketImage)
+    }
+  }, [event.image, event.ticketImage])
+
+  const isFile = (value: any): value is File =>
+    value instanceof File
+
   return (
      <>
-     <Header>Resumen final del evento</Header>
-     <Image src={'/images/events/medusa-fest-wallpaper.jpg'} />
-     <MainContainer>
+     <EventPreviewCreationHeader>Resumen final del evento</EventPreviewCreationHeader>
+     <EventPreviewCreationImage src={imagePreview || ''} />
+     <EventPreviewCreationMainContainer>
 
-          <FirstContainer>
-              <Name>
-                  <NameHeader>Nombre del evento</NameHeader>
-                  <NameText>{event.name}</NameText>
-              </Name>
+          <EventPreviewCreationFirstContainer>
+              <EventPreviewCreationName>
+                  <EventPreviewCreationNameHeader>Nombre del evento</EventPreviewCreationNameHeader>
+                  <EventPreviewCreationNameText>{event.name}</EventPreviewCreationNameText>
+              </EventPreviewCreationName>
 
-              <Description>
-                  <DescriptionHeader>Descripción del evento</DescriptionHeader>
-                  <DescriptionText>{event.description}</DescriptionText>
-              </Description>
+              <EventPreviewCreationDescription>
+                  <EventPreviewCreationDescriptionHeader>Descripción del evento</EventPreviewCreationDescriptionHeader>
+                  <EventPreviewCreationDescriptionText>{event.description}</EventPreviewCreationDescriptionText>
+              </EventPreviewCreationDescription>
 
-              <StartDate>
-                  <StartDateHeader>Fecha de inicio</StartDateHeader>
-                  <StartDateText>{event.start_date}</StartDateText>
-              </StartDate>
+              <EventPreviewCreationStartDate>
+                  <EventPreviewCreationStartDateHeader>Fecha de inicio</EventPreviewCreationStartDateHeader>
+                  <EventPreviewCreationStartDateText>{parseDate(event.start_date)}</EventPreviewCreationStartDateText>
+              </EventPreviewCreationStartDate>
 
-              <EndDate>
-                  <EndDateHeader>Fecha de finalización</EndDateHeader>
-                  <EndDateText>23 de Agosto 2023</EndDateText>
-              </EndDate>
+              <EventPreviewCreationEndDate>
+                  <EventPreviewCreationEndDateHeader>Fecha de finalización</EventPreviewCreationEndDateHeader>
+                  <EventPreviewCreationEndDateText>{parseDate(event.end_date)}</EventPreviewCreationEndDateText>
+              </EventPreviewCreationEndDate>
 
-              <Location>
-                  <LocationHeader>Ubicación del evento</LocationHeader>
-                  <LocationText>{event.location}</LocationText>
-                  <LocationImage src={'/images/google-maps.png'} alt='Google Maps image' />
-              </Location>
+              <EventPreviewCreationLocation>
+                  <EventPreviewCreationLocationHeader>Ubicación del evento</EventPreviewCreationLocationHeader>
+                  <EventPreviewCreationLocationText>{event.locationFormattedAddress}</EventPreviewCreationLocationText>
+                  <EventPreviewCreationLocationImage src={event.locationImage} alt='Google Maps image' />
+              </EventPreviewCreationLocation>
 
-          </FirstContainer>
+          </EventPreviewCreationFirstContainer>
 
-          <SecondContainer>
-              <Ticket>
-                  <TicketHeader>Entradas</TicketHeader>
-                  <TicketImage src={'/images/tickets/medusa-festival.png'} alt='Ticket image' />
-                  <TicketName>Medusa Festival (EV)</TicketName>
-                  <TicketPriceContainer>
-                      <TicketPrice>100 entradas</TicketPrice>
-                      <TicketAmount>90€</TicketAmount>
-                  </TicketPriceContainer>
-              </Ticket>
-          </SecondContainer>
-      </MainContainer></>
+          <EventPreviewCreationSecondContainer>
+              <EventPreviewCreationTicket>
+                  <EventPreviewCreationTicketHeader>Entradas</EventPreviewCreationTicketHeader>
+                  <EventPreviewCreationTicketImage src={ticketImagePreview || ''} alt='Ticket image' />
+                  <EventPreviewCreationTicketName>{event.ticketTitle}</EventPreviewCreationTicketName>
+                  <EventPreviewCreationTicketPriceContainer>
+                      <EventPreviewCreationTicketPrice>{event.ticketAmount} entradas</EventPreviewCreationTicketPrice>
+                      <EventPreviewCreationTicketAmount>{event.ticketPrice}€</EventPreviewCreationTicketAmount>
+                  </EventPreviewCreationTicketPriceContainer>
+              </EventPreviewCreationTicket>
+          </EventPreviewCreationSecondContainer>
+      </EventPreviewCreationMainContainer></>
   )
 }
 
-export default Form
+export default EventPreviewCreationForm

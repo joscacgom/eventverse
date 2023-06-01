@@ -57,6 +57,5 @@ export type TicketTableSupabase = {
       max_per_user: number;
       organizer_royalty: number;
       platform_royalty: number
-      contract_address: string;
       platform_address: string;
 }

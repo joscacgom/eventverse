@@ -1,3 +1,4 @@
+import { EventTicketPreview } from '@/models/Events/types'
 import { TicketTableSupabase } from '@/models/Tickets/types'
 
 type FormData = {
@@ -5,10 +6,10 @@ type FormData = {
 };
 
 export const handleEventObjects = (event:FormData, ticket: FormData) => {
-  const eventPreview: any = {
-    title: event.eventName,
-    date: event.startDate,
-    endDate: event.endDate,
+  const eventPreview: EventTicketPreview = {
+    name: event.eventName,
+    start_date: event.startDate,
+    end_date: event.endDate,
     description: event.eventDescription,
     image: event.image,
     location: event.location,
@@ -26,6 +27,7 @@ export const handleEventObjects = (event:FormData, ticket: FormData) => {
     image: event.image,
     tags: 'none',
     location: event.locationFormattedAddress,
+    locationImage: event.locationImage,
     start_date: event.startDate,
     end_date: event.endDate,
     time_zone: event.timezone,
@@ -39,15 +41,14 @@ export const handleEventObjects = (event:FormData, ticket: FormData) => {
   const ticketToSubmit: TicketTableSupabase = {
     name: ticket.ticketName,
     description: ticket.ticketDescription,
-    image: ticket.image.name,
+    image: ticket.image,
     start_date: ticket.startDate,
     end_date: ticket.endDate,
     price: ticket.ticketPrice,
     quantity: ticket.ticketAmount,
     max_per_user: ticket.ticketLimit,
     organizer_royalty: ticket.ticketRoyalties,
-    contract_address: '0x0000000000',
-    platform_address: '0x0000000000',
+    platform_address: '0xEC504299EEd0774293BE523c52a8FB2B2F2ABb13',
     platform_royalty: 5
   }
 

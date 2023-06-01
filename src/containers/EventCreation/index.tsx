@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { EventCreationForm, EventCreationSidebar, EventTicketCreationForm, EventPreviewCreationForm } from '@/components/Event'
 import { MainContainer, EventCreationFormButton, ButtonContainer } from './styles'
 import { useRouter } from 'next/router'
 import { ToastContainer, Zoom, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { handleSubmitEventToSupabase } from '@/utils/Event/handleSubmitEventToSupabase'
 import { handleEventObjects } from '@/utils/Event/handleEventObjects'
 import { validationRules } from '@/utils/Event/validationRules'
 
@@ -22,8 +22,20 @@ const EventCreation = () => {
   })
   const handleStepIncrease = () => {
     if (step === 3) return handleSubmit()
-    const { fields, lengthMin, lengthMax, errorMessageEmpty, errorMessageDate, errorMessageLength, errorMessageDatePast, errorMessageLimit, errorMessageLengthMin, errorMessageLenghtMax, errorMessageLengthMinEvent, errorMessageLengthEvent } = validationRules[step - 1]
+    const { fields, lengthMin, lengthMax, errorMessageEmpty, errorMessageDate, errorMessageLength, errorMessageDatePast, errorMessageLimit, errorMessageLengthMin, errorMessageLenghtMax, errorMessageLengthMinEvent, errorMessageLengthEvent, errorMessageStartDateTicket, errorMessageEndDateTicket } = validationRules[step - 1]
 
+    if (step === 2) {
+      const { startDate, endDate } = formData.part1
+      const { startDate: startDate2, endDate: endDate2 } = formData.part2
+      if (startDate < startDate2) {
+        toast.error(errorMessageStartDateTicket)
+        return
+      }
+      if (endDate < endDate2) {
+        toast.error(errorMessageEndDateTicket)
+        return
+      }
+    }
     for (const field of fields) {
       if (!formData[`part${step}`][field]) {
         toast.error(errorMessageEmpty)
@@ -43,7 +55,7 @@ const EventCreation = () => {
       return
     }
 
-    if (ticketLimit > ticketAmount) {
+    if (Number(ticketLimit) > Number(ticketAmount)) {
       toast.error(errorMessageLimit)
       return
     }
@@ -101,7 +113,22 @@ const EventCreation = () => {
     }))
   }
 
-  const handleSubmit = () => {}
+  const handleSubmit = () => {
+    setSendingData(true)
+    const { eventToSubmit, ticketToSubmit } = handleEventObjects(formData.part1, formData.part2)
+    toast.promise(handleSubmitEventToSupabase(eventToSubmit, ticketToSubmit), {
+      pending: 'Procesando datos de tu evento, la creación de los NFT puede tardar unos minutos... ⏳',
+      success: 'Tu evento ha sido creado exitosamente! 😍',
+      error: 'Hubo un error al crear tu evento! 😭 Por favor, intenta nuevamente.'
+    }).then(() => {
+      setTimeout(() => {
+        router.push('/')
+      }, 5000)
+    }).catch(() => {
+      setSendingData(false)
+    }
+    )
+  }
 
   const handleFormRender = () => {
     switch (step) {

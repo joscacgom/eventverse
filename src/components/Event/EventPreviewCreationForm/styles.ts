@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const MainContainer = styled.div`
+export const EventPreviewCreationMainContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -14,7 +14,7 @@ export const MainContainer = styled.div`
     }
 `
 
-export const Header = styled.div`
+export const EventPreviewCreationHeader = styled.div`
   width: auto; 
   height: auto; 
   font-weight: 600;
@@ -29,7 +29,7 @@ export const Header = styled.div`
     }
 `
 
-export const Image = styled.img`
+export const EventPreviewCreationImage = styled.img`
   width: 1150px;
   height: 300px;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.25);
@@ -47,7 +47,7 @@ export const Image = styled.img`
     }
 `
 
-export const Name = styled.div`
+export const EventPreviewCreationName = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -60,7 +60,7 @@ export const Name = styled.div`
 
 `
 
-export const NameHeader = styled.div`
+export const EventPreviewCreationNameHeader = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -74,7 +74,7 @@ export const NameHeader = styled.div`
     }
 `
 
-export const NameText = styled.div`
+export const EventPreviewCreationNameText = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -88,7 +88,7 @@ export const NameText = styled.div`
     }
 `
 
-export const Description = styled.div`
+export const EventPreviewCreationDescription = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -100,7 +100,7 @@ export const Description = styled.div`
     }
 `
 
-export const DescriptionHeader = styled.div`
+export const EventPreviewCreationDescriptionHeader = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -114,7 +114,7 @@ export const DescriptionHeader = styled.div`
     }
 `
 
-export const DescriptionText = styled.div`
+export const EventPreviewCreationDescriptionText = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -128,7 +128,7 @@ export const DescriptionText = styled.div`
     }
 `
 
-export const StartDate = styled.div`
+export const EventPreviewCreationStartDate = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -140,7 +140,7 @@ export const StartDate = styled.div`
     }
 `
 
-export const StartDateHeader = styled.div`
+export const EventPreviewCreationStartDateHeader = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -154,7 +154,7 @@ export const StartDateHeader = styled.div`
     }
 `
 
-export const StartDateText = styled.div`
+export const EventPreviewCreationStartDateText = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -168,7 +168,7 @@ export const StartDateText = styled.div`
     }
 `
 
-export const EndDate = styled.div`
+export const EventPreviewCreationEndDate = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -180,7 +180,7 @@ export const EndDate = styled.div`
     }
 `
 
-export const EndDateHeader = styled.div`
+export const EventPreviewCreationEndDateHeader = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -194,7 +194,7 @@ export const EndDateHeader = styled.div`
     }
 `
 
-export const EndDateText = styled.div`
+export const EventPreviewCreationEndDateText = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -208,7 +208,7 @@ export const EndDateText = styled.div`
     }
 `
 
-export const Location = styled.div`
+export const EventPreviewCreationLocation = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -221,7 +221,7 @@ export const Location = styled.div`
 
 `
 
-export const LocationHeader = styled.div`
+export const EventPreviewCreationLocationHeader = styled.div`
   width: auto; 
   height: auto;
   white-space: pre;
@@ -237,7 +237,7 @@ export const LocationHeader = styled.div`
     }
 `
 
-export const LocationText = styled.div`
+export const EventPreviewCreationLocationText = styled.div`
   width: auto; 
   height: auto;
   opacity: 0.5;
@@ -251,7 +251,7 @@ export const LocationText = styled.div`
     }
 `
 
-export const LocationImage = styled.img`
+export const EventPreviewCreationLocationImage = styled.img`
   width: 258px;
   height: 139px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
@@ -266,7 +266,7 @@ export const LocationImage = styled.img`
     }
 `
 
-export const Ticket = styled.div`
+export const EventPreviewCreationTicket = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -280,7 +280,7 @@ export const Ticket = styled.div`
     }
 `
 
-export const TicketHeader = styled.div`
+export const EventPreviewCreationTicketHeader = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -294,7 +294,7 @@ export const TicketHeader = styled.div`
     }
 `
 
-export const TicketImage = styled.img`
+export const EventPreviewCreationTicketImage = styled.img`
   width: 184px;
   height: 138px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
@@ -311,7 +311,7 @@ export const TicketImage = styled.img`
   
 `
 
-export const TicketName = styled.div`
+export const EventPreviewCreationTicketName = styled.div`
   width: auto; 
   height: auto; 
   font-family: "Inter", sans-serif;
@@ -321,7 +321,7 @@ export const TicketName = styled.div`
         font-size: 14px;
     }
 `
-export const FirstContainer = styled.div`
+export const EventPreviewCreationFirstContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -330,7 +330,7 @@ export const FirstContainer = styled.div`
     }
 `
 
-export const SecondContainer = styled.div`
+export const EventPreviewCreationSecondContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -339,7 +339,7 @@ export const SecondContainer = styled.div`
     }
 `
 
-export const TicketPriceContainer = styled.div`
+export const EventPreviewCreationTicketPriceContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -348,7 +348,7 @@ export const TicketPriceContainer = styled.div`
 
 `
 
-export const TicketPrice = styled.div`
+export const EventPreviewCreationTicketPrice = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;
@@ -362,7 +362,7 @@ export const TicketPrice = styled.div`
     }
 `
 
-export const TicketAmount = styled.div`
+export const EventPreviewCreationTicketAmount = styled.div`
   width: auto; 
   height: auto; 
   opacity: 0.5;

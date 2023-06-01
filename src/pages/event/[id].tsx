@@ -1,7 +1,10 @@
 import { Layout } from '@/components'
+import Loading from '@/components/Loading'
 import { EventDetails } from '@/containers'
 import useEventById from '@/hooks/useEventById'
 import { useRouter } from 'next/router'
+import Error from '@/components/Error'
+import NotFound from '@/components/NotFound'
 
 const Event = () => {
   const router = useRouter()
@@ -9,17 +12,16 @@ const Event = () => {
   const { data: event, error, isLoading } = useEventById({ id: parseInt(id as string) })
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loading type='main' />
   }
 
   if (error) {
-    return <div>Error</div>
+    return <Error />
   }
 
   if (!event) {
-    return <div>Not found</div>
+    return <NotFound />
   }
-
   return (
     <Layout title={event.name}>
       <EventDetails event={event} />

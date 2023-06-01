@@ -1,14 +1,17 @@
 /* eslint-disable camelcase */
+import { EventTableSupabase } from '@/models/Events/types'
 import { TicketTableSupabase } from '@/models/Tickets/types'
+import { handleSubmitImageToCloudinary } from '../Event/handleSubmitImageToCloudinary'
 import { handleSubmitToThirdWeb } from './handleSubmitToThirdWeb'
 import { supabase } from '@/config'
 
-export const handleSubmitEventToSupabase = async (ticket: TicketTableSupabase) => {
+export const handleSubmitEventToSupabase = async (event: EventTableSupabase, ticket: TicketTableSupabase) => {
   try {
     const organizerId = 1
+    const imageURL = await handleSubmitImageToCloudinary(event.image)
     const { data: eventData, error: eventError } = await supabase
       .from('event')
-      .insert([{ ...event, organizerId }])
+      .insert([{ ...event, organizerId, image: imageURL }])
       .select()
 
     if (eventError) {

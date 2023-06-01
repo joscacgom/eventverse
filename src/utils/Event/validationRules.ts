@@ -19,7 +19,9 @@ export const validationRules = [
     errorMessageDate: 'La fecha de inicio no puede ser mayor que la fecha de fin 😬',
     errorMessageLengthEvent: 'Los campos de nombre, descripción y resumen deben tener entre 5 y 255 caracteres 😬',
     errorMessageLengthMinEvent: 'Los campos de nombre, descripción y resumen no pueden ser menores a 5 caracteres 😬',
-    errorMessageDatePast: 'La fecha de inicio no puede ser menor a la fecha actual 😬'
+    errorMessageDatePast: 'La fecha de inicio no puede ser menor a la fecha actual 😬',
+    errorMessageStartDateTicket: 'La fecha de inicio de venta del ticket no puede ser mayor a la fecha de inicio del evento 😬',
+    errorMessageEndDateTicket: 'La fecha de fin de venta del ticket no puede ser mayor a la fecha de fin del evento 😬'
   },
   {
     fields: [
@@ -41,6 +43,8 @@ export const validationRules = [
     errorMessageLengthMin: 'Los campos de cantidad, precio, límite y regalías no pueden ser menores a 1 😬',
     errorMessageLenghtMax: 'Los campos de cantidad, precio, límite y regalías no pueden ser mayores a 100000 😬',
     errorMessageDatePast: 'La fecha de inicio no puede ser menor a la fecha actual 😬',
-    errorMessageLimit: 'El límite de tickets de un usuario no puede ser mayor a la cantidad de tickets 😬'
+    errorMessageLimit: 'El límite de tickets de un usuario no puede ser mayor a la cantidad de tickets 😬',
+    errorMessageStartDateTicket: 'La fecha de inicio de venta del ticket no puede ser mayor a la fecha de inicio del evento 😬',
+    errorMessageEndDateTicket: 'La fecha de fin de venta del ticket no puede ser mayor a la fecha de fin del evento 😬'
   }
 ]
