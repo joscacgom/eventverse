@@ -9,6 +9,12 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
   // convert price in eur to matic
 
   try {
+    const response = await fetch('/api/crypto')
+    if (!response.ok) {
+      throw new Error('Failed to fetch data from the Crypto conversor API')
+    }
+    const data = await response.json()
+    const maticBalance = (Number(ticket.price) / data)
     const nftContract: any = await sdk?.deployer.deployNFTDrop({
       name: ticket.name,
       primary_sale_recipient: organizerAddress,
@@ -26,7 +32,7 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
         startTime: new Date(ticket.start_date),
         maxClaimableSupply: Number(ticket.quantity),
         maxClaimablePerWallet: Number(ticket.max_per_user),
-        price: Number(ticket.price)
+        price: Number(maticBalance)
       }
     ]
 
