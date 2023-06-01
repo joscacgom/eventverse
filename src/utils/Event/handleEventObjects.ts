@@ -1,3 +1,4 @@
+import { EventTicketPreview } from '@/models/Events/types'
 import { TicketTableSupabase } from '@/models/Tickets/types'
 
 type FormData = {
