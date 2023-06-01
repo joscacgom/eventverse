@@ -1,4 +1,3 @@
-import { EventTableSupabase, EventTicketPreview } from '@/models/Events/types'
 import { TicketTableSupabase } from '@/models/Tickets/types'
 
 type FormData = {
@@ -20,7 +19,7 @@ export const handleEventObjects = (event:FormData, ticket: FormData) => {
     ticketImage: ticket.image,
     locationFormattedAddress: event.locationFormattedAddress
   }
-  const eventToSubmit: EventTableSupabase = {
+  const eventToSubmit: any = {
     name: event.eventName,
     summary: event.eventSummary,
     description: event.eventDescription,
