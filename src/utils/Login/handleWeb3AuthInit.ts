@@ -19,7 +19,6 @@ export const handleWeb3AuthInit = () => {
   const [torusPlugin, setTorusPlugin] =
     useState<TorusWalletConnectorPlugin | null>(null)
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null | any>(null)
-
   useEffect(() => {
     const init = async () => {
       if (provider && !getUserCookie('web3auth_provider')) {

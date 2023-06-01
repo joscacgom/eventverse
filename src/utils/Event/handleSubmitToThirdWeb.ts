@@ -20,7 +20,6 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
       platform_fee_basis_points: Number(ticket.platform_royalty)
     })
     const contractDrop = await sdk?.getContract(nftContract, 'nft-drop')
-    console.log('contractDrop', contractDrop)
 
     const claimConditions = [
       {
@@ -30,15 +29,12 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
         price: Number(ticket.price)
       }
     ]
-    console.log('claimConditions', claimConditions)
 
     const metadatas = Array(Number(ticket.quantity)).fill({
       name: ticket.name,
       description: ticket.description,
       image: ticket.image
     })
-
-    console.log('metadatas', metadatas)
 
     await contractDrop?.createBatch(metadatas)
     await contractDrop?.claimConditions.set(claimConditions)
@@ -47,7 +43,6 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
     const nftImageURL = nftMetadata?.image
     return { nftContract, nftImageURL }
   } catch (error) {
-    console.log(error)
     throw new Error('Ticket submission failed!')
   }
 }
