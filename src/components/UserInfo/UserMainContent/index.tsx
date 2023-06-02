@@ -36,13 +36,13 @@ const UserMainContent:FC<Props> = ({ userData }) => {
   }
   return (
     <>
-        <HeaderSection>Bienvenido {userData.name.split(' ')[0]}! 👋 </HeaderSection>
+        <HeaderSection>Bienvenido {userData.name.includes('@') ? userData.name.split('@')[0] : userData.name.split(' ')[0]}! 👋 </HeaderSection>
         <MainContainer>
             <InfoMainContainer>
-                <Image src={userData.profileImage} alt='user' width={150} height={150} />
+                <Image src={userData.profileImage === '' ? '/images/avatar.jpg' : userData.profileImage } alt='user' width={150} height={150} />
                 <InfoContainer>
                     <h2>Información de tu cuenta</h2>
-                        <p>{userData.name}</p>
+                        <p>{userData.name.includes('@') ? userData.name.split('@')[0] : userData.name}</p>
                         <p>{userData.email}</p>
                     <h2>Información de la cartera</h2>
                         <p>{userData.address}</p>

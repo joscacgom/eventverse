@@ -11,7 +11,6 @@ const Navbar = () => {
   const { userData, setUserData } = useContext(Web3AuthContext)
   const router = useRouter()
   const { login, logout } = handleWeb3AuthInit()
-  const userCookieImage = JSON.parse(getUserCookie('userData'))?.profileImage
 
   useEffect(() => {
     const userCookieData = JSON.parse(getUserCookie('userData'))
@@ -63,7 +62,7 @@ const Navbar = () => {
           <>
             <Button85 onClick={handleClickCreateEvent}>Crear evento</Button85>
             <LinkItem mobile={showMobileMenu} primary={false} href={'/user'}>
-              <Avatar src={userData?.profileImage === '' ? userCookieImage : userData?.profileImage } alt='User avatar'/>
+              <Avatar src={userData.profileImage === '' ? '/images/avatar.jpg' : userData.profileImage } alt='User avatar'/>
             </LinkItem>
             <IconWrapper onClick={logout}>
               <LogoutIcon />

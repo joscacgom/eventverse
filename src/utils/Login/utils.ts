@@ -21,7 +21,7 @@ export async function createOrganizer () {
         name: user.name,
         email: user.email,
         image: user.profileImage,
-        wallet_address: user.address
+        wallet_address: user.address[0]
       }
     ])
     .select()

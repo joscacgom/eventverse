@@ -21,13 +21,20 @@ export const handleWeb3AuthInit = () => {
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null | any>(null)
   useEffect(() => {
     const init = async () => {
-      if (provider) {
-        setCookie('web3auth_provider', JSON.stringify(provider))
+      if (provider && !getUserCookie('web3auth_provider')) {
+        try {
+          setCookie('web3auth_provider', JSON.stringify(provider))
+        } catch (error) {
+          setCookie('web3auth_provider', 'Metamask/Other')
+        }
         const user = JSON.parse(getUserCookie('userData'))
         const { balance, privateKey, address } = await userBlockchainInfo(provider)
         const userWithBlockchainInfo = { ...user, balance, privateKey, address }
         setUserData(userWithBlockchainInfo)
         setCookie('userData', JSON.stringify(userWithBlockchainInfo), 7)
+        const organizerExists = await checkOrganizerExists()
+        if (organizerExists) return
+        await createOrganizer()
       }
     }
     init()
@@ -77,9 +84,15 @@ export const handleWeb3AuthInit = () => {
             },
             walletInitOptions: {
               whiteLabel: {
-                theme: { isDark: true, colors: { primary: '#222222' } },
-                logoDark: '/favicon.png',
-                logoLight: '/favicon.png',
+                theme: {
+                  isDark: false,
+                  colors: {
+                    torusBrand1: '#000000',
+                    primary: '#ffffff'
+                  }
+                },
+                logoDark: 'https://res.cloudinary.com/duffkgzef/image/upload/v1685733380/favicon_hayass.ico',
+                logoLight: 'https://res.cloudinary.com/duffkgzef/image/upload/v1685733380/favicon_hayass.ico',
                 defaultLanguage: 'es',
                 topupHide: false,
                 featuredBillboardHide: true,
@@ -163,10 +176,6 @@ export const handleWeb3AuthInit = () => {
     const user = await web3authcontext.getUserInfo()
     setCookie('userData', JSON.stringify(user), 7)
     setUserData(user)
-
-    const organizerExists = await checkOrganizerExists()
-    if (organizerExists) return
-    await createOrganizer()
   }
 
   const logout = async () => {
