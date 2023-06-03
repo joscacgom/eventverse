@@ -25,11 +25,11 @@ export const handleWeb3AuthInit = () => {
         try {
           setCookie('web3auth_provider', JSON.stringify(provider))
         } catch (error) {
-          setCookie('web3auth_provider', 'Metamask/Other')
+          setCookie('web3auth_provider', '{Metamask/Other}')
         }
         const user = JSON.parse(getUserCookie('userData'))
         const { balance, privateKey, address } = await userBlockchainInfo(provider)
-        const userWithBlockchainInfo = { ...user, balance, privateKey, address }
+        const userWithBlockchainInfo = Object.keys(user).length === 0 ? { balance, address } : { ...user, balance, privateKey, address }
         setUserData(userWithBlockchainInfo)
         setCookie('userData', JSON.stringify(userWithBlockchainInfo), 7)
         const organizerExists = await checkOrganizerExists()
@@ -44,7 +44,12 @@ export const handleWeb3AuthInit = () => {
     const init = async () => {
       const storedProvider = getUserCookie('web3auth_provider')
       if (storedProvider) {
-        setProvider(JSON.parse(storedProvider))
+        try {
+          const parsedProvider = JSON.parse(storedProvider)
+          setProvider(parsedProvider)
+        } catch (error) {
+          setProvider(storedProvider)
+        }
       } else {
         try {
           const web3auth = new Web3Auth({

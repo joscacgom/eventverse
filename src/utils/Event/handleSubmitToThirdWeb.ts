@@ -6,8 +6,6 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
   const privateKey = JSON.parse(getUserCookie('userData')).privateKey
   const organizerAddress = JSON.parse(getUserCookie('userData')).address[0]
   const sdk = ThirdwebSDK.fromPrivateKey(privateKey, 'mumbai')
-  // convert price in eur to matic
-
   try {
     const response = await fetch('/api/crypto')
     if (!response.ok) {
