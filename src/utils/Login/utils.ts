@@ -6,7 +6,7 @@ export async function checkOrganizerExists () {
   const { error } = await supabase
     .from('organizer')
     .select('*')
-    .eq('email', user.email)
+    .eq('wallet_address', user.address[0])
     .single()
 
   return !error
@@ -18,10 +18,10 @@ export async function createOrganizer () {
     .from('organizer')
     .insert([
       {
-        name: user.name,
-        email: user.email,
-        image: user.profileImage,
-        wallet_address: user.address
+        name: user?.name,
+        email: user?.email,
+        image: user?.profileImage,
+        wallet_address: user?.address[0]
       }
     ])
     .select()

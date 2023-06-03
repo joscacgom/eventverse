@@ -36,14 +36,14 @@ const UserMainContent:FC<Props> = ({ userData }) => {
   }
   return (
     <>
-        <HeaderSection>Bienvenido {userData.name.split(' ')[0]}! 👋 </HeaderSection>
+      <HeaderSection>Bienvenido {userData.name ? (userData.name.includes('@') ? userData.name.split('@')[0] : userData.name.split(' ')[0]) : String(userData.address).substring(0, 6)}! 👋 </HeaderSection>
         <MainContainer>
             <InfoMainContainer>
-                <Image src={userData.profileImage} alt='user' width={150} height={150} />
+                <Image src={userData.profileImage === '' || !userData.profileImage ? '/images/avatar.jpg' : userData.profileImage } alt='user' width={150} height={150} />
                 <InfoContainer>
                     <h2>Información de tu cuenta</h2>
-                        <p>{userData.name}</p>
-                        <p>{userData.email}</p>
+                        <p>{userData.name ? (userData.name?.includes('@') ? userData.name?.split('@')[0] : userData.name) : 'Conectado mediante Metamask/Wallet'}</p>
+                        <p>{userData.email ? userData.email : ''}</p>
                     <h2>Información de la cartera</h2>
                         <p>{userData.address}</p>
                         <p>{eurBalance}€<small> {userData.balance} ~ MATIC </small></p>
@@ -60,7 +60,7 @@ const UserMainContent:FC<Props> = ({ userData }) => {
                           <p>¡No compartas tu clave privada con nadie!</p>
                     </WarningContainer>
                     <br />
-                    <small>{userData.privateKey}</small>
+                    <small>{userData.privateKey ? userData.privateKey : 'Para ver su clave privada, acceda a su Metamask/Wallet'}</small>
                     <button onClick={handlePrivateKey}>Cerrar</button>
                 </PrivateKeyContainer>
                 }
