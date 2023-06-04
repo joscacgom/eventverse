@@ -1,15 +1,15 @@
 import EventCard from './EventCard'
 import { MOCK_EVENTS } from '@/models/Events/mock'
-import { EventsList, SearchBar, Subtitle, TableHeader, TableItem, Title } from './styles'
+import { Container, EventsList, SearchBar, Subtitle, TableHeader, TableItem, Title } from './styles'
 
-const Events = () => {
-  const renderOrganizerEvents = () => {
-    return MOCK_EVENTS.map((event) => <EventCard key={event.id} event={event} />)
-  }
+const OrganizerEvents = () => {
+  const renderOrganizerEvents = () => MOCK_EVENTS.map(
+    (event) => <EventCard key={event.id} event={event} />
+  )
 
   return (
-    <>
-      <Title>Bienvenido Jorge! 🙌</Title>
+    <Container>
+      <Title>Bienvenido! 🙌</Title>
       <Subtitle>Estos son los eventos que has creado</Subtitle>
       <SearchBar placeholder="🔎 Buscar evento" />
       <TableHeader>
@@ -21,8 +21,8 @@ const Events = () => {
       <EventsList>
         {renderOrganizerEvents()}
       </EventsList>
-    </>
+    </Container>
   )
 }
 
-export default Events
+export default OrganizerEvents
