@@ -184,15 +184,13 @@ export const handleWeb3AuthInit = () => {
   }
 
   const logout = async () => {
-    if (!web3authcontext) return
-
-    await torusPlugin?.disconnect()
-    await web3authcontext.logout()
-
     removeCookie('web3auth_provider')
     removeCookie('userData')
     setProvider(null)
     setUserData(null)
+    if (!web3authcontext) return
+    await torusPlugin?.disconnect()
+    await web3authcontext.logout()
   }
 
   return { login, logout, provider }

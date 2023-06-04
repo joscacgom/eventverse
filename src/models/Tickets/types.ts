@@ -24,6 +24,7 @@ export type Ticket = {
     price: number;
     quantity: number;
     start_date: string;
+    crossmint_id?: string;
 }
 
 export const normalizeTicket = (ticket: any): Ticket => {
@@ -42,7 +43,8 @@ export const normalizeTicket = (ticket: any): Ticket => {
     platform_royalty: ticket.platform_royalty,
     price: ticket.price,
     quantity: ticket.quantity,
-    start_date: ticket.start_date
+    start_date: ticket.start_date,
+    crossmint_id: ticket.crossmint_id
   }
 }
 

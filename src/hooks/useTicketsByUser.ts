@@ -1,35 +1,27 @@
 import { Ticket } from '@/models/Tickets/types'
 import { useQuery } from 'react-query'
 
-type UseTicketsByUserResult = {
-  tickets: Ticket[] | undefined;
-  isLoading: boolean;
-  error: boolean;
-};
+type Props = {
+    walletAddress: string
+}
 
-async function getAllTickets (): Promise<Ticket[]> {
-  const response = await fetch('/api/tickets', {
+async function getTicketsByUser ({ walletAddress }: Props) {
+  const response = await fetch(`/api/tickets/tickets-user/${walletAddress}`, {
     method: 'GET'
   })
   const data: Ticket[] = await response.json()
+
   return data
 }
 
-const useTicketsByUser = (): UseTicketsByUserResult => {
-  const { data: tickets, isLoading: ticketsLoading, error: ticketsError } = useQuery('ticketsByUser', getAllTickets, {
-    staleTime: 60000,
-    cacheTime: 300000
-  })
+const useTicketsByUser = ({ walletAddress }: Props) => {
+  const { data, isLoading, error } = useQuery('ticketsByUser', () => getTicketsByUser({ walletAddress }))
 
-  if (ticketsLoading) {
-    return { tickets: [], isLoading: true, error: false }
+  return {
+    tickets: data,
+    isLoading,
+    error
   }
-
-  if (ticketsError) {
-    return { tickets: [], isLoading: false, error: true }
-  }
-
-  return { tickets, isLoading: false, error: false }
 }
 
 export default useTicketsByUser

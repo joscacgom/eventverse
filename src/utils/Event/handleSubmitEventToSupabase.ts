@@ -7,11 +7,11 @@ import { supabase } from '@/config'
 
 export const handleSubmitEventToSupabase = async (event: EventTableSupabase, ticket: TicketTableSupabase) => {
   try {
-    const organizerId = 1
+    const organizer_id = 2
     const imageURL = await handleSubmitImageToCloudinary(event.image)
     const { data: eventData, error: eventError } = await supabase
       .from('event')
-      .insert([{ ...event, organizerId, image: imageURL }])
+      .insert([{ ...event, organizer_id, image: imageURL }])
       .select()
 
     if (eventError) {
