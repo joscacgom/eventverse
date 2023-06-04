@@ -1,11 +1,11 @@
 import { MOCK_EVENTS } from '@/models/Events/mock'
 import EventCard from './EventCard'
-import { Title, Subtitle, Balance, TransferButton, SearchBar, TableHeader, TableItem, EventList } from './styles'
+import { Container, Title, Subtitle, Balance, TransferButton, SearchBar, TableHeader, TableItem, EventList } from './styles'
 import { useState } from 'react'
 import { Event } from '@/models/Events/types'
 
 const MOCK_BALANCE = '227.815,75 €'
-const Finances = () => {
+const OrganizerFinances = () => {
   const [selectedEvents, setSelectedEvents] = useState<null | Event[]>(null)
 
   const handleUpdateSelectedEvents = (event: Event) => {
@@ -41,8 +41,8 @@ const Finances = () => {
     })
   }
   return (
-    <>
-      <Title>Tus finanzas 🪙</Title>
+    <Container>
+      <Title>Tus finanzas</Title>
       <Subtitle>Balance disponible <Balance>{MOCK_BALANCE}</Balance></Subtitle>
       <TransferButton>Transferir saldo</TransferButton>
       <Subtitle bold>Ingresos por evento</Subtitle>
@@ -54,8 +54,8 @@ const Finances = () => {
       <EventList>
         {renderEventList()}
       </EventList>
-    </>
+    </Container>
   )
 }
 
-export default Finances
+export default OrganizerFinances

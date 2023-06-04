@@ -1,15 +1,32 @@
 import EventCard from './EventCard'
-import { MOCK_EVENTS } from '@/models/Events/mock'
-import { EventsList, SearchBar, Subtitle, TableHeader, TableItem, Title } from './styles'
+import { Container, EventsList, SearchBar, Subtitle, TableHeader, TableItem, Title } from './styles'
+import useEventsByUser from '@/hooks/useEventsByUser'
+import { getUserCookie } from '@/utils/Login/userCookie'
 
-const Events = () => {
+const OrganizerEvents = () => {
+  const userCookie = getUserCookie('userData')
+  const { events, error, isLoading } = useEventsByUser({ userEmail: userCookie?.email })
   const renderOrganizerEvents = () => {
-    return MOCK_EVENTS.map((event) => <EventCard key={event.id} event={event} />)
+    if (events === undefined || error) {
+      return <div>Hubo un error al cargar los eventos</div>
+    }
+
+    if (isLoading) {
+      return <div>Cargando eventos...</div>
+    }
+
+    if (events.length === 0) {
+      return <div>Aún no tienes eventos creados</div>
+    }
+
+    return events.map(
+      (event) => <EventCard key={event.id} event={event} />
+    )
   }
 
   return (
-    <>
-      <Title>Bienvenido Jorge! 🙌</Title>
+    <Container>
+      <Title>Bienvenido! 🙌</Title>
       <Subtitle>Estos son los eventos que has creado</Subtitle>
       <SearchBar placeholder="🔎 Buscar evento" />
       <TableHeader>
@@ -21,8 +38,8 @@ const Events = () => {
       <EventsList>
         {renderOrganizerEvents()}
       </EventsList>
-    </>
+    </Container>
   )
 }
 
-export default Events
+export default OrganizerEvents
