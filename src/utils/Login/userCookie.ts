@@ -12,5 +12,10 @@ export const setCookie = (cookie: string, value:any, expires?: number) => {
 }
 
 export const removeCookie = (cookie: string) => {
-  Cookies.remove(cookie)
+  const domain = window.location.hostname
+
+  Cookies.remove(cookie, {
+    path: '/',
+    domain: domain.startsWith('www.') ? domain.substring(4) : domain
+  })
 }

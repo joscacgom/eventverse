@@ -31,13 +31,13 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
           <TicketImage src={ticket.image} />
           <TicketInfo>
             <TicketName>{ticket.name}</TicketName>
-            <TicketDate>{ticket.start_date.split(' ')[0]}</TicketDate>
+            <TicketDate>{ticket.start_date.split('T')[0] + ' ' + ticket.start_date.split('T')[1]}</TicketDate>
             <TicketPlace>{ticket.description.slice(0, 15) + '...'}</TicketPlace>
-            <TicketTime>{ticket.start_date.split(' ')[1]}</TicketTime>
+            <TicketTime>{}</TicketTime>
           </TicketInfo>
         </TicketMainData>
         <TicketAmount>
-          <p>x{ticket.quantity}</p>
+          <p>x{data.length}</p>
         </TicketAmount>
         <TicketPrice>
           <p>{ticket.price}€</p>
@@ -51,7 +51,7 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
   } else if (isLoading) {
     return <Loading type='main' />
   } else {
-    return <p>No tienes tickets</p>
+    return null
   }
 }
 

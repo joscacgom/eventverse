@@ -25,7 +25,7 @@ import Loading from '@/components/Loading'
 
 const EventBuyOption: FC<Props> = ({ event }) => {
   const { ticket } = useTicketsByEvent({ event_id: event.id })
-  const userAddress = JSON.parse(getUserCookie('userData')).address[0] || ''
+  const userAddress = JSON.parse(getUserCookie('userData'))?.address[0] || ''
   const [amount, setAmount] = useState(1)
   const [totalPrice, setTotalPrice] = useState<number>(ticket ? ticket.price : 0)
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.CREDIT_CARD)
@@ -73,10 +73,28 @@ const EventBuyOption: FC<Props> = ({ event }) => {
   const renderPaymentMethod = () => {
     if (!ticket) return null
 
-    if (paymentMethod === PaymentMethod.CREDIT_CARD) return <CrossmintButton quantity={amount} totalPrice={totalPrice} />
-    return <ThirdwebButton contractAddress={ticket.contract_address} />
+    if (paymentMethod === PaymentMethod.CREDIT_CARD) {
+      return ticket.crossmint_id
+        ? (
+      <CrossmintButton
+        quantity={amount}
+        totalPrice={totalPrice}
+        ticketId={ticket.id}
+        userAddress={userAddress}
+      />
+          )
+        : (
+      <p>Este evento necesita pasar el proceso de verificación</p>
+          )
+    }
+    return (
+      <ThirdwebButton
+        contractAddress={ticket.contract_address}
+        quantity={amount}
+        ticketId={ticket.id}
+      />
+    )
   }
-
   useEffect(() => {
     if (!ticket) return
 
@@ -130,7 +148,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
     <p>Ha finalizado el plazo de compra.</p>
   </div>
         )
-      : userAddress === ''
+      : userAddress === '' && paymentMethod === PaymentMethod.CREDIT_CARD
         ? (
   <div>
     <p>Por favor, inicia sesión.</p>

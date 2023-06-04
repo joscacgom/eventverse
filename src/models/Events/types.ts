@@ -15,7 +15,6 @@ export type Event = {
     image: string;
     location: string;
     locationImage?: string;
-    tags?: string;
     time_zone: string;
     ticket?: Ticket
     pricing_plan?: string;
@@ -40,7 +39,6 @@ export type EventTableSupabase = {
     summary: string
     description: string
     image: any
-    tags: string
     location: string
     locationImage: string
     start_date: string
@@ -69,7 +67,6 @@ export const normalizeEvent = (event: any): Event => {
     locationImage: event.locationImage,
     pricing_plan: event.pricing_plan,
     summary: event.summary,
-    tags: event.tags,
     time_zone: event.time_zone
   }
 }
