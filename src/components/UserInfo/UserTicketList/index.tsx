@@ -24,6 +24,24 @@ const UserTicketList: FC<Props> = ({ userData }) => {
     ticket.name.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
+  const handleRenderTickets = () => {
+    if (ticketsLoading) {
+      return <p>Loading tickets...</p>
+    }
+
+    if (filteredTickets?.length === 0) {
+      return <p>No hay tickets que coincidan con tu búsqueda</p>
+    }
+
+    return filteredTickets?.map((ticket) => (
+      <li key={ticket.id}>
+        <p>{ticket.name}</p>
+        <p>{ticket.quantity}</p>
+        <p>{ticket.price}</p>
+      </li>
+    ))
+  }
+
   return (
     <>
       <HeaderSection>Bienvenido {userData.name.split(' ')[0]}! 👋 </HeaderSection>
@@ -46,16 +64,7 @@ const UserTicketList: FC<Props> = ({ userData }) => {
             <p>Estado</p>
           </TicketListHeader>
           <TicketList>
-            {ticketsLoading
-              ? (
-              <p>Loading tickets...</p>
-                )
-              : filteredTickets?.length === 0
-                ? (
-              <p>No tienes tickets</p>
-                  )
-                : (<p>Tickets</p>) }
-
+            {handleRenderTickets()}
           </TicketList>
         </TicketListContainer>
       </MainContainer>
