@@ -5,6 +5,7 @@ import { TicketAmount, TicketDate, TicketImage, TicketInfo, TicketItem, TicketMa
 import ResellTicketForm from '@/components/ResellTicket/ResellTicketForm'
 import handleStatus from '@/utils/Ticket/handleStatus'
 import Loading from '@/components/Loading'
+import { parseDate } from '@/utils/Event/parseDate'
 
 type TicketWithNFTsProps = {
   ticket: Ticket;
@@ -31,7 +32,7 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
           <TicketImage src={ticket.image} />
           <TicketInfo>
             <TicketName>{ticket.name}</TicketName>
-            <TicketDate>{ticket.start_date.split('T')[0] + ' ' + ticket.start_date.split('T')[1]}</TicketDate>
+            <TicketDate>{parseDate(ticket.start_date)}</TicketDate>
             <TicketPlace>{ticket.description.slice(0, 15) + '...'}</TicketPlace>
             <TicketTime>{}</TicketTime>
           </TicketInfo>

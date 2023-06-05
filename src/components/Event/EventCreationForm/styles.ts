@@ -10,7 +10,7 @@ export const EventCreationMainContainer = styled.div`
     height: 100%;
     padding: 0 1rem;
     @media (max-width: 768px) {
-        padding: 0;
+        padding: 1rem;
         margin-top: 7rem;
     }
     @media (min-width: 1920px){

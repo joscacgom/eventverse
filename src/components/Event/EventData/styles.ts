@@ -44,6 +44,9 @@ export const DateContainer = styled.div`
     justify-content:center;
     width:100%;
     height:auto;
+    @media (max-width: 768px) {
+      padding-left:1rem;
+    }
 `
 export const LocationContainer = styled.div`
     display:flex;
@@ -52,6 +55,9 @@ export const LocationContainer = styled.div`
     justify-content:center;
     width:100%;
     height:auto;
+    @media (max-width: 768px) {
+      padding-left:1rem;
+    }
 `
 export const Name = styled.h1`
   width: auto; 
@@ -109,6 +115,9 @@ export const TypeContainer = styled.div`
     justify-content:center;
     width:100%;
     height:auto;
+    @media (max-width: 768px) {
+      padding-left:1rem;
+    }
 `
 
 export const Description = styled.p`
@@ -187,17 +196,17 @@ export const Location = styled.p`
 `
 export const GoogleMapPic = styled.img`
   width: 455px;
-  height: 254px;
+  height: 304px;
   display: block;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
   z-index: 1;
-  background-image: url(/* image.png */);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 12px;
   @media (max-width: 768px) {
     width: 100%;
+    margin-left:-0.5rem;
     height: auto;
 }
 `

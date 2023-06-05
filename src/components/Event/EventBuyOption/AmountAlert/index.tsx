@@ -8,9 +8,9 @@ type Props = {
 
 const AmountAlert: FC<Props> = ({ supply }) => {
   return (
-    <Container status={supply?.lt(10) ? 'Danger' : 'Safe'}>
+    <Container status={supply?.lte(10) ? 'Danger' : 'Safe'}>
       <InfoIcon />
-      {(supply?.lt(10))
+      {(supply?.lte(10))
         ? <Text>¡Solo quedan {BigNumber.from(supply || 0).toString()} tickets disponibles.</Text>
         : <Text>Aún Quedan {BigNumber.from(supply || 0).toString()} tickets disponibles.</Text>
       }

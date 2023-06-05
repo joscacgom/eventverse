@@ -25,6 +25,10 @@ export const TicketItem = styled.div`
   border-radius: 9px;
   cursor: pointer;
   border: 1px solid #222;
+  &:hover {
+        transform: scale(1.02);
+        transition: all 0.2s ease-in-out;
+    }
   @media (max-width: 768px) {
     width: 100%;
     flex-direction: row;

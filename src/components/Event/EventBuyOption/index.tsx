@@ -126,7 +126,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
       <AmountAlert supply={unclaimedSupply.data} />
       <TicketContainer>
         <TicketInfo>
-          <TicketImage src={event.image} />
+          <TicketImage src={ticket?.image} />
           <TicketAction>
             <TicketActionLabel htmlFor="amount">Cantidad</TicketActionLabel>
             <TicketActionAmount
