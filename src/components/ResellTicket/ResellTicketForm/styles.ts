@@ -1,33 +1,5 @@
 import styled from 'styled-components'
 
-export const TicketAction = styled.button`
-  width: 20px;
-  height: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  border:none;
-  text-align: center;
-  color: ${({ theme }) => theme.nord.white};
-  background-color: ${({ theme }) => theme.nord.green};
-  font-family: "Inter", sans-serif;
-  color: #ffffff;
-  font-size: 12px;
-  border-radius: 100%;
-  cursor: pointer;
-  &:hover {
-    color: ${({ theme }) => theme.nord.green};
-    background-color: ${({ theme }) => theme.nord.white};
-  }
-  @media (max-width: 768px) {
-    font-size: 10px;
-
-  }
- 
-`
-
 export const TicketResellCancel = styled.button`
   width: 40px;
   height: 20px;

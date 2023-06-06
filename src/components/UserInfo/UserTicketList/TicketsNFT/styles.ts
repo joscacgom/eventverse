@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const TicketList = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top:1rem;
   @media (max-width: 768px) {
     width:45%;
     gap:1rem;
@@ -12,15 +11,41 @@ export const TicketList = styled.div`
   
 `
 
+export const TicketAction = styled.button`
+  width: 20px;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border:none;
+  text-align: center;
+  color: ${({ theme }) => theme.nord.white};
+  background-color: ${({ theme }) => theme.nord.green};
+  font-family: "Inter", sans-serif;
+  color: #ffffff;
+  font-size: 12px;
+  border-radius: 100%;
+  cursor: pointer;
+  &:hover {
+    color: ${({ theme }) => theme.nord.green};
+    background-color: ${({ theme }) => theme.nord.white};
+  }
+  @media (max-width: 768px) {
+    font-size: 10px;
+
+  }
+`
+
 export const TicketItem = styled.div`
-  width: 1050px;
+  width: 1000px;
   height: 105px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
-  margin-top: 1rem;
   align-content: center;
   border-radius: 9px;
   cursor: pointer;
@@ -50,7 +75,6 @@ export const TicketMainData = styled.div`
     gap: 0;
   }
 
-  
 `
 
 export const TicketImage = styled.img`

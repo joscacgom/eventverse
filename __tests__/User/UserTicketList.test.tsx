@@ -63,43 +63,43 @@ describe('UserTicketList component', () => {
     expect(loadingMessage).toBeInTheDocument()
   })
 
-  // it('renders no tickets message when no tickets are available', async () => {
-  //   render(
-  //     <QueryClientProvider client={queryClient}>
-  //           <ThemeProvider theme={theme}>
-  //               <UserTicketList userData={userData} />
-  //          </ThemeProvider>
-  //     </QueryClientProvider>
-  //   )
-  //   await waitFor(() => {
-  //     const noTicketsMessage = screen.getByText('No tienes tickets')
-  //     expect(noTicketsMessage).toBeInTheDocument()
-  //   })
-  // })
+  it('renders no tickets message when no tickets are available', async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+            <ThemeProvider theme={theme}>
+                <UserTicketList userData={userData} />
+           </ThemeProvider>
+      </QueryClientProvider>
+    )
+    await waitFor(() => {
+      const noTicketsMessage = screen.getByText('No tienes tickets')
+      expect(noTicketsMessage).toBeInTheDocument()
+    })
+  })
 
-  // it('renders the tickets when available', () => {
-  //   const tickets = [
-  //     { name: 'Ticket 1', price: 10, quantity: 1, start_date: '2021-10-10', end_date: '2021-10-11', description: 'Ticket 1 description' },
-  //     { name: 'Ticket 2', price: 20, quantity: 2, start_date: '2023-10-10', end_date: '2023-10-11', description: 'Ticket 2 description' }
-  //   ]
-  //   jest.mock('@/hooks/useTicketsByUser', () => ({
-  //     useTicketsByUser: () => ({
-  //       tickets,
-  //       isLoading: false,
-  //       error: null
-  //     })
-  //   }))
+  it('renders the tickets when available', () => {
+    const tickets = [
+      { name: 'Ticket 1', price: 10, quantity: 1, start_date: '2021-10-10', end_date: '2021-10-11', description: 'Ticket 1 description' },
+      { name: 'Ticket 2', price: 20, quantity: 2, start_date: '2023-10-10', end_date: '2023-10-11', description: 'Ticket 2 description' }
+    ]
+    jest.mock('@/hooks/useTicketsByUser', () => ({
+      useTicketsByUser: () => ({
+        tickets,
+        isLoading: false,
+        error: null
+      })
+    }))
 
-  //   render(
-  //           <ThemeProvider theme={theme}>
-  //               <UserTicketList userData={userData} />
-  //          </ThemeProvider>
-  //   )
+    render(
+            <ThemeProvider theme={theme}>
+                <UserTicketList userData={userData} />
+           </ThemeProvider>
+    )
 
-  //   const ticket1 = screen.getByText('Ticket 1')
-  //   const ticket2 = screen.getByText('Ticket 2')
+    const ticket1 = screen.getByText('Ticket 1')
+    const ticket2 = screen.getByText('Ticket 2')
 
-  //   expect(ticket1).toBeInTheDocument()
-  //   expect(ticket2).toBeInTheDocument()
-  // })
+    expect(ticket1).toBeInTheDocument()
+    expect(ticket2).toBeInTheDocument()
+  })
 })

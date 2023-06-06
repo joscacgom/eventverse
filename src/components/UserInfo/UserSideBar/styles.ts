@@ -9,10 +9,11 @@ export const SideBarContainer = styled.div`
   background-color: #fcfcfc;
   align-content: center;
   position: fixed;
+  z-index: 1;
   left: 0;
-  border-radius: 0;
+  border-radius: 8px;
   border: 1px solid #e6e6e6;
-  border-top: 0;
+  border-left: none;
   & >:nth-child(2) {
     p{
       margin-left: 0.4rem;
@@ -23,12 +24,11 @@ export const SideBarContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    height: 10%;
+    height: 80px;
     width: 100%;
     flex-direction: row;
-    gap:0;
+    border-radius: 0;
     position: absolute;
-    padding-left: 1rem;
     p{
       font-size: 0.7rem;
     }
@@ -43,7 +43,6 @@ export const OptionContainer = styled.div`
   font-weight: 700;
   font-style: normal;
   font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
-  color: #000000;
   font-size: 14px;
   height: 50px;
   padding: 0 20px;
@@ -59,6 +58,8 @@ export const OptionContainer = styled.div`
   @media (max-width: 768px) {
     height: 100%;
     width: 100%;
+    text-align: center;
+    justify-content: center;
     margin: 0;
   }
 `

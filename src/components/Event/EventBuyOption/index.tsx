@@ -22,6 +22,7 @@ import { useActiveClaimConditionForWallet, useClaimConditions, useContract, useU
 import Timer from './Timer'
 import { getUserCookie } from '@/utils/Login/userCookie'
 import Loading from '@/components/Loading'
+import CustomAlert from './CustomAlert'
 
 const EventBuyOption: FC<Props> = ({ event }) => {
   const { ticket } = useTicketsByEvent({ event_id: event.id })
@@ -84,7 +85,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
       />
           )
         : (
-      <p>Este evento necesita pasar el proceso de verificación</p>
+      <CustomAlert status='Info' text='🧐 Este evento necesita pasar el proceso de verificación' ></CustomAlert>
           )
     }
     return (
@@ -144,41 +145,29 @@ const EventBuyOption: FC<Props> = ({ event }) => {
         </TicketInfo>
     {isTicketEndDatePassed
       ? (
-  <div>
-    <p>Ha finalizado el plazo de compra.</p>
-  </div>
+    <CustomAlert status='Error' text='⌛ Ha finalizado el plazo de compra.' ></CustomAlert>
         )
       : userAddress === '' && paymentMethod === PaymentMethod.CREDIT_CARD
         ? (
-  <div>
-    <p>Por favor, inicia sesión.</p>
-  </div>
+    <CustomAlert status='Info' text='🤓 Por favor, inicia sesión.' ></CustomAlert>
           )
-        : claimConditions.data && claimConditions.data[0].startTime > new Date()
+        : claimConditions?.data && claimConditions?.data[0]?.startTime > new Date()
           ? (
-  <div>
-    <Timer date={claimConditions.data[0].startTime} />
-  </div>
+    <Timer date={claimConditions?.data[0]?.startTime} />
             )
           : activeClaimCondition.isError
             ? (
-  <div>
-    <p>Límite de tickets por persona alcanzado.</p>
-  </div>
+    <CustomAlert status='Error' text='🎟️ Límite de tickets por persona alcanzado.' ></CustomAlert>
               )
             : canClaim
               ? (
                   isLoading
                     ? (
-    <div>
       <Loading type='button' />
-    </div>
                       )
                     : unclaimedSupply.data?.eq(0)
                       ? (
-    <div>
-      <p>Agotado 😭</p>
-    </div>
+      <CustomAlert status='Error' text='Agotado 😭' ></CustomAlert>
                         )
                       : (
     <div>

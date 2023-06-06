@@ -1,21 +1,16 @@
-import { FC, useState } from 'react'
-import { TicketAction, TicketResellPopUp, TicketResellPopUpHeader, TicketResellCancel, TicketResellPopUpImage, TicketResellPopUpButton, Overlay, TicketResellPopUpTitle, TicketResellPopUpPrice, TicketResellPopUpForm, TicketResellPopUpLabel, TicketResellPopUpInput } from './styles'
+import { FC } from 'react'
+import { TicketResellPopUp, TicketResellPopUpHeader, TicketResellCancel, TicketResellPopUpImage, TicketResellPopUpButton, Overlay, TicketResellPopUpTitle, TicketResellPopUpPrice, TicketResellPopUpForm, TicketResellPopUpLabel, TicketResellPopUpInput } from './styles'
 import { Ticket } from '@/models/Tickets/types'
 import { ToastContainer, Zoom, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import handleStatus from '@/utils/Ticket/handleStatus'
 
 type Props = {
-    ticket: Ticket
+    ticket: Ticket,
+    setShowPopup: (showPopup: boolean) => void
 }
 
-const handleRenderResellButton:FC<Props> = ({ ticket }) => {
-  const [showPopup, setShowPopup] = useState<boolean>(false)
-
-  const handleResellClick = () => {
-    setShowPopup(true)
-  }
-
+const handleRenderResellButton:FC<Props> = ({ ticket, setShowPopup }) => {
   const handlePopupClose = () => {
     setShowPopup(false)
   }
@@ -44,10 +39,6 @@ const handleRenderResellButton:FC<Props> = ({ ticket }) => {
     return (
       <>
         <ToastContainer theme='colored' transition={Zoom} position='top-center' />
-        <TicketAction onClick={handleResellClick}>
-          $
-        </TicketAction>
-        {showPopup && (
         <Overlay>
           <TicketResellPopUp>
             <TicketResellCancel onClick={handlePopupClose}>X</TicketResellCancel>
@@ -64,7 +55,6 @@ const handleRenderResellButton:FC<Props> = ({ ticket }) => {
             </TicketResellPopUpForm>
           </TicketResellPopUp>
         </Overlay>
-        )}
       </>
     )
   }

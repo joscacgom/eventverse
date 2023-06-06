@@ -55,7 +55,7 @@ const UserTicketList: FC<Props> = ({ userData }) => {
       )
     : filteredTickets?.length === 0
       ? (
-  <p>Aún no tienes tickets comprados 😭</p>
+  <p>Ningún ticket encontrado 😭</p>
         )
       : (
   <TicketList>
