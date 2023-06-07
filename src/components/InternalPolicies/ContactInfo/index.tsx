@@ -2,7 +2,6 @@ import React from 'react'
 import { ToastContainer, Zoom, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ContactInfoContainer, ContactInfoHeader, ContactInfoFormInputs, ContactInfoFormImage, ContactInfoFormContainer, ContactInfoFormButton, ContactInfoFormLabel, ContactInfoFormInput, ContactInfoFormTextArea, ContactInfoBody, ContactInfoTitle, ContactInfoText, ContactInfoParagraph } from './styles'
-
 const ContactInfo = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -13,9 +12,6 @@ const ContactInfo = () => {
     try {
       const response = await fetch('/api/email', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify(data)
       })
 
@@ -46,14 +42,14 @@ const ContactInfo = () => {
           </ContactInfoBody>
         <ContactInfoFormContainer onSubmit={handleSubmit}>
             <ContactInfoFormInputs>
-                <ContactInfoFormLabel htmlFor='name'>Nombre</ContactInfoFormLabel>
-                <ContactInfoFormInput required type='text' placeholder='Introduce tu nombre' id='name' name='name'></ContactInfoFormInput>
+                <ContactInfoFormLabel htmlFor='user-name'>Nombre</ContactInfoFormLabel>
+                <ContactInfoFormInput type='text' placeholder='Introduce tu nombre' id='user-name' name='name'></ContactInfoFormInput>
 
                 <ContactInfoFormLabel htmlFor='email'>Email</ContactInfoFormLabel>
-                <ContactInfoFormInput required type='email' placeholder='Introduce una dirección válida de correo electrónico' id='email' name='email'></ContactInfoFormInput>
+                <ContactInfoFormInput type='email' placeholder='Introduce una dirección válida de correo electrónico' id='email' name='email'></ContactInfoFormInput>
 
                 <ContactInfoFormLabel htmlFor='message'>Mensaje</ContactInfoFormLabel>
-                <ContactInfoFormTextArea required placeholder='Introduce el mensaje que deseas enviarnos' id='message' name='message'></ContactInfoFormTextArea>
+                <ContactInfoFormTextArea placeholder='Introduce el mensaje que deseas enviarnos' id='message' name='message'></ContactInfoFormTextArea>
                 <ContactInfoFormButton type="submit" >Enviar</ContactInfoFormButton>
 
             </ContactInfoFormInputs>
