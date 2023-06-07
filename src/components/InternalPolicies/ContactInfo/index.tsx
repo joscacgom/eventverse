@@ -43,13 +43,13 @@ const ContactInfo = () => {
         <ContactInfoFormContainer onSubmit={handleSubmit}>
             <ContactInfoFormInputs>
                 <ContactInfoFormLabel htmlFor='user-name'>Nombre</ContactInfoFormLabel>
-                <ContactInfoFormInput type='text' placeholder='Introduce tu nombre' id='user-name' name='name'></ContactInfoFormInput>
+                <ContactInfoFormInput type='text' placeholder='Introduce tu nombre' id='user-name' name='name' maxLength={50}></ContactInfoFormInput>
 
                 <ContactInfoFormLabel htmlFor='email'>Email</ContactInfoFormLabel>
-                <ContactInfoFormInput type='email' placeholder='Introduce una dirección válida de correo electrónico' id='email' name='email'></ContactInfoFormInput>
+                <ContactInfoFormInput type='email' placeholder='Introduce una dirección válida de correo electrónico' id='email' name='email' maxLength={50}></ContactInfoFormInput>
 
                 <ContactInfoFormLabel htmlFor='message'>Mensaje</ContactInfoFormLabel>
-                <ContactInfoFormTextArea placeholder='Introduce el mensaje que deseas enviarnos' id='message' name='message'></ContactInfoFormTextArea>
+                <ContactInfoFormTextArea placeholder='Introduce el mensaje que deseas enviarnos' id='message' name='message' maxLength={255}></ContactInfoFormTextArea>
                 <ContactInfoFormButton type="submit" >Enviar</ContactInfoFormButton>
 
             </ContactInfoFormInputs>
