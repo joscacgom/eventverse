@@ -72,7 +72,12 @@ export const SearchInput = styled.input`
   width: 300px;
   height: 40px;
   padding: 0 1rem;
-  border: 1px solid ${({ theme }) => theme.nord.gray2};
+  border: 1px solid ${({ theme }) => theme.nord.gray3};
   border-radius: 5px;
   outline: none;
+  transition: border-color 0.3s ease;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.nord.gray2};
+  }
 `

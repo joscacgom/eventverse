@@ -21,6 +21,8 @@ export const CardWrapper = styled.div`
 export const CardImage = styled.img`
   height: 40%;
   width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   object-fit: fill;
 `
 

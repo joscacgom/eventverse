@@ -37,23 +37,80 @@ export const BackgroundImage = styled.div`
 `
 
 export const Heading = styled.h1`
-    opacity: 1;
-    text-align: center;
-    margin-top: 1em;
-    font-size: 2.6em;
-    font-weight: bold;
+  opacity: 1;
+  text-align: center;
+  margin-top: 1em;
+  font-size: 2.6em;
+  font-weight: bold;
+  & br {
+    display: block;
+    content: "";
+    margin-top: 0.5em;
+  }
 
-    & br {
-        display: block;
-        content: "";
-        margin-top: 0.5em;
-    }
+  @media (min-width: 1300px) {
+    font-size: 3.4em;
+  }
 
-    @media (min-width: 1300px) {
-        font-size: 3.4em;
-    }
+  @media (max-width: 767px) {
+    font-size: 2em;
+  }
 
-    @media (max-width: 767px) {
-        font-size: 2em;
+
+`
+
+export const SpanClip = styled.span`
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+
+  @keyframes textclip {
+    to {
+        background-position: 200% center;
     }
+}
+  
+`
+
+export const SpanLiquid = styled.span`
+  display: inline;
+  color: transparent;
+  background: linear-gradient(
+    -45deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: liquidAnimation 4s linear infinite;
+  background-size: 200% 100%;
+  background-position: 100% 50%;
+
+  @keyframes liquidAnimation  {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+  }
 `

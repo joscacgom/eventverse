@@ -59,7 +59,7 @@ export const ContactInfoBody = styled.div`
     margin-bottom: 15px;
     font-size: 1.2rem;
 `
-export const ContactInfoFormContainer = styled.div`
+export const ContactInfoFormContainer = styled.form`
     width: 1000px;
     height: 370px;
     display: flex;
