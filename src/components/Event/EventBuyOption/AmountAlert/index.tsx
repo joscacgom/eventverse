@@ -11,7 +11,7 @@ const AmountAlert: FC<Props> = ({ supply }) => {
     <Container status={supply?.lt(10) ? 'Danger' : 'Safe'}>
       <InfoIcon />
       {(supply?.lt(10))
-        ? <Text>¡Solo quedan {BigNumber.from(supply || 0).toString()} tickets disponibles.</Text>
+        ? <Text>¡Solo quedan {BigNumber.from(supply || 0).toString()} tickets disponibles!</Text>
         : <Text>Aún Quedan {BigNumber.from(supply || 0).toString()} tickets disponibles.</Text>
       }
     </Container>

@@ -6,6 +6,7 @@ import Loading from '@/components/Loading'
 import ThirdwebButton from './ThirdwebButton'
 import { PaymentMethod } from './types'
 import CrossmintButton from './CrossmintButton'
+import CustomAlert from './CustomAlert'
 
 type Props = {
   ticket: Ticket | undefined
@@ -28,57 +29,26 @@ const useLogic = ({ ticket, nftDrop, userAddress, amount, totalPrice, paymentMet
 
     const isTicketEndDatePassed = endDate < now
 
-    if (isTicketEndDatePassed) {
-      return (
-        <div>
-          <p>Ha finalizado el plazo de compra.</p>
-        </div>
-      )
-    }
+    return isTicketEndDatePassed
   }, [ticket])
 
   const checkUserLogged = useMemo(() => {
-    if (!userAddress) {
-      return (
-        <div>
-          <p>Por favor, inicia sesión.</p>
-        </div>
-      )
-    }
+    if (!userAddress) return false
+    return true
   }, [userAddress])
 
-  // 3. plazo de compra
   const checkTicketStartDate = useMemo(() => {
     const isTicketStartDatePassed = claimConditions.data && claimConditions.data[0]?.startTime > new Date()
-    if (isTicketStartDatePassed) {
-      return (
-        <div>
-          <Timer date={claimConditions.data[0]?.startTime} />
-        </div>
-      )
-    }
+    return isTicketStartDatePassed
   }, [claimConditions])
 
-  // const checkClaimConditionsHasError = useMemo(() => {
-  //   if (activeClaimCondition.isError) {
-  //     console.log('activeClaimCondition.isError', activeClaimCondition.isError)
-  //     return (
-  //       <div>
-  //         <p>Límite de tickets por persona alcanzado.</p>
-  //       </div>
-  //     )
-  //   }
-  // }, [activeClaimCondition])
+  const checkClaimConditionsHasError = useMemo(() => {
+    return activeClaimCondition.isError
+  }, [activeClaimCondition])
 
   const loadingClaimData = useMemo(() => {
     const loading = activeClaimCondition.isLoading || claimConditions.isLoading
-    if (loading) {
-      return (
-        <div>
-          <Loading type='button' />
-        </div>
-      )
-    }
+    return loading
   }, [activeClaimCondition, claimConditions])
 
   const renderPaymentMethod = useMemo(() => {
@@ -88,25 +58,49 @@ const useLogic = ({ ticket, nftDrop, userAddress, amount, totalPrice, paymentMet
     return <ThirdwebButton contractAddress={ticket.contract_address} />
   }, [ticket, paymentMethod, amount, totalPrice])
 
+  const canClaim = useMemo(() => {
+    return activeClaimCondition.isSuccess
+  }, [
+    activeClaimCondition.isSuccess
+  ])
   const notEnoughTickets = useMemo(() => {
-    if (unClaimedSupply.data?.eq(0)) {
-      return (
-        <div>
-          <p>Agotado 😭</p>
-        </div>
-      )
-    }
+    return unClaimedSupply.data?.eq(0)
   }, [unClaimedSupply])
 
   const renderPaymentLogic = () => {
-    if (checkTicketEndDate) return checkTicketEndDate
-    if (checkUserLogged) return checkUserLogged
-    if (checkTicketStartDate) return checkTicketStartDate
-    if (loadingClaimData) return loadingClaimData
-    if (notEnoughTickets) return notEnoughTickets
-    if (renderPaymentMethod) return renderPaymentMethod
+    if (checkTicketEndDate) {
+      return (
+      <CustomAlert status='Error' text='⌛ Ha finalizado el plazo de compra.' />
+      )
+    } else if (!checkUserLogged) {
+      return (
+      <CustomAlert status='Info' text='🤓 Por favor, inicia sesión.' />
+      )
+    } else if (checkTicketStartDate) {
+      const startTime = claimConditions.data && claimConditions.data[0]?.startTime
+      if (startTime) {
+        return <Timer date={startTime} />
+      }
+    } else if (checkClaimConditionsHasError) {
+      return (
+      <CustomAlert status='Error' text='🎟️ Límite de tickets por persona alcanzado.' />
+      )
+    } else if (canClaim) {
+      if (loadingClaimData) {
+        return <Loading type='button' />
+      } else if (notEnoughTickets) {
+        return (
+        <CustomAlert status='Error' text='Agotado 😭' />
+        )
+      } else {
+        return (
+        <div>{renderPaymentMethod}</div>
+        )
+      }
+    } else {
+      return <Loading type='button' />
+    }
   }
-
   return {
     renderPaymentLogic
   }
