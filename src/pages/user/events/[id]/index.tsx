@@ -1,0 +1,33 @@
+import { Layout } from '@/components'
+import React, { useEffect, useState } from 'react'
+import { MOCK_EVENTS } from '@/models/Events/mock'
+import OrganizerEventDetails from '@/containers/Organizer/Events/EventDetails'
+import { useRouter } from 'next/router'
+import { Event } from '@/models/Events/types'
+
+const EventDetails = () => {
+  const [event, setEvent] = useState<null | Event>(null)
+  const router = useRouter()
+  const { id } = router.query
+
+  useEffect(() => {
+    if (id) {
+      const event = MOCK_EVENTS.find((event) => event.id === parseInt(id as string))
+      if (!event) {
+        router.push('/user/event')
+      } else {
+        setEvent(event)
+      }
+    }
+  }, [id])
+
+  if (!event) return null
+
+  return (
+    <Layout title={`${event.name}`}>
+        <OrganizerEventDetails event={event} />
+    </Layout>
+  )
+}
+
+export default EventDetails

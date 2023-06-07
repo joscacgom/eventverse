@@ -1,7 +1,18 @@
 import styled from 'styled-components'
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 70vw;
+  height: auto;
+  gap: 2em;
+  margin-top: 2em;
+  margin-bottom: 4em;
+`
+
 export const Title = styled.h1`
-  font-size: 2.6em;
+  font-size: 2em;
   font-weight: 600;
   margin-bottom: 10px;
 `
@@ -10,7 +21,7 @@ type SubtitleProps = {
   bold?: boolean
 }
 export const Subtitle = styled.h2<SubtitleProps>`
-  font-size: 1.8em;
+  font-size: 1.4em;
   font-weight: ${({ bold }) => bold ? 600 : 400};
 `
 
@@ -23,7 +34,7 @@ export const TransferButton = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 9px;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 400;
   padding: 10px 20px;
   background-color: ${({ theme }) => theme.nord.black0};

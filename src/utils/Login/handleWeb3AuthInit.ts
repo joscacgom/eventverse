@@ -64,7 +64,7 @@ export const handleWeb3AuthInit = () => {
               defaultLanguage: 'es',
               appLogo: '/favicon.ico'
             },
-            web3AuthNetwork: 'cyan'
+            web3AuthNetwork: 'testnet'
           })
 
           const openloginAdapter = new OpenloginAdapter({
@@ -123,7 +123,7 @@ export const handleWeb3AuthInit = () => {
           const metamaskAdapter = new MetamaskAdapter({
             clientId,
             sessionTime: 3600, // 1 hour in seconds
-            web3AuthNetwork: 'cyan',
+            web3AuthNetwork: 'testnet',
             chainConfig: {
               chainNamespace: CHAIN_NAMESPACES.EIP155,
               chainId: '0x13881'
@@ -135,7 +135,7 @@ export const handleWeb3AuthInit = () => {
               chainNamespace: CHAIN_NAMESPACES.EIP155,
               chainId: '0x13881'
             },
-            web3AuthNetwork: 'cyan'
+            web3AuthNetwork: 'testnet'
           })
 
           // it will add/update  the metamask adapter in to web3auth class

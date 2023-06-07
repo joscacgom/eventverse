@@ -70,3 +70,7 @@ export const normalizeEvent = (event: any): Event => {
     time_zone: event.time_zone
   }
 }
+
+export const normalizeEvents = (events: any[]): Event[] => {
+  return events.map((event) => normalizeEvent(event))
+}
