@@ -56,7 +56,7 @@ export const handleWeb3AuthInit = () => {
             clientId,
             chainConfig: {
               chainNamespace: CHAIN_NAMESPACES.EIP155,
-              chainId: '0x13881' // Chain ID for Mumbai testnet
+              chainId: '0x13881' // Chain ID for Mumbai test
             },
             uiConfig: {
               theme: 'light',

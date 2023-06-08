@@ -13,6 +13,7 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
     }
     const data = await response.json()
     const maticBalance = (Number(ticket.price) / data)
+    console.log(maticBalance)
     const nftContract: any = await sdk?.deployer.deployNFTDrop({
       name: ticket.name,
       primary_sale_recipient: organizerAddress,
