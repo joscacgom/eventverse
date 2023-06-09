@@ -1,23 +1,26 @@
 import React, { FC } from 'react'
-import { CardContent, CardImage, CardWrapper, Date, Description, Title } from './styles'
-import { Event } from '@/models/Events/types'
+import { CardContent, CardImage, CardWrapper, Description, Title } from './styles'
 import { useRouter } from 'next/router'
+import { TicketListingItem } from '@/models/Resell/types'
 
 type Props = {
-  event: Event
+  ticketEvent: TicketListingItem
 }
-const EventCard: FC<Props> = ({ event }) => {
+const EventCard: FC<Props> = ({ ticketEvent }) => {
   const router = useRouter()
   const handleClickEvent = (id: number) => () => {
     router.push(`/resell/event/${id}`)
   }
+
+  const shortDescription = ticketEvent.asset.description.substring(0, 40) + '...'
+  const ticketId = Number(ticketEvent.asset.id)
+
   return (
-    <CardWrapper onClick={handleClickEvent(event.id)}>
-      <CardImage src={event.image} />
+    <CardWrapper onClick={handleClickEvent(ticketId)}>
+      <CardImage src={ticketEvent.asset.image} />
       <CardContent>
-        <Title>{event.name}</Title>
-        <Date>{event.start_date}</Date>
-        <Description>{event.description}</Description>
+        <Title>{ticketEvent.asset.name}</Title>
+        <Description>{shortDescription}</Description>
         <img src={'/images/avatar-events.png'} width={60} height={20} />
       </CardContent>
     </CardWrapper>

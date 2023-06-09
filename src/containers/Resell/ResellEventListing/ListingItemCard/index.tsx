@@ -1,20 +1,21 @@
 import React, { FC } from 'react'
-import { BuyButton, CardContent, CardImage, CardWrapper, Price, Title } from './styles'
-import { useRouter } from 'next/router'
-import { ListingItem } from '@/models/Resell/types'
+import { CardContent, CardImage, CardWrapper, Price, Title } from './styles'
+import { TicketListingItem } from '@/models/Resell/types'
+import CrossmintButton from '@/components/Event/EventBuyOption/CrossmintButton'
 
 type Props = {
-  listingItem: ListingItem
+  listingItem: TicketListingItem
 }
 const EventCard: FC<Props> = ({ listingItem }) => {
-  const router = useRouter()
+  const maticPrice = listingItem.buyoutCurrencyValuePerToken.displayValue
+
   return (
-    <CardWrapper onClick={() => router.push(`/ticket/${listingItem.id}`)}>
-      <CardImage src={listingItem.image} />
+    <CardWrapper>
+      <CardImage src={listingItem.asset.image} />
       <CardContent>
-        <Title>{listingItem.title}</Title>
-        <Price>{listingItem.price}€</Price>
-        <BuyButton>Comprar</BuyButton>
+        <Title>{listingItem.asset.name}</Title>
+        <Price>{maticPrice} MATIC</Price>
+        <CrossmintButton quantity={1} totalPrice={0.01} />
       </CardContent>
     </CardWrapper>
   )
