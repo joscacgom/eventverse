@@ -1,20 +1,38 @@
 import React, { FC } from 'react'
-import { BuyButton, CardContent, CardImage, CardWrapper, Price, Title } from './styles'
-import { useRouter } from 'next/router'
-import { ListingItem } from '@/models/Resell/types'
+import { CardContent, CardImage, CardWrapper, Price, Title, BuyButton } from './styles'
+import { TicketListingItem } from '@/models/Resell/types'
+import { ConnectWallet, useAddress, useContract, useNetworkMismatch } from '@thirdweb-dev/react'
 
 type Props = {
-  listingItem: ListingItem
+  listingItem: TicketListingItem
 }
 const EventCard: FC<Props> = ({ listingItem }) => {
-  const router = useRouter()
+  const maticPrice = listingItem.buyoutCurrencyValuePerToken.displayValue
+  const { contract } = useContract(process.env.NEXT_PUBLIC_MARKETPLACE_ADDR, 'marketplace')
+  const networkMismatch = useNetworkMismatch()
+  const userAddress = useAddress()
+
+  const onClickBuyTicket = async () => {
+    if (!contract) return
+    try {
+      await contract.buyoutListing(listingItem.id, 1)
+    } catch (error) {
+      console.log(error)
+      alert('Error al comprar ticket, comprueba que tienes sufiente MATIC en tu wallet')
+    }
+  }
+
   return (
-    <CardWrapper onClick={() => router.push(`/ticket/${listingItem.id}`)}>
-      <CardImage src={listingItem.image} />
+    <CardWrapper>
+      <CardImage src={listingItem.asset.image} />
       <CardContent>
-        <Title>{listingItem.title}</Title>
-        <Price>{listingItem.price}€</Price>
-        <BuyButton>Comprar</BuyButton>
+        <Title>{listingItem.asset.name}</Title>
+        <Price>{maticPrice} MATIC</Price>
+        {
+          (networkMismatch || !userAddress)
+            ? <ConnectWallet />
+            : <BuyButton onClick={onClickBuyTicket}>Comprar ticket</BuyButton>
+        }
       </CardContent>
     </CardWrapper>
   )

@@ -1,20 +1,26 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Container, EventList, Title, Header, Search, SearchInput } from './styles'
 import EventCard from './EventCard'
-import { MOCK_EVENTS } from '@/models/Events/mock'
+import { useListedTickets } from '@/hooks/useListedTickets'
+import Loading from '@/components/Loading'
 
 const MainSection = () => {
   const [searchTerm, setSearchTerm] = useState<string>('')
+  const { resellTickets, isLoading } = useListedTickets()
+  console.log(resellTickets, isLoading)
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchTerm(e.target.value)
 
-  const filteredEvents = MOCK_EVENTS.filter((e) =>
-    e.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredEvents = useMemo(() => {
+    if (searchTerm === '') return resellTickets
+    return resellTickets.filter((ticketEvent) =>
+      ticketEvent.asset.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }, [resellTickets, searchTerm])
 
   const handleRenderEventList = () =>
-    filteredEvents.map((event) => <EventCard key={event.id} event={event} />)
+    filteredEvents.map((ticketEvent) => <EventCard key={ticketEvent.id} ticketEvent={ticketEvent} />)
 
   return (
     <Container>
@@ -24,7 +30,11 @@ const MainSection = () => {
           <SearchInput placeholder="🔎 Buscar eventos..." onChange={handleSearchInput} />
         </Search>
       </Header>
-      <EventList>{handleRenderEventList()}</EventList>
+      <EventList>
+        {
+          isLoading ? <Loading type='main' /> : handleRenderEventList()
+        }
+      </EventList>
     </Container>
   )
 }
