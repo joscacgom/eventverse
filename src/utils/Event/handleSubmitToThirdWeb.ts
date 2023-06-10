@@ -6,6 +6,7 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
   const privateKey = JSON.parse(getUserCookie('userData')).privateKey
   const organizerAddress = JSON.parse(getUserCookie('userData')).address[0]
   const sdk = ThirdwebSDK.fromPrivateKey(privateKey, 'mumbai')
+
   try {
     const response = await fetch('/api/crypto')
     if (!response.ok) {
@@ -13,7 +14,6 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
     }
     const data = await response.json()
     const maticBalance = (Number(ticket.price) / data)
-    console.log(maticBalance)
     const nftContract: any = await sdk?.deployer.deployNFTDrop({
       name: ticket.name,
       primary_sale_recipient: organizerAddress,
@@ -48,6 +48,7 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
     const nftImageURL = nftMetadata?.image
     return { nftContract, nftImageURL }
   } catch (error) {
+    console.log('Error: ', error)
     throw new Error('Ticket submission failed!')
   }
 }

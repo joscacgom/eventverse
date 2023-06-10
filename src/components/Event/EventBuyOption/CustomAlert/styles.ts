@@ -10,6 +10,7 @@ export const Container = styled.div<ContainerProps>`
     justify-content:flex-start;
     width:100%;
     height:auto;
+    text-align:center;
     background-color: ${({ status, theme }) =>
         status === 'Info' ? theme.nord.blue : theme.nord.red};    
     border-radius: 9px;

@@ -20,16 +20,12 @@ const ThirdwebButton: FC<Props> = ({ contractAddress, quantity, ticketId }) => {
     <ToastContainer theme='colored' transition={Zoom} position='top-center' />
     <Web3Button
         contractAddress={contractAddress}
-        onSubmit={async () => toast.promise(createTicketBuy({ walletAddress, ticketId }), {
-          pending: 'Procesando datos de tu compra... ⏳',
-          success: 'Tu compra ha sido procesada exitosamente! 😍',
-          error: 'Hubo un error al procesar tu compra! 😭 Por favor, intenta nuevamente.'
-        })}
+        onSuccess={async () => createTicketBuy({ walletAddress, ticketId })}
         onError={() => { toast.error('Puede que hayas alcanzado el límite de compras por persona 😢') }}
         action={() =>
           claimNft({
             to: walletAddress,
-            quantity: BigNumber.from(quantity || 0)
+            quantity: BigNumber.from(quantity || 1)
           })
       }
         theme="dark"

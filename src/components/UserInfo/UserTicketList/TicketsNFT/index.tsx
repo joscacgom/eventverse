@@ -31,7 +31,6 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
   const router = useRouter()
   const [showPopup, setShowPopup] = useState<boolean>(false)
   const userTicket = { ...ticket, quantity: data?.length || 0 }
-  console.log(data)
 
   const handleEventClick = () => {
     router.push(`/event/${ticket.event_id}`)
@@ -68,6 +67,7 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
             }
           </TicketStatus>
         </TicketItem>
+
         {
           showPopup && (
             <ResellTicketForm ticket={userTicket} setShowPopup={setShowPopup} ownedNFT={data} />

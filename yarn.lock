@@ -1560,9 +1560,9 @@
     "@paperxyz/sdk-common-utilities" "*"
 
 "@paperxyz/sdk-common-utilities@*":
-  version "0.0.4"
-  resolved "https://registry.npmjs.org/@paperxyz/sdk-common-utilities/-/sdk-common-utilities-0.0.4.tgz"
-  integrity sha512-MV7n0xFYxNPSQeYNWlWHx2jEnqxfOnkA6kl6GpbZFtx0tbupslIlsNRXq14q10LQ8c2cV1ichNvvxsgfjb5Ygw==
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/@paperxyz/sdk-common-utilities/-/sdk-common-utilities-0.0.5.tgz"
+  integrity sha512-Udx/CKGBKDicHqYKvcE5K+6B+scHOgx+s6eNNMAOLMnuawuzbvJbMmzIap9qyeUBIDCrKQaOpwnXxFctAu5WTA==
 
 "@pedrouid/environment@^1.0.1":
   version "1.0.1"
@@ -4469,7 +4469,14 @@ browserslist@^4.21.3, "browserslist@>= 4.21.0":
     node-releases "^2.0.8"
     update-browserslist-db "^1.0.10"
 
-bs58@^4.0.0, bs58@^4.0.1:
+bs58@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.npmjs.org/bs58/-/bs58-4.0.1.tgz"
+  integrity sha512-Ok3Wdf5vOIlBrgCvTq96gBkJw+JUEzdBgyaza5HLtPm7yTHkjRy8+JzNyHF7BHa0bNWOQIp3m5YF0nnFcOIKLw==
+  dependencies:
+    base-x "^3.0.2"
+
+bs58@^4.0.1:
   version "4.0.1"
   resolved "https://registry.npmjs.org/bs58/-/bs58-4.0.1.tgz"
   integrity sha512-Ok3Wdf5vOIlBrgCvTq96gBkJw+JUEzdBgyaza5HLtPm7yTHkjRy8+JzNyHF7BHa0bNWOQIp3m5YF0nnFcOIKLw==

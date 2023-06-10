@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const TicketResellCancel = styled.button`
   width: 40px;
@@ -20,6 +20,40 @@ export const TicketResellCancel = styled.button`
     font-size: 10px;
 
   }
+`
+
+export const FirstContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+
+`
+
+export const SecondContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+`
+
+export const WarnText = styled.p`
+  width: 100%;
+  height: 20px;
+  font-weight: 500;
+  font-style: normal;
+  font-family: "Inter-Medium", "Inter", sans-serif;
+  color: ${({ theme }) => theme.nord.red};
+  font-size: 14px;
+  text-align: center;
 `
 
 export const TicketResellPopUpTitle = styled.p`
@@ -50,7 +84,7 @@ export const TicketResellPopUpPrice = styled.p`
 
 export const TicketResellPopUpForm = styled.form`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
@@ -117,7 +151,7 @@ export const TicketResellPopUpImage = styled.img`
 export const TicketResellPopUp = styled.div`
   position: fixed;
   margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: ${({ theme }) => theme.nord.white};
   padding: 2rem;
   border-radius: 0.5rem;
   display: flex;
@@ -125,7 +159,8 @@ export const TicketResellPopUp = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  box-shadow: 0 0.25rem 0.75rem ${({ theme }) => theme.nord.gray1};;
+  box-shadow: 0 0.25rem 0.75rem ${({ theme }) => theme.nord.gray1};
+  width: 30%;
   
   @media (max-width: 768px) {
     padding: 1rem;
@@ -149,8 +184,10 @@ export const TicketResellPopUpHeader = styled.h2`
     font-size: 22px;
     }
 `
-
-export const TicketResellPopUpButton = styled.button`
+type Props = {
+  disabled: boolean
+}
+export const TicketResellPopUpButton = styled.button<Props>`
   height: 40px;
   display: flex;
   flex-direction: row;
@@ -159,7 +196,7 @@ export const TicketResellPopUpButton = styled.button`
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
   background-color: #222222;
   align-content: center;
-  border:none;
+  border: none;
   color: ${({ theme }) => theme.nord.white};
   border-radius: 8px;
   font-weight: 600;
@@ -168,12 +205,20 @@ export const TicketResellPopUpButton = styled.button`
   color: #ffffff;
   font-size: 14px;
   padding: 0 1rem;
-  cursor: pointer;
-  &:hover {
-    background-color: ${({ theme }) => theme.nord.white};
-    color: ${({ theme }) => theme.nord.black0};
-  }
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
+
+  ${({ disabled }) =>
+    !disabled &&
+    css`
+      &:hover {
+        background-color: ${({ theme }) => theme.nord.white};
+        color: ${({ theme }) => theme.nord.black0};
+      }
+    `}
+
   @media (max-width: 768px) {
-    width:50%;
-   }
+    width: 50%;
+  }
 `
