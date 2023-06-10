@@ -10,6 +10,7 @@ const ThirdwebButton: FC<Props> = ({ contractAddress, quantity = 1 }) => (
         contractAddress={contractAddress}
         action={(contract) => contract.erc721.claim(quantity)}
         theme="dark"
+
     >
         Comprar con Wallet
     </Web3Button>

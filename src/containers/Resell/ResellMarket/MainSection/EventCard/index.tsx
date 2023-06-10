@@ -8,8 +8,10 @@ type Props = {
 }
 const EventCard: FC<Props> = ({ ticketEvent }) => {
   const router = useRouter()
+
   const handleClickEvent = (id: number) => () => {
-    router.push(`/resell/event/${id}`)
+    const collectionAddr = ticketEvent.assetContractAddress
+    router.push(`/resell/event/${collectionAddr}`)
   }
 
   const shortDescription = ticketEvent.asset.description.substring(0, 40) + '...'

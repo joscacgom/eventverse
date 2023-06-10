@@ -1,13 +1,26 @@
 import React, { FC } from 'react'
-import { CardContent, CardImage, CardWrapper, Price, Title } from './styles'
+import { CardContent, CardImage, CardWrapper, Price, Title, BuyButton } from './styles'
 import { TicketListingItem } from '@/models/Resell/types'
-import CrossmintButton from '@/components/Event/EventBuyOption/CrossmintButton'
+import { ConnectWallet, useAddress, useContract, useNetworkMismatch } from '@thirdweb-dev/react'
 
 type Props = {
   listingItem: TicketListingItem
 }
 const EventCard: FC<Props> = ({ listingItem }) => {
   const maticPrice = listingItem.buyoutCurrencyValuePerToken.displayValue
+  const { contract } = useContract(process.env.NEXT_PUBLIC_MARKETPLACE_ADDR, 'marketplace')
+  const networkMismatch = useNetworkMismatch()
+  const userAddress = useAddress()
+
+  const onClickBuyTicket = async () => {
+    if (!contract) return
+    try {
+      await contract.buyoutListing(listingItem.id, 1)
+    } catch (error) {
+      console.log(error)
+      alert('Error al comprar ticket, comprueba que tienes sufiente MATIC en tu wallet')
+    }
+  }
 
   return (
     <CardWrapper>
@@ -15,7 +28,11 @@ const EventCard: FC<Props> = ({ listingItem }) => {
       <CardContent>
         <Title>{listingItem.asset.name}</Title>
         <Price>{maticPrice} MATIC</Price>
-        <CrossmintButton quantity={1} totalPrice={0.01} />
+        {
+          (networkMismatch || !userAddress)
+            ? <ConnectWallet />
+            : <BuyButton onClick={onClickBuyTicket}>Comprar ticket</BuyButton>
+        }
       </CardContent>
     </CardWrapper>
   )
