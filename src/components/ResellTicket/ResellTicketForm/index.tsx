@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { TicketResellPopUp, TicketResellPopUpHeader, TicketResellCancel, WarnText, FirstContainer, SecondContainer, TicketResellPopUpImage, TicketResellPopUpButton, Overlay, TicketResellPopUpTitle, TicketResellPopUpPrice, TicketResellPopUpForm, TicketResellPopUpLabel, TicketResellPopUpInput } from './styles'
+import { TicketResellPopUp, TicketResellPopUpHeader, TicketResellCancel, RoyaltiesContainer, Royalty, WarnText, FirstContainer, SecondContainer, TicketResellPopUpImage, TicketResellPopUpButton, Overlay, TicketResellPopUpTitle, TicketResellPopUpPrice, TicketResellPopUpForm, TicketResellPopUpLabel, TicketResellPopUpInput } from './styles'
 import { Ticket } from '@/models/Tickets/types'
 import { ToastContainer, Zoom, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -55,56 +55,62 @@ const handleRenderResellButton: FC<Props> = ({ ticket, setShowPopup, ownedNFT })
 
   if (handleStatus({ ticket }) === 'Activo') {
     return (
-  <>
-    <Overlay>
-      <ToastContainer theme='colored' transition={Zoom} position='top-center' />
-      <TicketResellPopUp>
-        <TicketResellCancel onClick={handlePopupClose}>X</TicketResellCancel>
-        <TicketResellPopUpHeader>¡Revende tu ticket!</TicketResellPopUpHeader>
-        <TicketResellPopUpImage src={ticket.image} />
-        <TicketResellPopUpTitle>{ticket.name}</TicketResellPopUpTitle>
-        <TicketResellPopUpPrice>{ticket.price}€</TicketResellPopUpPrice>
-        {isLoading
-          ? (
-          <Loading type='main' />
-            )
-          : (
-          <TicketResellPopUpForm onSubmit={handleConfirmResellTicket}>
-            <FirstContainer>
-              <TicketResellPopUpLabel htmlFor='nftId'>Ticket</TicketResellPopUpLabel>
-              <TicketResellPopUpInput name="nftId" id="nftId" as='select' required>
-                {ticketsAvailable.map((nft) => (
-                  <option key={nft.metadata.id} value={nft.metadata.id}>
-                    {ticket.name} id: {nft.metadata.id}
-                  </option>
-                ))}
-              </TicketResellPopUpInput>
-              <TicketResellPopUpLabel htmlFor="price">Precio</TicketResellPopUpLabel>
-              <TicketResellPopUpInput name="price" id="price" type="number" min="0" defaultValue="0" />
-              {ticketsAvailable.length !== 0
-                ? (
-                <TicketResellPopUpButton type='submit' disabled={false}>Revender</TicketResellPopUpButton>
-                  )
-                : (
-                <TicketResellPopUpButton type='submit' disabled>Revender</TicketResellPopUpButton>
-                  )}
-            </FirstContainer>
-            <CustomAlert
-              status='Info'
-              text='⚠️ El ticket estará disponible en el mercado de reventa durante 7 días. Durante este tiempo, no podrás acceder a él.'
-            />
-            {ticketsAvailable.length === 0
+<>
+  <Overlay>
+    <ToastContainer theme='colored' transition={Zoom} position='top-center' />
+    <TicketResellPopUp>
+      <TicketResellCancel onClick={handlePopupClose}>X</TicketResellCancel>
+      <TicketResellPopUpHeader>¡Revende tu ticket!</TicketResellPopUpHeader>
+      <TicketResellPopUpImage src={ticket.image} />
+      <TicketResellPopUpTitle>{ticket.name}</TicketResellPopUpTitle>
+      <TicketResellPopUpPrice>{ticket.price}€</TicketResellPopUpPrice>
+      {isLoading
+        ? (
+        <Loading type='main' />
+          )
+        : (
+        <TicketResellPopUpForm onSubmit={handleConfirmResellTicket}>
+          <FirstContainer>
+            <TicketResellPopUpLabel htmlFor='nftId'>Ticket</TicketResellPopUpLabel>
+            <TicketResellPopUpInput name="nftId" id="nftId" as='select' required>
+              {ticketsAvailable.map((nft) => (
+                <option key={nft.metadata.id} value={nft.metadata.id}>
+                  {ticket.name} id: {nft.metadata.id}
+                </option>
+              ))}
+            </TicketResellPopUpInput>
+            <TicketResellPopUpLabel htmlFor="price">Precio</TicketResellPopUpLabel>
+            <TicketResellPopUpInput name="price" id="price" type="number" min="0" defaultValue="0" />
+            {ticketsAvailable.length !== 0
               ? (
-              <SecondContainer>
-                <WarnText>❌ No tienes tickets disponibles para revender</WarnText>
-              </SecondContainer>
+              <TicketResellPopUpButton type='submit' disabled={false}>Revender</TicketResellPopUpButton>
                 )
-              : null}
-          </TicketResellPopUpForm>
-            )}
-      </TicketResellPopUp>
-    </Overlay>
+              : (
+              <TicketResellPopUpButton type='submit' disabled>Revender</TicketResellPopUpButton>
+                )}
+          </FirstContainer>
+          {ticketsAvailable.length !== 0 && (
+            <>
+              <RoyaltiesContainer>
+                <Royalty>* {ticket.organizer_royalty}% comisión del organizador y 5% de EventVerse.</Royalty>
+              </RoyaltiesContainer>
+              <CustomAlert
+                status='Info'
+                text='⚠️ El ticket estará disponible en el mercado de reventa durante 7 días. Durante este tiempo, no podrás acceder a él.'
+              />
+            </>
+          )}
+          {ticketsAvailable.length === 0 && (
+            <SecondContainer>
+              <WarnText>❌ No tienes tickets disponibles para revender</WarnText>
+            </SecondContainer>
+          )}
+        </TicketResellPopUpForm>
+          )}
+    </TicketResellPopUp>
+  </Overlay>
 </>
+
     )
   }
 

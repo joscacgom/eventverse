@@ -40,12 +40,13 @@ export const OptionContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
   font-weight: 700;
   font-style: normal;
   font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
   font-size: 14px;
   height: 50px;
-  padding: 0 20px;
+  padding: 1rem;
   width: 100%;
   gap:1rem;
   margin-top:2rem;
@@ -60,6 +61,9 @@ export const OptionContainer = styled.div`
     width: 100%;
     text-align: center;
     justify-content: center;
+    p{
+      display: none;
+    }
     margin: 0;
   }
 `

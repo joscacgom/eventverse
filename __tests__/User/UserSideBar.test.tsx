@@ -21,8 +21,9 @@ describe('UserSideBar', () => {
             </ThemeProvider>
     )
 
-    expect(screen.getAllByRole('img', { hidden: true })).toHaveLength(2)
     expect(screen.getByText('Mis tickets')).toBeInTheDocument()
     expect(screen.getByText('Mis datos')).toBeInTheDocument()
+    expect(screen.getByText('Mis eventos')).toBeInTheDocument()
+    expect(screen.getByText('Mis finanzas')).toBeInTheDocument()
   })
 })

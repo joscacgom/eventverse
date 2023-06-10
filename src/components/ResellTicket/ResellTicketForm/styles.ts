@@ -21,6 +21,32 @@ export const TicketResellCancel = styled.button`
 
   }
 `
+export const RoyaltiesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px 0px 0px 0px;
+  @media (max-width: 768px) {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+`
+
+export const Royalty = styled.small`
+  width: auto;
+  height: auto;
+  font-weight: 500;
+  text-align: center;
+  color: ${({ theme }) => theme.nord.black0};
+  font-style: normal;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  @media (max-width: 768px) {
+    font-size: 10px;
+    }
+`
 
 export const FirstContainer = styled.div`
   display: flex;
