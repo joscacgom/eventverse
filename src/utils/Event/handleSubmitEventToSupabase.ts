@@ -1,32 +1,43 @@
 /* eslint-disable camelcase */
-import { EventTableSupabase } from '@/models/Events/types'
 import { TicketTableSupabase } from '@/models/Tickets/types'
 import { handleSubmitImageToCloudinary } from '../Event/handleSubmitImageToCloudinary'
 import { handleSubmitToThirdWeb } from './handleSubmitToThirdWeb'
 import { supabase } from '@/config'
 
-export const handleSubmitEventToSupabase = async (event: EventTableSupabase, ticket: TicketTableSupabase) => {
+type Props = {
+  eventToSubmit: any
+  ticketToSubmit: TicketTableSupabase
+  userEmail: string | undefined
+}
+export const handleSubmitEventToSupabase = async ({ eventToSubmit, ticketToSubmit, userEmail }: Props) => {
   try {
-    const organizerId = 1
-    const imageURL = await handleSubmitImageToCloudinary(event.image)
+    const imageURL = await handleSubmitImageToCloudinary(eventToSubmit.image)
+
+    const { data: organizerData, error: organizerError } = await supabase
+      .from('organizer')
+      .select()
+      .eq('email', userEmail)
+
+    const organizer_id = organizerData?.[0].id
+
     const { data: eventData, error: eventError } = await supabase
       .from('event')
-      .insert([{ ...event, organizerId, image: imageURL }])
+      .insert([{ ...event, organizer_id, image: imageURL }])
       .select()
 
-    if (eventError) {
+    if (eventError || organizerError) {
       throw new Error('Event submission failed!')
     }
 
     const eventId = eventData?.[0].id
 
-    const { nftContract, nftImageURL } = await handleSubmitToThirdWeb(ticket)
+    const { nftContract, nftImageURL } = await handleSubmitToThirdWeb(ticketToSubmit)
 
     const { error: ticketError } = await supabase
       .from('ticket_drop')
       .insert([
         {
-          ...ticket,
+          ...ticketToSubmit,
           event_id: eventId,
           contract_address: nftContract,
           image: nftImageURL
