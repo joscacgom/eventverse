@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { EventCreationForm, EventCreationSidebar, EventTicketCreationForm, EventPreviewCreationForm } from '@/components/Event'
 import { MainContainer, EventCreationFormButton, ButtonContainer } from './styles'
 import { useRouter } from 'next/router'
@@ -7,12 +7,15 @@ import 'react-toastify/dist/ReactToastify.css'
 import { handleSubmitEventToSupabase } from '@/utils/Event/handleSubmitEventToSupabase'
 import { handleEventObjects } from '@/utils/Event/handleEventObjects'
 import { validationRules } from '@/utils/Event/validationRules'
+import { getUserCookie } from '@/utils/Login/userCookie'
+import { User } from '@/models/Users/types'
 
 type FormData = {
   [part: string]: any;
 };
 
 const EventCreation = () => {
+  const [userData, setUserData] = useState<User>()
   const [step, setStep] = useState<number>(1)
   const [sendingData, setSendingData] = useState<boolean>(false)
   const router = useRouter()
@@ -116,7 +119,10 @@ const EventCreation = () => {
   const handleSubmit = () => {
     setSendingData(true)
     const { eventToSubmit, ticketToSubmit } = handleEventObjects(formData.part1, formData.part2)
-    toast.promise(handleSubmitEventToSupabase(eventToSubmit, ticketToSubmit), {
+    const creationData = {
+      eventToSubmit, ticketToSubmit, userEmail: userData?.email
+    }
+    toast.promise(handleSubmitEventToSupabase(creationData), {
       pending: 'Procesando datos de tu evento, la creación de los NFT puede tardar unos minutos... ⏳',
       success: 'Tu evento ha sido creado exitosamente! 😍',
       error: 'Hubo un error al crear tu evento! 😭 Por favor, intenta nuevamente.'
@@ -152,6 +158,15 @@ const EventCreation = () => {
   const handleDecreaseTextRender = () => {
     return step === 1 ? 'Cancelar' : 'Anterior paso'
   }
+
+  useEffect(() => {
+    const userCookie = getUserCookie('userData')
+    if (!userCookie) {
+      alert('Debes iniciar sesión para crear un evento')
+    } else {
+      setUserData(userCookie)
+    }
+  }, [])
 
   return (
     <MainContainer>
