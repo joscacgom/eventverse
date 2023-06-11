@@ -93,7 +93,7 @@ export const TicketContainer = styled.div`
   
   gap: 1rem;
   width: 410px;
-  height: 247px;
+  height: auto;
   
   border-radius: 9px;
   border: 1px solid ${({ theme }) => theme.nord.gray3};
@@ -177,17 +177,14 @@ export const TicketActionAmount = styled.input`
 `
 
 export const TicketImage = styled.img`
-  width: 141px;
-  height: 138px;
+  width: 120px;
+  height: 120px;
   display: block;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 9px;
-  @media (max-width: 768px) {
-   
-    }
 `
 
 export const TicketAction = styled.div`

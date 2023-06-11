@@ -14,7 +14,7 @@ const EventCard: FC<Props> = ({ event }) => {
           <CardImage src={event.image} />
           <CardContent>
             <Title>{event.name}</Title>
-            <Date>{event.start_date}</Date>
+            <Date>{event.start_date.split('T')[0] + ' ' + event.start_date.split('T')[1]}</Date>
             <Description>{shortDescription}...</Description>
             <img src={'/images/avatar-events.png'} width={60} height={20} />
           </CardContent>

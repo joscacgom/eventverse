@@ -52,6 +52,7 @@ const UserMainContent:FC<Props> = ({ userData }) => {
                     </PrivateKeyButton>
                 </InfoContainer>
             </InfoMainContainer>
+            </MainContainer>
 
              {privateKey &&
                 <PrivateKeyContainer>
@@ -64,8 +65,6 @@ const UserMainContent:FC<Props> = ({ userData }) => {
                     <button onClick={handlePrivateKey}>Cerrar</button>
                 </PrivateKeyContainer>
                 }
-
-        </MainContainer>
 
     </>
 

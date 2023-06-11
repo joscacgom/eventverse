@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { FC } from 'react'
 import {
   Container,
@@ -14,67 +14,26 @@ import {
   TicketSpan
 } from './styles'
 import { PaymentMethod, Props } from './types'
-import CrossmintButton from './CrossmintButton'
-import ThirdwebButton from './ThirdwebButton'
 import useTicketsByEvent from '@/hooks/useTicketsByEvent'
 import AmountAlert from './AmountAlert'
-import { useActiveClaimConditionForWallet, useClaimConditions, useContract, useUnclaimedNFTSupply } from '@thirdweb-dev/react'
-import Timer from './Timer'
+import { useContract, useUnclaimedNFTSupply } from '@thirdweb-dev/react'
+import useLogic from './useLogic'
 import { getUserCookie } from '@/utils/Login/userCookie'
-import Loading from '@/components/Loading'
 
 const EventBuyOption: FC<Props> = ({ event }) => {
   const { ticket } = useTicketsByEvent({ event_id: event.id })
-  const userAddress = JSON.parse(getUserCookie('userData')).address[0] || ''
+  const userAddress = JSON.parse(getUserCookie('userData'))?.address[0] || ''
   const [amount, setAmount] = useState(1)
   const [totalPrice, setTotalPrice] = useState<number>(ticket ? ticket.price : 0)
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.CREDIT_CARD)
   const { contract: nftDrop } = useContract(ticket?.contract_address)
   const unclaimedSupply = useUnclaimedNFTSupply(nftDrop)
-  const claimConditions = useClaimConditions(nftDrop)
-  const activeClaimCondition = useActiveClaimConditionForWallet(
-    nftDrop,
-    userAddress
-  )
 
-  const canClaim = useMemo(() => {
-    return (
-      activeClaimCondition.isSuccess
-    )
-  }, [
-    activeClaimCondition.isSuccess
-  ])
-
-  const isLoading = useMemo(() => {
-    return (
-      activeClaimCondition.isLoading ||
-      unclaimedSupply.isLoading ||
-      !nftDrop
-    )
-  }, [
-    activeClaimCondition.isLoading,
-    nftDrop,
-    unclaimedSupply.isLoading
-  ])
-
-  const isTicketEndDatePassed = useMemo(() => {
-    if (ticket?.end_date) {
-      const endDate = new Date(ticket?.end_date)
-      return endDate < new Date()
-    }
-    return false
-  }, [ticket?.end_date])
+  const { renderPaymentLogic } = useLogic({ ticket, nftDrop, userAddress, amount, totalPrice, paymentMethod })
 
   const updatePaymentMethod = (method: PaymentMethod) => {
     if (method === paymentMethod) return
     setPaymentMethod(method)
-  }
-
-  const renderPaymentMethod = () => {
-    if (!ticket) return null
-
-    if (paymentMethod === PaymentMethod.CREDIT_CARD) return <CrossmintButton quantity={amount} totalPrice={totalPrice} />
-    return <ThirdwebButton contractAddress={ticket.contract_address} />
   }
 
   useEffect(() => {
@@ -108,7 +67,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
       <AmountAlert supply={unclaimedSupply.data} />
       <TicketContainer>
         <TicketInfo>
-          <TicketImage src={event.image} />
+          <TicketImage src={ticket?.image} />
           <TicketAction>
             <TicketActionLabel htmlFor="amount">Cantidad</TicketActionLabel>
             <TicketActionAmount
@@ -124,55 +83,8 @@ const EventBuyOption: FC<Props> = ({ event }) => {
             <TicketActionPrice>{totalPrice} €</TicketActionPrice>
           </TicketAction>
         </TicketInfo>
-    {isTicketEndDatePassed
-      ? (
-  <div>
-    <p>Ha finalizado el plazo de compra.</p>
-  </div>
-        )
-      : userAddress === ''
-        ? (
-  <div>
-    <p>Por favor, inicia sesión.</p>
-  </div>
-          )
-        : claimConditions.data && claimConditions.data[0].startTime > new Date()
-          ? (
-  <div>
-    <Timer date={claimConditions.data[0].startTime} />
-  </div>
-            )
-          : activeClaimCondition.isError
-            ? (
-  <div>
-    <p>Límite de tickets por persona alcanzado.</p>
-  </div>
-              )
-            : canClaim
-              ? (
-                  isLoading
-                    ? (
-    <div>
-      <Loading type='button' />
-    </div>
-                      )
-                    : unclaimedSupply.data?.eq(0)
-                      ? (
-    <div>
-      <p>Agotado 😭</p>
-    </div>
-                        )
-                      : (
-    <div>
-      {renderPaymentMethod()}
-    </div>
-                        )
-                )
-              : (
-  <div>
-    <Loading type='button' />
-  </div>
-                )}
+
+        {renderPaymentLogic()}
 
       </TicketContainer>
     </Container>

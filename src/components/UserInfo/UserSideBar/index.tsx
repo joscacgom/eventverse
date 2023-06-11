@@ -35,11 +35,11 @@ const UserSideBar = () => {
         </OptionContainer>
         <OptionContainer onClick={handleMyEvents}>
           <FontAwesomeIcon icon={faTicket} size='2xl'/>
-            <p>Eventos creados</p>
+            <p>Mis eventos</p>
         </OptionContainer>
         <OptionContainer onClick={handleMyFinances}>
           <FontAwesomeIcon icon={faDollar} size='2xl'/>
-            <p>Finanzas</p>
+            <p>Mis finanzas</p>
         </OptionContainer>
     </SideBarContainer>
   )

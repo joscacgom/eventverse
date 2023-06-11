@@ -9,38 +9,33 @@ import '@testing-library/jest-dom'
 // import theme from '@/theme'
 
 describe('HandleRenderResellButton', () => {
-  // const ticket = MOCK_EVENT_TICKET
-  const result = 1 + 1
-  it('renders the button correctly', () => {
-    expect(result).toBe(2)
+  it('renders 1+1 correctly', () => {
+    expect(1 + 1).toBe(2)
   })
-  //   it('renders the button correctly', () => {
-  //     render(
-  //         <ThemeProvider theme={theme}>
-  //             <HandleRenderResellButton ticket={ticket} />
-  //         </ThemeProvider>)
-  //     expect(screen.getByText('$')).toBeInTheDocument()
-  //   })
+  // const ticket = MOCK_EVENT_TICKET
 
-  //   it('displays the resell popup when the button is clicked', () => {
-  //     render(
+  // it('displays the resell popup when the button is clicked', () => {
+  //   render(
   //         <ThemeProvider theme={theme}>
-  //             <HandleRenderResellButton ticket={ticket} />
+  //             <HandleRenderResellButton ticket={ticket} setShowPopup={function (showPopup: boolean): void {
+  //             } } ownedNFT={[]} />
   //         </ThemeProvider>)
-  //     fireEvent.click(screen.getByText('$'))
-  //     expect(screen.getByText('¡Revende tu ticket!')).toBeInTheDocument()
-  //     expect(screen.getByLabelText('Cantidad')).toBeInTheDocument()
-  //     expect(screen.getByLabelText('Precio')).toBeInTheDocument()
-  //   })
+  //   expect(screen.getByText('¡Revende tu ticket!')).toBeInTheDocument()
+  //   expect(screen.getByText('Concert Ticket')).toBeInTheDocument()
+  //   expect(screen.getByText('20€')).toBeInTheDocument()
+  //   expect(screen.getByLabelText('Cantidad')).toBeInTheDocument()
+  //   expect(screen.getByLabelText('Precio')).toBeInTheDocument()
+  //   expect(screen.getByText('Revender')).toBeInTheDocument()
+  // })
 
-//   it('closes the resell popup when the cancel button is clicked', () => {
-//     render(
-//         <ThemeProvider theme={theme}>
-//             <HandleRenderResellButton ticket={ticket} />
-//         </ThemeProvider>)
-//     fireEvent.click(screen.getByText('$'))
-//     expect(screen.getByText('¡Revende tu ticket!')).toBeInTheDocument()
-//     fireEvent.click(screen.getByText('X'))
-//     expect(screen.queryByText('¡Revende tu ticket!')).toBeNull()
-//   })
+  // it('closes the resell popup when the cancel button is clicked', () => {
+  //   const setShowPopup = jest.fn()
+  //   render(
+  //       <ThemeProvider theme={theme}>
+  //           <HandleRenderResellButton ticket={ticket} setShowPopup={setShowPopup} ownedNFT={[]} />
+  //       </ThemeProvider>)
+  //   fireEvent.click(screen.getByText('Revender'))
+  //   expect(setShowPopup).toHaveBeenCalledTimes(1)
+  //   expect(setShowPopup).toHaveBeenCalledWith(false)
+  // })
 })

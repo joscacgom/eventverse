@@ -8,7 +8,7 @@ export const EventPreviewCreationMainContainer = styled.div`
     padding: 1rem;
     gap: 5rem;
     @media (max-width: 768px) {
-        padding: 0;
+        padding: 1rem;
         gap: 0;
         flex-direction: column;
     }
@@ -24,26 +24,35 @@ export const EventPreviewCreationHeader = styled.div`
   font-size: 36px;
   margin-bottom: 2rem;
     @media (max-width: 768px) {
+        padding-left: 1rem;
+        padding-top: 1rem;
         font-size: 24px;
         margin-top: 7rem;
     }
 `
 
 export const EventPreviewCreationImage = styled.img`
-  width: 1150px;
+  width: 800px;
+  margin-top: 1rem;
   height: 300px;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.25);
   opacity: 0.5;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 12px;
+  border-radius: 4px;
   border: 1px solid #d4d4d4;
   margin-bottom: 2rem;
+  object-fit: fill;
+  margin-left: 1rem;
+  
     @media (max-width: 768px) {
-        width: 100%;
-        height: 100%;
-        margin-top: 1rem;
+        width: 100vw;
+        margin-top: 0;
+        margin-left: 0;
+        height: 242px;
+        border: none;
+        border-radius: 0px;
     }
 `
 
@@ -260,6 +269,7 @@ export const EventPreviewCreationLocationImage = styled.img`
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 12px;
+  object-fit:fill;
     @media (max-width: 768px) {
         width: 100%;
         height: 100%;

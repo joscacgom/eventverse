@@ -3,6 +3,9 @@ import { MainContainer, HeaderSection, InfoHeader, SearchContainer, SearchInput,
 import type { FC } from 'react'
 import { User } from '@/models/Users/types'
 import useTicketsByUser from '@/hooks/useTicketsByUser'
+import Loading from '@/components/Loading'
+import Error from '@/components/Error'
+import TicketsNFT from './TicketsNFT'
 
 type Props = {
   userData: User;
@@ -10,11 +13,8 @@ type Props = {
 
 const UserTicketList: FC<Props> = ({ userData }) => {
   const [searchQuery, setSearchQuery] = useState<string>('')
-  const { tickets, isLoading: ticketsLoading, error } = useTicketsByUser()
-
-  if (error) {
-    return <p>Error: {error}</p>
-  }
+  const walletAddress = userData.address[0]
+  const { tickets, isLoading: ticketsLoading, error } = useTicketsByUser({ walletAddress })
 
   const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
@@ -24,27 +24,9 @@ const UserTicketList: FC<Props> = ({ userData }) => {
     ticket.name.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
-  const handleRenderTickets = () => {
-    if (ticketsLoading) {
-      return <p>Loading tickets...</p>
-    }
-
-    if (filteredTickets?.length === 0) {
-      return <p>No hay tickets que coincidan con tu búsqueda</p>
-    }
-
-    return filteredTickets?.map((ticket) => (
-      <li key={ticket.id}>
-        <p>{ticket.name}</p>
-        <p>{ticket.quantity}</p>
-        <p>{ticket.price}</p>
-      </li>
-    ))
-  }
-
   return (
     <>
-      <HeaderSection>Bienvenido {userData.name.split(' ')[0]}! 👋 </HeaderSection>
+      <HeaderSection>Bienvenido {userData.name ? (userData.name.includes('@') ? userData.name.split('@')[0] : userData.name.split(' ')[0]) : String(userData.address).substring(0, 6)}! 👋 </HeaderSection>
       <MainContainer>
         <InfoHeader>
           Estos son los tickets que has comprado
@@ -63,9 +45,26 @@ const UserTicketList: FC<Props> = ({ userData }) => {
             <p>Precio</p>
             <p>Estado</p>
           </TicketListHeader>
-          <TicketList>
-            {handleRenderTickets()}
-          </TicketList>
+{ticketsLoading
+  ? (
+  <Loading type='main' />
+    )
+  : error
+    ? (
+      <Error />
+      )
+    : filteredTickets?.length === 0
+      ? (
+  <p>Ningún ticket encontrado 😭</p>
+        )
+      : (
+  <TicketList>
+    {filteredTickets?.map((ticket) => (
+      <TicketsNFT key={ticket.id} ticket={ticket} address={walletAddress} />
+    ))}
+  </TicketList>
+        )}
+
         </TicketListContainer>
       </MainContainer>
     </>

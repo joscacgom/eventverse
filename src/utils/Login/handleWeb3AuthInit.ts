@@ -25,6 +25,7 @@ export const handleWeb3AuthInit = () => {
         try {
           setCookie('web3auth_provider', JSON.stringify(provider))
         } catch (error) {
+          console.log(provider)
           setCookie('web3auth_provider', '{Metamask/Other}')
         }
         const user = JSON.parse(getUserCookie('userData'))
@@ -56,7 +57,7 @@ export const handleWeb3AuthInit = () => {
             clientId,
             chainConfig: {
               chainNamespace: CHAIN_NAMESPACES.EIP155,
-              chainId: '0x13881' // Chain ID for Mumbai mainnet
+              chainId: '0x13881' // Chain ID for Mumbai test
             },
             uiConfig: {
               theme: 'light',
@@ -184,15 +185,13 @@ export const handleWeb3AuthInit = () => {
   }
 
   const logout = async () => {
-    if (!web3authcontext) return
-
-    await torusPlugin?.disconnect()
-    await web3authcontext.logout()
-
     removeCookie('web3auth_provider')
     removeCookie('userData')
     setProvider(null)
     setUserData(null)
+    if (!web3authcontext) return
+    await torusPlugin?.disconnect()
+    await web3authcontext.logout()
   }
 
   return { login, logout, provider }

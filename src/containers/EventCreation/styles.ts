@@ -25,8 +25,10 @@ export const ButtonContainer = styled.div`
     width: 100%;
 
     @media (max-width: 768px) {
-        width: 80%;
+        width: 70%;
+        justify-content: center;
         gap: 1rem;
+        padding-left:1rem;
     }
 `
 type ButtonProps = {

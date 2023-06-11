@@ -25,7 +25,6 @@ export const handleEventObjects = (event:FormData, ticket: FormData) => {
     summary: event.eventSummary,
     description: event.eventDescription,
     image: event.image,
-    tags: 'none',
     location: event.locationFormattedAddress,
     locationImage: event.locationImage,
     start_date: event.startDate,
@@ -34,7 +33,7 @@ export const handleEventObjects = (event:FormData, ticket: FormData) => {
     country: event.country,
     event_type: event.eventType,
     category: event.eventCategory,
-    pricing_plan: 'free'
+    pricing_plan: 'STANDARD'
 
   }
 
