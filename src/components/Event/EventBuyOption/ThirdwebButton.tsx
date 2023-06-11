@@ -29,6 +29,7 @@ const ThirdwebButton: FC<Props> = ({ contractAddress, quantity, ticketId }) => {
           })
       }
         theme="dark"
+
     >
         Comprar con Wallet
     </Web3Button>
