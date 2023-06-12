@@ -7,16 +7,21 @@ import { supabase } from '@/config'
 type Props = {
   eventToSubmit: any
   ticketToSubmit: TicketTableSupabase
-  userEmail: string | undefined
+  walletAddress: string | undefined
 }
-export const handleSubmitEventToSupabase = async ({ eventToSubmit, ticketToSubmit, userEmail }: Props) => {
+export const handleSubmitEventToSupabase = async ({ eventToSubmit, ticketToSubmit, walletAddress }: Props) => {
+  if (!walletAddress) {
+    alert('❌ Necesitas iniciar sesión para crear un evento')
+    return
+  }
+
   try {
     const imageURL = await handleSubmitImageToCloudinary(eventToSubmit.image)
 
     const { data: organizerData, error: organizerError } = await supabase
       .from('organizer')
       .select()
-      .eq('email', userEmail)
+      .eq('wallet_address', walletAddress)
 
     const organizer_id = organizerData?.[0].id
 

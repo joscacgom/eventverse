@@ -15,7 +15,7 @@ type FormData = {
 };
 
 const EventCreation = () => {
-  const [userData, setUserData] = useState<User>()
+  const [userData, setUserData] = useState<User | null>(null)
   const [step, setStep] = useState<number>(1)
   const [sendingData, setSendingData] = useState<boolean>(false)
   const router = useRouter()
@@ -120,7 +120,7 @@ const EventCreation = () => {
     setSendingData(true)
     const { eventToSubmit, ticketToSubmit } = handleEventObjects(formData.part1, formData.part2)
     const creationData = {
-      eventToSubmit, ticketToSubmit, userEmail: userData?.email
+      eventToSubmit, ticketToSubmit, walletAddress: userData?.address[0]
     }
     toast.promise(handleSubmitEventToSupabase(creationData), {
       pending: 'Procesando datos de tu evento, la creación de los NFT puede tardar unos minutos... ⏳',
@@ -164,7 +164,7 @@ const EventCreation = () => {
     if (!userCookie) {
       alert('Debes iniciar sesión para crear un evento')
     } else {
-      setUserData(userCookie)
+      setUserData(JSON.parse(userCookie))
     }
   }, [])
 
