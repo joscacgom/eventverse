@@ -3,9 +3,10 @@ import { TicketTableSupabase } from '@/models/Tickets/types'
 import { handleSubmitImageToCloudinary } from '../Event/handleSubmitImageToCloudinary'
 import { handleSubmitToThirdWeb } from './handleSubmitToThirdWeb'
 import { supabase } from '@/config'
+import { EventTableSupabase } from '@/models/Events/types'
 
 type Props = {
-  eventToSubmit: any
+  eventToSubmit: EventTableSupabase
   ticketToSubmit: TicketTableSupabase
   walletAddress: string | undefined
 }
@@ -27,7 +28,7 @@ export const handleSubmitEventToSupabase = async ({ eventToSubmit, ticketToSubmi
 
     const { data: eventData, error: eventError } = await supabase
       .from('event')
-      .insert([{ ...event, organizer_id, image: imageURL }])
+      .insert([{ ...eventToSubmit, organizer_id, image: imageURL }])
       .select()
 
     if (eventError || organizerError) {
