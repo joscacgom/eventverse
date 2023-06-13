@@ -1,23 +1,25 @@
+import { Event } from '@/models/Events/types'
 import { useQuery } from 'react-query'
 
 type Props = { userEmail: string }
 
 const useEventsByUser = ({ userEmail }: Props) => {
-  const { data, isLoading, error } = useQuery('eventsByUser',
+  const { data, refetch, isLoading, error } = useQuery(
+    'eventsByUser',
     () => getEventsByUser({ userEmail })
   )
 
-  const events = Array.isArray(data) ? data : []
-
-  return { events, isLoading, error }
+  return { events: data, isLoading, error, refetch }
 }
 
-async function getEventsByUser ({ userEmail }: Props) {
+export async function getEventsByUser ({ userEmail }: Props) {
+  console.log('getEventsByUser', userEmail)
   const response = await fetch(`/api/events/email/${userEmail}`, {
     method: 'GET'
   })
-  const data = await response.json()
-  return data
+  const res: Event[] = await response.json()
+  const events = Array.isArray(res) ? res : []
+  return events
 }
 
 export default useEventsByUser
