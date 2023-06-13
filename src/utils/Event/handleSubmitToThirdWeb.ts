@@ -48,7 +48,6 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
     const nftImageURL = nftMetadata?.image
     return { nftContract, nftImageURL }
   } catch (error) {
-    console.log('Error: ', error)
     throw new Error('Ticket submission failed!')
   }
 }

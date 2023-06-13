@@ -17,7 +17,6 @@ const EventCard: FC<Props> = ({ listingItem }) => {
     try {
       await contract.buyoutListing(listingItem.id, 1)
     } catch (error) {
-      console.log(error)
       alert('Error al comprar ticket, comprueba que tienes sufiente MATIC en tu wallet')
     }
   }

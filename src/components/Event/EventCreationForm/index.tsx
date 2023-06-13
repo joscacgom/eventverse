@@ -29,7 +29,7 @@ const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
   const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(null)
   const [location, setLocation] = useState('')
   const [loading, setLoading] = useState(false)
-  const [mapImageUrl, setMapImageUrl] = useState(formData.locationImage || 'https://via.placeholder.com/150')
+  const [mapImageUrl, setMapImageUrl] = useState(formData.locationImage || '/images/location-placeholder.png')
   const [characterCount, setCharacterCount] = useState({
     eventName: formData.eventName?.length || 0,
     eventDescription: formData.eventDescription?.length || 0,
@@ -122,7 +122,7 @@ const EventCreationForm:FC<Props> = ({ onChange, formData }) => {
       reader.readAsDataURL(formData.image)
       return <EventCreationFormImagePreview src={''} alt='Previously uploaded image' />
     } else {
-      return <EventCreationFormImagePreview src='https://via.placeholder.com/150' alt='Default image' />
+      return <EventCreationFormImagePreview src='/images/event-placeholder.png' alt='Default image' />
     }
   }
 

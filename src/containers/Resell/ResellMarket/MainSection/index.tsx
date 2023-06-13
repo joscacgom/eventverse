@@ -7,7 +7,6 @@ import Loading from '@/components/Loading'
 const MainSection = () => {
   const [searchTerm, setSearchTerm] = useState<string>('')
   const { resellTickets, isLoading } = useListedTickets()
-  console.log(resellTickets, isLoading)
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchTerm(e.target.value)

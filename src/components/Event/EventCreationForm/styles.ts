@@ -273,17 +273,14 @@ export const EventCreationFormLocationImage = styled.img`
 export const EventCreationFormImagePreview = styled.img`
   width: 367px;
   height: 231px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   background-color: #ffffff;
   opacity: 0.25;
   padding: 0px 0px 0px 0px;
-  align-content: center;
-  flex-wrap: nowrap;
-  gap: 10;
-  border-radius: 5px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 12px;
   border: 1px solid #222;
     @media (max-width: 768px) {
         width: 80%;
