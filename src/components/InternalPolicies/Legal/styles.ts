@@ -29,7 +29,7 @@ export const LegalTitle = styled.h1`
     }
 `
 
-export const LegalText = styled.p`
+export const LegalText = styled.div`
     margin-bottom: 15px;
     font-size: 1.2rem;
     text-align: justify;
@@ -56,7 +56,7 @@ export const LegalHeader = styled.div`
 
 `
 
-export const LegalBody = styled.p`
+export const LegalBody = styled.div`
     margin-bottom: 15px;
     font-size: 1.2rem;
 `

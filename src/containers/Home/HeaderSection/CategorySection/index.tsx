@@ -15,7 +15,7 @@ export enum Category {
 
 const CategorySection = () => {
   return (
-      <CategoryContainer>
+      <CategoryContainer data-testid="category-section">
         <CategoryItem>{Category.Festivals}</CategoryItem>
         <CategoryItem>{Category.Business}</CategoryItem>
         <CategoryItem>{Category.Music}</CategoryItem>

@@ -15,6 +15,7 @@ const CrossmintButton: FC<Props> = ({ clientId = TEST_CLIENT_ID, totalPrice, qua
   const quantityToString = String(quantity)
   return (
         <CrossmintPayButton
+            data-testid="crossmint-pay-button"
             clientId={clientId}
             mintConfig={{
               type: 'thirdweb-drop',

@@ -12,7 +12,7 @@ const Home:FC<Props> = ({ ticket }) => {
     <>
       <MainImage src={'/images/events/medusa-fest-wallpaper.jpg'} />
       <MainImageText> Detalles </MainImageText>
-      <ResellTicket ticket={ticket} />
+      <ResellTicket data-testid="resell-ticket" ticket={ticket} />
     </>
   )
 }

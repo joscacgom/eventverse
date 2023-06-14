@@ -29,7 +29,7 @@ const EventCard: FC<Props> = ({ listingItem }) => {
         <Price>{maticPrice} MATIC</Price>
         {
           (networkMismatch || !userAddress)
-            ? <ConnectWallet />
+            ? <ConnectWallet data-testid="connect-wallet"/>
             : <BuyButton onClick={onClickBuyTicket}>Comprar ticket</BuyButton>
         }
       </CardContent>

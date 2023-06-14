@@ -7,7 +7,7 @@ type Props = {
 }
 const CustomAlert: FC<Props> = ({ status, text }) => {
   return (
-    <Container status={status}>
+    <Container status={status} data-testid="alert-container">
         <Text>{text}</Text>
     </Container>
   )

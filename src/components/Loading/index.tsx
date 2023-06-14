@@ -6,7 +6,7 @@ type Props = {
 }
 const Loading:FC<Props> = ({ type }) => {
   return (
-        <Spinner type={type}>
+        <Spinner data-testid="spinner" type={type}>
             <Loader></Loader>
         </Spinner>
   )
