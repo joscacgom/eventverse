@@ -23,7 +23,7 @@ const EventCard: FC<Props> = ({ listingItem }) => {
 
   return (
     <CardWrapper>
-      <CardImage src={listingItem.asset.image} />
+      <CardImage src={listingItem.asset.image} alt="ticket image" />
       <CardContent>
         <Title>{listingItem.asset.name}</Title>
         <Price>{maticPrice} MATIC</Price>

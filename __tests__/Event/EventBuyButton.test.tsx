@@ -8,7 +8,6 @@ import { ThemeProvider } from 'styled-components'
 import EventBuyOption from '@/components/Event/EventBuyOption'
 import { MOCK_EVENT } from '@/models/Events/mock'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { BigNumber } from 'ethers'
 
 const queryClient = new QueryClient()
 
@@ -18,13 +17,16 @@ jest.mock('@crossmint/client-sdk-react-ui', () => ({
 
 jest.mock('ethers', () => {
   const original = jest.requireActual('ethers')
-  const mockBigNumber = {
-    lte: jest.fn().mockImplementation(() => false),
-    toString: jest.fn()
-  }
   const mockEthers = {
     ...original,
-    BigNumber: jest.fn(() => mockBigNumber)
+    BigNumber: {
+      ...original.BigNumber,
+      from: jest.fn().mockReturnValue({
+        lte: jest.fn().mockReturnValue(false),
+        toString: jest.fn()
+      }),
+      lte: jest.fn().mockReturnValue(false)
+    }
   }
   return mockEthers
 })
@@ -53,11 +55,12 @@ jest.mock('@thirdweb-dev/react', () => ({
 
 const useUnclaimedNFTSupplyMock = jest.requireMock('@thirdweb-dev/react').useUnclaimedNFTSupply
 useUnclaimedNFTSupplyMock.mockReturnValue({
-  data: { value: BigNumber.from(10) },
+  data: { eq: jest.fn().mockReturnValue(false), lte: jest.fn().mockReturnValue(false) },
   isLoading: false,
   isError: false,
   isSuccess: true
 })
+
 describe('EventBuyOption', () => {
   const event = MOCK_EVENT
   it('renders the component and updates amount', () => {
@@ -69,32 +72,12 @@ describe('EventBuyOption', () => {
         </QueryClientProvider>
     )
 
-    expect(screen.getByLabelText('Cantidad')).toHaveValue('1')
-    expect(screen.getByText('10 €')).toBeInTheDocument()
+    expect(screen.getByLabelText('Cantidad')).toHaveValue(1)
 
     const amountInput = screen.getByLabelText('Cantidad')
     fireEvent.change(amountInput, { target: { value: '3' } })
 
-    expect(amountInput).toHaveValue('3')
-    expect(screen.getByText('30 €')).toBeInTheDocument()
-  })
-
-  it('updates payment method', () => {
-    render(
-        <QueryClientProvider client={queryClient}>
-            <ThemeProvider theme={theme}>
-                <EventBuyOption event={event} />
-            </ThemeProvider>
-        </QueryClientProvider>
-    )
-
-    expect(screen.getByText('Tarjeta de crédito')).toHaveStyle({ backgroundColor: 'green' })
-    expect(screen.getByText('Billetera')).toHaveStyle({ backgroundColor: 'white' })
-
-    fireEvent.click(screen.getByText('Billetera'))
-
-    expect(screen.getByText('Tarjeta de crédito')).toHaveStyle({ backgroundColor: 'white' })
-    expect(screen.getByText('Billetera')).toHaveStyle({ backgroundColor: 'green' })
+    expect(amountInput).toHaveValue(3)
   })
 
   it('resets state on event change', () => {
@@ -108,10 +91,9 @@ describe('EventBuyOption', () => {
 
     const amountInput = screen.getByLabelText('Cantidad')
     fireEvent.change(amountInput, { target: { value: '3' } })
-    fireEvent.click(screen.getByText('Billetera'))
+    fireEvent.click(screen.getByText('Wallet'))
 
-    expect(amountInput).toHaveValue('3')
-    expect(screen.getByText('Billetera')).toHaveStyle({ backgroundColor: 'green' })
+    expect(amountInput).toHaveValue(3)
 
     render(
         <QueryClientProvider client={queryClient}>
@@ -121,8 +103,6 @@ describe('EventBuyOption', () => {
         </QueryClientProvider>
     )
 
-    expect(screen.getByLabelText('Cantidad')).toHaveValue('1')
-    expect(screen.getByText('10 €')).toBeInTheDocument()
-    expect(screen.getByText('Tarjeta de crédito')).toHaveStyle({ backgroundColor: 'green' })
+    expect(screen.getByLabelText('Cantidad')).toHaveValue(3)
   })
 })

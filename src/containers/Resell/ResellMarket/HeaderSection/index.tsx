@@ -15,7 +15,7 @@ const TopSection = () => {
         <BackgroundImage />
         <Heading><SpanClip>Marketplace</SpanClip> oficial<br/>para <SpanLiquid>reventas</SpanLiquid> </Heading>
         <SubHeading>Un lugar seguro donde comprar y vender entradas de reventa</SubHeading>
-        <CategorySection />
+        <CategorySection data-testid="category-section" />
       </Container>
   )
 }
