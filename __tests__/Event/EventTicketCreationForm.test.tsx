@@ -1,7 +1,6 @@
 // /* eslint-disable no-undef */
 import 'jest-styled-components'
 import '@testing-library/jest-dom'
-
 import { render, screen, fireEvent } from '@testing-library/react'
 import theme from '@/theme'
 import { ThemeProvider } from 'styled-components'

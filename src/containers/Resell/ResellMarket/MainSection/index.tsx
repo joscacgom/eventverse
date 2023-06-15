@@ -19,7 +19,7 @@ const MainSection = () => {
   }, [resellTickets, searchTerm])
 
   const handleRenderEventList = () =>
-    filteredEvents.map((ticketEvent) => <EventCard key={ticketEvent.id} ticketEvent={ticketEvent} />)
+    filteredEvents.map((ticketEvent) => <EventCard data-testid="event-card" key={ticketEvent.id} ticketEvent={ticketEvent} />)
 
   return (
     <Container>

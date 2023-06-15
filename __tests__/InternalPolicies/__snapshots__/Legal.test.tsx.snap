@@ -112,10 +112,10 @@ exports[`Legal Component matches snapshot 1`] = `
         Ley de los servicios de la sociedad de la información (LSSI) 
       </h1>
     </div>
-    <p
+    <div
       class="c3"
     >
-      <p
+      <div
         class="c4"
       >
         <p
@@ -123,8 +123,8 @@ exports[`Legal Component matches snapshot 1`] = `
         >
           EventVerse, responsable del sitio web, en adelante RESPONSABLE, pone a disposición de los usuarios el presente documento, con el que pretende dar cumplimiento a las obligaciones dispuestas en la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSICE), así como informar a todos los usuarios del sitio web respecto a cuáles son las condiciones de uso. Toda persona que acceda a este sitio web asume el papel de usuario, comprometiéndose a la observancia y cumplimiento riguroso de las disposiciones aquí dispuestas, así como a cualquier otra disposición legal que fuera de aplicación. EventVerse, se reserva el derecho de modificar cualquier tipo de información que pudiera aparecer en el sitio web, sin que exista obligación de preavisar o poner en conocimiento de los usuarios dichas obligaciones, entendiéndose como suficiente con la publicación en el sitio web de EventVerse
         </p>
-      </p>
-    </p>
+      </div>
+    </div>
     <div
       class="c1"
     >
@@ -134,10 +134,10 @@ exports[`Legal Component matches snapshot 1`] = `
         Objeto
       </h1>
     </div>
-    <p
+    <div
       class="c3"
     >
-      <p
+      <div
         class="c4"
       >
         <p
@@ -145,8 +145,8 @@ exports[`Legal Component matches snapshot 1`] = `
         >
           A través del Sitio Web, les ofrecemos a los Usuarios la posibilidad de acceder a la información sobre nuestros servicios.
         </p>
-      </p>
-    </p>
+      </div>
+    </div>
     <div
       class="c1"
     >
@@ -156,10 +156,10 @@ exports[`Legal Component matches snapshot 1`] = `
         Privacidad y tratamiento de datos
       </h1>
     </div>
-    <p
+    <div
       class="c3"
     >
-      <p
+      <div
         class="c4"
       >
         <p
@@ -167,8 +167,8 @@ exports[`Legal Component matches snapshot 1`] = `
         >
           Cuando para el acceso a determinados contenidos o servicio sea necesario facilitar datos de carácter personal, los Usuarios garantizarán su veracidad, exactitud, autenticidad y vigencia. La empresa dará a dichos datos el tratamiento automatizado que corresponda en función de su naturaleza o finalidad, en los términos indicados en la sección de Política de Privacidad.
         </p>
-      </p>
-    </p>
+      </div>
+    </div>
     <div
       class="c1"
     >
@@ -178,10 +178,10 @@ exports[`Legal Component matches snapshot 1`] = `
         Propiedad industrial e intelectual
       </h1>
     </div>
-    <p
+    <div
       class="c3"
     >
-      <p
+      <div
         class="c4"
       >
         <p
@@ -204,8 +204,8 @@ exports[`Legal Component matches snapshot 1`] = `
         >
           Los contenidos, textos, fotografías, diseños, logotipos, imágenes, programas de ordenador, códigos fuente y, en general, cualquier creación intelectual existente en este Espacio, así como el propio Espacio en su conjunto, como obra artística multimedia, están protegidos como derechos de autor por la legislación en materia de propiedad intelectual. La empresa es titular de los elementos que integran el diseño gráfico del Espacio Web, lo menús, botones de navegación, el código HTML, los textos, imágenes, texturas, gráficos y cualquier otro contenido del Espacio Web o, en cualquier caso dispone de la correspondiente autorización para la utilización de dichos elementos. El contenido dispuesto en el Espacio Web no podrá ser reproducido ni en todo ni en parte, ni transmitido, ni registrado por ningún sistema de recuperación de información, en ninguna forma ni en ningún medio, a menos que se cuente con la autorización previa, por escrito, de la citada Entidad. Asimismo queda prohibido suprimir, eludir y/o manipular el «copyright» así como los dispositivos técnicos de protección, o cualesquiera mecanismos de información que pudieren contener los contenidos. El Usuario de este Espacio Web se compromete a respetar los derechos enunciados y a evitar cualquier actuación que pudiera perjudicarlos, reservándose en todo caso la empresa el ejercicio de cuantos medios o acciones legales le correspondan en defensa de sus legítimos derechos de propiedad intelectual e industrial.
         </p>
-      </p>
-    </p>
+      </div>
+    </div>
     <div
       class="c1"
     >
@@ -215,10 +215,10 @@ exports[`Legal Component matches snapshot 1`] = `
         Protección de datos
       </h1>
     </div>
-    <p
+    <div
       class="c3"
     >
-      <p
+      <div
         class="c4"
       >
         <p
@@ -226,8 +226,8 @@ exports[`Legal Component matches snapshot 1`] = `
         >
           Para utilizar algunos de los Servicios, el Usuario debe proporcionar previamente ciertos datos de carácter personal. La empresa tratará automatizadamente estos datos y aplicará las correspondientes medidas de seguridad, todo ello en cumplimiento del RGPD, LOPDGDD y LSSI. El Usuario puede acceder a la política seguida en el tratamiento de los datos personales, así como el establecimiento de las finalidades previamente establecidas, en las condiciones definidas en la Política de Privacidad.
         </p>
-      </p>
-    </p>
+      </div>
+    </div>
     <div
       class="c1"
     >
@@ -237,10 +237,10 @@ exports[`Legal Component matches snapshot 1`] = `
         Declaraciones y garantías
       </h1>
     </div>
-    <p
+    <div
       class="c3"
     >
-      <p
+      <div
         class="c4"
       >
         <p
@@ -248,8 +248,8 @@ exports[`Legal Component matches snapshot 1`] = `
         >
           En general, los contenidos y servicios ofrecidos en el Espacio Web tienen carácter meramente informativo. Por consiguiente, al ofrecerlos, no se otorga garantía ni declaración alguna en relación con los contenidos y servicios ofrecidos en el Espacio web, incluyendo, a título enunciativo, garantías de licitud, fiabilidad, utilidad, veracidad, exactitud, o comerciabilidad, salvo en la medida en que por ley no puedan excluirse tales declaraciones y garantías.
         </p>
-      </p>
-    </p>
+      </div>
+    </div>
     <div
       class="c1"
     >
@@ -259,10 +259,10 @@ exports[`Legal Component matches snapshot 1`] = `
         Fuerza mayor
       </h1>
     </div>
-    <p
+    <div
       class="c3"
     >
-      <p
+      <div
         class="c4"
       >
         <p
@@ -270,8 +270,8 @@ exports[`Legal Component matches snapshot 1`] = `
         >
           La empresa no será responsable en todo en caso de imposibilidad de prestar servicio, si ésta se debe a interrupciones prolongadas del suministro eléctrico, líneas de telecomunicaciones, conflictos sociales, huelgas, rebelión, explosiones, inundaciones, actos y omisiones del Gobierno, y en general todos los supuestos de fuerza mayor o de caso fortuito.
         </p>
-      </p>
-    </p>
+      </div>
+    </div>
     <div
       class="c1"
     >
@@ -281,10 +281,10 @@ exports[`Legal Component matches snapshot 1`] = `
         Resolución de controversias. Ley aplicable y jurisdicción
       </h1>
     </div>
-    <p
+    <div
       class="c3"
     >
-      <p
+      <div
         class="c4"
       >
         <p
@@ -297,8 +297,8 @@ exports[`Legal Component matches snapshot 1`] = `
         >
           En el supuesto de que cualquier estipulación de las presentes Condiciones Generales de Uso resultara inexigible o nula en virtud de la legislación aplicable o como consecuencia de una resolución judicial o administrativa, dicha inexigibilidad o nulidad no hará que las presentes Condiciones Generales de Uso resulten inexigibles o nulas en su conjunto. En dichos casos, la empresa procederá a la modificación o sustitución de dicha estipulación por otra que sea válida y exigible y que, en la medida de lo posible, consiga el objetivo y pretensión reflejados en la estipulación original.
         </p>
-      </p>
-    </p>
+      </div>
+    </div>
   </div>
 </div>
 `;

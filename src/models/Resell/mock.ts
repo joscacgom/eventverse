@@ -62,7 +62,7 @@ export const MOCK_RESELL_TICKETS: TicketListingItem[] = [
       },
       displayValue: '10.0'
     },
-    id: '0',
+    id: '1',
     tokenId: {
       type: 'BigNumber',
       hex: '0x06'

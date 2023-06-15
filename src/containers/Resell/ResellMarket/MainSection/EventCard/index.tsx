@@ -18,8 +18,8 @@ const EventCard: FC<Props> = ({ ticketEvent }) => {
   const ticketId = Number(ticketEvent.asset.id)
 
   return (
-    <CardWrapper onClick={handleClickEvent(ticketId)}>
-      <CardImage src={ticketEvent.asset.image} />
+    <CardWrapper data-testid="event-card" onClick={handleClickEvent(ticketId)}>
+      <CardImage src={ticketEvent.asset.image} alt="ticket image" />
       <CardContent>
         <Title>{ticketEvent.asset.name}</Title>
         <Description>{shortDescription}</Description>

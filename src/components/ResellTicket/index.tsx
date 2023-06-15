@@ -10,7 +10,7 @@ type Props = {
 
 const ResellTicket:FC<Props> = ({ ticket }) => {
   return (
-        <MainContainer>
+        <MainContainer data-testid="resell-ticket">
            <ResellTicketInfo ticket={ticket} />
            <ResellTicketNetworkInfo ticket={ticket} />
         </MainContainer>
