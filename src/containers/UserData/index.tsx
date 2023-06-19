@@ -1,11 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { UserMainContent, UserSideBar } from '@/components/UserInfo'
 import { MainContainer } from './styles'
-import Web3AuthContext from '@/context/Web3AuthContext'
 import { getUserCookie } from '@/utils/Login/userCookie'
-
 const User = () => {
-  const userData = getUserCookie('userData') || useContext(Web3AuthContext).userData
+  const userData = getUserCookie('userData')
   return (
     <MainContainer>
       <UserSideBar />
