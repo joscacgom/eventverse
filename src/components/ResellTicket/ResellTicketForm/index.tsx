@@ -17,7 +17,7 @@ type Props = {
     ownedNFT: NFT[]
 }
 
-const handleRenderResellButton: FC<Props> = ({ ticket, setShowPopup, ownedNFT }) => {
+const ResellButton: FC<Props> = ({ ticket, setShowPopup, ownedNFT }) => {
   const privateKey = JSON.parse(getUserCookie('userData')).privateKey
   const [ticketsAvailable, setTicketsAvailable] = useState<NFT[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -117,4 +117,4 @@ const handleRenderResellButton: FC<Props> = ({ ticket, setShowPopup, ownedNFT })
   return null
 }
 
-export default handleRenderResellButton
+export default ResellButton

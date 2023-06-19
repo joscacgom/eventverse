@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Button85, LinkItem, MenuLinks, Nav, Avatar, IconWrapper } from './styles'
 import { useRouter } from 'next/router'
-import { handleWeb3AuthInit } from '@/utils/Login/handleWeb3AuthInit'
+import { Web3AuthInit } from '@/utils/Login/handleWeb3AuthInit'
 import Web3AuthContext from '@/context/Web3AuthContext'
 import LogoutIcon from './LogoutIcon'
 import { getUserCookie } from '@/utils/Login/userCookie'
@@ -10,7 +10,7 @@ const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
   const { userData, setUserData } = useContext(Web3AuthContext)
   const router = useRouter()
-  const { login, logout } = handleWeb3AuthInit()
+  const { login, logout } = Web3AuthInit()
 
   useEffect(() => {
     const userCookieData = JSON.parse(getUserCookie('userData'))
