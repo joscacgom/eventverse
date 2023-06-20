@@ -19,8 +19,12 @@ const useNFTsForTickets = (tickets: Ticket[], address: string) => {
         return { nfts }
       })
 
-      const ticketsWithNFTs = await Promise.all(ticketsWithNFTsPromises)
-      setTicketsWithNFTs(ticketsWithNFTs)
+      const fetchTickets = async () => {
+        const ticketsWithNFTs = await Promise.all(ticketsWithNFTsPromises)
+        setTicketsWithNFTs(ticketsWithNFTs)
+      }
+
+      fetchTickets()
     }
 
     fetchNFTsForTickets()
