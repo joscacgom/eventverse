@@ -6,10 +6,10 @@ import Image from 'next/image'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-type Props ={
-    userData:User,
+type Props = {
+  userData: User,
 };
-const UserMainContent:FC<Props> = ({ userData }) => {
+const UserMainContent: FC<Props> = ({ userData }) => {
   const [privateKey, setPrivateKey] = useState<boolean>(false)
   const [eurBalance, setEurBalance] = useState<number>(0)
 
@@ -41,34 +41,34 @@ const UserMainContent:FC<Props> = ({ userData }) => {
   return (
     <>
       <HeaderSection>Bienvenido {userName}! 👋 </HeaderSection>
-        <MainContainer>
-            <InfoMainContainer>
-                <Image src={userData.profileImage === '' || !userData.profileImage ? '/images/avatar.jpg' : userData.profileImage } alt='user' width={150} height={150} />
-                <InfoContainer>
-                    <h2>Información de tu cuenta</h2>
-                        <p>{userInfoConnect}</p>
-                        <p>{userData.email ? userData.email : ''}</p>
-                    <h2>Información de la cartera</h2>
-                        <p>{userData.address}</p>
-                        <p>{eurBalance}€<small> {userData.balance} ~ MATIC </small></p>
-                    <PrivateKeyButton onClick={handlePrivateKey}>
-                        Obtener clave privada
-                    </PrivateKeyButton>
-                </InfoContainer>
-            </InfoMainContainer>
-            </MainContainer>
+      <MainContainer>
+        <InfoMainContainer>
+          <Image src={userData.profileImage === '' || !userData.profileImage ? '/images/avatar.jpg' : userData.profileImage} alt='user' width={150} height={150} />
+          <InfoContainer>
+            <h2>Información de tu cuenta</h2>
+            <p>{userInfoConnect}</p>
+            <p>{userData.email ? userData.email : ''}</p>
+            <h2>Información de la cartera</h2>
+            <p>{userData.address}</p>
+            <p>{eurBalance}€<small> {userData.balance} ~ MATIC </small></p>
+            <PrivateKeyButton onClick={handlePrivateKey}>
+              Obtener clave privada
+            </PrivateKeyButton>
+          </InfoContainer>
+        </InfoMainContainer>
+      </MainContainer>
 
-             {privateKey &&
-                <PrivateKeyContainer>
-                    <WarningContainer>
-                         <FontAwesomeIcon icon={faExclamationTriangle} size={'2xl'} />
-                          <p>¡No compartas tu clave privada con nadie!</p>
-                    </WarningContainer>
-                    <br />
-                    <small>{userData.privateKey ? userData.privateKey : 'Para ver su clave privada, acceda a su Metamask/Wallet'}</small>
-                    <button onClick={handlePrivateKey}>Cerrar</button>
-                </PrivateKeyContainer>
-                }
+      {privateKey &&
+        <PrivateKeyContainer>
+          <WarningContainer>
+            <FontAwesomeIcon icon={faExclamationTriangle} size={'2xl'} />
+            <p>¡No compartas tu clave privada con nadie!</p>
+          </WarningContainer>
+          <br />
+          <small>{userData.privateKey ? userData.privateKey : 'Para ver su clave privada, acceda a su Metamask/Wallet'}</small>
+          <button onClick={handlePrivateKey}>Cerrar</button>
+        </PrivateKeyContainer>
+      }
 
     </>
 

@@ -11,6 +11,12 @@ export const Container = styled(Link)`
         transition: all 0.2s ease-in-out;
     }
 `
+export const CardInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10px;
+`
 
 export const Card = styled.div`
     display: flex;

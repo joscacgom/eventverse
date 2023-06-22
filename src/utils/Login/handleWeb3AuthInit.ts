@@ -25,7 +25,6 @@ export const Web3AuthInit = () => {
         try {
           setCookie('web3auth_provider', JSON.stringify(provider))
         } catch (error) {
-          console.log(provider)
           setCookie('web3auth_provider', '{Metamask/Other}')
         }
         const user = JSON.parse(getUserCookie('userData'))
