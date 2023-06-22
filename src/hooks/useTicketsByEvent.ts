@@ -16,7 +16,7 @@ const useTicketsByEvent = ({ event_id }: Props) => {
   }
 }
 
-async function getTicketsByEvent ({ event_id }: Props) {
+export async function getTicketsByEvent ({ event_id }: Props) {
   const response = await fetch(`/api/tickets/${event_id}`, {
     method: 'GET'
   })

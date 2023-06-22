@@ -15,7 +15,7 @@ const useEventById = ({ id }: Props) => {
   }
 }
 
-async function getEventById ({ id }: Props) {
+export async function getEventById ({ id }: Props) {
   const response = await fetch(`/api/events/${id}`, {
     method: 'GET'
   })

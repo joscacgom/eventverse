@@ -1,15 +1,6 @@
 import { Event } from '@/models/Events/types'
 import type { FC } from 'react'
-import { Container, Card, EventTitle, Info, Image } from './styles'
-import styled from 'styled-components'
-
-export const CardInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-left: 10px;
-
-`
+import { Container, Card, EventTitle, Info, Image, CardInfo } from './styles'
 
 type Props = {
     event: Event

@@ -1,27 +1,21 @@
-import { Event } from '@/models/Events/types'
 import type { FC } from 'react'
-import { Container, Left, Checkbox, Right, Title } from './styles'
-
-const MOCK_AMOUNT = '1.239.003,12€'
+import { Container, Left, Right, Title } from './styles'
+import { EventBalance } from '../types'
 
 type Props = {
-  event: Event
-  selected: boolean
-  handleUpdateSelectedEvents: (event: Event) => void
+  eventBalance: EventBalance
 }
-const EventCard: FC<Props> = ({ event, selected, handleUpdateSelectedEvents }) => {
+const EventCard: FC<Props> = ({ eventBalance }) => {
   return (
     <Container>
       <Left>
-        <Checkbox
-          type="checkbox"
-          checked={selected}
-          onChange={() => handleUpdateSelectedEvents(event)}
-        />
-        <Title>{event.name}</Title>
+        <Title>{eventBalance.eventName}</Title>
       </Left>
       <Right>
-        <Title>{MOCK_AMOUNT}</Title>
+        <Title>{eventBalance.totalSales}</Title>
+      </Right>
+      <Right>
+        <Title>{eventBalance.earnings}</Title>
       </Right>
     </Container>
   )

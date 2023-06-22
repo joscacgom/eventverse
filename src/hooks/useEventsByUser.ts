@@ -13,7 +13,6 @@ const useEventsByUser = ({ userEmail }: Props) => {
 }
 
 export async function getEventsByUser ({ userEmail }: Props) {
-  console.log('getEventsByUser', userEmail)
   const response = await fetch(`/api/events/email/${userEmail}`, {
     method: 'GET'
   })
