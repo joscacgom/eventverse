@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { CardContent, CardImage, CardWrapper, Price, Title, BuyButton } from './styles'
 import { TicketListingItem } from '@/models/Resell/types'
+import { ToastContainer, Zoom, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { ConnectWallet, useAddress, useContract, useNetworkMismatch } from '@thirdweb-dev/react'
 
 type Props = {
@@ -16,12 +18,15 @@ const EventCard: FC<Props> = ({ listingItem }) => {
     if (!contract) return
     try {
       await contract.buyoutListing(listingItem.id, 1)
+      toast.success('Ticket comprado con éxito 🎉')
     } catch (error) {
-      alert('Error al comprar ticket, comprueba que tienes sufiente MATIC en tu wallet')
+      toast.error('Error al comprar ticket, comprueba que tienes sufiente MATIC en tu wallet 🙃')
     }
   }
 
   return (
+    <>
+    <ToastContainer theme='colored' transition={Zoom} position='top-center' />
     <CardWrapper>
       <CardImage src={listingItem.asset.image} alt="ticket image" />
       <CardContent>
@@ -34,6 +39,8 @@ const EventCard: FC<Props> = ({ listingItem }) => {
         }
       </CardContent>
     </CardWrapper>
+    </>
+    
   )
 }
 

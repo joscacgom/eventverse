@@ -20,21 +20,21 @@ const handleTicketResell = async ({ e, ticket, privateKey, ownedNFT }: Props) =>
   const nftId = Number(formData.get('nftId'))
   const priceValue = Number(formData.get('price'))
   const sdk = ThirdwebSDK.fromPrivateKey(privateKey, 'mumbai')
-  const contract = await sdk.getContract(String(process.env.NEXT_PUBLIC_MARKETPLACE_ADDR))
+  const contract = await sdk.getContract(String(process.env.NEXT_PUBLIC_MARKETPLACE_ADDR), 'marketplace')
   const userAddress = JSON.parse(getUserCookie('userData'))?.address[0] || ''
 
   try {
     const maticConversion = await fetch('/api/crypto')
     const data = await maticConversion.json()
     const maticBalance = (Number(priceValue) / data)
-    const transaction = await contract.directListings.createListing({
+    const transaction = await contract?.direct.createListing({
       assetContractAddress: ticket.contract_address,
       tokenId: nftId,
-      pricePerToken: maticBalance,
+      buyoutPricePerToken: maticBalance,
       startTimestamp: new Date(Date.now()),
       currencyContractAddress: NATIVE_TOKEN_ADDRESS,
       quantity: 1,
-      endTimestamp: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+      listingDurationInSeconds: 60 * 60 * 24 * 7
     })
 
     const transactionId = ethers.BigNumber.from(transaction.id._hex).toString()
