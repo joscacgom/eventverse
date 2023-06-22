@@ -40,7 +40,6 @@ const EventCard: FC<Props> = ({ listingItem }) => {
       </CardContent>
     </CardWrapper>
     </>
-    
   )
 }
 
