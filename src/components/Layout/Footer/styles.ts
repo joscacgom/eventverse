@@ -14,7 +14,7 @@ export const Foot = styled.footer`
     color: ${({ theme }) => theme.nord.white};
 
     @media (max-width: 768px) {
-        padding: 20px 20px;
+        padding-top: 2rem;
         flex-direction: column;
     }
 `

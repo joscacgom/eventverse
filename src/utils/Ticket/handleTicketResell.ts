@@ -20,12 +20,10 @@ const handleTicketResell = async ({ e, ticket, privateKey, ownedNFT }: Props) =>
   const nftId = Number(formData.get('nftId'))
   const priceValue = Number(formData.get('price'))
   const sdk = ThirdwebSDK.fromPrivateKey(privateKey, 'mumbai')
-  const contract = await sdk.getContract('0xF10CC8b889856cFe2fCfD2d98Bf73F7e7C6488ff')
+  const contract = await sdk.getContract(String(process.env.NEXT_PUBLIC_MARKETPLACE_ADDR))
   const userAddress = JSON.parse(getUserCookie('userData'))?.address[0] || ''
 
   try {
-    // const tokenIds = Object.keys(ownedNFT)
-    // const tokensToSell = tokenIds.slice(0, amountValue)
     const maticConversion = await fetch('/api/crypto')
     const data = await maticConversion.json()
     const maticBalance = (Number(priceValue) / data)
@@ -39,23 +37,6 @@ const handleTicketResell = async ({ e, ticket, privateKey, ownedNFT }: Props) =>
       endTimestamp: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
     })
 
-    // const listingPromises = tokensToSell.map(async (tokenId) => {
-    //   const transaction = await contract.directListings.createListing({
-    //     assetContractAddress: ticket.contract_address,
-    //     tokenId,
-    //     pricePerToken: maticBalance,
-    //     startTimestamp: new Date(Date.now()),
-    //     currencyContractAddress: NATIVE_TOKEN_ADDRESS,
-    //     quantity: 1,
-    //     endTimestamp: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
-    //   })
-    //   return transaction
-    // })
-    // const transactions = await Promise.all(listingPromises)
-    // const transactionIds = transactions.map((tx) => {
-    //   const parsedValue = ethers.BigNumber.from(tx.id._hex).toString()
-    //   return parsedValue
-    // })
     const transactionId = ethers.BigNumber.from(transaction.id._hex).toString()
     await submitResellIdToSupabase({ walletAddress: userAddress, transactionId, ticketId: ticket.id })
   } catch (error) {

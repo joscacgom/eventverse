@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 
-export const BORDER_RADIUS = '9px'
-
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 350px;
   width: 250px;
   border: 1px solid ${({ theme }) => theme.nord.gray0};
+  border-radius: 8px;
   cursor: pointer;
   transition: transform 0.35s ease-in-out;
 
@@ -22,7 +21,9 @@ export const CardWrapper = styled.div`
 export const CardImage = styled.img`
   height: 40%;
   width: 100%;
-  object-fit: cover;
+  object-fit: fill;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 `
 
 export const CardContent = styled.div`

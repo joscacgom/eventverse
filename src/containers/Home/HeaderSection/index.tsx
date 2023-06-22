@@ -7,7 +7,7 @@ const TopSection = () => {
       <Container>
         <BackgroundImage />
         <Heading>Entradas <SpanClip>únicas</SpanClip><br/>eventos <SpanLiquid>inolvidables</SpanLiquid> </Heading>
-        <CategorySection />
+        <CategorySection data-testid="category-section" />
       </Container>
   )
 }

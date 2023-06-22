@@ -14,6 +14,9 @@ const Footer = () => (
       <MenuItem href="/policies/privacy-policy">
         <Text>Política de privacidad</Text>
       </MenuItem>
+        <MenuItem href="/policies/faq">
+        <Text>FAQ</Text>
+      </MenuItem>
     </Menu>
   </Foot>
 )

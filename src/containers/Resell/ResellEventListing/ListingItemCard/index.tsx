@@ -17,20 +17,19 @@ const EventCard: FC<Props> = ({ listingItem }) => {
     try {
       await contract.buyoutListing(listingItem.id, 1)
     } catch (error) {
-      console.log(error)
       alert('Error al comprar ticket, comprueba que tienes sufiente MATIC en tu wallet')
     }
   }
 
   return (
     <CardWrapper>
-      <CardImage src={listingItem.asset.image} />
+      <CardImage src={listingItem.asset.image} alt="ticket image" />
       <CardContent>
         <Title>{listingItem.asset.name}</Title>
         <Price>{maticPrice} MATIC</Price>
         {
           (networkMismatch || !userAddress)
-            ? <ConnectWallet />
+            ? <ConnectWallet data-testid="connect-wallet"/>
             : <BuyButton onClick={onClickBuyTicket}>Comprar ticket</BuyButton>
         }
       </CardContent>

@@ -14,7 +14,7 @@ import { userBlockchainInfo } from './userBlockchainInfo'
 const clientId = process.env.NEXT_PUBLIC_WEB3_AUTH_CLIENT_ID as string
 const walletConnectClientId = process.env.NEXT_PUBLIC_WALLET_CONNECT_CLIENT_ID as string
 
-export const handleWeb3AuthInit = () => {
+export const Web3AuthInit = () => {
   const { web3auth: web3authcontext, setUserData, setWeb3auth } = useContext(Web3AuthContext)
   const [torusPlugin, setTorusPlugin] =
     useState<TorusWalletConnectorPlugin | null>(null)

@@ -7,7 +7,6 @@ import Loading from '@/components/Loading'
 const MainSection = () => {
   const [searchTerm, setSearchTerm] = useState<string>('')
   const { resellTickets, isLoading } = useListedTickets()
-  console.log(resellTickets, isLoading)
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchTerm(e.target.value)
@@ -20,7 +19,7 @@ const MainSection = () => {
   }, [resellTickets, searchTerm])
 
   const handleRenderEventList = () =>
-    filteredEvents.map((ticketEvent) => <EventCard key={ticketEvent.id} ticketEvent={ticketEvent} />)
+    filteredEvents.map((ticketEvent) => <EventCard data-testid="event-card" key={ticketEvent.id} ticketEvent={ticketEvent} />)
 
   return (
     <Container>

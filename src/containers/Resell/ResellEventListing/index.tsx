@@ -13,6 +13,7 @@ const ResellEventListing: FC<Props> = ({ listing }) => {
   const renderListingItems = () => {
     return listing.map((item) => (
       <ListingItemCard
+        data-testid={`listing-item-${item.id}`}
         key={item.id}
         listingItem={item}
       />

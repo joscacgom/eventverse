@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, BackgroundImage, Heading } from './styles'
+import { Container, BackgroundImage, Heading, SpanClip, SpanLiquid } from './styles'
 import CategorySection from './CategorySection'
 import styled from 'styled-components'
 
@@ -13,9 +13,9 @@ const TopSection = () => {
   return (
       <Container>
         <BackgroundImage />
-        <Heading>Marketplace oficial<br/>para reventas </Heading>
+        <Heading><SpanClip>Marketplace</SpanClip> oficial<br/>para <SpanLiquid>reventas</SpanLiquid> </Heading>
         <SubHeading>Un lugar seguro donde comprar y vender entradas de reventa</SubHeading>
-        <CategorySection />
+        <CategorySection data-testid="category-section" />
       </Container>
   )
 }

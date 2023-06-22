@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
             <PrivacyPolicyBody data-testid="privacy-policy-body">
                 <PrivacyPolicyText>
                     <PrivacyPolicyParagraph>
-                        El presente Política de Privacidad establece los términos en que EventVerse usa y protege la información que es proporcionada por sus usuarios al momento de utilizar su sitio web. Esta aplicación está comprometida con la seguridad de los datos de sus usuarios. Cuando le pedimos llenar los campos de información personal con la cual usted pueda ser identificado, lo hacemos asegurando que sólo se empleará de acuerdo con los términos de este documento. Sin embargo, esta Política de Privacidad puede cambiar con el tiempo o ser actualizada, por lo que le recomendamos y enfatizamos revisar continuamente esta página para asegurarse de que está de acuerdo con dichos cambios.
+                        La presente Política de Privacidad establece los términos en que EventVerse usa y protege la información que es proporcionada por sus usuarios al momento de utilizar su sitio web. Esta aplicación está comprometida con la seguridad de los datos de sus usuarios. Cuando le pedimos llenar los campos de información personal con la cual usted pueda ser identificado, lo hacemos asegurando que sólo se empleará de acuerdo con los términos de este documento. Sin embargo, esta Política de Privacidad puede cambiar con el tiempo o ser actualizada, por lo que le recomendamos y enfatizamos revisar continuamente esta página para asegurarse de que está de acuerdo con dichos cambios.
                     </PrivacyPolicyParagraph>
                 </PrivacyPolicyText>
             </PrivacyPolicyBody>
@@ -43,11 +43,8 @@ const PrivacyPolicy = () => {
                     <PrivacyPolicyParagraph>
                         Nuestro sitio web utiliza la información recopilada para proporcionar el mejor servicio posible,
                         especialmente para mantener un registro de usuarios, y para mejorar nuestros productos y
-                        servicios. Es posible que se envíen correos electrónicos por cada compra realizada en la aplicación,
-                        nuevos eventos y otra información publicitaria que consideremos relevante para usted o que pueda brindarle algún beneficio.
-                        Estos correos electrónicos se enviarán a la dirección que usted proporcione y podrán ser cancelados en cualquier momento.
-                        EventVerse está altamente comprometido para cumplir con el compromiso de mantener su información segura.
-                        Usamos los sistemas más avanzados y los actualizamos constantemente para asegurarnos que no exista ningún acceso no autorizado.
+                        servicios. No es posible que se envíen correos electrónicos por cada compra realizada en la aplicación,
+                        nuevos eventos u otra información publicitaria. EventVerse está altamente comprometido para cumplir con el compromiso de mantener su información segura.
                     </PrivacyPolicyParagraph>
                 </PrivacyPolicyText>
             </PrivacyPolicyBody>

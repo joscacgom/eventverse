@@ -58,7 +58,7 @@ export const PrivacyPolicyHeader = styled.div`
 
 `
 
-export const PrivacyPolicyBody = styled.p`
+export const PrivacyPolicyBody = styled.div`
     margin-bottom: 15px;
     font-size: 1.2rem;
 `

@@ -34,15 +34,19 @@ const UserMainContent:FC<Props> = ({ userData }) => {
   const handlePrivateKey = () => {
     setPrivateKey(!privateKey)
   }
+
+  const userName = userData.name ? (userData.name.includes('@') ? userData.name.split('@')[0] : userData.name.split(' ')[0]) : String(userData.address).substring(0, 6)
+  const userInfoConnect = userData.name ? (userData.name?.includes('@') ? userData.name?.split('@')[0] : userData.name) : 'Conectado mediante Metamask/Wallet'
+
   return (
     <>
-      <HeaderSection>Bienvenido {userData.name ? (userData.name.includes('@') ? userData.name.split('@')[0] : userData.name.split(' ')[0]) : String(userData.address).substring(0, 6)}! 👋 </HeaderSection>
+      <HeaderSection>Bienvenido {userName}! 👋 </HeaderSection>
         <MainContainer>
             <InfoMainContainer>
                 <Image src={userData.profileImage === '' || !userData.profileImage ? '/images/avatar.jpg' : userData.profileImage } alt='user' width={150} height={150} />
                 <InfoContainer>
                     <h2>Información de tu cuenta</h2>
-                        <p>{userData.name ? (userData.name?.includes('@') ? userData.name?.split('@')[0] : userData.name) : 'Conectado mediante Metamask/Wallet'}</p>
+                        <p>{userInfoConnect}</p>
                         <p>{userData.email ? userData.email : ''}</p>
                     <h2>Información de la cartera</h2>
                         <p>{userData.address}</p>
