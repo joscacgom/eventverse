@@ -35,6 +35,7 @@ const useConnect = () => {
       getPurchasedTickesByDrop({ ticketDrop: String(ticketDrop.id) })
         .then((tickets) => {
           const totalSales = tickets?.length
+          console.log({ totalSales, ticketDrop })
           getEventById({ id: ticketDrop.event_id })
             .then((event) => {
               const res = {

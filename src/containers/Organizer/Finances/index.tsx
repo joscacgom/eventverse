@@ -4,6 +4,7 @@ import useConnect from './useConnect'
 
 const OrganizerFinances = () => {
   const { eventBalances } = useConnect()
+  // console.log('🚀 Event balances', eventBalances)
 
   const renderEventList = () => eventBalances.map(
     (eventBalance) => (

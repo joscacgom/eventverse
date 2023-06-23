@@ -12,7 +12,7 @@ export default async function handler (
   const { ticket_drop } = req.query
 
   const { data, error } = await supabase
-    .from('ticket_purchase')
+    .from('ticket_purchased')
     .select('*')
     .eq('ticket_drop', ticket_drop)
 
