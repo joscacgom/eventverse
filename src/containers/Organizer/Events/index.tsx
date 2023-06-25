@@ -16,7 +16,7 @@ const OrganizerEvents = () => {
   const renderOrganizerEvents = useCallback(() => {
     if (isLoading) return <Loading type='main' />
     if (error || events === undefined) return <Error />
-    if (events.length === 0) return <p>No hay eventos creados</p>
+    if (events.length === 0) return <p>No hay eventos creados 😭</p>
 
     return events.map(event => <EventCard key={event.id} event={event} />)
   }, [events, error, isLoading])
@@ -43,7 +43,7 @@ const OrganizerEvents = () => {
     <Container>
       <Title>Bienvenido 🙌</Title>
       <Subtitle>Estos son los eventos que has creado</Subtitle>
-      <SearchBar placeholder="🔎 Buscar evento" />
+      <SearchBar placeholder="🔎 Buscar eventos..." />
       <TableHeader>
         <TableItem>Evento</TableItem>
         <TableItem>Venta Directa</TableItem>

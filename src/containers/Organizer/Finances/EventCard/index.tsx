@@ -15,7 +15,7 @@ const EventCard: FC<Props> = ({ eventBalance }) => {
         <Title>{eventBalance.totalSales}</Title>
       </Right>
       <Right>
-        <Title>{eventBalance.earnings}</Title>
+        <Title>{eventBalance.earnings} €</Title>
       </Right>
     </Container>
   )

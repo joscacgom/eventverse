@@ -39,6 +39,23 @@ export const TableHeader = styled.div`
   width: 90%;
   height: 40px;
   border-bottom: 1px solid ${({ theme }) => theme.nord.black1};
+   p{
+    width: auto; 
+    height: auto; 
+    font-weight: 700;
+    font-style: normal;
+    font-family: "Inter-Bold", "Inter", "Inter Placeholder", sans-serif;
+    color: #333333;
+    font-size: 18px;
+
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+
+    p {
+      font-size: 16px;
+    }
+  }
 `
 
 export const TableItem = styled.p``
@@ -51,4 +68,12 @@ export const EventsList = styled.div`
   height: auto;
   margin-bottom: 4em;
   gap: 2em;
+   p {
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 10em;
+  }
 `

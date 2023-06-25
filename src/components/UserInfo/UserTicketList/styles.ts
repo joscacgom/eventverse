@@ -72,7 +72,6 @@ export const SearchInput = styled.input`
   font-size: 1.2em;
   display: flex;
   flex-direction: row;
-  outline: none;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -127,6 +126,7 @@ export const TicketListHeader = styled.div`
   align-items: center;
   width: 1000px;
   height: 40px;
+  margin-bottom: 1rem;
   border-bottom: 1px solid ${({ theme }) => theme.nord.black1};
   @media (max-width: 768px) {
     display: none;

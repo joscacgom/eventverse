@@ -2,7 +2,7 @@ import Link from 'next/link'
 import styled, { keyframes } from 'styled-components'
 
 type NavProps = {
-    mobile?: boolean // Make `mobile` prop optional
+    mobile?: boolean
 }
 
 export const Nav = styled.nav<NavProps>`
@@ -26,16 +26,40 @@ export const Nav = styled.nav<NavProps>`
   `
 
 type MenuProps = {
-    mobile?: boolean // Make `mobile` prop optional
+    mobile?: boolean
 }
 
 export const MenuLinks = styled.div<MenuProps>`
+  display: ${({ mobile }) => (mobile ? 'none' : 'flex')};
+  flex-direction: row;
+  align-items: center;
+  width: ${({ mobile }) => (mobile ? '100%' : 'auto')};
+  height: ${({ mobile }) => (mobile ? '0' : '100%')};
+  overflow: hidden;
+  margin-top: ${({ mobile }) => (mobile ? '20px' : '0')};
+
+  @media (max-width: 768px) {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    width: ${({ mobile }) => mobile ? '100%' : 'auto'};
-    height: ${({ mobile }) => mobile ? 'auto' : '100%'};
-    margin-top: ${({ mobile }) => mobile ? '20px' : '0'};
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    gap:1rem;
+    margin-top: 20px;
+    transition: opacity 0s ease-in-out;
+
+    ${({ mobile }) =>
+      mobile
+        ? `
+          opacity: 1;
+          pointer-events: all;
+        `
+        : `
+          opacity: 0;
+          pointer-events: none;
+        `}
+  }
 `
 
 export const Avatar = styled.img`
@@ -64,7 +88,7 @@ export const IconWrapper = styled.div`
 `
 type LinkProps = {
     primary: boolean;
-    mobile?: boolean; // Make `mobile` prop optional
+    mobile?: boolean;
 }
 
 export const LinkItem = styled(Link)<LinkProps>`
@@ -91,6 +115,21 @@ const glowingButton85 = keyframes`
   }
   100% {
     background-position: 0 0;
+  }
+`
+export const ToggleMobileMenuButton = styled.button`
+  display: none; 
+  @media (max-width: 768px) {
+    display: block; 
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    svg {
+      width: 32px;
+      height: 32px;
+      fill: ${({ theme }) => theme.nord.black0};
+    }
   }
 `
 
