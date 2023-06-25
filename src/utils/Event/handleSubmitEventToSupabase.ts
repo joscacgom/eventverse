@@ -39,11 +39,19 @@ export const handleSubmitEventToSupabase = async ({ eventToSubmit, ticketToSubmi
 
     const { nftContract, nftImageURL } = await handleSubmitToThirdWeb(ticketToSubmit)
 
+    const response = await fetch('/api/crypto')
+    if (!response.ok) {
+      throw new Error('Failed to fetch data from the Crypto conversor API')
+    }
+    const data = await response.json()
+    const maticBalance = (Number(ticketToSubmit.price) / data)
+
     const { error: ticketError } = await supabase
       .from('ticket_drop')
       .insert([
         {
           ...ticketToSubmit,
+          price: maticBalance,
           event_id: eventId,
           contract_address: nftContract,
           image: nftImageURL
