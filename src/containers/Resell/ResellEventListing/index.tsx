@@ -4,6 +4,7 @@ import type { FC } from 'react'
 import ListingItemCard from './ListingItemCard'
 import { Container, Main, Image, AbsoluteTitle, EventTitle, Heading, SubTitle, FilterContainer, FilterButton, ListingContainer } from './styles'
 import { TicketListingItem } from '@/models/Resell/types'
+import NotFound from '@/components/NotFound'
 
 type Props = {
   listing: TicketListingItem[]
@@ -11,6 +12,12 @@ type Props = {
 const ResellEventListing: FC<Props> = ({ listing }) => {
   const router = useRouter()
   const renderListingItems = () => {
+    if (!listing) return null
+    if (listing.length === 0) {
+      return (
+      <NotFound />
+      )
+    }
     return listing.map((item) => (
       <ListingItemCard
         data-testid={`listing-item-${item.id}`}

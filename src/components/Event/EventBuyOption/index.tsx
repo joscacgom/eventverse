@@ -47,7 +47,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
         }
         const data = await response.json()
         const eurPrice = (Number(amount * ticket.price) * data).toFixed(2)
-        const maticPrice = Number(amount * ticket.price)
+        const maticPrice = Number((amount * ticket.price).toFixed(2))
         setTotalPrice(Number(eurPrice))
         setMaticPrice(maticPrice)
       } catch (error) {

@@ -4,8 +4,8 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    height: 80vh;
+    margin-top: 3rem;
+    margin-bottom: 10em;
     @media (max-width: 768px) {
         flex-direction: column;
     }

@@ -21,7 +21,7 @@ const CrossmintButton: FC<Props> = ({ clientId, totalPrice, quantity, ticketId, 
               totalPrice: totalPriceToString,
               quantity: quantityToString,
               currency: 'eur',
-              locale: 'es'
+              locale: 'es-ES'
             }}
             mintTo={userAddress}
             currency='eur'
