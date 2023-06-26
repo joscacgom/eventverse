@@ -47,7 +47,7 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
     const nftMetadata = await contractDrop?.metadata.get()
     const nftImageURL = nftMetadata?.image
 
-    return { nftContract, nftImageURL }
+    return { nftContract, nftImageURL, maticBalance }
   } catch (error) {
     throw new Error('Ticket submission failed!')
   }
