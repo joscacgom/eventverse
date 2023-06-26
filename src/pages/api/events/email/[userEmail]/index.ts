@@ -17,6 +17,8 @@ export default async function handler (
     .eq('email', userEmail)
     .single()
 
+  console.log('User', user)
+
   if (userError) return res.status(500).json({ error: userError.message ?? 'Server error' })
   if (!user) return res.status(404).json({ event: {} })
 
@@ -25,6 +27,8 @@ export default async function handler (
     .from('event')
     .select('*')
     .eq('organizer_id', user.id)
+
+  console.log('events', events)
 
   if (eventsError) return res.status(500).json({ error: eventsError.message ?? 'Server error' })
   if (!events) return res.status(404).json({ event: {} })
