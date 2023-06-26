@@ -19,7 +19,9 @@ const CrossmintButton: FC<Props> = ({ clientId, totalPrice, quantity, ticketId, 
             mintConfig={{
               type: 'thirdweb-drop',
               totalPrice: totalPriceToString,
-              quantity: quantityToString
+              quantity: quantityToString,
+              currency: 'eur',
+              locale: 'es'
             }}
             mintTo={userAddress}
             currency='eur'
