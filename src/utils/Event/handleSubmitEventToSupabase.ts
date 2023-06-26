@@ -51,7 +51,7 @@ export const handleSubmitEventToSupabase = async ({ eventToSubmit, ticketToSubmi
       .insert([
         {
           ...ticketToSubmit,
-          price: maticBalance,
+          price: maticBalance.toFixed(3),
           event_id: eventId,
           contract_address: nftContract,
           image: nftImageURL
