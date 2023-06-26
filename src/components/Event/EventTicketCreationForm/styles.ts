@@ -68,6 +68,14 @@ export const EventTicketCreationFormLabel = styled.label`
   @media (min-width: 1920px){
         width: 70%;
     }
+
+    small{
+          font-weight: 300;
+          font-style: normal;
+          font-family: "Inter-Light", "Inter", sans-serif;
+          color: #919191;
+          font-size: 15px;
+    }
 `
 
 export const EventTicketCreationFormInput = styled.input`
