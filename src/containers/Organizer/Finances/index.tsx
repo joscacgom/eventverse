@@ -7,11 +7,9 @@ const OrganizerFinances = () => {
   const renderEventList = () => {
     if (eventBalances.length === 0) {
       return <p>No hay eventos creados 😭</p>
+    } else {
+      return eventBalances.map((eventBalance) => <EventCard key={eventBalance.eventId} eventBalance={eventBalance} />)
     }
-
-    return eventBalances.map((eventBalance) => (
-    <EventCard key={eventBalance.eventId} eventBalance={eventBalance} />
-    ))
   }
 
   return (

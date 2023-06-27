@@ -43,7 +43,7 @@ export const EventPreviewCreationImage = styled.img`
   border-radius: 4px;
   border: 1px solid #d4d4d4;
   margin-bottom: 2rem;
-  object-fit: fill;
+  object-fit: cover;
   margin-left: 1rem;
   
     @media (max-width: 768px) {
@@ -269,7 +269,7 @@ export const EventPreviewCreationLocationImage = styled.img`
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 12px;
-  object-fit:fill;
+  object-fit: cover;
     @media (max-width: 768px) {
         width: 100%;
         height: 100%;

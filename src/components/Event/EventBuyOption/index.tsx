@@ -30,7 +30,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
   const { contract: nftDrop } = useContract(ticket?.contract_address)
   const unclaimedSupply = useUnclaimedNFTSupply(nftDrop)
 
-  const { renderPaymentLogic } = useLogic({ ticket, nftDrop, userAddress, amount, totalPrice, paymentMethod })
+  const { renderPaymentLogic } = useLogic({ ticket, nftDrop, userAddress, amount, maticPrice, paymentMethod })
 
   const updatePaymentMethod = (method: PaymentMethod) => {
     if (method === paymentMethod) return

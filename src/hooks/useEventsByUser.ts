@@ -16,6 +16,7 @@ export async function getEventsByUser ({ userEmail }: Props) {
   const response = await fetch(`/api/events/email/${userEmail}`, {
     method: 'GET'
   })
+  // console.log('response', response)
   const res: Event[] = await response.json()
   const events = Array.isArray(res) ? res : []
   return events

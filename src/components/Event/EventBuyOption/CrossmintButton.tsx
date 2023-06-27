@@ -5,11 +5,10 @@ type Props = {
     clientId: string
     quantity: number
     totalPrice: number
-    ticketId: number
     userAddress: string
 }
 
-const CrossmintButton: FC<Props> = ({ clientId, totalPrice, quantity, ticketId, userAddress }) => {
+const CrossmintButton: FC<Props> = ({ clientId, totalPrice, quantity, userAddress }) => {
   const totalPriceToString = String(totalPrice)
   const quantityToString = String(quantity)
   return (
@@ -26,6 +25,8 @@ const CrossmintButton: FC<Props> = ({ clientId, totalPrice, quantity, ticketId, 
             mintTo={userAddress}
             currency='eur'
             environment="staging"
+            successCallbackURL='https://www.eventverse.app/payment/success'
+            failureCallbackURL='https://www.eventverse.app/payment/failure'
         />
   )
 }
