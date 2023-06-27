@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { User as UserType } from '@/models/Users/types'
 import Error from '@/components/Error'
 
-const index = () => {
+const Index = () => {
   const [userData, setUserData] = useState<UserType | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -44,4 +44,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index
