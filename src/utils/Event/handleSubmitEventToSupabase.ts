@@ -37,13 +37,14 @@ export const handleSubmitEventToSupabase = async ({ eventToSubmit, ticketToSubmi
 
     const eventId = eventData?.[0].id
 
-    const { nftContract, nftImageURL } = await handleSubmitToThirdWeb(ticketToSubmit)
+    const { nftContract, nftImageURL, maticBalance } = await handleSubmitToThirdWeb(ticketToSubmit)
 
     const { error: ticketError } = await supabase
       .from('ticket_drop')
       .insert([
         {
           ...ticketToSubmit,
+          price: maticBalance.toFixed(3),
           event_id: eventId,
           contract_address: nftContract,
           image: nftImageURL

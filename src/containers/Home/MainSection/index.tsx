@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react'
-import { Container, EventList, Title, Header, Search, SearchInput } from './styles'
+import { Container, EventList, Title, Header, Search, SearchInput, NoEvents } from './styles'
 import EventCard from './EventCard'
 import useEvents from '@/hooks/useEvents'
 import { Event } from '@/models/Events/types'
@@ -25,6 +25,9 @@ const MainSection = () => {
 
   const handleRenderEventList = () => {
     const filtered = filteredEvents()
+    if (filtered.length === 0) {
+      return <NoEvents>No hay eventos disponibles</NoEvents>
+    }
     return filtered.map((event: Event) => <EventCard key={event.id} event={event} />)
   }
 

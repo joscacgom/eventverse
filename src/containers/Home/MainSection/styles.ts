@@ -15,6 +15,28 @@ export const Container = styled.div`
   }
 `
 
+export const NoEvents = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: auto;
+  height: auto;
+
+  margin-top: 2rem;
+  margin-bottom: 7rem;
+
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.nord.gray2};
+
+  
+  @media (max-width: 768px) {
+    align-items: center;
+  }
+`
+
 export const Header = styled.header`
   display: flex;
   flex-direction: row;

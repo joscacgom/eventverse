@@ -14,7 +14,7 @@ const EventCard: FC<Props> = ({ ticketEvent }) => {
     router.push(`/resell/event/${collectionAddr}`)
   }
 
-  const shortDescription = ticketEvent.asset.description.substring(0, 40) + '...'
+  const shortDescription = ticketEvent?.asset?.description?.substring(0, 40) + '...'
   const ticketId = Number(ticketEvent.asset.id)
 
   return (

@@ -57,7 +57,7 @@ const useLogic = ({ ticket, nftDrop, userAddress, amount, totalPrice, paymentMet
 
     if (paymentMethod === PaymentMethod.CREDIT_CARD) {
       return ticket.crossmint_id
-        ? <CrossmintButton clientId={ticket.crossmint_id} data-testid="crossmint-button" quantity={amount} totalPrice={totalPrice} userAddress={userAddress} />
+        ? <CrossmintButton data-testid="crossmint-button" clientId={ticket.crossmint_id} quantity={amount} totalPrice={totalPrice} userAddress={userAddress} />
         : <CustomAlert status='Info' text='💳 Este evento aun no ha sido verificado para aceptar pagos con tarjeta.' />
     }
     return <ThirdwebButton data-testid="thirdweb-button" contractAddress={ticket.contract_address} ticketId={ticket.id} />

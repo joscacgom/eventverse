@@ -8,6 +8,7 @@ export const CardWrapper = styled.div`
   height: 225px;
   width: 240px;
   border: 1px solid ${({ theme }) => theme.nord.gray0};
+  border-radius: 8px;
   cursor: pointer;
   transition: transform 0.35s ease-in-out;
 
@@ -16,13 +17,18 @@ export const CardWrapper = styled.div`
     transition: transform 0.35s ease-in-out;
   }
 
+  small{
+    font-size: 0.8em;
+  }
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 `
 
 export const CardImage = styled.img`
   height: 40%;
   width: 100%;
-  object-fit: cover;
+  object-fit: fill;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 `
 
 export const CardContent = styled.div`

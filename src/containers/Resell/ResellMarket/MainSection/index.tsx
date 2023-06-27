@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Container, EventList, Title, Header, Search, SearchInput } from './styles'
+import { Container, EventList, Title, Header, Search, SearchInput, NoEvents } from './styles'
 import EventCard from './EventCard'
 import { useListedTickets } from '@/hooks/useListedTickets'
 import Loading from '@/components/Loading'
@@ -18,8 +18,11 @@ const MainSection = () => {
     )
   }, [resellTickets, searchTerm])
 
-  const handleRenderEventList = () =>
+  const handleRenderEventList = () => {
+    if (isLoading) return <Loading type='main' />
+    if (filteredEvents.length === 0) return <NoEvents>No hay eventos disponibles</NoEvents>
     filteredEvents.map((ticketEvent) => <EventCard data-testid="event-card" key={ticketEvent.id} ticketEvent={ticketEvent} />)
+  }
 
   return (
     <Container>

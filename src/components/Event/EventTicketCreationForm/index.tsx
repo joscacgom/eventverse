@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { EventTicketCreationMainContainer, EventTicketCreationHeader, EventTicketCreationFormImagePreview, EventTicketCreationFormInputDate, EventTicketCreationFormContainer, EventTicketCreationFormLabel, EventTicketCreationFormInput, EventTicketCreationFormTextArea, EventTicketCreationFormImageFile, LimitCharacterSpan } from './styles'
 interface Props {
   onChange: (data: any) => void,
@@ -6,6 +6,8 @@ interface Props {
 }
 const EventTicketCreationForm:FC<Props> = ({ onChange, formData }) => {
   const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(null)
+  const [ticketPrice, setTicketPrice] = useState<number>(isNaN(formData.ticketPrice) ? 0 : formData.ticketPrice)
+
   const [characterCount, setCharacterCount] = useState({
     ticketName: formData.ticketName?.length || 0,
     ticketDescription: formData.ticketDescription?.length || 0
@@ -27,6 +29,8 @@ const EventTicketCreationForm:FC<Props> = ({ onChange, formData }) => {
     const { name, value } = event.target
     if (name === 'ticketName' || name === 'ticketDescription') {
       handleChangeCharacters(event)
+    } else if (name === 'ticketPrice') {
+      setTicketPrice(parseFloat(value))
     }
 
     onChange({ [name]: value })
@@ -62,6 +66,24 @@ const EventTicketCreationForm:FC<Props> = ({ onChange, formData }) => {
     }
   }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/crypto')
+        if (!response.ok) {
+          throw new Error('Failed to fetch data from the Crypto conversor API')
+        }
+        const data = await response.json()
+        const maticPrice = (Number(formData.ticketPrice) / data).toFixed(3)
+        setTicketPrice(Number(maticPrice))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchData()
+  }, [formData.ticketPrice])
+
   return (
         <EventTicketCreationMainContainer>
             <EventTicketCreationHeader>Información de las entradas</EventTicketCreationHeader>
@@ -92,8 +114,8 @@ const EventTicketCreationForm:FC<Props> = ({ onChange, formData }) => {
         <EventTicketCreationFormLabel htmlFor='ticket-limit'>Límite por usuario</EventTicketCreationFormLabel>
         <EventTicketCreationFormInput value={formData.ticketLimit || ''} required onChange={handleChange} type='number' min='1' placeholder='Introduce el límite de entradas por usuario' id='ticket-limit' name='ticketLimit'></EventTicketCreationFormInput>
 
-         <EventTicketCreationFormLabel htmlFor='ticket-price'>Precio</EventTicketCreationFormLabel>
-        <EventTicketCreationFormInput value={formData.ticketPrice || ''} required onChange={handleChange} type='number' min='0' placeholder='Introduce el precio de las entradas (€)' id='ticket-price' name='ticketPrice'></EventTicketCreationFormInput>
+         <EventTicketCreationFormLabel htmlFor='ticket-price'>Precio <small> {ticketPrice} ~ MATIC </small></EventTicketCreationFormLabel>
+        <EventTicketCreationFormInput value={formData.ticketPrice || ''} required onChange={handleChange} type='number' min='0' defaultValue={0} placeholder='Introduce el precio de las entradas (€)' id='ticket-price' name='ticketPrice'></EventTicketCreationFormInput>
 
          <EventTicketCreationFormLabel htmlFor='ticket-royalties'>Royalties</EventTicketCreationFormLabel>
         <EventTicketCreationFormInput value={formData.ticketRoyalties || ''} required onChange={handleChange} type='number' min='0' max='100' placeholder='Introduce un porcentaje para las regalías de las reventas' id='ticket-royalties' name='ticketRoyalties'></EventTicketCreationFormInput>

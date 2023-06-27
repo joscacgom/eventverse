@@ -24,7 +24,8 @@ const EventBuyOption: FC<Props> = ({ event }) => {
   const { ticket } = useTicketsByEvent({ event_id: event.id })
   const userAddress = JSON.parse(getUserCookie('userData'))?.address[0] || ''
   const [amount, setAmount] = useState(1)
-  const [totalPrice, setTotalPrice] = useState<number>(ticket ? ticket.price : 0)
+  const [totalPrice, setTotalPrice] = useState<number>(0)
+  const [maticPrice, setMaticPrice] = useState<number>(ticket ? ticket.price : 0)
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.CREDIT_CARD)
   const { contract: nftDrop } = useContract(ticket?.contract_address)
   const unclaimedSupply = useUnclaimedNFTSupply(nftDrop)
@@ -38,8 +39,23 @@ const EventBuyOption: FC<Props> = ({ event }) => {
 
   useEffect(() => {
     if (!ticket) return
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/crypto')
+        if (!response.ok) {
+          throw new Error('Failed to fetch data from the Crypto conversor API')
+        }
+        const data = await response.json()
+        const eurPrice = (Number(amount * ticket.price) * data).toFixed(2)
+        const maticPrice = Number((amount * ticket.price).toFixed(2))
+        setTotalPrice(Number(eurPrice))
+        setMaticPrice(maticPrice)
+      } catch (error) {
+        console.error(error)
+      }
+    }
 
-    setTotalPrice(amount * ticket.price)
+    fetchData()
   }, [amount, ticket])
 
   useEffect(() => {
@@ -80,7 +96,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
               onChange={(e) => setAmount(parseInt(e.target.value))}
             />
             <TicketSpan>Máx {ticket?.max_per_user ?? 1} </TicketSpan>
-            <TicketActionPrice>{totalPrice} €</TicketActionPrice>
+            <TicketActionPrice>{totalPrice} € <small> {maticPrice} ~ MATIC </small></TicketActionPrice>
           </TicketAction>
         </TicketInfo>
 

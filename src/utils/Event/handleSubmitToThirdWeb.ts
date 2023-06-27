@@ -31,7 +31,7 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
         startTime: new Date(ticket.start_date),
         maxClaimableSupply: Number(ticket.quantity),
         maxClaimablePerWallet: Number(ticket.max_per_user),
-        price: Number(maticBalance)
+        price: Number(maticBalance).toFixed(3)
       }
     ]
 
@@ -47,7 +47,7 @@ export const handleSubmitToThirdWeb = async (ticket: TicketTableSupabase) => {
     const nftMetadata = await contractDrop?.metadata.get()
     const nftImageURL = nftMetadata?.image
 
-    return { nftContract, nftImageURL }
+    return { nftContract, nftImageURL, maticBalance }
   } catch (error) {
     throw new Error('Ticket submission failed!')
   }

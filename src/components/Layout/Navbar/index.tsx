@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button85, LinkItem, MenuLinks, Nav, Avatar, IconWrapper } from './styles'
+import { Button85, LinkItem, MenuLinks, Nav, Avatar, IconWrapper, ToggleMobileMenuButton } from './styles'
 import { useRouter } from 'next/router'
 import { Web3AuthInit } from '@/utils/Login/handleWeb3AuthInit'
 import Web3AuthContext from '@/context/Web3AuthContext'
 import LogoutIcon from './LogoutIcon'
 import { getUserCookie } from '@/utils/Login/userCookie'
+import MenuIcon from './MenuIcon'
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
@@ -23,9 +24,6 @@ const Navbar = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setShowMobileMenu(true)
-      }
-      if (window.innerWidth >= 768) {
         setShowMobileMenu(false)
       }
     }
@@ -41,6 +39,11 @@ const Navbar = () => {
   const handleClickCreateEvent = () => {
     router.push('/event/create')
   }
+
+  const handleToggleMobileMenu = () => {
+    setShowMobileMenu((prev) => !prev)
+  }
+
   return (
     <Nav mobile={showMobileMenu}>
       <img
@@ -62,18 +65,27 @@ const Navbar = () => {
           <>
             <Button85 onClick={handleClickCreateEvent}>Crear evento</Button85>
             <LinkItem mobile={showMobileMenu} primary={false} href={'/user'}>
-              <Avatar src={userData.profileImage === '' || !userData.profileImage ? '/images/avatar.jpg' : userData.profileImage } alt='User avatar'/>
+              <Avatar
+                src={
+                  userData.profileImage === '' || !userData.profileImage
+                    ? '/images/avatar.jpg'
+                    : userData.profileImage
+                }
+                alt="User avatar"
+              />
             </LinkItem>
             <IconWrapper onClick={logout}>
               <LogoutIcon />
             </IconWrapper>
-
           </>
             )
           : (
           <Button85 onClick={login}>Conectar</Button85>
             )}
       </MenuLinks>
+      <ToggleMobileMenuButton onClick={handleToggleMobileMenu}>
+        <MenuIcon />
+      </ToggleMobileMenuButton>
     </Nav>
   )
 }
