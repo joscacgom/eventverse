@@ -13,10 +13,10 @@ type Props = {
   nftDrop: SmartContract | undefined
   userAddress: string
   amount: number
-  totalPrice: number
+  maticPrice: number
   paymentMethod: PaymentMethod
 }
-const useLogic = ({ ticket, nftDrop, userAddress, amount, totalPrice, paymentMethod }: Props) => {
+const useLogic = ({ ticket, nftDrop, userAddress, amount, maticPrice, paymentMethod }: Props) => {
   const claimConditions = useClaimConditions(nftDrop)
   const activeClaimCondition = useActiveClaimConditionForWallet(nftDrop, userAddress)
   const unClaimedSupply = useUnclaimedNFTSupply(nftDrop)
@@ -53,15 +53,15 @@ const useLogic = ({ ticket, nftDrop, userAddress, amount, totalPrice, paymentMet
 
   const renderPaymentMethod = useMemo(() => {
     if (!ticket) return null
-    console.log('🚀 TOTOAL PRICE', totalPrice)
+    console.log('🚀 TOTOAL PRICE', maticPrice)
 
     if (paymentMethod === PaymentMethod.CREDIT_CARD) {
       return ticket.crossmint_id
-        ? <CrossmintButton data-testid="crossmint-button" clientId={ticket.crossmint_id} quantity={amount} totalPrice={totalPrice} userAddress={userAddress} />
+        ? <CrossmintButton data-testid="crossmint-button" clientId={ticket.crossmint_id} quantity={amount} totalPrice={maticPrice} userAddress={userAddress} />
         : <CustomAlert status='Info' text='💳 Este evento aun no ha sido verificado para aceptar pagos con tarjeta.' />
     }
     return <ThirdwebButton data-testid="thirdweb-button" contractAddress={ticket.contract_address} ticketId={ticket.id} />
-  }, [ticket, paymentMethod, amount, totalPrice])
+  }, [ticket, paymentMethod, amount, maticPrice])
 
   const canClaim = useMemo(() => {
     return activeClaimCondition.isSuccess

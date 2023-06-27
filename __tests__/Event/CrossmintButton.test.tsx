@@ -15,7 +15,6 @@ describe('CrossmintButton', () => {
   it('renders the CrossmintPayButton component', () => {
     const quantity = 2
     const totalPrice = 20
-    const ticketId = 123
     const userAddress = '0x123abc'
 
     render(
@@ -24,7 +23,6 @@ describe('CrossmintButton', () => {
                 clientId='b01bd14f-1da4-4343-84a9-dc1909844036'
                 quantity={quantity}
                 totalPrice={totalPrice}
-                ticketId={ticketId}
                 userAddress={userAddress}
             />
         </ThemeProvider>
