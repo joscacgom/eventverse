@@ -1,6 +1,7 @@
 import { Layout } from '@/components'
+import { handleNewTicketPurchaseWithCrossmint } from '@/utils/Ticket/handleTicketBuy'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -13,17 +14,42 @@ export const Container = styled.div`
     width: 100%;
 `
 
+export type Payload = [{
+  type: string
+  status: string
+  walletAddress: string
+  clientId: string
+  txId: string
+  contractAddress: string
+  tokenId: string
+  tokenIds: string[]
+}]
+
 const SuccessPage = () => {
   const router = useRouter()
   const { p: payload } = router.query
-  console.log('🚀 Payload data', payload)
+
+  useEffect(() => {
+    if (!payload) return
+
+    const parsedPayload = JSON.parse(payload as string) as Payload
+    const options = {
+      walletAddress: parsedPayload[0].walletAddress,
+      ticketDropContractAddress: parsedPayload[0].contractAddress
+    }
+
+    handleNewTicketPurchaseWithCrossmint(options)
+      .then(() => console.log('🚀 Ticket purchase success', { parsedPayload }))
+      .catch((error) => console.error('❌ Ticket purchase error', { error }))
+  }, [payload])
+
   return (
-        <Layout title='Payment failure'>
-            <Container>
-            <h1>Payment failure</h1>
-            <a href='/'>Go back to home page</a>
-            </Container>
-        </Layout>
+    <Layout title='Payment success'>
+      <Container>
+        <h1>Payment Success 🎉</h1>
+        <a href='/'>Go back to home page</a>
+      </Container>
+    </Layout>
   )
 }
 

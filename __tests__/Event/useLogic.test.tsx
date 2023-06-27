@@ -40,11 +40,11 @@ describe('useLogic', () => {
     const nftDrop = undefined
     const userAddress = 'user_address'
     const amount = 1
-    const totalPrice = 10
+    const maticPrice = 10
     const paymentMethod = PaymentMethod.CREDIT_CARD
 
     const TestComponent = () => {
-      const { renderPaymentLogic } = useLogic({ ticket, nftDrop, userAddress, amount, totalPrice, paymentMethod })
+      const { renderPaymentLogic } = useLogic({ ticket, nftDrop, userAddress, amount, maticPrice, paymentMethod })
       return <div data-testid="payment-logic">{renderPaymentLogic()}</div>
     }
 

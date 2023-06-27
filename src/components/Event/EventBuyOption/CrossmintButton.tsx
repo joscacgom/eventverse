@@ -25,7 +25,8 @@ const CrossmintButton: FC<Props> = ({ clientId, totalPrice, quantity, userAddres
             mintTo={userAddress}
             currency='eur'
             environment="staging"
-            successCallbackURL='http://localhost:3000/payment/success'
+            successCallbackURL='https://www.eventverse.app/payment/success'
+            failureCallbackURL='https://www.eventverse.app/payment/failure'
         />
   )
 }

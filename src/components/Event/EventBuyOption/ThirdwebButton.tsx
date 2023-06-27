@@ -3,7 +3,7 @@ import { Web3Button, useAddress, useClaimNFT, useContract } from '@thirdweb-dev/
 import { ToastContainer, Zoom, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { BigNumber } from 'ethers'
-import { createTicketBuy } from '@/utils/Ticket/handleTicketBuy'
+import { handleNewTicketPurchase } from '@/utils/Ticket/handleTicketBuy'
 
 type Props = {
     contractAddress: string
@@ -20,7 +20,7 @@ const ThirdwebButton: FC<Props> = ({ contractAddress, quantity, ticketId }) => {
     <ToastContainer theme='colored' transition={Zoom} position='top-center' />
     <Web3Button
         contractAddress={contractAddress}
-        onSuccess={async () => createTicketBuy({ walletAddress, ticketId })}
+        onSuccess={async () => handleNewTicketPurchase({ walletAddress, ticketDropId: ticketId })}
         onError={() => { toast.error('Puede que hayas alcanzado el límite de compras por persona 😢') }}
         action={() =>
           claimNft({
