@@ -37,6 +37,7 @@ export const MenuLinks = styled.div<MenuProps>`
   height: ${({ mobile }) => (mobile ? '0' : '100%')};
   overflow: hidden;
   margin-top: ${({ mobile }) => (mobile ? '20px' : '0')};
+  padding-right: ${({ mobile }) => (mobile ? '0' : '20px')};
 
   @media (max-width: 768px) {
     display: flex;
