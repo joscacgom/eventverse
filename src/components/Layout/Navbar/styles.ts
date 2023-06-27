@@ -143,9 +143,6 @@ export const Button85 = styled.button`
   position: relative;
   z-index: 0;
   border-radius: 10px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
 
   &:before {
     content: "";

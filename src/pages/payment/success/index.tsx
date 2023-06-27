@@ -46,8 +46,8 @@ const SuccessPage = () => {
   return (
     <Layout title='Payment success'>
       <Container>
-        <h1>Payment Success 🎉</h1>
-        <a href='/'>Go back to home page</a>
+        <h1>Pago completado 🎉</h1>
+        <a href='/'>Vuelve a la página de inicio</a>
       </Container>
     </Layout>
   )
