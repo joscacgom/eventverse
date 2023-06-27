@@ -9,7 +9,7 @@ import CrossmintButton from './CrossmintButton'
 import CustomAlert from './CustomAlert'
 
 type Props = {
-  ticket: Ticket | undefined
+  ticket: Ticket
   nftDrop: SmartContract | undefined
   userAddress: string
   amount: number
@@ -22,9 +22,9 @@ const useLogic = ({ ticket, nftDrop, userAddress, amount, maticPrice, paymentMet
   const unClaimedSupply = useUnclaimedNFTSupply(nftDrop)
 
   const checkTicketEndDate = useMemo(() => {
-    if (!ticket?.end_date) return false
+    if (!ticket.end_date) return false
 
-    const endDate = new Date(ticket?.end_date)
+    const endDate = new Date(ticket.end_date)
     const now = new Date()
 
     const isTicketEndDatePassed = endDate < now
@@ -52,9 +52,6 @@ const useLogic = ({ ticket, nftDrop, userAddress, amount, maticPrice, paymentMet
   }, [activeClaimCondition, claimConditions])
 
   const renderPaymentMethod = useMemo(() => {
-    if (!ticket) return null
-    console.log('🚀 TOTOAL PRICE', maticPrice)
-
     if (paymentMethod === PaymentMethod.CREDIT_CARD) {
       return ticket.crossmint_id
         ? <CrossmintButton data-testid="crossmint-button" clientId={ticket.crossmint_id} quantity={amount} totalPrice={maticPrice} userAddress={userAddress} />
@@ -107,7 +104,8 @@ const useLogic = ({ ticket, nftDrop, userAddress, amount, maticPrice, paymentMet
     }
   }
   return {
-    renderPaymentLogic
+    renderPaymentLogic,
+    renderPaymentMethod
   }
 }
 

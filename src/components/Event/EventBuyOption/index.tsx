@@ -14,23 +14,22 @@ import {
   TicketSpan
 } from './styles'
 import { PaymentMethod, Props } from './types'
-import useTicketsByEvent from '@/hooks/useTicketsByEvent'
 import AmountAlert from './AmountAlert'
 import { useContract, useUnclaimedNFTSupply } from '@thirdweb-dev/react'
 import useLogic from './useLogic'
 import { getUserCookie } from '@/utils/Login/userCookie'
 
-const EventBuyOption: FC<Props> = ({ event }) => {
-  const { ticket } = useTicketsByEvent({ event_id: event.id })
+const EventBuyOption: FC<Props> = ({ event, ticket }) => {
   const userAddress = JSON.parse(getUserCookie('userData'))?.address[0] || ''
   const [amount, setAmount] = useState(1)
   const [totalPrice, setTotalPrice] = useState<number>(0)
-  const [maticPrice, setMaticPrice] = useState<number>(ticket ? ticket.price : 0)
+  const [maticPrice, setMaticPrice] = useState<number>(ticket.price)
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.CREDIT_CARD)
-  const { contract: nftDrop } = useContract(ticket?.contract_address)
+
+  const { contract: nftDrop } = useContract(ticket.contract_address)
   const unclaimedSupply = useUnclaimedNFTSupply(nftDrop)
 
-  const { renderPaymentLogic } = useLogic({ ticket, nftDrop, userAddress, amount, maticPrice, paymentMethod })
+  const { renderPaymentMethod } = useLogic({ ticket, nftDrop, userAddress, amount, maticPrice, paymentMethod })
 
   const updatePaymentMethod = (method: PaymentMethod) => {
     if (method === paymentMethod) return
@@ -38,7 +37,6 @@ const EventBuyOption: FC<Props> = ({ event }) => {
   }
 
   useEffect(() => {
-    if (!ticket) return
     const fetchData = async () => {
       try {
         const response = await fetch('/api/crypto')
@@ -48,6 +46,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
         const data = await response.json()
         const eurPrice = (Number(amount * ticket.price) * data).toFixed(2)
         const maticPrice = Number((amount * ticket.price).toFixed(2))
+
         setTotalPrice(Number(eurPrice))
         setMaticPrice(maticPrice)
       } catch (error) {
@@ -56,11 +55,11 @@ const EventBuyOption: FC<Props> = ({ event }) => {
     }
 
     fetchData()
-  }, [amount, ticket])
+  }, [event, amount, ticket])
 
   useEffect(() => {
     setAmount(1)
-    setTotalPrice(ticket ? ticket.price : 0)
+    setTotalPrice(ticket.price)
     setPaymentMethod(PaymentMethod.CREDIT_CARD)
   }, [event])
 
@@ -83,7 +82,7 @@ const EventBuyOption: FC<Props> = ({ event }) => {
       <AmountAlert supply={unclaimedSupply.data} />
       <TicketContainer>
         <TicketInfo>
-          <TicketImage src={ticket?.image} />
+          <TicketImage src={ticket.image} />
           <TicketAction>
             <TicketActionLabel htmlFor="amount">Cantidad</TicketActionLabel>
             <TicketActionAmount
@@ -91,17 +90,15 @@ const EventBuyOption: FC<Props> = ({ event }) => {
               id="amount"
               type="number"
               min="1"
-              max={ticket?.max_per_user ?? 1}
+              max={ticket.max_per_user ?? 1}
               defaultValue={amount}
               onChange={(e) => setAmount(parseInt(e.target.value))}
             />
-            <TicketSpan>Máx {ticket?.max_per_user ?? 1} </TicketSpan>
-            <TicketActionPrice>{totalPrice} € <small> {maticPrice} ~ MATIC </small></TicketActionPrice>
+            <TicketSpan>Máx {ticket.max_per_user ?? 1} </TicketSpan>
+            <TicketActionPrice>{totalPrice} € <small>{maticPrice} ~ MATIC</small></TicketActionPrice>
           </TicketAction>
         </TicketInfo>
-
-        {renderPaymentLogic()}
-
+        {renderPaymentMethod}
       </TicketContainer>
     </Container>
   )
