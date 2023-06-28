@@ -36,8 +36,6 @@ const OrganizerEvents = () => {
       }
     }
     fetchUserEvents()
-      .then(() => console.log('Events fetched'))
-      .catch(() => console.log('Error fetching events'))
   }, [])
   return (
     <Container>

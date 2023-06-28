@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 type Props = {
   collectionAddr: string
 }
-export const useListedTicketsByCollection = ({ collectionAddr }: Props) => {
+export const useEventsWithListedTicketsByCollection = ({ collectionAddr }: Props) => {
   const [resellTickets, setResellTickets] = useState<TicketListingItem[]>([])
   const { contract: marketplace } = useContract(process.env.NEXT_PUBLIC_MARKETPLACE_ADDR, 'marketplace')
   const { data: listings, isLoading } = useActiveListings(marketplace)
@@ -24,4 +24,4 @@ export const useListedTicketsByCollection = ({ collectionAddr }: Props) => {
   return { resellTickets, isLoading }
 }
 
-export default useListedTicketsByCollection
+export default useEventsWithListedTicketsByCollection

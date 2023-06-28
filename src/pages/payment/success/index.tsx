@@ -39,8 +39,6 @@ const SuccessPage = () => {
     }
 
     handleNewTicketPurchaseWithCrossmint(options)
-      .then(() => console.log('🚀 Ticket purchase success', { parsedPayload }))
-      .catch((error) => console.error('❌ Ticket purchase error', { error }))
   }, [payload])
 
   return (
