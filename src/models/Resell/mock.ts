@@ -76,8 +76,8 @@ export const MOCK_RESELL_TICKETS: TicketListingItem[] = [
       hex: '0x643c271b'
     },
     asset: {
-      name: 'Medusa Ticket',
-      description: 'Remember to replace this description',
+      name: 'Medusa Ticket 2',
+      description: 'Remember to replace this description 2',
       image: 'https://ipfs-2.thirdwebcdn.com/ipfs/QmXgbYLJzdQAkTKX9bePwJpcmWt8Rxb3Ji4gZGDQY5YkHN/medusa-ticket.png',
       id: '6',
       uri: 'ipfs://QmTSbVGTVz9piJvrw4SB767H4WKQHnZxDJonPxngGKe4Dq/6'
