@@ -14,10 +14,11 @@ import CustomAlert from '@/components/Event/EventBuyOption/CustomAlert'
 type Props = {
     ticket: Ticket,
     setShowPopup: (showPopup: boolean) => void,
-    ownedNFT: NFT[]
+    ownedNFT: NFT[],
+    eurPrice: number
 }
 
-const ResellButton: FC<Props> = ({ ticket, setShowPopup, ownedNFT }) => {
+const ResellButton: FC<Props> = ({ ticket, setShowPopup, ownedNFT, eurPrice }) => {
   const privateKey = JSON.parse(getUserCookie('userData')).privateKey
   const [ticketsAvailable, setTicketsAvailable] = useState<NFT[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -63,7 +64,7 @@ const ResellButton: FC<Props> = ({ ticket, setShowPopup, ownedNFT }) => {
       <TicketResellPopUpHeader>¡Revende tu ticket!</TicketResellPopUpHeader>
       <TicketResellPopUpImage src={ticket.image} />
       <TicketResellPopUpTitle>{ticket.name}</TicketResellPopUpTitle>
-      <TicketResellPopUpPrice>{ticket.price}€</TicketResellPopUpPrice>
+      <TicketResellPopUpPrice>{eurPrice}€</TicketResellPopUpPrice>
       {isLoading
         ? (
         <Loading type='main' />
@@ -80,7 +81,7 @@ const ResellButton: FC<Props> = ({ ticket, setShowPopup, ownedNFT }) => {
               ))}
             </TicketResellPopUpInput>
             <TicketResellPopUpLabel htmlFor="price">Precio</TicketResellPopUpLabel>
-            <TicketResellPopUpInput name="price" id="price" type="number" min="0" defaultValue="0" />
+            <TicketResellPopUpInput name="price" id="price" type="text" min="0" defaultValue="0" pattern="[0-9]+([.][0-9]+)?"/>
             {ticketsAvailable.length !== 0
               ? (
               <TicketResellPopUpButton type='submit' disabled={false}>Revender</TicketResellPopUpButton>

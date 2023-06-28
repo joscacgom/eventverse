@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useContract, useOwnedNFTs } from '@thirdweb-dev/react'
 import { Ticket } from '@/models/Tickets/types'
 import { TicketAction, TicketAmount, TicketDate, TicketImage, TicketInfo, TicketItem, TicketMainData, TicketName, TicketPlace, TicketPrice, TicketStatus, TicketTime } from './styles'
@@ -31,6 +31,7 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
   const router = useRouter()
   const [showPopup, setShowPopup] = useState<boolean>(false)
   const userTicket = { ...ticket, quantity: data?.length || 0 }
+  const [eurPrice, setEurPrice] = useState(0)
 
   const handleEventClick = () => {
     router.push(`/event/${ticket.event_id}`)
@@ -39,6 +40,24 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
   const handleResellClick = () => {
     setShowPopup(true)
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/crypto')
+        if (!response.ok) {
+          throw new Error('Failed to fetch data from the Crypto conversor API')
+        }
+        const data = await response.json()
+        const eurBalance = (Number(ticket.price) * data).toFixed(2)
+        setEurPrice(Number(eurBalance))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   if (data && data.length > 0) {
     return (
@@ -57,7 +76,7 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
             <p>x{data.length}</p>
           </TicketAmount>
           <TicketPrice>
-            <p>{ticket.price}€</p>
+            <p>{eurPrice}€</p>
           </TicketPrice>
           <TicketStatus>
             <p style={{ color: COLOR_STATUS[handleStatus({ ticket })] }}>{handleStatus({ ticket })}</p>
@@ -70,7 +89,7 @@ const TicketWithNFTs: React.FC<TicketWithNFTsProps> = ({ ticket, address }) => {
 
         {
           showPopup && (
-            <ResellTicketForm ticket={userTicket} setShowPopup={setShowPopup} ownedNFT={data} />
+            <ResellTicketForm ticket={userTicket} eurPrice={eurPrice} setShowPopup={setShowPopup} ownedNFT={data} />
           )
         }
       </>
