@@ -17,7 +17,6 @@ export async function getPurchasedTickesByDrop ({ ticketDrop }: Props) {
     method: 'GET'
   })
   const res = await response.json()
-  console.log('🚀 tickets', res)
   const tickets: Ticket[] = Array.isArray(res) ? res : []
   return tickets
 }

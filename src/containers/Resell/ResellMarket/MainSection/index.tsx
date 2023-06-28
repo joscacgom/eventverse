@@ -1,36 +1,20 @@
-import React, { useMemo, useState } from 'react'
-import { Container, EventList, Title, Header, Search, SearchInput, NoEvents } from './styles'
+import React, { useCallback } from 'react'
+import { Container, EventList, Title, Header } from './styles'
 import EventCard from './EventCard'
-import { useListedTickets } from '@/hooks/useListedTickets'
+import { useEventsWithListedTickets } from '@/hooks/useEventsWithListedTickets'
 import Loading from '@/components/Loading'
 
 const MainSection = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('')
-  const { resellTickets, isLoading } = useListedTickets()
+  const { resellTickets, isLoading } = useEventsWithListedTickets()
 
-  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearchTerm(e.target.value)
-
-  const filteredEvents = useMemo(() => {
-    if (searchTerm === '') return resellTickets
-    return resellTickets.filter((ticketEvent) =>
-      ticketEvent.asset.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  }, [resellTickets, searchTerm])
-
-  const handleRenderEventList = () => {
-    if (isLoading) return <Loading type='main' />
-    if (filteredEvents.length === 0) return <NoEvents>No hay eventos disponibles</NoEvents>
-    filteredEvents.map((ticketEvent) => <EventCard data-testid="event-card" key={ticketEvent.id} ticketEvent={ticketEvent} />)
-  }
+  const handleRenderEventList = useCallback(() =>
+    resellTickets.map((resellEvent) => <EventCard key={resellEvent.asset.id} ticketEvent={resellEvent} />
+    ), [resellTickets])
 
   return (
     <Container>
       <Header>
         <Title>Eventos con reventas disponibles</Title>
-        <Search>
-          <SearchInput placeholder="🔎 Buscar eventos..." onChange={handleSearchInput} />
-        </Search>
       </Header>
       <EventList>
         {
