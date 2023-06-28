@@ -30,11 +30,18 @@ const ResellButton: FC<Props> = ({ ticket, setShowPopup, ownedNFT, eurPrice }) =
   useEffect(() => {
     const fetchTicketsAvailable = async () => {
       const ticketsInResell = await handleTicketsInResell({ ticketId: ticket.id, ownedNFT, privateKey })
-      const availableTickets = ownedNFT.filter((nft) => !ticketsInResell?.includes(nft.metadata.id))
+      const availableTickets = ownedNFT.filter((nft) => {
+        const nftId = nft.metadata.id
+        const existsInResell = ticketsInResell?.some((ticket) => {
+          const resellId = ticket.toString()
+          return resellId === nftId
+        })
+        return !existsInResell
+      }) || []
+
       setTicketsAvailable(availableTickets)
       setIsLoading(false)
     }
-
     fetchTicketsAvailable()
   }, [ticket.id, ownedNFT, privateKey])
 
