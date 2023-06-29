@@ -27,6 +27,7 @@
     "@uiball/loaders": "1.2.6",
     "@walletconnect/client": "^1.8.0",
     "@walletconnect/jsonrpc-types": "^1.0.2",
+    "@walletconnect/modal": "^2.5.7",
     "@walletconnect/types": "^2.7.4",
     "@web3auth/base": "^5.2.0",
     "@web3auth/metamask-adapter": "^5.2.0",
