@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Container, EventList, Title, Header } from './styles'
+import { Container, EventList, Title, Header, NoEvents } from './styles'
 import EventCard from './EventCard'
 import { useEventsWithListedTickets } from '@/hooks/useEventsWithListedTickets'
 import Loading from '@/components/Loading'
@@ -7,9 +7,13 @@ import Loading from '@/components/Loading'
 const MainSection = () => {
   const { resellTickets, isLoading } = useEventsWithListedTickets()
 
-  const handleRenderEventList = useCallback(() =>
+  const handleRenderEventList = useCallback(() => {
+    if (isLoading) return <Loading type='main' />
+    if (!resellTickets) return <NoEvents>No hay eventos disponibles</NoEvents>
+
     resellTickets.map((resellEvent) => <EventCard key={resellEvent.asset.id} ticketEvent={resellEvent} />
-    ), [resellTickets])
+    )
+  }, [resellTickets])
 
   return (
     <Container>
