@@ -56,7 +56,7 @@ const ResellEventListing: FC<Props> = ({ listing }) => {
       <AbsoluteTitle>Reventas</AbsoluteTitle>
       <Image src={'/images/events/medusa-fest-wallpaper.jpg'} />
       <Main>
-        <BackButton onClick={() => router.back()}>Volver </BackButton>
+        <BackButton onClick={() => router.back()}>Volver</BackButton>
         <EventTitle>{listing[0]?.asset.name}</EventTitle>
         <Heading>
           <SubTitle>Tickets de reventa disponibles 🎟️</SubTitle>
