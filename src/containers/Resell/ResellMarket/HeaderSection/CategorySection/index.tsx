@@ -1,30 +1,42 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState, FC } from 'react'
 import { CategoryContainer, CategoryItem } from './styles'
 
 export enum Category {
-    Business = 'Negocios',
-    Music = 'Musica',
-    Sports = 'Deportes',
-    Theater = 'Teatro',
-    Film = 'Cine',
-    Art = 'Arte',
-    Food = 'Comida',
-    Festivals = 'Festivales',
+  Business = 'Negocios',
+  Music = 'Musica',
+  Sports = 'Deportes',
+  Theater = 'Teatro',
+  Film = 'Cine',
+  Art = 'Arte',
+  Food = 'Comida',
+  Festivals = 'Festivales',
 }
 
-const CategorySection = () => {
+type Props = {
+  onSelectCategory: (category: Category) => void
+}
+
+const CategorySection:FC<Props> = ({ onSelectCategory }) => {
+  const [selectedCategory, setSelectedCategory] = useState('')
+
+  const handleCategoryClick = (category: Category) => {
+    setSelectedCategory(category)
+    onSelectCategory(category)
+  }
+
   return (
-      <CategoryContainer data-testid="category-section">
-        <CategoryItem>{Category.Festivals}</CategoryItem>
-        <CategoryItem>{Category.Business}</CategoryItem>
-        <CategoryItem>{Category.Music}</CategoryItem>
-        <CategoryItem>{Category.Sports}</CategoryItem>
-        <CategoryItem>{Category.Theater}</CategoryItem>
-        <CategoryItem>{Category.Film}</CategoryItem>
-        <CategoryItem>{Category.Art}</CategoryItem>
-        <CategoryItem>{Category.Food}</CategoryItem>
-      </CategoryContainer>
+    <CategoryContainer data-testid="category-section">
+      {Object.values(Category).map((category) => (
+        <CategoryItem
+          key={category}
+          onClick={() => handleCategoryClick(category)}
+          selected={category === selectedCategory}
+        >
+          {category}
+        </CategoryItem>
+      ))}
+    </CategoryContainer>
   )
 }
 

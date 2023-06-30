@@ -38,23 +38,35 @@ export const FilterContainer = styled.div`
   justify-content: flex-end;
   width: 30%;
   height: auto;
-`
+  gap: 1rem;
 
-export const FilterButton = styled.button`
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+
+`
+type Props = {
+  isActive: boolean;
+};
+
+export const FilterButton = styled.button<Props>`
   border: none;
   outline: none;
-  background-color: ${({ theme }) => theme.nord.black0};
+  background-color: ${({ theme, isActive }) =>
+    isActive ? theme.nord.black1 : theme.nord.black0};
   color: ${({ theme }) => theme.nord.white};
   font-size: 1.2rem;
   font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: 9px;
   cursor: pointer;
+  transition: background-color 0.3s;
 
   &:hover {
-    opacity: 0.9;
+    background-color: ${({ theme }) => theme.nord.black1};
   }
 `
+
 export const Heading = styled.div`
   display: flex;
   flex-direction: row;
@@ -63,6 +75,10 @@ export const Heading = styled.div`
   width: 100%;
   height: auto;
   padding: 1rem 0;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `
 
 export const ListingContainer = styled.div`

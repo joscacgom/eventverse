@@ -1,5 +1,14 @@
+/* eslint-disable react/prop-types */
 import React, { useState, ChangeEvent } from 'react'
-import { Container, EventList, Title, Header, Search, SearchInput, NoEvents } from './styles'
+import {
+  Container,
+  EventList,
+  Title,
+  Header,
+  Search,
+  SearchInput,
+  NoEvents
+} from './styles'
 import EventCard from './EventCard'
 import useEvents from '@/hooks/useEvents'
 import { Event } from '@/models/Events/types'
@@ -7,19 +16,27 @@ import Loading from '@/components/Loading'
 import Error from '@/components/Error'
 import NotFound from '@/components/NotFound'
 
-const MainSection = () => {
+interface MainSectionProps {
+  selectedCategory?: string;
+}
+
+const MainSection = ({ selectedCategory = '' }: MainSectionProps) => {
   const { data, error, isLoading } = useEvents()
-  const [searchTerm, setSearchTerm] = useState<string>('')
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
-
-  function filteredEvents () {
+  }
+  const filteredEvents = () => {
     if (!data) return []
-    return data.filter(event => nameIncludesSearchTerm(event))
+    return data.filter(
+      (event) =>
+        nameIncludesSearchTerm(event) &&
+        (selectedCategory === '' || event.category === selectedCategory)
+    )
   }
 
-  function nameIncludesSearchTerm (event: Event) {
+  const nameIncludesSearchTerm = (event: Event) => {
     return event.name.toLowerCase().includes(searchTerm.toLowerCase())
   }
 
@@ -28,11 +45,13 @@ const MainSection = () => {
     if (filtered.length === 0) {
       return <NoEvents>No hay eventos disponibles</NoEvents>
     }
-    return filtered.map((event: Event) => <EventCard key={event.id} event={event} />)
+    return filtered.map((event: Event) => (
+      <EventCard key={event.id} event={event} />
+    ))
   }
 
   if (isLoading) {
-    return <Loading type='main' />
+    return <Loading type="main" />
   }
 
   if (error) {
@@ -48,7 +67,10 @@ const MainSection = () => {
       <Header>
         <Title>Novedades</Title>
         <Search>
-          <SearchInput placeholder="🔎 Buscar eventos..." onChange={handleSearchInput} />
+          <SearchInput
+            placeholder="🔎 Buscar eventos..."
+            onChange={handleSearchInput}
+          />
         </Search>
       </Header>
       <EventList>{handleRenderEventList()}</EventList>

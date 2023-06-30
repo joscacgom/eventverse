@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Container, BackgroundImage, Heading, SpanClip, SpanLiquid } from './styles'
 import CategorySection from './CategorySection'
@@ -9,14 +10,29 @@ export const SubHeading = styled.h2`
   color: ${({ theme }) => theme.nord.black1};
   text-align: center;
 `
-const TopSection = () => {
+
+type TopSectionProps = {
+  onSelectCategory: (category: string) => void
+}
+
+const TopSection: React.FC<TopSectionProps> = ({ onSelectCategory }) => {
+  const handleSelectCategory = (category: string) => {
+    onSelectCategory(category)
+  }
+
   return (
-      <Container>
-        <BackgroundImage />
-        <Heading><SpanClip>Marketplace</SpanClip> oficial<br/>para <SpanLiquid>reventas</SpanLiquid> </Heading>
-        <SubHeading>Un lugar seguro donde comprar y vender entradas de reventa</SubHeading>
-        <CategorySection data-testid="category-section" />
-      </Container>
+    <Container>
+      <BackgroundImage />
+      <Heading>
+        <SpanClip>Marketplace</SpanClip> oficial
+        <br />
+        para <SpanLiquid>reventas</SpanLiquid>
+      </Heading>
+      <SubHeading>
+        Un lugar seguro donde comprar y vender entradas de reventa
+      </SubHeading>
+      <CategorySection onSelectCategory={handleSelectCategory} />
+    </Container>
   )
 }
 

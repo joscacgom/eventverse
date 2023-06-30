@@ -1,11 +1,18 @@
+import React, { useState } from 'react'
 import HeaderSection from './HeaderSection'
 import MainSection from './MainSection'
 
 const Home = () => {
+  const [selectedCategory, setSelectedCategory] = useState('')
+
+  const handleSelectCategory = (category: any) => {
+    setSelectedCategory(category)
+  }
+
   return (
     <>
-      <HeaderSection />
-      <MainSection />
+      <HeaderSection onSelectCategory={handleSelectCategory} />
+      <MainSection selectedCategory={selectedCategory} />
     </>
   )
 }
