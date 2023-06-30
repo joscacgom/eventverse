@@ -1,3 +1,2 @@
-# eventverse
+# EventVerse
 
-edit3
