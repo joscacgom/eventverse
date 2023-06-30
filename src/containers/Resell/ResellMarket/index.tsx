@@ -10,8 +10,6 @@ const Home = () => {
   const [filteredEvents, setFilteredEvents] = useState<ResellEvent[]>([])
   const eventsRef = useRef<ResellEvent[]>([])
 
-  console.log(resellEvents)
-
   useEffect(() => {
     if (resellEvents.length > 0) {
       eventsRef.current = resellEvents
@@ -34,7 +32,7 @@ const Home = () => {
   return (
     <>
       <HeaderSection onSelectCategory={handleSelectCategory} />
-      <MainSection resellEvents={filteredEvents} isLoading={isLoading} />
+      <MainSection resellEvents={selectedCategory === EventCategory.Todos ? resellEvents : filteredEvents} isLoading={isLoading} />
     </>
   )
 }

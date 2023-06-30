@@ -29,7 +29,6 @@ export const useEventsWithListedTickets = () => {
         })
       )
       setResellEvents(events)
-      console.log(events)
     }
   }
 
