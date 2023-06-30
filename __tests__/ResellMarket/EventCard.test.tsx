@@ -8,7 +8,7 @@ import theme from '@/theme'
 import { ThemeProvider } from 'styled-components'
 import { NextRouter, useRouter } from 'next/router'
 import EventCard from '@/containers/Resell/ResellMarket/MainSection/EventCard'
-import { MOCK_RESELL_TICKETS } from '@/models/Resell/mock'
+import { MOCK_RESELL_EVENT } from '@/models/Events/mock'
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn()
@@ -16,12 +16,10 @@ jest.mock('next/router', () => ({
 useRouter as jest.Mock<NextRouter>
 
 describe('EventCard', () => {
-  const ticketEvent = MOCK_RESELL_TICKETS[0]
-
   it('should render the event details', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventCard ticketEvent={ticketEvent} />
+            <EventCard resellEvent={MOCK_RESELL_EVENT} />
         </ThemeProvider>)
 
     expect(screen.getByText('Medusa Ticket')).toBeInTheDocument()
@@ -38,7 +36,7 @@ describe('EventCard', () => {
       push: pushMock
     }))
     render(<ThemeProvider theme={theme}>
-            <EventCard ticketEvent={ticketEvent} />
+            <EventCard resellEvent={MOCK_RESELL_EVENT} />
         </ThemeProvider>)
 
     const eventCard = screen.getByTestId('event-card')

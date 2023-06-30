@@ -1,8 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Container, BackgroundImage, Heading, SpanClip, SpanLiquid } from './styles'
 import CategorySection from './CategorySection'
 import styled from 'styled-components'
+import { EventCategory } from '@/models/Events/types'
 
 export const SubHeading = styled.h2`
   font-size: 1.5rem;
@@ -12,11 +12,11 @@ export const SubHeading = styled.h2`
 `
 
 type TopSectionProps = {
-  onSelectCategory: (category: string) => void
+  onSelectCategory: (category: EventCategory) => void
 }
 
 const TopSection: React.FC<TopSectionProps> = ({ onSelectCategory }) => {
-  const handleSelectCategory = (category: string) => {
+  const handleSelectCategory = (category: EventCategory) => {
     onSelectCategory(category)
   }
 

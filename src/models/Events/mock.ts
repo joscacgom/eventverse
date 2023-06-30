@@ -1,3 +1,4 @@
+import { ResellEvent } from '@/hooks/useEventsWithListedTickets'
 import { Event, EventTicketPreview } from './types'
 
 export const MOCK_EVENT: Event = {
@@ -87,3 +88,26 @@ export const MOCK_EVENTS: Event[] = [
     pricing_plan: 'STANDARD'
   }
 ]
+
+export const MOCK_RESELL_EVENT: ResellEvent =
+{
+  event: {
+    id: 93,
+    organizer_id: 33,
+    name: 'Taller React Native + Typescript',
+    description: 'Taller React Native + Typescript',
+    image: 'https://res.cloudinary.com/duffkgzef/image/upload/v1687707227/eventverse/rplf1gqpvbdsb58r9fok.jpg',
+    start_date: '2023-12-29T17:32',
+    end_date: '2023-12-30T17:33',
+    created_at: '2023-06-25T15:33:48.528979+00:00',
+    category: 'Negocios',
+    country: 'España',
+    event_type: 'Online',
+    location: 'Sevilla, España',
+    locationImage: 'https://maps.googleapis.com/maps/api/staticmap?center=37.3890924,-5.9844589&zoom=13&size=800x800&key=AIzaSyDp8ieppBq87VKJq9E9Oh9ebjcab2IsYoo',
+    pricing_plan: 'STANDARD',
+    summary: 'Taller React Native + Typescript',
+    time_zone: 'GMT+1'
+  },
+  contractAddress: '0xEe4c531415344E3EAa90d2E566ce4a24A604c0d7'
+}

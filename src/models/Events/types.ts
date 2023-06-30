@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Ticket } from '../Tickets/types'
 
 export type Event = {
@@ -48,6 +49,17 @@ export type EventTableSupabase = {
     event_type: string
     category: string
     pricing_plan: string
+}
+
+export enum EventCategory {
+  Todos = 'Todos',
+  Negocios = 'Negocios',
+  Musica = 'Musica',
+  Deportes = 'Deportes',
+  Teatro = 'Teatro',
+  Cine = 'Cine',
+  Arte = 'Arte',
+  Festivales = 'Festivales',
 }
 
 export const normalizeEvent = (event: any): Event => {

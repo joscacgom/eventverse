@@ -1,33 +1,22 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, FC } from 'react'
 import { CategoryContainer, CategoryItem } from './styles'
-
-export enum Category {
-  Business = 'Negocios',
-  Music = 'Musica',
-  Sports = 'Deportes',
-  Theater = 'Teatro',
-  Film = 'Cine',
-  Art = 'Arte',
-  Food = 'Comida',
-  Festivals = 'Festivales',
-}
+import { EventCategory } from '@/models/Events/types'
 
 type Props = {
-  onSelectCategory: (category: Category) => void
+  onSelectCategory: (category: EventCategory) => void
 }
 
 const CategorySection:FC<Props> = ({ onSelectCategory }) => {
-  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState<EventCategory>()
 
-  const handleCategoryClick = (category: Category) => {
+  const handleCategoryClick = (category: EventCategory) => {
     setSelectedCategory(category)
     onSelectCategory(category)
   }
 
   return (
     <CategoryContainer data-testid="category-section">
-      {Object.values(Category).map((category) => (
+      {Object.values(EventCategory).map((category) => (
         <CategoryItem
           key={category}
           onClick={() => handleCategoryClick(category)}

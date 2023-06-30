@@ -26,11 +26,11 @@ jest.mock('../../src/hooks/useEventsWithListedTickets', () => ({
 describe('MainSection', () => {
   it('should render the title and search input', () => {
     render(
-    <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-            <MainSection />
+          <MainSection />
         </ThemeProvider>
-        </QueryClientProvider>)
+      </QueryClientProvider>)
 
     expect(screen.getByText('Eventos con reventas disponibles')).toBeInTheDocument()
     expect(screen.getByText('Medusa Ticket')).toBeInTheDocument()

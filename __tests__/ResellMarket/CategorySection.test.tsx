@@ -5,7 +5,8 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import theme from '@/theme'
 import { ThemeProvider } from 'styled-components'
-import CategorySection, { Category } from '@/containers/Resell/ResellMarket/HeaderSection/CategorySection'
+import CategorySection from '@/containers/Resell/ResellMarket/HeaderSection/CategorySection'
+import { EventCategory } from '@/models/Events/types'
 
 describe('CategorySection', () => {
   it('should render category items', () => {
@@ -14,7 +15,7 @@ describe('CategorySection', () => {
         <ThemeProvider theme={theme}>
             <CategorySection onSelectCategory={onSelectCategoryMock} />
         </ThemeProvider>)
-    Object.values(Category).forEach((category) => {
+    Object.values(EventCategory).forEach((category) => {
       const categoryItem = screen.getByText(category)
       expect(categoryItem).toBeInTheDocument()
     })

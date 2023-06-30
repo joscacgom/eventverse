@@ -1,36 +1,22 @@
-import React, { ChangeEvent, useCallback, useState } from 'react'
+import React, { FC, useCallback } from 'react'
 import { Container, EventList, Title, Header, NoEvents, Search, SearchInput } from './styles'
 import EventCard from './EventCard'
-import { useEventsWithListedTickets } from '@/hooks/useEventsWithListedTickets'
+import { ResellEvent } from '@/hooks/useEventsWithListedTickets'
 import Loading from '@/components/Loading'
-import { TicketListingItem } from '@/models/Resell/types'
 
-const MainSection = () => {
-  const { resellTickets, isLoading } = useEventsWithListedTickets()
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
-  }
-
-  const nameIncludesSearchTerm = (resellEvent: TicketListingItem) => {
-    return resellEvent.asset.name.toLowerCase().includes(searchTerm.toLowerCase())
-  }
-
-  const filteredEvents = () => {
-    if (!resellTickets) return []
-    return resellTickets.filter((event) => nameIncludesSearchTerm(event))
-  }
-
+type Props ={
+  resellEvents: ResellEvent[]
+  isLoading: boolean
+}
+const MainSection: FC<Props> = ({ resellEvents, isLoading }) => {
   const handleRenderEventList = useCallback(() => {
-    const filtered = filteredEvents()
     if (isLoading) return <Loading type='main' />
-    if (!filtered || filtered.length === 0) return <NoEvents>No hay eventos disponibles</NoEvents>
+    if (!resellEvents || resellEvents.length === 0) return <NoEvents>No hay eventos disponibles</NoEvents>
 
-    return filtered.map((resellEvent) => (
-      <EventCard key={resellEvent.asset.id} ticketEvent={resellEvent} />
+    return resellEvents.map((resellEvent) => (
+      <EventCard key={resellEvent.event.id} resellEvent={resellEvent} />
     ))
-  }, [resellTickets, searchTerm])
+  }, [resellEvents])
   return (
     <Container>
       <Header>
@@ -38,7 +24,7 @@ const MainSection = () => {
         <Search>
           <SearchInput
             placeholder="🔎 Buscar eventos..."
-            onChange={handleSearchInput}
+            onChange={ () => {} }
           />
         </Search>
       </Header>
