@@ -10,9 +10,11 @@ import TopSection from '@/containers/Home/HeaderSection'
 
 describe('TopSection', () => {
   it('should render the heading and category section', () => {
+    const onSelectCategoryMock = jest.fn()
+
     render(
         <ThemeProvider theme={theme}>
-            <TopSection />
+            <TopSection onSelectCategory={onSelectCategoryMock} />
         </ThemeProvider>)
 
     const heading = screen.getByText((content, element) => {

@@ -9,10 +9,14 @@ import CategorySection, { Category } from '@/containers/Home/HeaderSection/Categ
 
 describe('CategorySection', () => {
   it('should render category items', () => {
+    const onSelectCategoryMock = jest.fn()
+
     render(
-        <ThemeProvider theme={theme}>
-            <CategorySection />
-        </ThemeProvider>)
+      <ThemeProvider theme={theme}>
+        <CategorySection onSelectCategory={onSelectCategoryMock} />
+      </ThemeProvider>
+    )
+
     Object.values(Category).forEach((category) => {
       const categoryItem = screen.getByText(category)
       expect(categoryItem).toBeInTheDocument()

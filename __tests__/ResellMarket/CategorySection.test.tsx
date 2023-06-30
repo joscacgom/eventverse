@@ -9,9 +9,10 @@ import CategorySection, { Category } from '@/containers/Resell/ResellMarket/Head
 
 describe('CategorySection', () => {
   it('should render category items', () => {
+    const onSelectCategoryMock = jest.fn()
     render(
         <ThemeProvider theme={theme}>
-            <CategorySection />
+            <CategorySection onSelectCategory={onSelectCategoryMock} />
         </ThemeProvider>)
     Object.values(Category).forEach((category) => {
       const categoryItem = screen.getByText(category)

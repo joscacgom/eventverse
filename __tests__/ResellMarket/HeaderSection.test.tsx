@@ -10,9 +10,10 @@ import TopSection from '@/containers/Resell/ResellMarket/HeaderSection'
 
 describe('TopSection', () => {
   it('should render the heading and category section', () => {
+    const onSelectCategoryMock = jest.fn()
     render(
         <ThemeProvider theme={theme}>
-            <TopSection />
+            <TopSection onSelectCategory={onSelectCategoryMock} />
         </ThemeProvider>)
 
     const subheading = screen.getByText('Un lugar seguro donde comprar y vender entradas de reventa')
