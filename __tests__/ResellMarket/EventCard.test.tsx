@@ -8,7 +8,7 @@ import theme from '@/theme'
 import { ThemeProvider } from 'styled-components'
 import { NextRouter, useRouter } from 'next/router'
 import EventCard from '@/containers/Resell/ResellMarket/MainSection/EventCard'
-import { MOCK_RESELL_TICKETS } from '@/models/Resell/mock'
+import { MOCK_RESELL_EVENT } from '@/models/Events/mock'
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn()
@@ -16,20 +16,18 @@ jest.mock('next/router', () => ({
 useRouter as jest.Mock<NextRouter>
 
 describe('EventCard', () => {
-  const ticketEvent = MOCK_RESELL_TICKETS[0]
-
   it('should render the event details', () => {
     render(
         <ThemeProvider theme={theme}>
-            <EventCard ticketEvent={ticketEvent} />
+            <EventCard resellEvent={MOCK_RESELL_EVENT} />
         </ThemeProvider>)
 
-    expect(screen.getByText('Medusa Ticket')).toBeInTheDocument()
+    expect(screen.getByText('Taller React Native + Typescript')).toBeInTheDocument()
 
-    expect(screen.getByText('Remember to replace this description...')).toBeInTheDocument()
+    expect(screen.getByText('Taller React Native + Typescript...')).toBeInTheDocument()
 
     const ticketImage = screen.getByAltText('ticket image')
-    expect(ticketImage).toHaveAttribute('src', 'https://ipfs-2.thirdwebcdn.com/ipfs/QmXgbYLJzdQAkTKX9bePwJpcmWt8Rxb3Ji4gZGDQY5YkHN/medusa-ticket.png')
+    expect(ticketImage).toHaveAttribute('src', 'https://res.cloudinary.com/duffkgzef/image/upload/v1687707227/eventverse/rplf1gqpvbdsb58r9fok.jpg')
   })
 
   it('should navigate to the event page on click', () => {
@@ -38,12 +36,12 @@ describe('EventCard', () => {
       push: pushMock
     }))
     render(<ThemeProvider theme={theme}>
-            <EventCard ticketEvent={ticketEvent} />
+            <EventCard resellEvent={MOCK_RESELL_EVENT} />
         </ThemeProvider>)
 
     const eventCard = screen.getByTestId('event-card')
     fireEvent.click(eventCard)
 
-    expect(pushMock).toHaveBeenCalledWith('/resell/event/0x6968BaEb1058b0663a7F178725C1fF996F5Cd696')
+    expect(pushMock).toHaveBeenCalledWith('/resell/event/0xEe4c531415344E3EAa90d2E566ce4a24A604c0d7')
   })
 })

@@ -3,14 +3,14 @@ import React, { useState, FC } from 'react'
 import { CategoryContainer, CategoryItem } from './styles'
 
 export enum Category {
-  Business = 'Negocios',
-  Music = 'Musica',
-  Sports = 'Deportes',
-  Theater = 'Teatro',
-  Film = 'Cine',
-  Art = 'Arte',
-  Food = 'Comida',
-  Festivals = 'Festivales',
+  Todos = 'Todos',
+  Negocios = 'Negocios',
+  Musica = 'Musica',
+  Deportes = 'Deportes',
+  Teatro = 'Teatro',
+  Cine = 'Cine',
+  Arte = 'Arte',
+  Festivales = 'Festivales',
 }
 
 type Props = {

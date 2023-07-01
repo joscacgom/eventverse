@@ -9,6 +9,7 @@ import { NextRouter, useRouter } from 'next/router'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import MainSection from '@/containers/Resell/ResellMarket/MainSection'
 import { MOCK_RESELL_TICKETS } from '@/models/Resell/mock'
+import { MOCK_EVENT } from '@/models/Events/mock'
 
 const queryClient = new QueryClient()
 
@@ -25,16 +26,22 @@ jest.mock('../../src/hooks/useEventsWithListedTickets', () => ({
 
 describe('MainSection', () => {
   it('should render the title and search input', () => {
+    const resellEvents = [
+      {
+        event: MOCK_EVENT,
+        contractAddress: '0x123'
+      }
+    ]
     render(
-    <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-            <MainSection />
+          <MainSection resellEvents={resellEvents} isLoading={false} />
         </ThemeProvider>
-        </QueryClientProvider>)
+      </QueryClientProvider>)
 
     expect(screen.getByText('Eventos con reventas disponibles')).toBeInTheDocument()
-    expect(screen.getByText('Medusa Ticket')).toBeInTheDocument()
-    const description = screen.getByText('Remember to replace this description...')
+    expect(screen.getByText('Apolo Techno Fest (Sevilla)')).toBeInTheDocument()
+    const description = screen.getByText('The Apolo Techno Fest in Sevilla turned ...')
     expect(description).toBeInTheDocument()
   })
 })

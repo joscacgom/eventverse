@@ -32,7 +32,7 @@ const MainSection = ({ selectedCategory = '' }: MainSectionProps) => {
     return data.filter(
       (event) =>
         nameIncludesSearchTerm(event) &&
-        (selectedCategory === '' || event.category === selectedCategory)
+        ((selectedCategory === '' || selectedCategory === 'Todos') || event.category === selectedCategory)
     )
   }
 
