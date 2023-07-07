@@ -1,4 +1,3 @@
 # EventVerse
 
-https://github.com/jvegax/eventverse/assets/49287932/5d2c7f4c-94e7-48a4-aecb-c0bdea0fd1f5
-
+https://github.com/jvegax/eventverse/assets/49287932/d47502fe-d6b2-4318-8da2-00d6e4a5ade4
